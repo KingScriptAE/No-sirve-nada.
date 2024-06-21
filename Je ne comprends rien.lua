@@ -1,3 +1,4 @@
+--[[♦KingTeam^0^独家]]
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "欢迎使用King技术创作",Icon = "rbxassetid://17894875649",Duration = 15,Callback = bindable,Button1 = "我要用KingScprit！！",Button2 = "KingScript已经乱杀"})
 
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "感谢支持King",Icon = "rbxassetid://17894875649",Duration = 20,Callback = bindable,Button1 = "建议进King群玩",Button2 = "King已经乱杀"})
@@ -5,7 +6,7 @@ game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",T
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "新增超多娱乐功能",Icon = "rbxassetid://17894875649",Duration = 25,Callback = bindable,Button1 = "更多未知需要你们探索",Button2 = "King已经乱杀"})
 
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "KING团队技术",Icon = "rbxassetid://17894875649",Duration = 30,Callback = bindable,Button1 = "支持120个服务器",Button2 = "50个通用"})
-
+---------------分割线-------------------------------分割线-------------------------------分割线----------------
 repeat task.wait() until game:IsLoaded()
 local library = {}
 local ToggleUI = false
@@ -36,7 +37,7 @@ function Ripple(obj)
 		Ripple.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
 		Ripple.BackgroundTransparency = 1.000
 		Ripple.ZIndex = 8
-		Ripple.Image = "rbxassetid://17894875649"
+		Ripple.Image = "rbxassetid://18139019694"
 		Ripple.ImageTransparency = 0.800
 		Ripple.ScaleType = Enum.ScaleType.Fit
 		Ripple.ImageColor3 = Color3.fromRGB(139, 0, 255)
@@ -81,7 +82,6 @@ function switchTab(new)
   switchingTabs = false
 end
 
--- # Drag, Stolen from Kiriot or Wally # --
 function drag(frame, hold)
 	if not hold then
 		hold = frame
@@ -224,7 +224,7 @@ end
       DropShadow.BackgroundTransparency = 1.000
       DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
       DropShadow.Size = UDim2.new(1, 10, 1, 10)
-      DropShadow.Image = "rbxassetid://17894875649" --背景
+      DropShadow.Image = "rbxassetid://18139019694" --背景
       DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
       DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
 
