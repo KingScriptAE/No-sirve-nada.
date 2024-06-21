@@ -1,9 +1,9 @@
 --[[♦KingTeam^0^独家]]
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "欢迎使用King技术创作",Icon = "rbxassetid://17894875649",Duration = 15,Callback = bindable,Button1 = "我要用KingScprit！！",Button2 = "KingScript已经乱杀"})
 
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "感谢支持King",Icon = "rbxassetid://17894875649",Duration = 20,Callback = bindable,Button1 = "建议进King群玩",Button2 = "King已经乱杀"})
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "感谢支持King",Icon = "rbxassetid://18139249668",Duration = 20,Callback = bindable,Button1 = "建议进King群玩",Button2 = "King已经乱杀"})
 
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "新增超多娱乐功能",Icon = "rbxassetid://17894875649",Duration = 25,Callback = bindable,Button1 = "更多未知需要你们探索",Button2 = "King已经乱杀"})
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "新增超多娱乐功能",Icon = "rbxassetid://18139019694",Duration = 25,Callback = bindable,Button1 = "更多未知需要你们探索",Button2 = "King已经乱杀"})
 
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KingScprit",Text = "KING团队技术",Icon = "rbxassetid://17894875649",Duration = 30,Callback = bindable,Button1 = "支持120个服务器",Button2 = "50个通用"})
 ---------------分割线-------------------------------分割线-------------------------------分割线----------------
@@ -463,7 +463,7 @@ Open.Draggable = true
 Open.Image = "rbxassetid://17862570082"
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
-  Open.Image = Main.Visible and "rbxassetid://17862570082" or "rbxassetid://17894875649" --开关的图
+  Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开关的图
 end)
 
 UICorner_2.CornerRadius = UDim.new(0, 90)
@@ -492,7 +492,7 @@ UIG.Parent = Open
         TabIco.BackgroundTransparency = 1.000
         TabIco.BorderSizePixel = 0
         TabIco.Size = UDim2.new(0, 24, 0, 24)
-        TabIco.Image = "rbxassetid://17005961318" or icon and "rbxassetid://"..icon
+        TabIco.Image = "rbxassetid://17894875649" or icon and "rbxassetid://18139019694"..icon
         TabIco.ImageTransparency = 0.2
         
         TabText.Name = "TabText"
