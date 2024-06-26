@@ -1,9 +1,9 @@
  --[[KingUI.@AL★King独家]]
-  game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦不会跑路",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "不会跑路🙄",Button2 = "不会跑路❤️"})
+  game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "🎵不会跑路",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "不会跑路🙄",Button2 = "不会跑路❤️"})
  wait(1)
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦不会跑路",Icon = "rbxassetid://18139019694",Duration = 1,Callback = bindable,Button1 = "不会跑路🙄",Button2 = "不会跑路😳"})
 wait(2)
- game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦欢迎使用King",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "脚本超级进化🌝",Button2 = "King Script乱杀❤️"})
+ game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♠欢迎使用King",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "脚本超级进化🌝",Button2 = "King Script乱杀❤️"})
  wait(2)
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦by King",Icon = "rbxassetid://18139019694",Duration = 1,Callback = bindable,Button1 = "更多未知需要你们探索😊",Button2 = "未来等待着你😳"})
 wait(2)
@@ -39,7 +39,7 @@ function Ripple(obj)
 		Ripple.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
 		Ripple.BackgroundTransparency = 1.000
 		Ripple.ZIndex = 8
-		Ripple.Image = "rbxassetid://18139249668"
+		Ripple.Image = "rbxassetid://18216647696"
 		Ripple.ImageTransparency = 0.800
 		Ripple.ScaleType = Enum.ScaleType.Fit
 		Ripple.ImageColor3 = Color3.fromRGB(139, 0, 255)
@@ -226,7 +226,7 @@ end
       DropShadow.BackgroundTransparency = 1.000
       DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
       DropShadow.Size = UDim2.new(1, 10, 1, 10)
-      DropShadow.Image = "rbxassetid://18139249668" --背景
+      DropShadow.Image = "rbxassetid://18216647696" --背景
       DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
       DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
 
@@ -462,7 +462,7 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Image = "rbxassetid://17862570082"
+Open.Image = "rbxassetid://18216647696"
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
   Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开关的图
@@ -586,14 +586,14 @@ UIG.Parent = Open
           SectionOpen.BorderSizePixel = 0
           SectionOpen.Position = UDim2.new(0, -33, 0, 5)
           SectionOpen.Size = UDim2.new(0, 26, 0, 26)
-          SectionOpen.Image = "rbxassetid://6031302934"
+          SectionOpen.Image = "rbxassetid://18216647696"
           
           SectionOpened.Name = "SectionOpened"
           SectionOpened.Parent = SectionOpen
           SectionOpened.BackgroundTransparency = 1.000
           SectionOpened.BorderSizePixel = 0
           SectionOpened.Size = UDim2.new(0, 26, 0, 26)
-          SectionOpened.Image = "rbxassetid://6031302932"
+          SectionOpened.Image = "rbxassetid://18216647696"
           SectionOpened.ImageTransparency = 1.000
     
           SectionToggle.Name = "SectionToggle"
