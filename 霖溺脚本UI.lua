@@ -4,7 +4,7 @@
  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%202.Lua"))() 
   --((霖溺QQ新主群https://qm.qq.com/q/SU0hmhIvwk))
   
- wait(1) 
+ wait(0.2) 
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "作者：King"}, 
      {OutlineColor = Color3.fromRGB(27, 42, 53),Time = 5, Type = "image"}, 
