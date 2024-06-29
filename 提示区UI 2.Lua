@@ -13,19 +13,19 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     ambientShadow.Parent = GUI
     ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
     ambientShadow.BackgroundTransparency = 1.000
-    ambientShadow.BorderSizePixel = 0
+    ambientShadow.BorderSizePixel = 1
     ambientShadow.Position = UDim2.new(0.91525954, 0, 0.936809778, 0)
     ambientShadow.Size = UDim2.new(0, 0, 0, 0)
     ambientShadow.Image = "rbxassetid//18216647696"
-    ambientShadow.ImageColor3 = Color3.fromRGB(102, 255, 153)
-    ambientShadow.ImageTransparency = 0.400
+    ambientShadow.ImageColor3 = Color3.fromRGB(27, 42, 53)
+    ambientShadow.ImageTransparency = 1.000
     ambientShadow.ScaleType = Enum.ScaleType.Slice
     ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
     
     Window.Name = "Window"
     Window.Parent = ambientShadow
     Window.BackgroundColor3 = Color3.fromRGB(102, 255, 153)
-    Window.BorderSizePixel = 0
+    Window.BorderSizePixel = 1
     Window.Position = UDim2.new(0, 5, 0, 5)
     Window.Size = UDim2.new(0, 230, 0, 80)
     Window.ZIndex = 2
@@ -33,17 +33,17 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     Outline_A.Name = "Outline_A"
     Outline_A.Parent = Window
     Outline_A.BackgroundColor3 = middledebug.OutlineColor
-    Outline_A.BorderSizePixel = 0
+    Outline_A.BorderSizePixel = 1
     Outline_A.Position = UDim2.new(0, 0, 0, 25)
     Outline_A.Size = UDim2.new(0, 230, 0, 2)
     Outline_A.ZIndex = 5
     
     WindowTitle.Name = "WindowTitle"
     WindowTitle.Parent = Window
-    WindowTitle.BackgroundColor3 = Color3.fromRGB(102, 255, 153)
+    WindowTitle.BackgroundColor3 = Color3.fromRGB(27, 42, 53)
     WindowTitle.BackgroundTransparency = 1.000
     WindowTitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    WindowTitle.BorderSizePixel = 0
+    WindowTitle.BorderSizePixel = 1
     WindowTitle.Position = UDim2.new(0, 8, 0, 2)
     WindowTitle.Size = UDim2.new(0, 222, 0, 22)
     WindowTitle.ZIndex = 4
@@ -64,7 +64,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     WindowDescription.ZIndex = 4
     WindowDescription.Font = Enum.Font.GothamSemibold
     WindowDescription.Text = nofdebug.Description
-    WindowDescription.TextColor3 = Color3.fromRGB(102, 255, 153)
+    WindowDescription.TextColor3 = Color3.fromRGB(27, 42, 53)
     WindowDescription.TextSize = 12.000
     WindowDescription.TextWrapped = true
     WindowDescription.TextXAlignment = Enum.TextXAlignment.Left
@@ -92,9 +92,9 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         WindowTitle.Position = UDim2.new(0, 24, 0, 2)
         local ImageButton = Instance.new("ImageButton")
         ImageButton.Parent = Window
-        ImageButton.BackgroundColor3 = Color3.fromRGB(102, 255, 153)
+        ImageButton.BackgroundColor3 = Color3.fromRGB(27, 42, 53)
         ImageButton.BackgroundTransparency = 1.000
-        ImageButton.BorderSizePixel = 0
+        ImageButton.BorderSizePixel = 1
         ImageButton.Position = UDim2.new(0, 4, 0, 4)
         ImageButton.Size = UDim2.new(0, 18, 0, 18)
         ImageButton.ZIndex = 5
