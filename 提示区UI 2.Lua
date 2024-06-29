@@ -24,7 +24,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     
     Window.Name = "Window"
     Window.Parent = ambientShadow
-    Window.BackgroundColor3 = Color3.fromRGB(102, 255, 153)
+    Window.BackgroundColor3 = Color3.fromRGB(27, 42, 53)
     Window.BorderSizePixel = 1
     Window.Position = UDim2.new(0, 5, 0, 5)
     Window.Size = UDim2.new(0, 230, 0, 80)
@@ -49,7 +49,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     WindowTitle.ZIndex = 4
     WindowTitle.Font = Enum.Font.GothamSemibold
     WindowTitle.Text = nofdebug.Title
-    WindowTitle.TextColor3 = Color3.fromRGB(102, 255, 153)
+    WindowTitle.TextColor3 = Color3.fromRGB(27, 42, 53)
     WindowTitle.TextSize = 12.000
     WindowTitle.TextXAlignment = Enum.TextXAlignment.Left
     
@@ -131,7 +131,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         Uncheck.ZIndex = 5
         Uncheck.AutoButtonColor = false
         Uncheck.Image = "http://www.roblox.com/asset/?id=18216647696"
-        Uncheck.ImageColor3 = Color3.fromRGB(102, 255, 153)
+        Uncheck.ImageColor3 = Color3.fromRGB(27, 42, 53)
         
         Check.Name = "Check"
         Check.Parent = Window
@@ -143,7 +143,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         Check.ZIndex = 5
         Check.AutoButtonColor = false
         Check.Image = "http://www.roblox.com/asset/?id=18216647696"
-        Check.ImageColor3 = Color3.fromRGB(102, 255, 153)
+        Check.ImageColor3 = Color3.fromRGB(27, 42, 53)
 
         local function ORBHB_fake_script()
             local script = Instance.new('LocalScript', ambientShadow)
