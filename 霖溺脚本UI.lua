@@ -18,7 +18,7 @@
  )
  wait(0.2)
  Notification:Notify( 
-     {Title = "KING SCRIPT", Description = "祝你们玩的开心"}, 
+     {Title = "KING SCRIPT", Description = "祝你们玩的开心，记得加群我在群里等你哟，小宝贝"}, 
      {OutlineColor = Color3.fromRGB(27, 42, 53),Time = 5, Type = "image"}, 
      {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(27, 42, 53)} 
  )
