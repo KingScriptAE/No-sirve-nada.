@@ -1,14 +1,38 @@
- --[[KingUI.@AL★King独家]]
-  game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "🎵不会跑路",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "不会跑路🙄",Button2 = "不会跑路❤️"})
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/VG-1/-/main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%201.lua"))() 
+ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/VG-1/-/main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%202.Lua"))() 
+  --((霖溺QQ新主群https://qm.qq.com/q/SU0hmhIvwk))
+ wait(0.1)
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "By King🎵"}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 1, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ ) 
+ wait(1) 
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "♦正在加载"}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 2, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ )
  wait(1)
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦不会跑路",Icon = "rbxassetid://18139019694",Duration = 1,Callback = bindable,Button1 = "不会跑路🙄",Button2 = "不会跑路😳"})
-wait(2)
- game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♠欢迎使用King",Icon = "rbxassetid://17894875649",Duration = 1,Callback = bindable,Button1 = "脚本超级进化🌝",Button2 = "King Script乱杀❤️"})
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "😘加载成功"}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 3, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ )
  wait(2)
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦by King",Icon = "rbxassetid://18139019694",Duration = 1,Callback = bindable,Button1 = "更多未知需要你们探索😊",Button2 = "未来等待着你😳"})
-wait(2)
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "★King Team",Text = "♦KING祝你开心",Icon = "rbxassetid://18139249668",Duration = 2,Callback = bindable,Button1 = "KING业务全通👍",Button2 = "祝你玩的开心✌️"})
----------------分割线-------------------------------分割线------------------------
+Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "祝你们天天开心ꉂ(ˊᗜˋ*)"}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 3, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ )
+ wait(2)
+Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "感谢你们支持啦🤗}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 4, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ )
+ wait(1)
+ --[[KING TEAM★独家制作]]
 repeat task.wait() until game:IsLoaded()
 local library = {}
 local ToggleUI = false
