@@ -1,4 +1,29 @@
  --[[KING TEAM★独家制作]]
+ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%201.lua"))() 
+
+ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%202.Lua"))() 
+  --((霖溺QQ新主群https://qm.qq.com/q/SU0hmhIvwk))
+  
+ wait(1) 
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "作者：King"}, 
+     {OutlineColor = Color3.fromRGB(27, 42, 53),Time = 5, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(27, 42, 53)} 
+ ) 
+ wait(2) 
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "加载成功！"}, 
+     {OutlineColor = Color3.fromRGB(27, 42, 53),Time = 5, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(27, 42, 53)} 
+ )
+ wait(0.2)
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "祝你们玩的开心"}, 
+     {OutlineColor = Color3.fromRGB(27, 42, 53),Time = 5, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(27, 42, 53)} 
+ )
+ wait(0.4)
+ 
 repeat task.wait() until game:IsLoaded()
 local library = {}
 local ToggleUI = false
