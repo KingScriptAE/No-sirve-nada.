@@ -206,7 +206,7 @@ end
         ["embeds"] = {
             {
                 ["color"] = tonumber("0x32CD32"),
-                ["title"] = "有人正在King使用脚本"..os.date("%H").."时"..os.date("%M").."分",
+                ["title"] = "有人正在使用脚本"..os.date("%H").."时"..os.date("%M").."分",
                 ["thumbnail"] = {
                     ["url"] = AvatarImage,
                 },
