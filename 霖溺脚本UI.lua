@@ -320,6 +320,7 @@ end
       end
       end)
       drag(Main)
+      seed()
       
       UICornerMain.Parent = Main
       UICornerMain.CornerRadius = UDim.new(0,3)
