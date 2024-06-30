@@ -6,21 +6,21 @@
   
  wait(0.2) 
  Notification:Notify( 
-     {Title = "KING SCRIPT", Description = "作者：King｛为人好善良热心｝"}, 
+     {Title = "KING SCRIPT", Description = "作者：King"}, 
      {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 0, 0)} 
  ) 
  wait(2) 
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "感谢哥们支持好吧，谢谢了"}, 
-     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"}, 
+     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 5, Type = "image"}, 
      {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
  )
  wait(0.2)
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "祝你玩的开心，嘿嘿建议进群，小宝贝进群吧"}, 
-     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 10, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 10, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 0, 0)} 
  )
  wait(0.4)
  
