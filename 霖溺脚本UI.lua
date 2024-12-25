@@ -8,19 +8,19 @@
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "作者：King（霖溺）"}, 
      {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 0, 0)} 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
  ) 
  wait(2) 
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "感谢支持，谢谢"}, 
      {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 5, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 84, 84)} 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 84, 84)} 
  )
  wait(0.2)
  Notification:Notify( 
      {Title = "KING SCRIPT", Description = "祝你们玩的开心，小宝贝进群吧"}, 
      {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 10, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=18216647696", ImageColor = Color3.fromRGB(255, 0, 0)} 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
  )
  wait(0.4)
  
@@ -54,7 +54,7 @@ function Ripple(obj)
 		Ripple.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
 		Ripple.BackgroundTransparency = 1.000
 		Ripple.ZIndex = 8
-		Ripple.Image = "rbxassetid://110192983189954"
+		Ripple.Image = "rbxassetid://140717123582569"--这里和背景必须一样
 		Ripple.ImageTransparency = 0.800
 		Ripple.ScaleType = Enum.ScaleType.Fit
 		Ripple.ImageColor3 = Color3.fromRGB(139, 0, 255)
@@ -242,7 +242,7 @@ end
       DropShadow.BackgroundTransparency = 1.000
       DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
       DropShadow.Size = UDim2.new(1, 10, 1, 10)
-      DropShadow.Image = "rbxassetid://110192983189954" --背景
+      DropShadow.Image = "rbxassetid://140717123582569" --背景
       DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
       DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
 
@@ -478,7 +478,7 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Image = "rbxassetid://18216647696"
+Open.Image = "rbxassetid://140717123582569"
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
   Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开关的图
@@ -602,14 +602,14 @@ UIG.Parent = Open
           SectionOpen.BorderSizePixel = 0
           SectionOpen.Position = UDim2.new(0, -33, 0, 5)
           SectionOpen.Size = UDim2.new(0, 26, 0, 26)
-          SectionOpen.Image = "rbxassetid://18216647696"
+          SectionOpen.Image = "rbxassetid://140717123582569"
           
           SectionOpened.Name = "SectionOpened"
           SectionOpened.Parent = SectionOpen
           SectionOpened.BackgroundTransparency = 1.000
           SectionOpened.BorderSizePixel = 0
           SectionOpened.Size = UDim2.new(0, 26, 0, 26)
-          SectionOpened.Image = "rbxassetid://18216647696"
+          SectionOpened.Image = "rbxassetid://140717123582569"
           SectionOpened.ImageTransparency = 1.000
     
           SectionToggle.Name = "SectionToggle"
