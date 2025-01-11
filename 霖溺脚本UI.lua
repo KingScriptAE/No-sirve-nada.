@@ -54,7 +54,7 @@ function Ripple(obj)
 		Ripple.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
 		Ripple.BackgroundTransparency = 1.000
 		Ripple.ZIndex = 8
-		Ripple.Image = "rbxassetid://140717123582569"--这里和背景必须一样
+		Ripple.Image = "rbxassetid://132595527701011"--这里和背景必须一样
 		Ripple.ImageTransparency = 0.800
 		Ripple.ScaleType = Enum.ScaleType.Fit
 		Ripple.ImageColor3 = Color3.fromRGB(139, 0, 255)
@@ -148,7 +148,7 @@ function library.new(library, name,theme)
       end
 ----------------HACKER---------------------
 ALTransparency = 0.6
-ALcolor = Color3.fromRGB(255, 0, 0)  --字体颜色
+ALcolor = Color3.fromRGB(255, 255, 255)  --脚本字体颜色
 --------------HACKER------------------------
 if theme == 'dark' then
     MainColor = Color3.fromRGB(25, 25, 25)
@@ -242,7 +242,7 @@ end
       DropShadow.BackgroundTransparency = 1.000
       DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
       DropShadow.Size = UDim2.new(1, 10, 1, 10)
-      DropShadow.Image = "rbxassetid://140717123582569" --背景
+      DropShadow.Image = "rbxassetid://132595527701011" --背景
       DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
       DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
 
@@ -478,10 +478,10 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Image = "rbxassetid://140717123582569"
+Open.Image = "rbxassetid://132595527701011"--UI圆形图片
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
-  Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开关的图
+  Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开和关的图
 end)
 
 UICorner_2.CornerRadius = UDim.new(0, 90)
