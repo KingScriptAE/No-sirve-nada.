@@ -1,27 +1,18 @@
  --[[KING TEAM★独家制作]]
- local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%201.lua"))() 
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
+ local Notify = Notification.Notify;
 
- local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%202.Lua"))() 
-  --((霖溺QQ新主群https://qm.qq.com/q/SU0hmhIvwk))
-  
- wait(0.2) 
- Notification:Notify( 
-     {Title = "KING SCRIPT", Description = "作者：King（霖溺）"}, 
-     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
- ) 
- wait(2) 
- Notification:Notify( 
-     {Title = "KING SCRIPT", Description = "感谢支持，谢谢", Description = "你的注入器："..identifyexecutor(),}, 
-     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 5, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 84, 84)} 
- )
- wait(0.2)
- Notification:Notify( 
-     {Title = "KING SCRIPT", Description = "祝你们玩的开心，小宝贝进群吧", Description = "用户名"..game.Players.LocalPlayer.Character.Name,}, 
-     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 10, Type = "image"}, 
-     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
- )
+ Notify({
+		 Description = "这是一个新年";
+		 Title = "霖溺";
+		 Duration = 5;
+		 });
+		 
+Notify({
+	 Description = "脚本加载中";
+	 Title = "新年快乐";
+	 Duration = 5;
+	 });
  wait(0.4)
  
 repeat task.wait() until game:IsLoaded()
@@ -561,10 +552,7 @@ UIG.Parent = Open
     sound.SoundId = "rbxassetid://4590657391" --音乐id
     sound.Parent = game.Workspace
     sound:Play()
-    sound.Ended:Connect(function()
-        sound:Destroy()
-    end)
-end
+    
     -----------分割线---------------
         local tab = {}
         function tab.section(tab, name, TabVal)
