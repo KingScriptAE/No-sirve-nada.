@@ -140,17 +140,7 @@ function library.new(library, name,theme)
         end
       end
 
-	local function playSound(soundId)
-    local sound = Instance.new("Sound")
-    sound.SoundId = "rbxassetid://" .. soundId
-    sound.Parent = SoundService
-    sound:Play()
-    sound.Ended:Connect(function()
-        sound:Destroy()
-    end)
-end
-
-playSound("2865227271")
+	
 ----------------HACKER---------------------
 ALTransparency = 0.6
 ALcolor = Color3.fromRGB(255, 255, 255)  --脚本字体颜色
@@ -464,7 +454,7 @@ end
 
 
 -- Properties:
-
+	
 Frame.Parent = dogent
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -483,10 +473,12 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
+Open.SoundId = "rbxassetid://2865227271" .. soundId
 Open.Image = "rbxassetid://132595527701011"--UI圆形图片
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
   Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开和关的图
+			
 end)
 
 UICorner_2.CornerRadius = UDim.new(0, 90)
