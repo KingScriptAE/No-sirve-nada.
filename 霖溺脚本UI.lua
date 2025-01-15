@@ -13,19 +13,9 @@ Notify({
 	 Title = "新年快乐";
 	 Duration = 5;
 	 });
- wait(0.4)
  
- local function playSound(soundId)
-    local sound = Instance.new("Sound")
-    sound.SoundId = "rbxassetid://" .. soundId
-    sound.Parent = SoundService
-    sound:Play()
-    sound.Ended:Connect(function()
-        sound:Destroy()
-    end)
-end
-
-playSound("2865227271")
+ 
+ 
 
 repeat task.wait() until game:IsLoaded()
 local library = {}
@@ -149,6 +139,18 @@ function library.new(library, name,theme)
           v:Destroy()
         end
       end
+
+	local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+
+playSound("2865227271")
 ----------------HACKER---------------------
 ALTransparency = 0.6
 ALcolor = Color3.fromRGB(255, 255, 255)  --脚本字体颜色
