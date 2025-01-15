@@ -454,6 +454,17 @@ end
 
 
 -- Properties:
+	local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound:Play()
+    sound.Open:Connect(function()
+        sound:Destroy()
+    end)
+end
+
+playSound("2865227271")
 	
 Frame.Parent = dogent
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
