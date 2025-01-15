@@ -1,22 +1,29 @@
  --[[KING TEAM★独家制作]]
-  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
- local Notify = Notification.Notify;
+ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%201.lua"))() 
 
- Notify({
-		 Description = "这是一个新年";
-		 Title = "霖溺";
-		 Duration = 5;
-		 });
-		 
-Notify({
-	 Description = "脚本加载中";
-	 Title = "新年快乐";
-	 Duration = 5;
-	 });
+ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./main/%E6%8F%90%E7%A4%BA%E5%8C%BAUI%202.Lua"))() 
+  --((霖溺QQ新主群https://qm.qq.com/q/SU0hmhIvwk))
+  
+ wait(0.2) 
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "作者：King（霖溺）"}, 
+     {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
+ ) 
+ wait(2) 
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "感谢支持，谢谢", Description = "你的注入器："..identifyexecutor(),}, 
+     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 5, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 84, 84)} 
+ )
+ wait(0.2)
+ Notification:Notify( 
+     {Title = "KING SCRIPT", Description = "祝你们玩的开心，小宝贝进群吧", Description = "用户名"..game.Players.LocalPlayer.Character.Name,}, 
+     {OutlineColor = Color3.fromRGB(255, 0, 0),Time = 10, Type = "image"}, 
+     {Image = "http://www.roblox.com/asset/?id=140717123582569", ImageColor = Color3.fromRGB(255, 0, 0)} 
+ )
+ wait(0.4)
  
- 
- 
-
 repeat task.wait() until game:IsLoaded()
 local library = {}
 local ToggleUI = false
@@ -139,11 +146,9 @@ function library.new(library, name,theme)
           v:Destroy()
         end
       end
-
-	
 ----------------HACKER---------------------
 ALTransparency = 0.6
-ALcolor = Color3.fromRGB(255, 255, 255)  --脚本字体颜色
+ALcolor = Color3.fromRGB(255, 255, 255), ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))  --脚本字体颜色
 --------------HACKER------------------------
 if theme == 'dark' then
     MainColor = Color3.fromRGB(25, 25, 25)
@@ -454,18 +459,7 @@ end
 
 
 -- Properties:
-	local function playSound(soundId)
-    local sound = Instance.new("Sound")
-    sound.SoundId = "rbxassetid://" .. soundId
-    sound.Parent = SoundService
-    sound:Play()
-    sound.Open:Connect(function()
-        sound:Destroy()
-    end)
-end
 
-playSound("2865227271")
-	
 Frame.Parent = dogent
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -484,12 +478,10 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Sound = "rbxassetid://2865227271"
 Open.Image = "rbxassetid://132595527701011"--UI圆形图片
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
   Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开和关的图
-			
 end)
 
 UICorner_2.CornerRadius = UDim.new(0, 90)
@@ -563,7 +555,17 @@ UIG.Parent = Open
         TabL:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
           Tab.CanvasSize = UDim2.new(0, 0, 0, TabL.AbsoluteContentSize.Y + 8)
         end)
-        
+        ----------AL.King音乐--------------
+       
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://4590657391" --音乐id
+    sound.Parent = game.Workspace
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+    -----------分割线---------------
         local tab = {}
         function tab.section(tab, name, TabVal)
           local Section = Instance.new("Frame")
