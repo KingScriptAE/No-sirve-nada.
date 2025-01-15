@@ -473,7 +473,7 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.SoundId = "rbxassetid://2865227271" .. soundId
+Open.Sound = "rbxassetid://2865227271"
 Open.Image = "rbxassetid://132595527701011"--UI圆形图片
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
