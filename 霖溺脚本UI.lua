@@ -37,7 +37,7 @@ function Ripple(obj)
             Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Ripple.BackgroundTransparency = 1.000
             Ripple.ZIndex = 8
-            Ripple.Image = "rbxassetid://2708891598"
+            Ripple.Image = "rbxassetid://132595527701011"
             Ripple.ImageTransparency = 0.800
             Ripple.ScaleType = Enum.ScaleType.Fit
             Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -207,19 +207,19 @@ function library.new(library, name, theme)
             Currently = "Currently："
         },
         ["zh-cn"] = {
-            Universal = "欢迎使用云脚本",
+            Universal = "欢迎使用King脚本",
             OpenUI = "打开UI",
             HideUI = "隐藏UI",
             Currently = "当前："
         },
         ["zh-tw"] = {
-            Universal = "歡迎使用雲腳本",
+            Universal = "歡迎使用King腳本",
             OpenUI = "打開UI",
             HideUI = "隱藏UI",
             Currently = "當前："
         },
         ["zh-hk"] = { 
-            Universal = "歡迎使用雲腳本",
+            Universal = "歡迎使用King腳本",
             OpenUI = "打開UI",
             HideUI = "隱藏UI",
             Currently = "當前："
@@ -284,10 +284,10 @@ function library.new(library, name, theme)
     DropShadowHolder.ZIndex = 0
 
     local imageID = {
-        "rbxassetid://6015897843",
-        --"rbxassetid://17648824616",
-        --"rbxassetid://17382643288",
-        --"rbxassetid://17356528678",
+        "rbxassetid://132595527701011",
+        "rbxassetid://77592432644305",
+        "rbxassetid://140717123582569",
+        "rbxassetid://17356528678",
     }
 
     DropShadow.Name = "DropShadow"
@@ -760,14 +760,14 @@ function library.new(library, name, theme)
             SectionOpen.BorderSizePixel = 0
             SectionOpen.Position = UDim2.new(0, -33, 0, 5)
             SectionOpen.Size = UDim2.new(0, 26, 0, 26)
-            SectionOpen.Image = "http://www.roblox.com/asset/?id=6031302934"
+            SectionOpen.Image = "http://www.roblox.com/asset/?id=132595527701011"
 
             SectionOpened.Name = "SectionOpened"
             SectionOpened.Parent = SectionOpen
             SectionOpened.BackgroundTransparency = 1.000
             SectionOpened.BorderSizePixel = 0
             SectionOpened.Size = UDim2.new(0, 26, 0, 26)
-            SectionOpened.Image = "http://www.roblox.com/asset/?id=6031302932"
+            SectionOpened.Image = "http://www.roblox.com/asset/?id=132595527701011"
             SectionOpened.ImageTransparency = 1.000
 
             SectionToggle.Name = "SectionToggle"
