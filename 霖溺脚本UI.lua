@@ -285,9 +285,9 @@ function library.new(library, name, theme)
 
     local imageID = {
         "rbxassetid://132595527701011",
-        "rbxassetid://77592432644305",
-        "rbxassetid://140717123582569",
-        "rbxassetid://17356528678",
+        --"rbxassetid://77592432644305",
+        --"rbxassetid://140717123582569",
+        --"rbxassetid://17356528678",
     }
 
     DropShadow.Name = "DropShadow"
