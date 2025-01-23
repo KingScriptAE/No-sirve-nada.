@@ -238,14 +238,10 @@ function library.new(library, name, theme)
     if not ToggleUI then
         -- 关闭时添加阴影淡出
         services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
-        dogent.Enabled = false
-        ToggleUI = true
-    else
+        
         -- 打开时阴影恢复
         services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
-        ToggleUI = false
-        dogent.Enabled = true
-    end
+        
 end
     local Language = {
         ["en-us"] = {
@@ -705,25 +701,34 @@ tween:Play()
     spawn(Fakerainbow)
 
     Open.MouseButton1Click:Connect(function()
-        isAnimating = true 
-        if uihide == false then
-            Open.Text = Language[currentLanguage].OpenUI
-            TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
-            uihide = true
-            MainXE.Visible = false
-        else
-            Open.Text = Language[currentLanguage].HideUI
-            TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
-            
-if uihide == false then
-    Tween(MainXE, {0.3, "Quint", "Out"}, {Size = UDim2.new(0,0,0,0)})
-else
-    Tween(MainXE, {0.3, "Quint", "Out"}, {Size = UDim2.new(0,609,0,505)})
-end
-            
-            uihide = false
-        end
-    end)
+    isAnimating = true 
+    if uihide == false then
+        Open.Text = Language[currentLanguage].OpenUI
+        -- 使用Tween缩小UI并淡出
+        Tween(
+            MainXE,
+            {0.3, "Quint", "Out"},
+            {
+                Size = UDim2.new(0, 0, 0, 0),  -- 缩小到不可见
+                BackgroundTransparency = 0.7    -- 增加透明度
+            }
+        )
+        uihide = true
+    else
+        Open.Text = Language[currentLanguage].HideUI
+        -- 使用Tween恢复UI尺寸和透明度
+        Tween(
+            MainXE,
+            {0.3, "Quint", "Out"},
+            {
+                Size = UDim2.new(0, 609, 0, 505),  -- 恢复原尺寸
+                BackgroundTransparency = 0         -- 重置透明度
+            }
+        )
+        uihide = false
+    end
+    isAnimating = false
+end)
 
     drag(MainXE)
 
