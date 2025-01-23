@@ -483,7 +483,27 @@ function library.new(library, name, theme)
     ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
 
     UIGradientTitle.Parent = ScriptTitle
-    
+-- 在 ScriptTitle 的 UIGradientTitle 后添加：
+UIGradientTitle.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255, 127, 0)),
+    ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
+    ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 255, 255)),
+    ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(139, 0, 255))
+}
+
+UIGradientTitle.Rotation = 45
+UIGradientTitle.Enabled = true
+
+local tween = game:GetService("TweenService"):Create(
+    UIGradientTitle,
+    TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1),
+    { Offset = Vector2.new(1, 0) }
+)
+tween:Play()
+    -----
     local function NPLHKB_fake_script()
         local script = Instance.new("LocalScript", ScriptTitle)
 
