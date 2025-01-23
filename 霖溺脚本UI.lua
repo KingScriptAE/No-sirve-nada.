@@ -1465,13 +1465,7 @@ AdvancedRipple(ToggleBtn)  -- 添加水波
                 local funcs = {
                     SetValue = function(self, value)
                     
-                    spawn(function()
-        for _ = 1, 3 do
-            AdvancedRipple(SliderPart)
-            wait(0.05)
-        end
-    end)
-end
+                    
                         local percent = (mouse.X - SliderBar.AbsolutePosition.X) / SliderBar.AbsoluteSize.X
                         if value then
                             percent = (value - min) / (max - min)
