@@ -696,7 +696,7 @@ tween:Play()
     spawn(Fakerainbow)
 
     Open.MouseButton1Click:Connect(function()
-    isAnimating = true 
+    
     clickSound:Play()
 TweenService:Create(Open, TweenInfo.new(0.1, "Quad", "Out"), {
         Size = UDim2.new(0, 55, 0, 29)
