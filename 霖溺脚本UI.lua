@@ -56,26 +56,21 @@ function Tween(obj, t, data)
 end
 
 function Ripple(obj)
-    spawn(function()
-        if obj.ClipsDescendants ~= true then
-            obj.ClipsDescendants = true
-        end
-        local Ripple = Instance.new("ImageLabel")
-            
-            
+    spawn(
+        function()
+            if obj.ClipsDescendants ~= true then
+                obj.ClipsDescendants = true
+            end
+            local Ripple = Instance.new("ImageLabel")
             Ripple.Name = "Ripple"
             Ripple.Parent = obj
             Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Ripple.BackgroundTransparency = 1.000
             Ripple.ZIndex = 8
             Ripple.Image = "rbxassetid://2708891598"
-            
+            Ripple.ImageTransparency = 0.800
             Ripple.ScaleType = Enum.ScaleType.Fit
-            Ripple.ImageColor3 = Color3.fromHSV(tick()%5/5, 1, 1) -- 动态色相
-        Ripple.ImageTransparency = 0.6  -- 调整透明度
-        Ripple.Size = UDim2.new(0, 0, 0, 0)
-            
-            
+            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
             Ripple.Position =
                 UDim2.new(
                 (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
@@ -89,11 +84,11 @@ function Ripple(obj)
                 {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
             )
             wait(0.15)
-                Tween(Ripple, {.3, "Quad", "Out"}, {  -- 修改缓动曲线
-            Position = UDim2.new(-5.5, 0, -5.5, 0), 
-            Size = UDim2.new(12, 0, 12, 0)
-        })
-    end)
+            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
+            wait(.3)
+            Ripple:Destroy()
+        end
+    )
 end
 
 local toggled = false
@@ -187,12 +182,6 @@ function drag(frame, hold)
         end
     )
 end
-
-local SoundService = game:GetService("SoundService")
-local clickSound = Instance.new("Sound")
-clickSound.SoundId = "rbxassetid://9113082266" -- 示例音效ID
-clickSound.Volume = 0.5
-clickSound.Parent = SoundService
 
 function library.new(library, name, theme)
     for _, v in next, services.CoreGui:GetChildren() do
@@ -376,7 +365,6 @@ function library.new(library, name, theme)
 
     function toggleui()
         toggled = not toggled
-        MainXE.Visible = true  
         spawn(
             function()
                 if toggled then
@@ -384,16 +372,14 @@ function library.new(library, name, theme)
                 end
             end
         )
-        TweenService:Create(MainXE, TweenInfo.new(0.3, "Quad", "Out"), {
-        Size = UDim2.new(0, 609, 0, toggled and 505 or 0),
-        BackgroundTransparency = toggled and 0 or 0.2
-    }):Play()
-    
-    -- 添加投影动画
-    TweenService:Create(DropShadow, TweenInfo.new(0.3, "Quad", "Out"), {
-        ImageTransparency = toggled and 0.2 or 0.8
-    }):Play()
-end
+        Tween(
+            MainXE,
+            {0.3, "Sine", "InOut"},
+            {
+                Size = UDim2.new(0, 609, 0, (toggled and 505 or 0))
+            }
+        )
+    end
 
     TabMainXE.Name = "TabMainXE"
     TabMainXE.Parent = MainXE
@@ -696,20 +682,6 @@ tween:Play()
     spawn(Fakerainbow)
 
     Open.MouseButton1Click:Connect(function()
-    
-    clickSound:Play()
-TweenService:Create(Open, TweenInfo.new(0.1, "Quad", "Out"), {
-        Size = UDim2.new(0, 55, 0, 29)
-    }):Play()
-    TweenService:Create(Open, TweenInfo.new(0.1, "Quad", "Out", 0.1), {
-        Size = UDim2.new(0, 61, 0, 32)
-    }):Play()
-TweenService:Create(MainXE, TweenInfo.new(0.3, "Quad", "Out"), {
-        Position = UDim2.new(0.5, 0, uihide and 0.5 or 0.6, 0),
-        BackgroundTransparency = uihide and 0 or 0.2
-    }):Play()
-end)
-    
         isAnimating = true 
         if uihide == false then
             Open.Text = Language[currentLanguage].OpenUI
@@ -722,8 +694,6 @@ end)
             MainXE.Visible = true
             uihide = false
         end
-        
-        
     end)
 
     drag(MainXE)
@@ -936,8 +906,6 @@ end)
 
                 Btn.MouseButton1Click:Connect(
                     function()
-                    
-                    clickSound:Play() 
                         spawn(
                             function()
                                 Ripple(Btn)
