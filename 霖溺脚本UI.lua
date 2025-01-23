@@ -55,45 +55,50 @@ function Tween(obj, t, data)
     return true
 end
 
-function Ripple(obj)
+function AdvancedRipple(obj)
     spawn(function()
-        if obj.ClipsDescendants ~= true then
-            obj.ClipsDescendants = true
-        end
-        local Ripple = Instance.new("ImageLabel")
-        Ripple.Name = "Ripple"
-        Ripple.Parent = obj
-        Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Ripple.BackgroundTransparency = 1.000
-        Ripple.ZIndex = 8
-        Ripple.Image = "rbxassetid://2708891598"
-        Ripple.ScaleType = Enum.ScaleType.Fit
-        Ripple.ImageColor3 = Color3.fromHSV(tick()%5/5, 0.8, 1) -- 动态色相（降低饱和度）
-        Ripple.ImageTransparency = 0.5 -- 调整透明度
-        Ripple.Size = UDim2.new(0, 0, 0, 0)
+        -- 创建水波容器
+        local RippleContainer = Instance.new("Frame")
+        RippleContainer.Name = "AdvancedRipple"
+        RippleContainer.BackgroundTransparency = 1
+        RippleContainer.Size = UDim2.new(1, 0, 1, 0)
+        RippleContainer.ClipsDescendants = true
+        RippleContainer.Parent = obj
+        RippleContainer.ZIndex = obj.ZIndex + 1  -- 确保显示层级
         
-        -- 支持触摸和鼠标输入
-        local input = obj:FindFirstChildOfClass("TouchInput") or mouse
+        -- 水波本体
+        local Ripple = Instance.new("Frame")
+        Ripple.AnchorPoint = Vector2.new(0.5, 0.5)
+        Ripple.BackgroundColor3 = Color3.fromHSV(tick()%5/5, 1, 1) -- 动态彩虹色
+        Ripple.BackgroundTransparency = 0.7
+        Ripple.Size = UDim2.new(0, 0, 0, 0)
         Ripple.Position = UDim2.new(
-            (input.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+            (mouse.X - obj.AbsolutePosition.X)/obj.AbsoluteSize.X,
             0,
-            (input.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+            (mouse.Y - obj.AbsolutePosition.Y)/obj.AbsoluteSize.Y,
             0
         )
+        Ripple.Parent = RippleContainer
         
-        -- 动画优化
-        Tween(
-            Ripple,
-            {0.3, "Quad", "Out"},
-            {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
-        )
-        wait(0.15)
-        Tween(Ripple, {0.2, "Quad", "Out"}, {
-            Position = UDim2.new(-5.5, 0, -5.5, 0), 
-            Size = UDim2.new(12, 0, 12, 0)
+        -- 圆形效果
+        local Corner = Instance.new("UICorner")
+        Corner.CornerRadius = UDim.new(1, 0)
+        Corner.Parent = Ripple
+        
+        -- 扩散动画
+        Tween(Ripple, {0.6, "Quint", "Out"}, {
+            Size = UDim2.new(2.5, 0, 2.5, 0),
+            BackgroundTransparency = 1,
+            Position = UDim2.new(0.5, 0, 0.5, 0)
         })
+        
+        -- 自动销毁
+        wait(0.7)
+        RippleContainer:Destroy()
     end)
 end
+        
+
 
 local toggled = false
 
@@ -147,10 +152,16 @@ function drag(frame, hold)
     local startPos
 
     local function update(input)
-        local delta = input.Position - dragStart
-        frame.Position =
-            UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    local delta = input.Position - dragStart
+    frame.Position =
+        UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    
+    -- 添加拖动时的连续水波
+    if tick() - (lastRippleTime or 0) > 0.1 then
+        AdvancedRipple(SliderBar)
+        lastRippleTime = tick()
     end
+end
 
     hold.InputBegan:Connect(
         function(input)
@@ -907,18 +918,28 @@ tween:Play()
                 BtnC.CornerRadius = UDim.new(0, 6)
                 BtnC.Name = "BtnC"
                 BtnC.Parent = Btn
+                
+                
 
                 Btn.MouseButton1Click:Connect(
-                    function()
-                        spawn(
-                            function()
-                                Ripple(Btn)
-                            end
-                        )
-                        spawn(callback)
-                    end
-                )
-            end
+    function()
+        AdvancedRipple(Btn)  -- 使用新水波效果
+        spawn(callback)
+    end
+)
+
+Btn.MouseEnter:Connect(function()
+    Tween(Btn, {0.15, "Quint", "Out"}, {
+        BackgroundColor3 = zyColor:lerp(Color3.new(1,1,1), 0.1)
+    })
+end)
+Btn.MouseLeave:Connect(function()
+    Tween(Btn, {0.15, "Quint", "Out"}, {
+        BackgroundColor3 = zyColor
+    })
+end)
+            
+            
 
             function section:LabelTransparency(text)
                 local LabelModuleE = Instance.new("Frame")
@@ -1047,14 +1068,20 @@ tween:Play()
                         if library.flags[flag] == state then
                             return
                         end
-                        services.TweenService:Create(
-                            ToggleSwitch,
-                            TweenInfo.new(0.2),
-                            {
-                                Position = UDim2.new(0, (state and ToggleSwitch.Size.X.Offset / 2 or 0), 0, 0),
-                                BackgroundColor3 = (state and Color3.fromRGB(255, 255, 255) or beijingColor)
-                            }
-                        ):Play()
+                        
+                        
+services.TweenService:Create(
+    ToggleSwitch,
+    TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {
+        Position = UDim2.new(0, (state and ToggleSwitch.Size.X.Offset / 2 or 0), 0, 0),
+        BackgroundColor3 = (state and Color3.fromHSV(tick()%5/5, 1, 1) or beijingColor)
+    }
+):Play()
+AdvancedRipple(ToggleBtn)  -- 添加水波
+                        
+                        
+                        
                         library.flags[flag] = state
                         callback(state)
                     end,
@@ -1437,6 +1464,14 @@ tween:Play()
 
                 local funcs = {
                     SetValue = function(self, value)
+                    
+                    spawn(function()
+        for _ = 1, 3 do
+            AdvancedRipple(SliderPart)
+            wait(0.05)
+        end
+    end)
+end
                         local percent = (mouse.X - SliderBar.AbsolutePosition.X) / SliderBar.AbsoluteSize.X
                         if value then
                             percent = (value - min) / (max - min)
