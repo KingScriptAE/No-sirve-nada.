@@ -196,6 +196,13 @@ function library.new(library, name, theme)
     local UIGradientTitle = Instance.new("UIGradient")
     local WelcomeMainXE = Instance.new("TextLabel")
     
+    -- 在所有文字元素（TextLabel/TextButton）中添加字体设置：
+TextLabel.Font = Enum.Font.GothamSemibold  -- 更现代的字体
+TextLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
+TextLabel.TextStrokeTransparency = 0.3     -- 文字描边
+TextLabel.TextSize = 16                    -- 统一字号
+    
+    
     if syn and syn.protect_gui then
         syn.protect_gui(dogent)
     end
