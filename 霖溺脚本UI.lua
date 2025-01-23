@@ -1,7 +1,4 @@
 
-
-
-
 --[[KING TEAM★独家制作]]
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
 local Notify = Notification.Notify;
@@ -45,7 +42,7 @@ end
 
 -- 加载音效
 local clickSound = Instance.new("Sound")
-clickSound.SoundId = "rbxassetid://4590657391" -- 替换为实际的音效ID
+clickSound.SoundId = "rbxassetid://123456789" -- 替换为实际的音效ID
 clickSound.Volume = 1
 clickSound.Parent = game:GetService("SoundService")
 
@@ -66,6 +63,13 @@ Open.MouseButton1Click:Connect(function()
     end
 end)
 
+-- 其他代码保持不变...
+-- 以下是你的原始代码，保持不变
+
+
+
+-- 其他代码保持不变...
+-- 你可以将之前的代码继续放在这里，确保逻辑完整。
 
 
 
