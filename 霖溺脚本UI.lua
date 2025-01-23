@@ -36,19 +36,6 @@ Notify({
     library.currentTab = nil
     library.flags = {}
 
--- 原代码
-local zyColor, Background -- 提前声明变量
-
-spawn(function()
-    while true do
-        for i = 0, 1, 0.01 do
-            zyColor = Color3.fromHSV(i, 0.8, 0.3) -- 现在可以正确修改外部变量
-            Background = Color3.fromHSV(i, 0.5, 0.15)
-            wait(0.05)
-        end
-    end
-end)
-
 local services =
     setmetatable(
     {},
@@ -91,18 +78,16 @@ function Ripple(obj)
                 (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
                 0
             )
+            
             Tween(
-                Ripple,
-                {.3, "Linear", "InOut"},
-                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
-            )
-            wait(0.15)
-            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
-            wait(.3)
-            Ripple:Destroy()
-        end
-    )
-end
+    Ripple,
+    {0.4, "Quad", "Out"},
+    {
+        ImageTransparency = 1,
+        Rotation = math.random(-30, 30), -- 随机旋转
+        Size = UDim2.new(15, 0, 15, 0) -- 扩大消散范围
+    }
+)
 
 local toggled = false
 
@@ -128,9 +113,8 @@ function switchTab(new)
     library.currentTab = new
 
 -- 在 switchTab 函数中添加颜色变化：
--- 原代码颜色变化问题
 services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3), {
-    TextColor3 = Color3.fromHSV(tick()%5/5, 0.8, 1) -- 修正 HSV 参数范围
+    TextColor3 = Color3.fromHSV(tick()%1, 0.8, 1)
 }):Play()
 
     services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
@@ -219,12 +203,7 @@ function library.new(library, name, theme)
     local TabBtnsL = Instance.new("UIListLayout")
     local ScriptTitle = Instance.new("TextLabel")
     local SBG = Instance.new("UIGradient")
-    
-    
     local Open = Instance.new("TextButton")
-    
-    
-    
     local UIG = Instance.new("UIGradient")
     local DropShadowHolder = Instance.new("Frame")
     local DropShadow = Instance.new("ImageLabel")
@@ -233,112 +212,7 @@ function library.new(library, name, theme)
     local UIGradientTitle = Instance.new("UIGradient")
     local WelcomeMainXE = Instance.new("TextLabel")
     
-
--- 新增动画控制变量
-local animating = false
-local animationSpeed = 0.25  -- 动画时长（秒）
-local scaleFactor = 1.1      -- 动效缩放系数
-
--- 重写 ToggleUILib 函数
--- 原代码中存在重复的 ToggleUILib 定义
--- 修正后合并函数逻辑：
-function ToggleUILib()
-    if animating then return end
-    animating = true
     
-    -- 保留原有动画逻辑...
-    
-    -- 移除重复的函数定义
-end
-    
-    local targetSize = not ToggleUI and UDim2.new(0, 609, 0, 505) or UDim2.new(0, 0, 0, 0)
-    local targetPos = not ToggleUI and UDim2.new(0.5, 0, 0.5, 0) or UDim2.new(0.5, 0, 0.3, 0)
-    local targetAlpha = not ToggleUI and 1 or 0
-    local targetRotation = not ToggleUI and 0 or -15
-
-    -- 主面板动画
-    local mainTween = services.TweenService:Create(
-        MainXE,
-        TweenInfo.new(animationSpeed, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-        {
-            Size = targetSize,
-            Position = targetPos,
-            BackgroundTransparency = targetAlpha
-        }
-    )
-
-    -- 阴影动画
-    local shadowTween = services.TweenService:Create(
-        DropShadow,
-        TweenInfo.new(animationSpeed, Enum.EasingStyle.Quad),
-        {
-            ImageTransparency = not ToggleUI and 0.2 or 1,
-            Size = not ToggleUI and UDim2.new(1,20,1,20) or UDim2.new(0,0,0,0)
-        }
-    )
-
-    -- 标题文字动画
-    local textTween = services.TweenService:Create(
-        WelcomeMainXE,
-        TweenInfo.new(animationSpeed*0.8),
-        {
-            TextTransparency = not ToggleUI and 0 or 1,
-            TextStrokeTransparency = not ToggleUI and 0.5 or 1
-        }
-    )
-
-    -- 旋转效果
-    local rotationTween = services.TweenService:Create(
-        MainXE,
-        TweenInfo.new(animationSpeed, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {
-            Rotation = targetRotation
-        }
-    )
-
-    -- 侧边栏延迟动画
-    local sideBarTween = services.TweenService:Create(
-        Side,
-        TweenInfo.new(animationSpeed*0.7, Enum.EasingStyle.Quint),
-        {
-            Size = not ToggleUI and UDim2.new(0, 110, 0, 357) or UDim2.new(0,0,0,0)
-        }
-    )
-
-    -- 执行动画序列
-    if not ToggleUI then
-        MainXE.Visible = true
-        MainXE.Size = UDim2.new(0, 0, 0, 0)
-        MainXE.Rotation = 15
-        DropShadow.ImageTransparency = 1
-    end
-
-    mainTween:Play()
-    shadowTween:Play() 
-    textTween:Play()
-    rotationTween:Play()
-    
-    wait(animationSpeed*0.3)
-    sideBarTween:Play()
-
-    -- 动画完成回调
-    mainTween.Completed:Connect(function()
-        animating = false
-        ToggleUI = not ToggleUI
-        if ToggleUI then
-            TabMainXE.Visible = true
-            Open.Visible = true
-        else
-            TabMainXE.Visible = false
-            Open.Visible = false
-        end
-    end)
-end
-
-
-
-
-
     
     if syn and syn.protect_gui then
         syn.protect_gui(dogent)
@@ -352,14 +226,18 @@ end
     end
 
     function ToggleUILib()
-        if not ToggleUI then
-            dogent.Enabled = false
-            ToggleUI = true
-        else
-            ToggleUI = false
-            dogent.Enabled = true
-        end
+    if not ToggleUI then
+        -- 关闭时添加阴影淡出
+        TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
+        dogent.Enabled = false
+        ToggleUI = true
+    else
+        -- 打开时阴影恢复
+        TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
+        ToggleUI = false
+        dogent.Enabled = true
     end
+end
     local Language = {
         ["en-us"] = {
             Universal = "Welcome",
@@ -396,23 +274,21 @@ end
     local XA = Players.LocalPlayer
     local userRegion = game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(XA)
 
-    -- 原代码区域判断
-local RTLanguage = {
-    ["CN"] = "zh-cn", 
-    ["TW"] = "zh-tw",
-    ["HK"] = "zh-hk",
-    ["US"] = "en-us",  
-    ["FR"] = "fr-fr",
-    ["*"] = "zh-cn" -- 添加默认回退
-}
+    local RTLanguage = {
+        ["CN"] = "zh-cn", 
+        ["TW"] = "zh-tw",
+        ["HK"] = "zh-hk",
+        ["US"] = "en-us",  
+        ["FR"] = "fr-fr", 
+    }
 
-local currentLanguage = RTLanguage[userRegion] or "zh-cn"
+    local currentLanguage = Language[RTLanguage[userRegion]] and RTLanguage[userRegion] or "zh-cn"
 
     MainXE.Name = "MainXE"
     MainXE.Parent = dogent
     MainXE.AnchorPoint = Vector2.new(0.5, 0.5)
     MainXE.BackgroundColor3 = MainXEColor
-    MainXE.Position = UDim2.new(0.5, 0, 0.3, 0)
+    MainXE.Position = UDim2.new(0.5, 0, 0.5, 0)
     MainXE.Size = UDim2.new(0, 0, 0, 0)
     MainXE.ZIndex = 1
     MainXE.Active = true
@@ -436,7 +312,7 @@ local currentLanguage = RTLanguage[userRegion] or "zh-cn"
     
     
     UICornerMainXE.Parent = MainXE
-UICornerMainXE.CornerRadius = UDim.new(0, 12) -- 更大圆角
+    UICornerMainXE.CornerRadius = UDim.new(0, 3)
 
     DropShadowHolder.Name = "DropShadowHolder"
     DropShadowHolder.Parent = MainXE
@@ -499,10 +375,11 @@ UICornerMainXE.CornerRadius = UDim.new(0, 12) -- 更大圆角
             end
         )
         Tween(
-            MainXE,
-            {0.3, "Sine", "InOut"},
-            {
-                Size = UDim2.new(0, 609, 0, (toggled and 505 or 0))
+    MainXE,
+    {0.4, "Quint", "InOut"}, -- 延长持续时间并使用Quint缓动
+    {
+        Size = UDim2.new(0, 609, 0, (toggled and 505 or 0)),
+        BackgroundTransparency = (toggled and 0 or 0.1)
             }
         )
     end
@@ -517,7 +394,7 @@ UICornerMainXE.CornerRadius = UDim.new(0, 12) -- 更大圆角
 
     MainXEC.CornerRadius = UDim.new(0, 5.5)
     MainXEC.Name = "MainXEC"
-MainXEC.Parent = MainXE -- 正确设置父节点为 MainXE
+    MainXEC.Parent = Frame
 
     SB.Name = "SB"
     SB.Parent = MainXE
@@ -545,33 +422,39 @@ MainXEC.Parent = MainXE -- 正确设置父节点为 MainXE
     
       if _G.UIMainXE then
         warn()
-              MainXE:TweenSize(UDim2.new(0, 570, 0, 358), "Out", "Quad", 0.9, true, function()
-                  Side:TweenSize(UDim2.new(0, 110, 0, 357), "Out", "Quad", 0.4, true, function()
-                      SB:TweenSize(UDim2.new(0, 8, 0, 357), "Out", "Quad", 0.2, true, function()
-                      wait(0.5)
-                      TabMainXE.Visible = true
-                      --[[
-                      UIGradient:Destroy()
-                      MainXE.Transparency = 1
-                      TabMainXE.Transparency = 1
-                      SB.Transparency = 1
-                      Side.Transparency = 1
-                      ]]
-                  end)
-              end)
-          end)
+              MainXE:TweenSize(UDim2.new(0, 570, 0, 358), "Out", "Quint", 0.6, true, function()
+    Side:TweenSize(
+        UDim2.new(0, 110, 0, 357),
+        "Out", "Quint", 0.3, true,
+        function()
+            SB:TweenSize(
+                UDim2.new(0, 8, 0, 357),
+                "Out", "Quint", 0.2, true,
+                function()
+                    -- 添加渐显效果
+                    TweenService:Create(TabMainXE, TweenInfo.new(0.2), {BackgroundTransparency = 0}):Play()
+                end
+            )
+        end
+    )
+end)
       else
       MainXE:TweenSize(UDim2.new(0, 170, 0, 60), "Out", "Quad", 1.5, true, function()
       WelcomeMainXE.Visible = true
 
       local hideTween = TweenService:Create(
-          WelcomeMainXE,
-          TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-          {TextTransparency = 0, TextStrokeTransparency = 1}
-      )
-      hideTween:Play()
-      hideTween.Completed:Wait()
+    WelcomeMainXE,
+    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out), -- 添加弹性效果
+    {
+        TextTransparency = 0,
+        TextStrokeTransparency = 1,
+        TextColor3 = Color3.new(1, 0.5, 0.5), -- 颜色变化
+        Size = UDim2.new(1.2, 0, 1.2, 0) -- 放大效果
+    }
+)
       wait(2)
+      
+      
       local showTween = TweenService:Create(
           WelcomeMainXE,
           TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
@@ -806,34 +689,8 @@ tween:Play()
     end
     
     spawn(Fakerainbow)
-    Open.MouseEnter:Connect(function()
-    services.TweenService:Create(Open, TweenInfo.new(0.2), {
-        BackgroundTransparency = 0.6,
-        Size = UDim2.new(0, 65, 0, 34)
-    }):Play()
-end)
 
-Open.MouseLeave:Connect(function()
-    services.TweenService:Create(Open, TweenInfo.new(0.2), {
-        BackgroundTransparency = 0.75,
-        Size = UDim2.new(0, 61, 0, 32)
-    }):Play()
-end)
-    
-Open.MouseButton1Click:Connect(function()
-    if animating then return end
-    ToggleUILib()
-    
-    services.TweenService:Create(Open, TweenInfo.new(0.15), {
-        Size = UDim2.new(0, 61*scaleFactor, 0, 32*scaleFactor)
-    }):Play()
-    
-    wait(0.15)
-    services.TweenService:Create(Open, TweenInfo.new(0.1), {
-        Size = UDim2.new(0, 61, 0, 32)
-    }):Play()
-end)
-
+    Open.MouseButton1Click:Connect(function()
         isAnimating = true 
         if uihide == false then
             Open.Text = Language[currentLanguage].OpenUI
@@ -1919,3 +1776,6 @@ end)
         return window
     end
 return library
+--local window = library:new("11")
+--local mainAV = window:Tab("关于", "")
+--local information = mainAV:section("信息", false)
