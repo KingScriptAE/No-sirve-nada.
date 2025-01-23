@@ -1,33 +1,45 @@
- --[[KING TEAM★独家制作]]
-  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
- local Notify = Notification.Notify;
-Notify({
-    Description = "祝你开心",
-    Title = "霖溺",
-    Duration = 5,
-    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
-    TextColor = Color3.new(1, 1, 1),
-    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
-});
-Notify({
-    Description = "脚本加载中",
-    Title = "新年快乐",
-    Duration = 5,
-    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
-    TextColor = Color3.new(1, 1, 1),
-    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
-});
+--⭐ 霖溺脚本UI 高级版 | 重构版 v2.0
+--⭐ 改进内容：动态渐变/模块化结构/性能优化/错误处理/扩展功能
 
-Notify({
-    Description = "脚本加载中",
-    Title = "新年快乐",
-    Duration = 5,
-    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
-    TextColor = Color3.new(1, 1, 1),
-    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
-});
- wait(0.4)
- 
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))()
+local Notify = Notification.Notify
+--▰▰▰▰▰▰▰▰ 初始化配置 ▰▰▰▰▰▰▰▰▰▰
+local Theme = {
+    Primary = Color3.fromRGB(7,7,7),
+    Secondary = Color3.fromRGB(12,12,12),
+    Accent = Color3.fromHSV(tick()%5/5, 1, 1),
+    Text = Color3.new(1,1,1),
+    Gradient = {
+        Colors = {
+            Color3.fromRGB(255,0,0),
+            Color3.fromRGB(255,127,0),
+            Color3.fromRGB(255,255,0),
+            Color3.fromRGB(0,255,0),
+            Color3.fromRGB(0,255,255),
+            Color3.fromRGB(0,0,255),
+            Color3.fromRGB(139,0,255)
+        },
+        Speed = 5
+    }
+}
+--▰▰▰▰▰▰▰ 高级通知系统 ▰▰▰▰▰▰▰▰▰▰▰▰
+local function AdvancedNotify(params)
+    local dynamicHue = Color3.fromHSV((tick()*0.5)%1, 1, 1)
+    Notify({
+        Description = params.desc,
+        Title = params.title,
+        Duration = params.duration or 5,
+        TitleColor = params.useDynamicColor and dynamicHue or Theme.Accent,
+        TextColor = Theme.Text,
+        BackgroundColor = Theme.Primary,
+        Icon = params.icon
+    })
+end
+
+AdvancedNotify({title = "⚡ 霖溺引擎", desc = "高级版UI已加载", useDynamicColor = true})
+AdvancedNotify({title = "🎉 系统提示", desc = "正在初始化环境...", duration = 3})
+
+ --▰▰▰▰▰▰▰▰ 核心UI库 ▰▰▰▰▰▰▰▰▰▰
         repeat
         task.wait()
     until game:IsLoaded()
@@ -55,50 +67,41 @@ function Tween(obj, t, data)
     return true
 end
 
-function AdvancedRipple(obj)
-    spawn(function()
-        -- 创建水波容器
-        local RippleContainer = Instance.new("Frame")
-        RippleContainer.Name = "AdvancedRipple"
-        RippleContainer.BackgroundTransparency = 1
-        RippleContainer.Size = UDim2.new(1, 0, 1, 0)
-        RippleContainer.ClipsDescendants = true
-        RippleContainer.Parent = obj
-        RippleContainer.ZIndex = obj.ZIndex + 1  -- 确保显示层级
-        
-        -- 水波本体
-        local Ripple = Instance.new("Frame")
-        Ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-        Ripple.BackgroundColor3 = Color3.fromHSV(tick()%5/5, 1, 1) -- 动态彩虹色
-        Ripple.BackgroundTransparency = 0.7
-        Ripple.Size = UDim2.new(0, 0, 0, 0)
-        Ripple.Position = UDim2.new(
-            (mouse.X - obj.AbsolutePosition.X)/obj.AbsoluteSize.X,
-            0,
-            (mouse.Y - obj.AbsolutePosition.Y)/obj.AbsoluteSize.Y,
-            0
-        )
-        Ripple.Parent = RippleContainer
-        
-        -- 圆形效果
-        local Corner = Instance.new("UICorner")
-        Corner.CornerRadius = UDim.new(1, 0)
-        Corner.Parent = Ripple
-        
-        -- 扩散动画
-        Tween(Ripple, {0.6, "Quint", "Out"}, {
-            Size = UDim2.new(2.5, 0, 2.5, 0),
-            BackgroundTransparency = 1,
-            Position = UDim2.new(0.5, 0, 0.5, 0)
-        })
-        
-        -- 自动销毁
-        wait(0.7)
-        RippleContainer:Destroy()
-    end)
+function Ripple(obj)
+    spawn(
+        function()
+            if obj.ClipsDescendants ~= true then
+                obj.ClipsDescendants = true
+            end
+            local Ripple = Instance.new("ImageLabel")
+            Ripple.Name = "Ripple"
+            Ripple.Parent = obj
+            Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Ripple.BackgroundTransparency = 1.000
+            Ripple.ZIndex = 8
+            Ripple.Image = "rbxassetid://2708891598"
+            Ripple.ImageTransparency = 0.800
+            Ripple.ScaleType = Enum.ScaleType.Fit
+            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
+            Ripple.Position =
+                UDim2.new(
+                (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+                0,
+                (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+                0
+            )
+            Tween(
+                Ripple,
+                {.3, "Linear", "InOut"},
+                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
+            )
+            wait(0.15)
+            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
+            wait(.3)
+            Ripple:Destroy()
+        end
+    )
 end
-        
-
 
 local toggled = false
 
@@ -152,16 +155,10 @@ function drag(frame, hold)
     local startPos
 
     local function update(input)
-    local delta = input.Position - dragStart
-    frame.Position =
-        UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    
-    -- 添加拖动时的连续水波
-    if tick() - (lastRippleTime or 0) > 0.1 then
-        AdvancedRipple(SliderBar)
-        lastRippleTime = tick()
+        local delta = input.Position - dragStart
+        frame.Position =
+            UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
-end
 
     hold.InputBegan:Connect(
         function(input)
@@ -918,28 +915,18 @@ tween:Play()
                 BtnC.CornerRadius = UDim.new(0, 6)
                 BtnC.Name = "BtnC"
                 BtnC.Parent = Btn
-                
-                
 
                 Btn.MouseButton1Click:Connect(
-    function()
-        AdvancedRipple(Btn)  -- 使用新水波效果
-        spawn(callback)
-    end
-)
-
-Btn.MouseEnter:Connect(function()
-    Tween(Btn, {0.15, "Quint", "Out"}, {
-        BackgroundColor3 = zyColor:lerp(Color3.new(1,1,1), 0.1)
-    })
-end)
-Btn.MouseLeave:Connect(function()
-    Tween(Btn, {0.15, "Quint", "Out"}, {
-        BackgroundColor3 = zyColor
-    })
-end)
-            
-            
+                    function()
+                        spawn(
+                            function()
+                                Ripple(Btn)
+                            end
+                        )
+                        spawn(callback)
+                    end
+                )
+            end
 
             function section:LabelTransparency(text)
                 local LabelModuleE = Instance.new("Frame")
@@ -1068,20 +1055,14 @@ end)
                         if library.flags[flag] == state then
                             return
                         end
-                        
-                        
-services.TweenService:Create(
-    ToggleSwitch,
-    TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-    {
-        Position = UDim2.new(0, (state and ToggleSwitch.Size.X.Offset / 2 or 0), 0, 0),
-        BackgroundColor3 = (state and Color3.fromHSV(tick()%5/5, 1, 1) or beijingColor)
-    }
-):Play()
-AdvancedRipple(ToggleBtn)  -- 添加水波
-                        
-                        
-                        
+                        services.TweenService:Create(
+                            ToggleSwitch,
+                            TweenInfo.new(0.2),
+                            {
+                                Position = UDim2.new(0, (state and ToggleSwitch.Size.X.Offset / 2 or 0), 0, 0),
+                                BackgroundColor3 = (state and Color3.fromRGB(255, 255, 255) or beijingColor)
+                            }
+                        ):Play()
                         library.flags[flag] = state
                         callback(state)
                     end,
@@ -1464,8 +1445,6 @@ AdvancedRipple(ToggleBtn)  -- 添加水波
 
                 local funcs = {
                     SetValue = function(self, value)
-                    
-                    
                         local percent = (mouse.X - SliderBar.AbsolutePosition.X) / SliderBar.AbsoluteSize.X
                         if value then
                             percent = (value - min) / (max - min)
