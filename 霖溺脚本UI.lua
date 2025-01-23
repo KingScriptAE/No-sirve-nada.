@@ -1,18 +1,31 @@
  --[[KING TEAM★独家制作]]
   local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
  local Notify = Notification.Notify;
-
- Notify({
-		 Description = "这是一个新年";
-		 Title = "霖溺";
-		 Duration = 5;
-		 });
-		 
 Notify({
-	 Description = "脚本加载中";
-	 Title = "新年快乐";
-	 Duration = 5;
-	 });
+    Description = "祝你开心",
+    Title = "霖溺",
+    Duration = 5,
+    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
+    TextColor = Color3.new(1, 1, 1),
+    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
+});
+Notify({
+    Description = "脚本加载中",
+    Title = "新年快乐",
+    Duration = 5,
+    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
+    TextColor = Color3.new(1, 1, 1),
+    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
+});
+
+Notify({
+    Description = "脚本加载中",
+    Title = "新年快乐",
+    Duration = 5,
+    TitleColor = Color3.fromHSV(tick()%5/5, 1, 1),  -- 动态色相
+    TextColor = Color3.new(1, 1, 1),
+    BackgroundColor = Color3.new(0.1, 0.1, 0.1)
+});
  wait(0.4)
  
         repeat
@@ -100,6 +113,11 @@ function switchTab(new)
     end
     switchingTabs = true
     library.currentTab = new
+
+-- 在 switchTab 函数中添加颜色变化：
+services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3), {
+    TextColor3 = Color3.fromHSV(tick()%1, 0.8, 1)
+}):Play()
 
     services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
     services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
@@ -196,11 +214,6 @@ function library.new(library, name, theme)
     local UIGradientTitle = Instance.new("UIGradient")
     local WelcomeMainXE = Instance.new("TextLabel")
     
-    -- 在所有文字元素（TextLabel/TextButton）中添加字体设置：
-TextLabel.Font = Enum.Font.GothamSemibold  -- 更现代的字体
-TextLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
-TextLabel.TextStrokeTransparency = 0.3     -- 文字描边
-TextLabel.TextSize = 16                    -- 统一字号
     
     
     if syn and syn.protect_gui then
