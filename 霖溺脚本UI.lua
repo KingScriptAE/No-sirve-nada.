@@ -78,7 +78,12 @@ function Ripple(obj)
                 (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
                 0
             )
-            
+            Tween(
+                Ripple,
+                {.3, "Linear", "InOut"},
+                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
+            )
+            wait(0.15)
             Tween(
     Ripple,
     {0.4, "Quad", "Out"},
@@ -88,7 +93,11 @@ function Ripple(obj)
         Size = UDim2.new(15, 0, 15, 0) -- 扩大消散范围
     }
 )
-
+wait(.3)
+            Ripple:Destroy()
+        end
+    )
+end
 local toggled = false
 
 -- # Switch Tabs # --
