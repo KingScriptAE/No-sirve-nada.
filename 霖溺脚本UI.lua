@@ -1,45 +1,20 @@
---⭐ 霖溺脚本UI 高级版 | 重构版 v2.0
---⭐ 改进内容：动态渐变/模块化结构/性能优化/错误处理/扩展功能
+ --[[KING TEAM★独家制作]]
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
+ local Notify = Notification.Notify;
 
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))()
-local Notify = Notification.Notify
---▰▰▰▰▰▰▰▰ 初始化配置 ▰▰▰▰▰▰▰▰▰▰
-local Theme = {
-    Primary = Color3.fromRGB(7,7,7),
-    Secondary = Color3.fromRGB(12,12,12),
-    Accent = Color3.fromHSV(tick()%5/5, 1, 1),
-    Text = Color3.new(1,1,1),
-    Gradient = {
-        Colors = {
-            Color3.fromRGB(255,0,0),
-            Color3.fromRGB(255,127,0),
-            Color3.fromRGB(255,255,0),
-            Color3.fromRGB(0,255,0),
-            Color3.fromRGB(0,255,255),
-            Color3.fromRGB(0,0,255),
-            Color3.fromRGB(139,0,255)
-        },
-        Speed = 5
-    }
-}
---▰▰▰▰▰▰▰ 高级通知系统 ▰▰▰▰▰▰▰▰▰▰▰▰
-local function AdvancedNotify(params)
-    local dynamicHue = Color3.fromHSV((tick()*0.5)%1, 1, 1)
-    Notify({
-        Description = params.desc,
-        Title = params.title,
-        Duration = params.duration or 5,
-        TitleColor = params.useDynamicColor and dynamicHue or Theme.Accent,
-        TextColor = Theme.Text,
-        BackgroundColor = Theme.Primary,
-        Icon = params.icon
-    })
-end
-
-AdvancedNotify({title = "⚡ 霖溺引擎", desc = "高级版UI已加载", useDynamicColor = true})
-AdvancedNotify({title = "🎉 系统提示", desc = "正在初始化环境...", duration = 3})
-
- --▰▰▰▰▰▰▰▰ 核心UI库 ▰▰▰▰▰▰▰▰▰▰
+ Notify({
+		 Description = "这是一个新年";
+		 Title = "霖溺";
+		 Duration = 5;
+		 });
+		 
+Notify({
+	 Description = "脚本加载中";
+	 Title = "新年快乐";
+	 Duration = 5;
+	 });
+ wait(0.4)
+ 
         repeat
         task.wait()
     until game:IsLoaded()
@@ -125,11 +100,6 @@ function switchTab(new)
     end
     switchingTabs = true
     library.currentTab = new
-
--- 在 switchTab 函数中添加颜色变化：
-services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3), {
-    TextColor3 = Color3.fromHSV(tick()%1, 0.8, 1)
-}):Play()
 
     services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
     services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
@@ -225,8 +195,6 @@ function library.new(library, name, theme)
     local UIGradient = Instance.new("UIGradient")
     local UIGradientTitle = Instance.new("UIGradient")
     local WelcomeMainXE = Instance.new("TextLabel")
-    
-    
     
     if syn and syn.protect_gui then
         syn.protect_gui(dogent)
@@ -515,27 +483,7 @@ function library.new(library, name, theme)
     ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
 
     UIGradientTitle.Parent = ScriptTitle
--- 在 ScriptTitle 的 UIGradientTitle 后添加：
-UIGradientTitle.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255, 127, 0)),
-    ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
-    ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 255, 255)),
-    ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 255)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(139, 0, 255))
-}
-
-UIGradientTitle.Rotation = 45
-UIGradientTitle.Enabled = true
-
-local tween = game:GetService("TweenService"):Create(
-    UIGradientTitle,
-    TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1),
-    { Offset = Vector2.new(1, 0) }
-)
-tween:Play()
-    -----
+    
     local function NPLHKB_fake_script()
         local script = Instance.new("LocalScript", ScriptTitle)
 
