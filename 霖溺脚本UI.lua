@@ -56,21 +56,26 @@ function Tween(obj, t, data)
 end
 
 function Ripple(obj)
-    spawn(
-        function()
-            if obj.ClipsDescendants ~= true then
-                obj.ClipsDescendants = true
-            end
-            local Ripple = Instance.new("ImageLabel")
+    spawn(function()
+        if obj.ClipsDescendants ~= true then
+            obj.ClipsDescendants = true
+        end
+        local Ripple = Instance.new("ImageLabel")
+            
+            
             Ripple.Name = "Ripple"
             Ripple.Parent = obj
             Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Ripple.BackgroundTransparency = 1.000
             Ripple.ZIndex = 8
             Ripple.Image = "rbxassetid://2708891598"
-            Ripple.ImageTransparency = 0.800
+            
             Ripple.ScaleType = Enum.ScaleType.Fit
-            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
+            Ripple.ImageColor3 = Color3.fromHSV(tick()%5/5, 1, 1) -- 动态色相
+        Ripple.ImageTransparency = 0.6  -- 调整透明度
+        Ripple.Size = UDim2.new(0, 0, 0, 0)
+            
+            
             Ripple.Position =
                 UDim2.new(
                 (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
@@ -84,20 +89,13 @@ function Ripple(obj)
                 {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
             )
             wait(0.15)
-            Tween(
-    Ripple,
-    {0.4, "Quad", "Out"},
-    {
-        ImageTransparency = 1,
-        Rotation = math.random(-30, 30), -- 随机旋转
-        Size = UDim2.new(15, 0, 15, 0) -- 扩大消散范围
-    }
-)
-wait(.3)
-            Ripple:Destroy()
-        end
-    )
+                Tween(Ripple, {.3, "Quad", "Out"}, {  -- 修改缓动曲线
+            Position = UDim2.new(-5.5, 0, -5.5, 0), 
+            Size = UDim2.new(12, 0, 12, 0)
+        })
+    end)
 end
+
 local toggled = false
 
 -- # Switch Tabs # --
@@ -190,6 +188,12 @@ function drag(frame, hold)
     )
 end
 
+local SoundService = game:GetService("SoundService")
+local clickSound = Instance.new("Sound")
+clickSound.SoundId = "rbxassetid://9113082266" -- 示例音效ID
+clickSound.Volume = 0.5
+clickSound.Parent = SoundService
+
 function library.new(library, name, theme)
     for _, v in next, services.CoreGui:GetChildren() do
         if v.Name == "你好" then
@@ -235,9 +239,14 @@ function library.new(library, name, theme)
     end
 
     function ToggleUILib()
-    if not ToggleUI then
-   
-end
+        if not ToggleUI then
+            dogent.Enabled = false
+            ToggleUI = true
+        else
+            ToggleUI = false
+            dogent.Enabled = true
+        end
+    end
     local Language = {
         ["en-us"] = {
             Universal = "Welcome",
@@ -367,6 +376,7 @@ end
 
     function toggleui()
         toggled = not toggled
+        MainXE.Visible = true  
         spawn(
             function()
                 if toggled then
@@ -374,15 +384,16 @@ end
                 end
             end
         )
-        Tween(
-    MainXE,
-    {0.4, "Quint", "InOut"}, -- 延长持续时间并使用Quint缓动
-    {
-        Size = UDim2.new(0, 609, 0, (toggled and 505 or 0)),
-        BackgroundTransparency = (toggled and 0 or 0.1)
-            }
-        )
-    end
+        TweenService:Create(MainXE, TweenInfo.new(0.3, "Quad", "Out"), {
+        Size = UDim2.new(0, 609, 0, toggled and 505 or 0),
+        BackgroundTransparency = toggled and 0 or 0.2
+    }):Play()
+    
+    -- 添加投影动画
+    TweenService:Create(DropShadow, TweenInfo.new(0.3, "Quad", "Out"), {
+        ImageTransparency = toggled and 0.2 or 0.8
+    }):Play()
+end
 
     TabMainXE.Name = "TabMainXE"
     TabMainXE.Parent = MainXE
@@ -390,13 +401,11 @@ end
     TabMainXE.BackgroundTransparency = 1.000
     TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
     TabMainXE.Size = UDim2.new(0, 448, 0, 353)
-    
-TweenService:Create(TabMainXE, TweenInfo.new(0.2), {BackgroundTransparency = 0}):Play()
-TabMainXE.Visible = true -- 添加显式可见
+    TabMainXE.Visible = false
 
     MainXEC.CornerRadius = UDim.new(0, 5.5)
     MainXEC.Name = "MainXEC"
-MainXEC.Parent = MainXE -- 应为MainXE的子对象
+    MainXEC.Parent = Frame
 
     SB.Name = "SB"
     SB.Parent = MainXE
@@ -424,38 +433,33 @@ MainXEC.Parent = MainXE -- 应为MainXE的子对象
     
       if _G.UIMainXE then
         warn()
-              MainXE:TweenSize(UDim2.new(0, 570, 0, 358), "Out", "Quint", 0.6, true, function()
-    Side:TweenSize(
-        UDim2.new(0, 110, 0, 357),
-        "Out", "Quint", 0.3, true,
-        function()
-            SB:TweenSize(
-                UDim2.new(0, 8, 0, 357),
-                "Out", "Quint", 0.2, true,
-                function()
-                    -- 添加渐显效果
-                    TweenService:Create(TabMainXE, TweenInfo.new(0.2), {BackgroundTransparency = 0}):Play()
-                end
-            )
-        end
-    )
-end)
+              MainXE:TweenSize(UDim2.new(0, 570, 0, 358), "Out", "Quad", 0.9, true, function()
+                  Side:TweenSize(UDim2.new(0, 110, 0, 357), "Out", "Quad", 0.4, true, function()
+                      SB:TweenSize(UDim2.new(0, 8, 0, 357), "Out", "Quad", 0.2, true, function()
+                      wait(0.5)
+                      TabMainXE.Visible = true
+                      --[[
+                      UIGradient:Destroy()
+                      MainXE.Transparency = 1
+                      TabMainXE.Transparency = 1
+                      SB.Transparency = 1
+                      Side.Transparency = 1
+                      ]]
+                  end)
+              end)
+          end)
       else
-local hideTween = services.TweenService:Create(
-    WelcomeMainXE,
-    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-    {
-        TextTransparency = 0,
-        TextStrokeTransparency = 1,
-        TextColor3 = Color3.new(1, 0.5, 0.5),
-        Size = UDim2.new(1.2, 0, 1.2, 0)
-    }
-)
-hideTween:Play()  -- 添加播放
-hideTween.Completed:Wait()  -- 等待动画完成
-wait(2)
-      
-      
+      MainXE:TweenSize(UDim2.new(0, 170, 0, 60), "Out", "Quad", 1.5, true, function()
+      WelcomeMainXE.Visible = true
+
+      local hideTween = TweenService:Create(
+          WelcomeMainXE,
+          TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+          {TextTransparency = 0, TextStrokeTransparency = 1}
+      )
+      hideTween:Play()
+      hideTween.Completed:Wait()
+      wait(2)
       local showTween = TweenService:Create(
           WelcomeMainXE,
           TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
@@ -693,33 +697,34 @@ tween:Play()
 
     Open.MouseButton1Click:Connect(function()
     isAnimating = true 
-    if uihide == false then
-        Open.Text = Language[currentLanguage].OpenUI
-        -- 使用Tween缩小UI并淡出
-        Tween(
-            MainXE,
-            {0.3, "Quint", "Out"},
-            {
-                Size = UDim2.new(0, 0, 0, 0),  -- 缩小到不可见
-                BackgroundTransparency = 0.7    -- 增加透明度
-            }
-        )
-        uihide = true
-    else
-        Open.Text = Language[currentLanguage].HideUI
-        -- 使用Tween恢复UI尺寸和透明度
-        Tween(
-            MainXE,
-            {0.3, "Quint", "Out"},
-            {
-                Size = UDim2.new(0, 609, 0, 505),  -- 恢复原尺寸
-                BackgroundTransparency = 0         -- 重置透明度
-            }
-        )
-        uihide = false
-    end
-    isAnimating = false
+    clickSound:Play()
+TweenService:Create(Open, TweenInfo.new(0.1, "Quad", "Out"), {
+        Size = UDim2.new(0, 55, 0, 29)
+    }):Play()
+    TweenService:Create(Open, TweenInfo.new(0.1, "Quad", "Out", 0.1), {
+        Size = UDim2.new(0, 61, 0, 32)
+    }):Play()
+TweenService:Create(MainXE, TweenInfo.new(0.3, "Quad", "Out"), {
+        Position = UDim2.new(0.5, 0, uihide and 0.5 or 0.6, 0),
+        BackgroundTransparency = uihide and 0 or 0.2
+    }):Play()
 end)
+    
+        isAnimating = true 
+        if uihide == false then
+            Open.Text = Language[currentLanguage].OpenUI
+            TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
+            uihide = true
+            MainXE.Visible = false
+        else
+            Open.Text = Language[currentLanguage].HideUI
+            TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
+            MainXE.Visible = true
+            uihide = false
+        end
+        
+        
+    end)
 
     drag(MainXE)
 
@@ -931,6 +936,8 @@ end)
 
                 Btn.MouseButton1Click:Connect(
                     function()
+                    
+                    clickSound:Play() 
                         spawn(
                             function()
                                 Ripple(Btn)
