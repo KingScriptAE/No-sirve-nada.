@@ -1594,12 +1594,6 @@ DropdownModuleL.Name = "DropdownModuleL"
 DropdownModuleL.Parent = DropdownModule
 DropdownModuleL.SortOrder = Enum.SortOrder.LayoutOrder
 DropdownModuleL.Padding = UDim.new(0, 4)
-
--- 设置所有选项可见
-local setAllVisible = function()
-    local options = DropdownModule:GetChildren()
-    for i = 1, #options do
-        local option = options[i
             ---
 
             local setAllVisible = function()
