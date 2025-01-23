@@ -36,38 +36,46 @@ local services =
 local mouse = services.Players.LocalPlayer:GetMouse()
 
 function Tween(obj, t, data)
-    services.TweenService:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), data):Play()
+    services.TweenService:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle[t[2]], Enum.EasingDirection[t[3]]), data):Play(
+
+    )
     return true
 end
 
--- 优化 Ripple 效果
 function Ripple(obj)
-    spawn(function()
-        if obj.ClipsDescendants ~= true then
-            obj.ClipsDescendants = true
+    spawn(
+        function()
+            if obj.ClipsDescendants ~= true then
+                obj.ClipsDescendants = true
+            end
+            local Ripple = Instance.new("ImageLabel")
+            Ripple.Name = "Ripple"
+            Ripple.Parent = obj
+            Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Ripple.BackgroundTransparency = 1.000
+            Ripple.ZIndex = 8
+            Ripple.Image = "rbxassetid://2708891598"
+            Ripple.ImageTransparency = 0.800
+            Ripple.ScaleType = Enum.ScaleType.Fit
+            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
+            Ripple.Position =
+                UDim2.new(
+                (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+                0,
+                (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+                0
+            )
+            Tween(
+                Ripple,
+                {.3, "Linear", "InOut"},
+                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
+            )
+            wait(0.15)
+            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
+            wait(.3)
+            Ripple:Destroy()
         end
-        local Ripple = Instance.new("ImageLabel")
-        Ripple.Name = "Ripple"
-        Ripple.Parent = obj
-        Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Ripple.BackgroundTransparency = 1.000
-        Ripple.ZIndex = 8
-        Ripple.Image = "rbxassetid://2708891598"
-        Ripple.ImageTransparency = 0.800
-        Ripple.ScaleType = Enum.ScaleType.Fit
-        Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
-        Ripple.Position = UDim2.new(
-            (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
-            0,
-            (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
-            0
-        )
-        Tween(Ripple, {0.3, "Quad", "InOut"}, {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)})
-        wait(0.15)
-        Tween(Ripple, {0.3, "Quad", "InOut"}, {ImageTransparency = 1})
-        wait(0.3)
-        Ripple:Destroy()
-    end)
+    )
 end
 
 local toggled = false
@@ -1524,77 +1532,74 @@ function library.new(library, name, theme)
 
             library.flags[flag] = nil
 
-           local TweenService = game:GetService("TweenService")
+            local DropdownModule = Instance.new("Frame")
+            local DropdownTop = Instance.new("TextButton")
+            local DropdownTopC = Instance.new("UICorner")
+            local DropdownOpen = Instance.new("TextButton")
+            local DropdownText = Instance.new("TextBox")
+            local DropdownModuleL = Instance.new("UIListLayout")
+            local Option = Instance.new("TextButton")
+            local OptionC = Instance.new("UICorner")
 
-local DropdownModule = Instance.new("Frame")
-local DropdownTop = Instance.new("TextButton")
-local DropdownTopC = Instance.new("UICorner")
-local DropdownOpen = Instance.new("TextButton")
-local DropdownText = Instance.new("TextBox")
-local DropdownModuleL = Instance.new("UIListLayout")
-local Option = Instance.new("TextButton")
-local OptionC = Instance.new("UICorner")
+            DropdownModule.Name = "DropdownModule"
+            DropdownModule.Parent = Objs
+            DropdownModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownModule.BackgroundTransparency = 1.000
+            DropdownModule.BorderSizePixel = 0
+            DropdownModule.ClipsDescendants = true
+            DropdownModule.Position = UDim2.new(0, 0, 0, 0)
+            DropdownModule.Size = UDim2.new(0, 428, 0, 38)
 
--- Dropdown 组件初始化代码
-DropdownModule.Name = "DropdownModule"
-DropdownModule.Parent = Objs
-DropdownModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropdownModule.BackgroundTransparency = 1.000
-DropdownModule.BorderSizePixel = 0
-DropdownModule.ClipsDescendants = true
-DropdownModule.Position = UDim2.new(0, 0, 0, 0)
-DropdownModule.Size = UDim2.new(0, 428, 0, 38)
+            DropdownTop.Name = "DropdownTop"
+            DropdownTop.Parent = DropdownModule
+            DropdownTop.BackgroundColor3 = zyColor
+            DropdownTop.BorderSizePixel = 0
+            DropdownTop.Size = UDim2.new(0, 428, 0, 38)
+            DropdownTop.AutoButtonColor = false
+            DropdownTop.Font = Enum.Font.GothamBold
+            DropdownTop.Text = ""
+            DropdownTop.TextColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownTop.TextSize = 16.000
+            DropdownTop.TextXAlignment = Enum.TextXAlignment.Left
 
-DropdownTop.Name = "DropdownTop"
-DropdownTop.Parent = DropdownModule
-DropdownTop.BackgroundColor3 = zyColor
-DropdownTop.BorderSizePixel = 0
-DropdownTop.Size = UDim2.new(0, 428, 0, 38)
-DropdownTop.AutoButtonColor = false
-DropdownTop.Font = Enum.Font.GothamBold
-DropdownTop.Text = ""
-DropdownTop.TextColor3 = Color3.fromRGB(255, 255, 255)
-DropdownTop.TextSize = 16.000
-DropdownTop.TextXAlignment = Enum.TextXAlignment.Left
+            DropdownTopC.CornerRadius = UDim.new(0, 6)
+            DropdownTopC.Name = "DropdownTopC"
+            DropdownTopC.Parent = DropdownTop
 
-DropdownTopC.CornerRadius = UDim.new(0, 6)
-DropdownTopC.Name = "DropdownTopC"
-DropdownTopC.Parent = DropdownTop
+            DropdownOpen.Name = "DropdownOpen"
+            DropdownOpen.Parent = DropdownTop
+            DropdownOpen.AnchorPoint = Vector2.new(0, 0.5)
+            DropdownOpen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownOpen.BackgroundTransparency = 1.000
+            DropdownOpen.BorderSizePixel = 0
+            DropdownOpen.Position = UDim2.new(0.918383181, 0, 0.5, 0)
+            DropdownOpen.Size = UDim2.new(0, 20, 0, 20)
+            DropdownOpen.Font = Enum.Font.GothamBold
+            DropdownOpen.Text = "+"
+            DropdownOpen.TextColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownOpen.TextSize = 24.000
+            DropdownOpen.TextWrapped = true
 
-DropdownOpen.Name = "DropdownOpen"
-DropdownOpen.Parent = DropdownTop
-DropdownOpen.AnchorPoint = Vector2.new(0, 0.5)
-DropdownOpen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropdownOpen.BackgroundTransparency = 1.000
-DropdownOpen.BorderSizePixel = 0
-DropdownOpen.Position = UDim2.new(0.918383181, 0, 0.5, 0)
-DropdownOpen.Size = UDim2.new(0, 20, 0, 20)
-DropdownOpen.Font = Enum.Font.GothamBold
-DropdownOpen.Text = "+"
-DropdownOpen.TextColor3 = Color3.fromRGB(255, 255, 255)
-DropdownOpen.TextSize = 24.000
-DropdownOpen.TextWrapped = true
 
-DropdownText.Name = "DropdownText"
-DropdownText.Parent = DropdownTop
-DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropdownText.BackgroundTransparency = 1.000
-DropdownText.BorderSizePixel = 0
-DropdownText.Position = UDim2.new(0.0373831764, 0, 0, 0)
-DropdownText.Size = UDim2.new(0, 184, 0, 38)
-DropdownText.Font = Enum.Font.GothamBold
-DropdownText.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-DropdownText.PlaceholderText = text
-DropdownText.Text = text .. "｜" .. Language[currentLanguage].Currently
-DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
-DropdownText.TextSize = 16.000
-DropdownText.TextXAlignment = Enum.TextXAlignment.Left
+            DropdownText.Name = "DropdownText"
+            DropdownText.Parent = DropdownTop
+            DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownText.BackgroundTransparency = 1.000
+            DropdownText.BorderSizePixel = 0
+            DropdownText.Position = UDim2.new(0.0373831764, 0, 0, 0)
+            DropdownText.Size = UDim2.new(0, 184, 0, 38)
+            DropdownText.Font = Enum.Font.GothamBold
+            DropdownText.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownText.PlaceholderText = text
+            DropdownText.Text = text .. "｜" .. Language[currentLanguage].Currently
+            DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownText.TextSize = 16.000
+            DropdownText.TextXAlignment = Enum.TextXAlignment.Left
 
-DropdownModuleL.Name = "DropdownModuleL"
-DropdownModuleL.Parent = DropdownModule
-DropdownModuleL.SortOrder = Enum.SortOrder.LayoutOrder
-DropdownModuleL.Padding = UDim.new(0, 4)
-            ---
+            DropdownModuleL.Name = "DropdownModuleL"
+            DropdownModuleL.Parent = DropdownModule
+            DropdownModuleL.SortOrder = Enum.SortOrder.LayoutOrder
+            DropdownModuleL.Padding = UDim.new(0, 4)
 
             local setAllVisible = function()
                 local options = DropdownModule:GetChildren()
@@ -1722,3 +1727,6 @@ DropdownModuleL.Padding = UDim.new(0, 4)
         return window
     end
 return library
+--local window = library:new("11")
+--local mainAV = window:Tab("关于", "")
+--local information = mainAV:section("信息", false)
