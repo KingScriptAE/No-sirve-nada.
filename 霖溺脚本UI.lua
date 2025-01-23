@@ -215,7 +215,12 @@ function library.new(library, name, theme)
     local TabBtnsL = Instance.new("UIListLayout")
     local ScriptTitle = Instance.new("TextLabel")
     local SBG = Instance.new("UIGradient")
+    
+    
     local Open = Instance.new("TextButton")
+    
+    
+    
     local UIG = Instance.new("UIGradient")
     local DropShadowHolder = Instance.new("Frame")
     local DropShadow = Instance.new("ImageLabel")
@@ -224,7 +229,105 @@ function library.new(library, name, theme)
     local UIGradientTitle = Instance.new("UIGradient")
     local WelcomeMainXE = Instance.new("TextLabel")
     
+
+-- 新增动画控制变量
+local animating = false
+local animationSpeed = 0.25  -- 动画时长（秒）
+local scaleFactor = 1.1      -- 动效缩放系数
+
+-- 重写 ToggleUILib 函数
+function ToggleUILib()
+    if animating then return end
+    animating = true
     
+    local targetSize = not ToggleUI and UDim2.new(0, 609, 0, 505) or UDim2.new(0, 0, 0, 0)
+    local targetPos = not ToggleUI and UDim2.new(0.5, 0, 0.5, 0) or UDim2.new(0.5, 0, 0.3, 0)
+    local targetAlpha = not ToggleUI and 1 or 0
+    local targetRotation = not ToggleUI and 0 or -15
+
+    -- 主面板动画
+    local mainTween = services.TweenService:Create(
+        MainXE,
+        TweenInfo.new(animationSpeed, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+        {
+            Size = targetSize,
+            Position = targetPos,
+            BackgroundTransparency = targetAlpha
+        }
+    )
+
+    -- 阴影动画
+    local shadowTween = services.TweenService:Create(
+        DropShadow,
+        TweenInfo.new(animationSpeed, Enum.EasingStyle.Quad),
+        {
+            ImageTransparency = not ToggleUI and 0.2 or 1,
+            Size = not ToggleUI and UDim2.new(1,20,1,20) or UDim2.new(0,0,0,0)
+        }
+    )
+
+    -- 标题文字动画
+    local textTween = services.TweenService:Create(
+        WelcomeMainXE,
+        TweenInfo.new(animationSpeed*0.8),
+        {
+            TextTransparency = not ToggleUI and 0 or 1,
+            TextStrokeTransparency = not ToggleUI and 0.5 or 1
+        }
+    )
+
+    -- 旋转效果
+    local rotationTween = services.TweenService:Create(
+        MainXE,
+        TweenInfo.new(animationSpeed, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+        {
+            Rotation = targetRotation
+        }
+    )
+
+    -- 侧边栏延迟动画
+    local sideBarTween = services.TweenService:Create(
+        Side,
+        TweenInfo.new(animationSpeed*0.7, Enum.EasingStyle.Quint),
+        {
+            Size = not ToggleUI and UDim2.new(0, 110, 0, 357) or UDim2.new(0,0,0,0)
+        }
+    )
+
+    -- 执行动画序列
+    if not ToggleUI then
+        MainXE.Visible = true
+        MainXE.Size = UDim2.new(0, 0, 0, 0)
+        MainXE.Rotation = 15
+        DropShadow.ImageTransparency = 1
+    end
+
+    mainTween:Play()
+    shadowTween:Play() 
+    textTween:Play()
+    rotationTween:Play()
+    
+    wait(animationSpeed*0.3)
+    sideBarTween:Play()
+
+    -- 动画完成回调
+    mainTween.Completed:Connect(function()
+        animating = false
+        ToggleUI = not ToggleUI
+        if ToggleUI then
+            TabMainXE.Visible = true
+            Open.Visible = true
+        else
+            TabMainXE.Visible = false
+            Open.Visible = false
+        end
+    end)
+end
+
+
+
+
+
     
     if syn and syn.protect_gui then
         syn.protect_gui(dogent)
@@ -296,7 +399,7 @@ function library.new(library, name, theme)
     MainXE.Parent = dogent
     MainXE.AnchorPoint = Vector2.new(0.5, 0.5)
     MainXE.BackgroundColor3 = MainXEColor
-    MainXE.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainXE.Position = UDim2.new(0.5, 0, 0.3, 0)
     MainXE.Size = UDim2.new(0, 0, 0, 0)
     MainXE.ZIndex = 1
     MainXE.Active = true
@@ -320,7 +423,7 @@ function library.new(library, name, theme)
     
     
     UICornerMainXE.Parent = MainXE
-    UICornerMainXE.CornerRadius = UDim.new(0, 3)
+UICornerMainXE.CornerRadius = UDim.new(0, 12) -- 更大圆角
 
     DropShadowHolder.Name = "DropShadowHolder"
     DropShadowHolder.Parent = MainXE
@@ -690,8 +793,34 @@ tween:Play()
     end
     
     spawn(Fakerainbow)
+    Open.MouseEnter:Connect(function()
+    services.TweenService:Create(Open, TweenInfo.new(0.2), {
+        BackgroundTransparency = 0.6,
+        Size = UDim2.new(0, 65, 0, 34)
+    }):Play()
+end)
 
-    Open.MouseButton1Click:Connect(function()
+Open.MouseLeave:Connect(function()
+    services.TweenService:Create(Open, TweenInfo.new(0.2), {
+        BackgroundTransparency = 0.75,
+        Size = UDim2.new(0, 61, 0, 32)
+    }):Play()
+end)
+    
+Open.MouseButton1Click:Connect(function()
+    if animating then return end
+    ToggleUILib()
+    
+    services.TweenService:Create(Open, TweenInfo.new(0.15), {
+        Size = UDim2.new(0, 61*scaleFactor, 0, 32*scaleFactor)
+    }):Play()
+    
+    wait(0.15)
+    services.TweenService:Create(Open, TweenInfo.new(0.1), {
+        Size = UDim2.new(0, 61, 0, 32)
+    }):Play()
+end)
+
         isAnimating = true 
         if uihide == false then
             Open.Text = Language[currentLanguage].OpenUI
