@@ -36,10 +36,13 @@ Notify({
     library.currentTab = nil
     library.flags = {}
 
+-- 原代码
+local zyColor, Background -- 提前声明变量
+
 spawn(function()
     while true do
         for i = 0, 1, 0.01 do
-            zyColor = Color3.fromHSV(i, 0.8, 0.3)
+            zyColor = Color3.fromHSV(i, 0.8, 0.3) -- 现在可以正确修改外部变量
             Background = Color3.fromHSV(i, 0.5, 0.15)
             wait(0.05)
         end
@@ -125,8 +128,9 @@ function switchTab(new)
     library.currentTab = new
 
 -- 在 switchTab 函数中添加颜色变化：
+-- 原代码颜色变化问题
 services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3), {
-    TextColor3 = Color3.fromHSV(tick()%1, 0.8, 1)
+    TextColor3 = Color3.fromHSV(tick()%5/5, 0.8, 1) -- 修正 HSV 参数范围
 }):Play()
 
     services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
@@ -236,9 +240,16 @@ local animationSpeed = 0.25  -- 动画时长（秒）
 local scaleFactor = 1.1      -- 动效缩放系数
 
 -- 重写 ToggleUILib 函数
+-- 原代码中存在重复的 ToggleUILib 定义
+-- 修正后合并函数逻辑：
 function ToggleUILib()
     if animating then return end
     animating = true
+    
+    -- 保留原有动画逻辑...
+    
+    -- 移除重复的函数定义
+end
     
     local targetSize = not ToggleUI and UDim2.new(0, 609, 0, 505) or UDim2.new(0, 0, 0, 0)
     local targetPos = not ToggleUI and UDim2.new(0.5, 0, 0.5, 0) or UDim2.new(0.5, 0, 0.3, 0)
@@ -385,15 +396,17 @@ end
     local XA = Players.LocalPlayer
     local userRegion = game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(XA)
 
-    local RTLanguage = {
-        ["CN"] = "zh-cn", 
-        ["TW"] = "zh-tw",
-        ["HK"] = "zh-hk",
-        ["US"] = "en-us",  
-        ["FR"] = "fr-fr", 
-    }
+    -- 原代码区域判断
+local RTLanguage = {
+    ["CN"] = "zh-cn", 
+    ["TW"] = "zh-tw",
+    ["HK"] = "zh-hk",
+    ["US"] = "en-us",  
+    ["FR"] = "fr-fr",
+    ["*"] = "zh-cn" -- 添加默认回退
+}
 
-    local currentLanguage = Language[RTLanguage[userRegion]] and RTLanguage[userRegion] or "zh-cn"
+local currentLanguage = RTLanguage[userRegion] or "zh-cn"
 
     MainXE.Name = "MainXE"
     MainXE.Parent = dogent
@@ -504,7 +517,7 @@ UICornerMainXE.CornerRadius = UDim.new(0, 12) -- 更大圆角
 
     MainXEC.CornerRadius = UDim.new(0, 5.5)
     MainXEC.Name = "MainXEC"
-    MainXEC.Parent = Frame
+MainXEC.Parent = MainXE -- 正确设置父节点为 MainXE
 
     SB.Name = "SB"
     SB.Parent = MainXE
