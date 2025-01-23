@@ -236,16 +236,7 @@ function library.new(library, name, theme)
 
     function ToggleUILib()
     if not ToggleUI then
-        -- 关闭时添加阴影淡出
-        services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
-        dogent.Enabled = false
-        ToggleUI = true
-    else
-        -- 打开时阴影恢复
-        services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
-        ToggleUI = false
-        dogent.Enabled = true
-    end
+   
 end
     local Language = {
         ["en-us"] = {
@@ -450,23 +441,19 @@ MainXEC.Parent = MainXE -- 应为MainXE的子对象
     )
 end)
       else
-      MainXE:TweenSize(UDim2.new(0, 170, 0, 60), "Out", "Quad", 1.5, true, function()
-      WelcomeMainXE.Visible = true
-
-      local hideTween = services.TweenService:Create(
+local hideTween = services.TweenService:Create(
     WelcomeMainXE,
-    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out), 
-   
+    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
     {
         TextTransparency = 0,
         TextStrokeTransparency = 1,
-        TextColor3 = Color3.new(1, 0.5, 0.5), -- 颜色变化
-        Size = UDim2.new(1.2, 0, 1.2, 0) -- 放大效果
+        TextColor3 = Color3.new(1, 0.5, 0.5),
+        Size = UDim2.new(1.2, 0, 1.2, 0)
     }
 )
-hideTween:Play() -- 添加播放动画
-hideTween.Completed:Wait() -- 等待动画完成
-      wait(2)
+hideTween:Play()  -- 添加播放
+hideTween.Completed:Wait()  -- 等待动画完成
+wait(2)
       
       
       local showTween = TweenService:Create(
