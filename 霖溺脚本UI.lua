@@ -237,12 +237,12 @@ function library.new(library, name, theme)
     function ToggleUILib()
     if not ToggleUI then
         -- 关闭时添加阴影淡出
-        TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
+        services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
         dogent.Enabled = false
         ToggleUI = true
     else
         -- 打开时阴影恢复
-        TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
+        services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
         ToggleUI = false
         dogent.Enabled = true
     end
@@ -399,11 +399,13 @@ end
     TabMainXE.BackgroundTransparency = 1.000
     TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
     TabMainXE.Size = UDim2.new(0, 448, 0, 353)
-    TabMainXE.Visible = false
+    
+TweenService:Create(TabMainXE, TweenInfo.new(0.2), {BackgroundTransparency = 0}):Play()
+TabMainXE.Visible = true -- 添加显式可见
 
     MainXEC.CornerRadius = UDim.new(0, 5.5)
     MainXEC.Name = "MainXEC"
-    MainXEC.Parent = Frame
+MainXEC.Parent = MainXE -- 应为MainXE的子对象
 
     SB.Name = "SB"
     SB.Parent = MainXE
@@ -451,9 +453,10 @@ end)
       MainXE:TweenSize(UDim2.new(0, 170, 0, 60), "Out", "Quad", 1.5, true, function()
       WelcomeMainXE.Visible = true
 
-      local hideTween = TweenService:Create(
+      local hideTween = services.TweenService:Create(
     WelcomeMainXE,
-    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out), -- 添加弹性效果
+    TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out), 
+   
     {
         TextTransparency = 0,
         TextStrokeTransparency = 1,
@@ -461,6 +464,8 @@ end)
         Size = UDim2.new(1.2, 0, 1.2, 0) -- 放大效果
     }
 )
+hideTween:Play() -- 添加播放动画
+hideTween.Completed:Wait() -- 等待动画完成
       wait(2)
       
       
@@ -709,7 +714,13 @@ tween:Play()
         else
             Open.Text = Language[currentLanguage].HideUI
             TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
-            MainXE.Visible = true
+            
+if uihide == false then
+    Tween(MainXE, {0.3, "Quint", "Out"}, {Size = UDim2.new(0,0,0,0)})
+else
+    Tween(MainXE, {0.3, "Quint", "Out"}, {Size = UDim2.new(0,609,0,505)})
+end
+            
             uihide = false
         end
     end)
