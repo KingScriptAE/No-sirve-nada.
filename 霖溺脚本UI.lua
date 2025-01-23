@@ -36,6 +36,16 @@ Notify({
     library.currentTab = nil
     library.flags = {}
 
+spawn(function()
+    while true do
+        for i = 0, 1, 0.01 do
+            zyColor = Color3.fromHSV(i, 0.8, 0.3)
+            Background = Color3.fromHSV(i, 0.5, 0.15)
+            wait(0.05)
+        end
+    end
+end)
+
 local services =
     setmetatable(
     {},
@@ -1767,6 +1777,3 @@ tween:Play()
         return window
     end
 return library
---local window = library:new("11")
---local mainAV = window:Tab("关于", "")
---local information = mainAV:section("信息", false)
