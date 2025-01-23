@@ -56,39 +56,43 @@ function Tween(obj, t, data)
 end
 
 function Ripple(obj)
-    spawn(
-        function()
-            if obj.ClipsDescendants ~= true then
-                obj.ClipsDescendants = true
-            end
-            local Ripple = Instance.new("ImageLabel")
-            Ripple.Name = "Ripple"
-            Ripple.Parent = obj
-            Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Ripple.BackgroundTransparency = 1.000
-            Ripple.ZIndex = 8
-            Ripple.Image = "rbxassetid://2708891598"
-            Ripple.ImageTransparency = 0.800
-            Ripple.ScaleType = Enum.ScaleType.Fit
-            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
-            Ripple.Position =
-                UDim2.new(
-                (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
-                0,
-                (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
-                0
-            )
-            Tween(
-                Ripple,
-                {.3, "Linear", "InOut"},
-                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
-            )
-            wait(0.15)
-            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
-            wait(.3)
-            Ripple:Destroy()
+    spawn(function()
+        if obj.ClipsDescendants ~= true then
+            obj.ClipsDescendants = true
         end
-    )
+        local Ripple = Instance.new("ImageLabel")
+        Ripple.Name = "Ripple"
+        Ripple.Parent = obj
+        Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Ripple.BackgroundTransparency = 1.000
+        Ripple.ZIndex = 8
+        Ripple.Image = "rbxassetid://2708891598"
+        Ripple.ScaleType = Enum.ScaleType.Fit
+        Ripple.ImageColor3 = Color3.fromHSV(tick()%5/5, 0.8, 1) -- 动态色相（降低饱和度）
+        Ripple.ImageTransparency = 0.5 -- 调整透明度
+        Ripple.Size = UDim2.new(0, 0, 0, 0)
+        
+        -- 支持触摸和鼠标输入
+        local input = obj:FindFirstChildOfClass("TouchInput") or mouse
+        Ripple.Position = UDim2.new(
+            (input.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+            0,
+            (input.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+            0
+        )
+        
+        -- 动画优化
+        Tween(
+            Ripple,
+            {0.3, "Quad", "Out"},
+            {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
+        )
+        wait(0.15)
+        Tween(Ripple, {0.2, "Quad", "Out"}, {
+            Position = UDim2.new(-5.5, 0, -5.5, 0), 
+            Size = UDim2.new(12, 0, 12, 0)
+        })
+    end)
 end
 
 local toggled = false
