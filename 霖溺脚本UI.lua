@@ -1,112 +1,73 @@
+ --[[KING TEAM★独家制作]]
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
+ local Notify = Notification.Notify;
 
---[[KING TEAM★独家制作]]
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
-local Notify = Notification.Notify;
-
+ Notify({
+		 Description = "这是一个新年";
+		 Title = "霖溺";
+		 Duration = 5;
+		 });
+		 
 Notify({
-    Description = "这是一个新年",
-    Title = "霖溺",
-    Duration = 5,
-});
+	 Description = "脚本加载中";
+	 Title = "新年快乐";
+	 Duration = 5;
+	 });
+ wait(0.4)
+ 
+        repeat
+        task.wait()
+    until game:IsLoaded()
+    local library = {}
+    local ToggleUI = false
+    library.currentTab = nil
+    library.flags = {}
 
-Notify({
-    Description = "脚本加载中",
-    Title = "新年快乐",
-    Duration = 5,
-});
-
-wait(0.4)
-
-repeat
-    task.wait()
-until game:IsLoaded()
-
-local library = {}
-local ToggleUI = false
-library.currentTab = nil
-library.flags = {}
-
-local services = setmetatable({}, {
-    __index = function(t, k)
-        return game.GetService(game, k)
-    end
-})
+local services =
+    setmetatable(
+    {},
+    {
+        __index = function(t, k)
+            return game.GetService(game, k)
+        end
+    }
+)
 
 local mouse = services.Players.LocalPlayer:GetMouse()
 
--- 优化 Tween 函数
 function Tween(obj, t, data)
-    services.TweenService:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle.Quad, Enum.EasingDirection.Out), data):Play()
+    services.TweenService:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), data):Play()
     return true
 end
 
--- 加载音效
-local clickSound = Instance.new("Sound")
-clickSound.SoundId = "rbxassetid://123456789" -- 替换为实际的音效ID
-clickSound.Volume = 1
-clickSound.Parent = game:GetService("SoundService")
-
--- 在 Open.MouseButton1Click 事件中播放音效
-Open.MouseButton1Click:Connect(function()
-    isAnimating = true 
-    clickSound:Play() -- 播放音效
-    if uihide == false then
-        Open.Text = Language[currentLanguage].OpenUI
-        TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
-        uihide = true
-        MainXE.Visible = false
-    else
-        Open.Text = Language[currentLanguage].HideUI
-        TabMainXE.Position = UDim2.new(0.217000037, 0, 0, 3)
-        MainXE.Visible = true
-        uihide = false
-    end
-end)
-
--- 其他代码保持不变...
--- 以下是你的原始代码，保持不变
-
-
-
--- 其他代码保持不变...
--- 你可以将之前的代码继续放在这里，确保逻辑完整。
-
-
-
+-- 优化 Ripple 效果
 function Ripple(obj)
-    spawn(
-        function()
-            if obj.ClipsDescendants ~= true then
-                obj.ClipsDescendants = true
-            end
-            local Ripple = Instance.new("ImageLabel")
-            Ripple.Name = "Ripple"
-            Ripple.Parent = obj
-            Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Ripple.BackgroundTransparency = 1.000
-            Ripple.ZIndex = 8
-            Ripple.Image = "rbxassetid://2708891598"
-            Ripple.ImageTransparency = 0.800
-            Ripple.ScaleType = Enum.ScaleType.Fit
-            Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
-            Ripple.Position =
-                UDim2.new(
-                (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
-                0,
-                (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
-                0
-            )
-            Tween(
-                Ripple,
-                {.3, "Linear", "InOut"},
-                {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)}
-            )
-            wait(0.15)
-            Tween(Ripple, {.3, "Linear", "InOut"}, {ImageTransparency = 1})
-            wait(.3)
-            Ripple:Destroy()
+    spawn(function()
+        if obj.ClipsDescendants ~= true then
+            obj.ClipsDescendants = true
         end
-    )
+        local Ripple = Instance.new("ImageLabel")
+        Ripple.Name = "Ripple"
+        Ripple.Parent = obj
+        Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Ripple.BackgroundTransparency = 1.000
+        Ripple.ZIndex = 8
+        Ripple.Image = "rbxassetid://2708891598"
+        Ripple.ImageTransparency = 0.800
+        Ripple.ScaleType = Enum.ScaleType.Fit
+        Ripple.ImageColor3 = Color3.fromRGB(255, 255, 255)
+        Ripple.Position = UDim2.new(
+            (mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+            0,
+            (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+            0
+        )
+        Tween(Ripple, {0.3, "Quad", "InOut"}, {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)})
+        wait(0.15)
+        Tween(Ripple, {0.3, "Quad", "InOut"}, {ImageTransparency = 1})
+        wait(0.3)
+        Ripple:Destroy()
+    end)
 end
 
 local toggled = false
@@ -1758,6 +1719,3 @@ function library.new(library, name, theme)
         return window
     end
 return library
---local window = library:new("11")
---local mainAV = window:Tab("关于", "")
---local information = mainAV:section("信息", false)
