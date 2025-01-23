@@ -238,10 +238,14 @@ function library.new(library, name, theme)
     if not ToggleUI then
         -- 关闭时添加阴影淡出
         services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0.7}):Play()
-        
+        dogent.Enabled = false
+        ToggleUI = true
+    else
         -- 打开时阴影恢复
         services.TweenService:Create(DropShadow, TweenInfo.new(0.3), {ImageTransparency = 0}):Play()
-        
+        ToggleUI = false
+        dogent.Enabled = true
+    end
 end
     local Language = {
         ["en-us"] = {
