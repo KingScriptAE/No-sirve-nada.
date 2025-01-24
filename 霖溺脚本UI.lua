@@ -481,13 +481,6 @@ UICorner_2.CornerRadius = UDim.new(0, 0)  -- 修改为正方形（原值为90）
 UICorner_2.Parent = Open
 UIG.Parent = Open
 
-
-
-
-
-UICorner_2.CornerRadius = UDim.new(0, 90)
-UICorner_2.Parent = Open
-UIG.Parent = Open
       
       local window = {}
       function window.Tab(window, name, icon)
