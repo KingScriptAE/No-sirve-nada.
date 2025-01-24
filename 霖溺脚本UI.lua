@@ -1,19 +1,19 @@
  --[[KING TEAM★独家制作]]
-  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
- local Notify = Notification.Notify;
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))()
+ local Notify = Notification.Notify
 
  Notify({
-		 Description = "这是一个新年";
-		 Title = "霖溺";
-		 Duration = 5;
-		 });
+		 Description = "这是一个新年"
+		 Title = "霖溺"
+		 Duration = 5
+		 })
 		 
 Notify({
-	 Description = "脚本加载中";
-	 Title = "新年快乐";
-	 Duration = 5;
-	 });
- wait(0.4)
+	 Description = "脚本加载中"
+	 Title = "新年快乐"
+	 Duration = 5
+	 })
+ ------------
  
 repeat task.wait() until game:IsLoaded()
 local library = {}
@@ -451,6 +451,7 @@ end
 
 -- Properties:
 
+-- 找到Frame的UICorner设置（原圆形部分）
 Frame.Parent = dogent
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -459,9 +460,10 @@ Frame.Position = UDim2.new(0.00829315186, 0, 0.31107837, 0)
 Frame.Size = UDim2.new(0, 50, 0, 50)
 Frame.BackgroundTransparency = 1.000
 
-UICorner.CornerRadius = UDim.new(0, 90)
+UICorner.CornerRadius = UDim.new(0, 0)  -- 修改为正方形（原值为90）
 UICorner.Parent = Frame
 
+-- 找到Open按钮的UICorner设置
 Open.Parent = Frame
 Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Open.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -469,11 +471,19 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Image = "rbxassetid://132595527701011"--UI圆形图片
+Open.Image = "rbxassetid://132595527701011"  -- 替换为你的方形图片ID
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
-  Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开和关的图
+  Open.Image = Main.Visible and "rbxassetid://132595527701011" or "rbxassetid://17894875649" -- 替换为你的方形开关ID
 end)
+
+UICorner_2.CornerRadius = UDim.new(0, 0)  -- 修改为正方形（原值为90）
+UICorner_2.Parent = Open
+UIG.Parent = Open
+
+
+
+
 
 UICorner_2.CornerRadius = UDim.new(0, 90)
 UICorner_2.Parent = Open
