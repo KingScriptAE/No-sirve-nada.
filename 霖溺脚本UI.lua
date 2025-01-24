@@ -23,8 +23,8 @@ library.flags = {}
 
 local services = setmetatable({}, {
   __index = function(t, k)
-    return game:GetService(k) -- 使用:调用方法
-end
+    return game.GetService(game, k)
+  end
 })
 
 local mouse = services.Players.LocalPlayer:GetMouse()
@@ -50,12 +50,11 @@ function Ripple(obj)
 		Ripple.ScaleType = Enum.ScaleType.Fit
 		Ripple.ImageColor3 = Color3.fromRGB(139, 0, 255)
 		Ripple.Position = UDim2.new((mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X, 0, (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y, 0)
-		Tween(Ripple, {.3, 'Linear', 'InOut'}, {
-    Position = UDim2.new(-0.1, 0, -0.1, 0), -- 比例偏移
-    Size = UDim2.new(1.2, 0, 1.2, 0)        -- 比例缩放
-})
-		Tween(Ripple, {.3, 'Linear', 'InOut'}, {ImageTransparency = 1}):Wait()
-Ripple:Destroy()
+		Tween(Ripple, {.3, 'Linear', 'InOut'}, {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)})
+		wait(0.15)
+		Tween(Ripple, {.3, 'Linear', 'InOut'}, {ImageTransparency = 1})
+		wait(.3)
+		Ripple:Destroy()
 	end)
 end
 
@@ -105,8 +104,7 @@ function drag(frame, hold)
 		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 	end
 
-	if not dragging then
-    hold.InputBegan:Connect(function(input)
+	hold.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = true
 			dragStart = input.Position
@@ -119,7 +117,6 @@ function drag(frame, hold)
 			end)
 		end
 	end)
-	end
 
 	frame.InputChanged:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement then
@@ -142,10 +139,7 @@ function library.new(library, name,theme)
       end
 ----------------HACKER---------------------
 ALTransparency = 0.6
-ALcolor = ColorSequence.new({
-    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
-    })
+ALcolor = Color3.fromRGB(255, 255, 255), ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))  --脚本字体颜色
 --------------HACKER------------------------
 if theme == 'dark' then
     MainColor = Color3.fromRGB(25, 25, 25)
@@ -188,11 +182,6 @@ end
       
       function UiDestroy()
           dogent:Destroy()
-          for _, v in pairs(services.CoreGui:GetChildren()) do
-        if v.Name == "frosty" then
-            v:Destroy()
-        end
-    end
       end
       
           function ToggleUILib()
@@ -512,7 +501,7 @@ UIG.Parent = Open
         TabIco.BackgroundTransparency = 1.000
         TabIco.BorderSizePixel = 0
         TabIco.Size = UDim2.new(0, 24, 0, 24)
-        TabIco.Image = icon and "rbxassetid://"..icon or "rbxassetid://17894875649"
+        TabIco.Image = "rbxassetid://17894875649" or icon and "rbxassetid://18139019694"..icon
         TabIco.ImageTransparency = 0.2
         
         TabText.Name = "TabText"
