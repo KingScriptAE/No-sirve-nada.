@@ -1,19 +1,19 @@
  --[[KING TEAM★独家制作]]
-  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))()
- local Notify = Notification.Notify
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hunryn/VB/refs/heads/main/%E9%80%9A%E7%9F%A5ui%20.lua"))();
+ local Notify = Notification.Notify;
 
  Notify({
-		 Description = "这是一个新年"
-		 Title = "霖溺"
-		 Duration = 5
-		 })
+		 Description = "这是一个新年";
+		 Title = "霖溺";
+		 Duration = 5;
+		 });
 		 
 Notify({
-	 Description = "脚本加载中"
-	 Title = "新年快乐"
-	 Duration = 5
-	 })
- ------------
+	 Description = "脚本加载中";
+	 Title = "新年快乐";
+	 Duration = 5;
+	 });
+ wait(0.4)
  
 repeat task.wait() until game:IsLoaded()
 local library = {}
@@ -54,6 +54,13 @@ function Ripple(obj)
 		wait(0.15)
 		Tween(Ripple, {.3, 'Linear', 'InOut'}, {ImageTransparency = 1})
 		wait(.3)
+		
+		local originalSize = obj.Size
+Tween(obj, {0.1, 'Quad', 'Out'}, {Size = originalSize + UDim2.new(0,5,0,5)})
+wait(0.1)
+Tween(obj, {0.2, 'Bounce', 'Out'}, {Size = originalSize})
+		
+		
 		Ripple:Destroy()
 	end)
 end
@@ -77,10 +84,16 @@ function switchTab(new)
   switchingTabs = true
   library.currentTab = new
 
-  services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
-  services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
-  services.TweenService:Create(old[1].TabText, TweenInfo.new(0.1), {TextTransparency = 0.2}):Play()
-  services.TweenService:Create(new[1].TabText, TweenInfo.new(0.1), {TextTransparency = 0}):Play()
+  services.TweenService:Create(old[1], TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+    ImageTransparency = 0.5,
+    Size = UDim2.new(0, old[1].Size.X.Offset*0.9, 0, old[1].Size.Y.Offset*0.9)
+}):Play()
+
+services.TweenService:Create(new[1], TweenInfo.new(0.3, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
+    ImageTransparency = 0,
+    Size = UDim2.new(0, new[1].Size.X.Offset*1.1, 0, new[1].Size.Y.Offset*1.1)
+}):Play()
+
 
   old[2].Visible = false
   new[2].Visible = true
@@ -102,6 +115,9 @@ function drag(frame, hold)
 	local function update(input)
 		local delta = input.Position - dragStart
 		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		Tween(frame, {0.1, 'Quad', 'Out'}, {Size = UDim2.new(0,572+5,0,353+5)})
+wait(0.1)
+Tween(frame, {0.2, 'Bounce', 'Out'}, {Size = UDim2.new(0,572,0,353)})
 	end
 
 	hold.InputBegan:Connect(function(input)
@@ -131,12 +147,52 @@ function drag(frame, hold)
 	end)
 end
 
+-- 霓虹发光边框增强
+local BorderGlow = Instance.new("UIStroke")
+BorderGlow.Parent = Main
+BorderGlow.Color = Color3.fromRGB(0, 255, 255)
+BorderGlow.Thickness = 4
+BorderGlow.Transparency = 0.3
+BorderGlow.LineJoinMode = Enum.LineJoinMode.Round
+
+local BorderPulse = Instance.new("UIStroke")
+BorderPulse.Parent = Main
+BorderPulse.Color = Color3.fromRGB(255, 0, 255)
+BorderPulse.Thickness = 3
+BorderPulse.Transparency = 0.5
+BorderPulse.LineJoinMode = Enum.LineJoinMode.Round
+
+spawn(function()
+    while wait() do
+        services.TweenService:Create(BorderGlow, TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            Color = Color3.fromHSV(tick()%5/5, 1, 1),
+            Thickness = math.random(4,6),
+            Transparency = math.random(3,5)/10
+        }):Play()
+        
+        services.TweenService:Create(BorderPulse, TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+            Color = Color3.fromHSV(tick()%5/5, 1, 1):Lerp(Color3.new(1,1,1), 0.3),
+            Thickness = math.random(3,5)
+        }):Play()
+        wait(1.5)
+    end
+end)
+
 function library.new(library, name,theme)
     for _, v in next, services.CoreGui:GetChildren() do
         if v.Name == "frosty" then
           v:Destroy()
         end
       end
+      
+spawn(function()
+    while wait(1) do
+        services.TweenService:Create(BorderEffect, TweenInfo.new(1), {Thickness = 4}):Play()
+        wait(1)
+        services.TweenService:Create(BorderEffect, TweenInfo.new(1), {Thickness = 2}):Play()
+    end
+end)
+      
 ----------------HACKER---------------------
 ALTransparency = 0.6
 ALcolor = Color3.fromRGB(255, 255, 255), ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))  --脚本字体颜色
@@ -217,7 +273,7 @@ end
     
       
       UICornerMain.Parent = Main
-      UICornerMain.CornerRadius = UDim.new(0,3)
+      UICornerMain.CornerRadius = UDim.new(0,0)
       
       DropShadowHolder.Name = "DropShadowHolder"
       DropShadowHolder.Parent = Main
@@ -451,7 +507,6 @@ end
 
 -- Properties:
 
--- 找到Frame的UICorner设置（原圆形部分）
 Frame.Parent = dogent
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -460,10 +515,9 @@ Frame.Position = UDim2.new(0.00829315186, 0, 0.31107837, 0)
 Frame.Size = UDim2.new(0, 50, 0, 50)
 Frame.BackgroundTransparency = 1.000
 
-UICorner.CornerRadius = UDim.new(0, 0)  -- 修改为正方形（原值为90）
+UICorner.CornerRadius = UDim.new(0, 0) -- 直角
 UICorner.Parent = Frame
 
--- 找到Open按钮的UICorner设置
 Open.Parent = Frame
 Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Open.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -471,16 +525,15 @@ Open.BorderSizePixel = 0
 Open.Size = UDim2.new(0, 50, 0, 50)
 Open.Active = true
 Open.Draggable = true
-Open.Image = "rbxassetid://132595527701011"  -- 替换为你的方形图片ID
+Open.Image = "rbxassetid://132595527701011"--UI圆形图片
 Open.MouseButton1Click:Connect(function()
   Main.Visible = not Main.Visible
-  Open.Image = Main.Visible and "rbxassetid://132595527701011" or "rbxassetid://17894875649" -- 替换为你的方形开关ID
+  Open.Image = Main.Visible and "rbxassetid://18139019694" or "rbxassetid://17894875649" --开和关的图
 end)
 
-UICorner_2.CornerRadius = UDim.new(0, 0)  -- 修改为正方形（原值为90）
+UICorner_2.CornerRadius = UDim.new(0, 0) -- 直角
 UICorner_2.Parent = Open
 UIG.Parent = Open
-
       
       local window = {}
       function window.Tab(window, name, icon)
@@ -512,7 +565,8 @@ UIG.Parent = Open
         TabText.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
         TabText.BackgroundTransparency = 1.000
         TabText.Position = UDim2.new(1.41666663, 0, 0, 0)
-        TabText.Size = UDim2.new(0, 76, 0, 24)
+        TabText.Size = UDim2.new(0, 100, 0, 30) -- 增大标签宽度
+TabText.TextWrapped = true -- 允许换行
         TabText.Font = Enum.Font.GothamSemibold
         TabText.Text = name
         TabText.TextColor3 = ALcolor
@@ -674,19 +728,30 @@ UIG.Parent = Open
             Btn.TextColor3 = ALcolor
             Btn.TextSize = 16.000
             Btn.TextXAlignment = Enum.TextXAlignment.Left
-            Btn.BackgroundTransparency = ALTransparency
+            Btn.BackgroundTransparency = 0.3
             
             BtnC.CornerRadius = UDim.new(0, 6)
             BtnC.Name = "BtnC"
             BtnC.Parent = Btn
     
             Btn.MouseButton1Click:Connect(function()
+            Btn.MouseEnter:Connect(function()
+    Tween(Btn, {0.1, 'Back', 'Out'}, {Size = UDim2.new(0, 428, 0, 42)})
+    Tween(Btn, {0.2, 'Quad', 'Out'}, {Position = UDim2.new(0, -2, 0, -2)})
+end)
+
+Btn.MouseLeave:Connect(function()
+    Tween(Btn, {0.1, 'Back', 'Out'}, {Size = UDim2.new(0, 428, 0, 38)})
+    Tween(Btn, {0.2, 'Quad', 'Out'}, {Position = UDim2.new(0, 0, 0, 0)})
+end)
                 spawn(function()
                     Ripple(Btn)
                 end)
                     spawn(callback)
                 end)
             end
+    
+    
     
         function section:Label(text)
           local LabelModule = Instance.new("Frame")
@@ -1014,6 +1079,35 @@ UIG.Parent = Open
           function section.Slider(section, text, flag, default, min, max, precise, callback)
             local callback = callback or function() end
             local min = min or 1
+            
+            -- 新增粒子生成函数
+local function createParticle(parent)
+    local particle = Instance.new("Frame")
+    particle.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
+    particle.Size = UDim2.new(0, 4, 0, 4)
+    particle.BorderSizePixel = 0
+    particle.Position = UDim2.new(1, 2, 0.5, -2)
+    particle.ZIndex = 10
+    
+    local corner = Instance.new("UICorner", particle)
+    corner.CornerRadius = UDim.new(1, 0)
+    
+    local gradient = Instance.new("UIGradient", particle)
+    gradient.Rotation = 90
+    gradient.Transparency = NumberSequence.new({
+        NumberSequenceKeypoint.new(0, 0),
+        NumberSequenceKeypoint.new(1, 1)
+    })
+    
+    game:GetService("TweenService"):Create(particle, TweenInfo.new(0.5), {
+        Position = UDim2.new(1, 15, 0.5, -2),
+        BackgroundTransparency = 1
+    }):Play()
+    
+    particle.Parent = parent
+    delay(0.5, function() particle:Destroy() end)
+end
+            
             local max = max or 10
             local default = default or min
             local precise = precise or false
@@ -1076,10 +1170,23 @@ UIG.Parent = Open
             SliderBarC.Parent = SliderBar
             
             SliderPart.Name = "SliderPart"
-            SliderPart.Parent = SliderBar
-            SliderPart.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
-            SliderPart.BorderSizePixel = 0
-            SliderPart.Size = UDim2.new(0, 54, 0, 13)
+SliderPart.Parent = SliderBar
+SliderPart.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
+SliderPart.BorderSizePixel = 0
+SliderPart.Size = UDim2.new(0, 54, 0, 13)
+
+-- 添加立体效果
+local innerShadow = Instance.new("UIStroke", SliderPart)
+innerShadow.Color = Color3.new(0, 0, 0)
+innerShadow.Transparency = 0.8
+innerShadow.Thickness = 2
+innerShadow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local glow = Instance.new("UIStroke", SliderPart)
+glow.Color = Color3.fromRGB(200, 0, 255)
+glow.Thickness = 1.5
+glow.Transparency = 0.7
+glow.LineJoinMode = Enum.LineJoinMode.Round
             
             SliderPartC.CornerRadius = UDim.new(0, 4)
             SliderPartC.Name = "SliderPartC"
@@ -1153,9 +1260,27 @@ UIG.Parent = Open
                   value = value or math.floor(min + (max - min) * percent)
                 end
                 library.flags[flag] = tonumber(value)
-                SliderValue.Text = tostring(value)
-                SliderPart.Size = UDim2.new(percent, 0, 1, 0)
-                callback(tonumber(value))
+SliderValue.Text = tostring(value)
+
+-- 添加粒子效果
+if percent > 0 then
+    for _ = 1, math.floor(percent*3) do
+        spawn(function()
+            wait(math.random()*0.1)
+            createParticle(SliderPart)
+        end)
+    end
+end
+
+-- 弹性动画
+game:GetService("TweenService"):Create(SliderPart, TweenInfo.new(0.1, Enum.EasingStyle.Back), {
+    Size = UDim2.new(percent, 5, 1, 5)
+}):Play()
+game:GetService("TweenService"):Create(SliderPart, TweenInfo.new(0.3, Enum.EasingStyle.Bounce), {
+    Size = UDim2.new(percent, 0, 1, 0)
+}):Play()
+
+callback(tonumber(value))
               end
             }
     
@@ -1221,6 +1346,7 @@ UIG.Parent = Open
             end)
     
             SliderValue.FocusLost:Connect(function()
+            funcs:SetValue(tonumber(SliderValue.Text))
               boxFocused = false
               if SliderValue.Text == "" then
                 funcs:SetValue(default)
@@ -1430,4 +1556,7 @@ UIG.Parent = Open
       end
       return window
     end
+    
+
+    
 return library
