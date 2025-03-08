@@ -1,5 +1,5 @@
 --首创小云
-    --霖溺魔改雲的ui魔改 续创霖溺 这是续创ui
+    --霖溺魔改雲的ui魔改 续创霖溺 这是续创ui[会持续更新]
     repeat
         task.wait()
     until game:IsLoaded()
