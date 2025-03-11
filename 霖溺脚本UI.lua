@@ -193,7 +193,39 @@ beijingColor = Color3.fromRGB(255, 247, 247)
     function UiDestroy()
         dogent:Destroy()
     end
+local player = game.Players.LocalPlayer
 
+local billboardGui = Instance.new("BillboardGui")
+billboardGui.Adornee = player.Character.Head  
+billboardGui.Size = UDim2.new(0, 200, 0, 50)  
+billboardGui.StudsOffset = Vector3.new(0, 2.5, 0)  
+billboardGui.AlwaysOnTop = true  
+billboardGui.ExtentsOffset = Vector3.new(0, 0, 0) 
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Text = "霖溺脚本用户"  
+textLabel.Size = UDim2.new(1, 0, 1, 0)  
+textLabel.TextColor3 = Color3.new(1, 1, 1)  
+textLabel.BackgroundTransparency = 1  
+textLabel.Font = Enum.Font.SourceSansBold  
+textLabel.TextSize = 15  
+textLabel.TextStrokeColor3 = Color3.new(0, 0, 0)  
+textLabel.TextStrokeTransparency = 0.1  
+textLabel.TextScaled = false  
+textLabel.TextWrapped = false  
+
+textLabel.Parent = billboardGui
+
+billboardGui.Parent = player.Character.Head
+
+player.CharacterAdded:Connect(function(character)
+    local head = character:WaitForChild("Head")
+    billboardGui.Adornee = head
+    billboardGui.Parent = head
+end)
+
+
+    
     function ToggleUILib()
         if not ToggleUI then
             dogent.Enabled = false
