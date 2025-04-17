@@ -97,30 +97,11 @@ end
         if (old == nil) then
             new[2].Visible = true
             library.currentTab = new
-            services.TweenService:Create(new[1], TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
-    ImageTransparency = 0,
-    Size = UDim2.new(0, 30, 0, 30)
-}):Play()
-services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {
-    TextTransparency = 0,
-    TextColor3 = Color3.fromRGB(0, 255, 255),
-    TextStrokeTransparency = 0.7,
-    TextStrokeColor3 = Color3.fromRGB(0, 150, 255)
-}):Play()
-
-local selectionGlow = Instance.new("Frame")
-selectionGlow.Name = "SelectionGlow"
-selectionGlow.Parent = new[1]
-selectionGlow.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-selectionGlow.BackgroundTransparency = 0.8
-selectionGlow.Size = UDim2.new(1, 10, 1, 10)
-selectionGlow.Position = UDim2.new(0, -5, 0, -5)
-selectionGlow.ZIndex = -1
-services.TweenService:Create(selectionGlow, TweenInfo.new(0.3), {
-    BackgroundTransparency = 0.5,
-    Size = UDim2.new(1, 0, 1, 0),
-    Position = UDim2.new(0, 0, 0, 0)
-}):Play()
+            services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
+            services.TweenService:Create(new[1].TabText, TweenInfo.new(0.3), {
+            TextTransparency = 0,
+            TextColor3 = Color3.fromRGB(255, 215, 0)  
+        }):Play()
             return
         end
         
@@ -256,34 +237,14 @@ Main.Active = true
 Main.Draggable = true
 
 local LinNiBackground = Instance.new("ImageLabel")
-LinNiBackground.Name = "CyberBackground"
+LinNiBackground.Name = "霖溺背景"
 LinNiBackground.Parent = Main
 LinNiBackground.BackgroundTransparency = 1
 LinNiBackground.Size = UDim2.new(1, 0, 1, 0)
 LinNiBackground.ZIndex = 0
 LinNiBackground.Image = "rbxassetid://17120415981"  
-LinNiBackground.ImageTransparency = 0.85
-LinNiBackground.ImageColor3 = Color3.fromRGB(0, 255, 255)
-LinNiBackground.ScaleType = Enum.ScaleType.Tile
-LinNiBackground.TileSize = UDim2.new(0, 200, 0, 200)
-
-local HologramEffect = Instance.new("Frame")
-HologramEffect.Name = "HologramEffect"
-HologramEffect.Parent = LinNiBackground
-HologramEffect.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-HologramEffect.BackgroundTransparency = 0.9
-HologramEffect.Size = UDim2.new(1, 0, 1, 0)
-HologramEffect.ZIndex = -1
-
-spawn(function()
-    while HologramEffect and HologramEffect.Parent do
-        for i = 0, 1, 0.01 do
-            HologramEffect.BackgroundTransparency = 0.85 + math.sin(i*math.pi)*0.1
-            HologramEffect.BackgroundColor3 = Color3.fromHSV(i, 0.8, 1)
-            wait(0.05)
-        end
-    end
-end)
+LinNiBackground.ImageTransparency = 0.9
+LinNiBackground.ImageColor3 = Color3.fromRGB(0, 180, 255) 
 
 local TextGlow = Instance.new("ImageLabel")
 TextGlow.Name = "文字光效"
@@ -306,25 +267,16 @@ ScanLines.Size = UDim2.new(1, 0, 0, 1)
 ScanLines.ZIndex = 1
 
 local NeonBorder = Instance.new("ImageLabel")
-NeonBorder.Name = "NeonBorder"
+NeonBorder.Name = "霓虹边框"
 NeonBorder.Parent = Main
-NeonBorder.Image = "rbxassetid://13099872066"  
+NeonBorder.Image = "rbxassetid://8992232431"  
 NeonBorder.ScaleType = Enum.ScaleType.Slice
 NeonBorder.SliceCenter = Rect.new(100, 100, 100, 100)
-NeonBorder.Size = UDim2.new(1, 20, 1, 20)
-NeonBorder.Position = UDim2.new(0, -10, 0, -10)
+NeonBorder.Size = UDim2.new(1, 10, 1, 10)
+NeonBorder.Position = UDim2.new(0, -5, 0, -5)
 NeonBorder.BackgroundTransparency = 1
+NeonBorder.ImageColor3 = Color3.fromRGB(0, 255, 255)  
 NeonBorder.ZIndex = 2
-
-spawn(function()
-    while NeonBorder and NeonBorder.Parent do
-        for i = 0, 1, 0.01 do
-            NeonBorder.ImageColor3 = Color3.fromHSV(i, 1, 1)
-            NeonBorder.ImageTransparency = 0.3 + math.sin(i*math.pi*2)*0.1
-            wait(0.05)
-        end
-    end
-end)
 
 local HanziParticles = Instance.new("ParticleEmitter")
 HanziParticles.Name = "汉字粒子"
@@ -870,52 +822,18 @@ function window.Tab(window, name, icon)
                     BtnModule.BorderSizePixel = 0
                     BtnModule.Position = UDim2.new(0, 0, 0, 0)
                     BtnModule.Size = UDim2.new(0, 428, 0, 38)
-                   Btn.Name = "CyberButton"
+                   Btn.Name = "Btn"
 Btn.Parent = BtnModule
-Btn.BackgroundColor3 = Color3.fromRGB(10, 20, 30)
-Btn.BorderColor3 = Color3.fromRGB(0, 200, 255)
+Btn.BackgroundColor3 = zyColor
+Btn.BorderColor3 = Color3.fromRGB(180, 150, 50)  
 Btn.BorderSizePixel = 1
-Btn.Size = UDim2.new(0, 428, 0, 42)
+Btn.Size = UDim2.new(0, 428, 0, 42)  
 Btn.AutoButtonColor = false
 Btn.Font = Enum.Font.GothamSemibold
 Btn.Text = "   " .. text
-Btn.TextColor3 = Color3.fromRGB(200, 240, 255)
+Btn.TextColor3 = Color3.fromRGB(255, 240, 150)  
 Btn.TextSize = 16
 Btn.TextXAlignment = Enum.TextXAlignment.Left
-Btn.TextStrokeTransparency = 0.8
-Btn.TextStrokeColor3 = Color3.fromRGB(0, 150, 255)
-
-local buttonGlow = Instance.new("Frame")
-buttonGlow.Name = "ButtonGlow"
-buttonGlow.Parent = Btn
-buttonGlow.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-buttonGlow.BackgroundTransparency = 0.9
-buttonGlow.Size = UDim2.new(1, 10, 0, 2)
-buttonGlow.Position = UDim2.new(0, -5, 1, -2)
-buttonGlow.ZIndex = -1
-buttonGlow.BorderSizePixel = 0
-
-Btn.MouseEnter:Connect(function()
-    services.TweenService:Create(Btn, TweenInfo.new(0.2), {
-        BackgroundColor3 = Color3.fromRGB(20, 40, 60),
-        TextColor3 = Color3.fromRGB(0, 255, 255)
-    }):Play()
-    services.TweenService:Create(buttonGlow, TweenInfo.new(0.2), {
-        BackgroundTransparency = 0.7,
-        Size = UDim2.new(1, 20, 0, 4)
-    }):Play()
-end)
-
-Btn.MouseLeave:Connect(function()
-    services.TweenService:Create(Btn, TweenInfo.new(0.2), {
-        BackgroundColor3 = Color3.fromRGB(10, 20, 30),
-        TextColor3 = Color3.fromRGB(200, 240, 255)
-    }):Play()
-    services.TweenService:Create(buttonGlow, TweenInfo.new(0.2), {
-        BackgroundTransparency = 0.9,
-        Size = UDim2.new(1, 10, 0, 2)
-    }):Play()
-end)
                     BtnC.CornerRadius = UDim.new(0, 6)
                     BtnC.Name = "BtnC"
                     BtnC.Parent = Btn
@@ -1306,33 +1224,11 @@ end)
                     SliderBarC.Name = "SliderBarC"
                     SliderBarC.Parent = SliderBar
                     
-                    SliderPart.Name = "CyberSlider"
-SliderPart.Parent = SliderBar
-SliderPart.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-SliderPart.BorderSizePixel = 0
-SliderPart.Size = UDim2.new(0, 54, 0, 13)
-
-local sliderGlow = Instance.new("ImageLabel")
-sliderGlow.Name = "SliderGlow"
-sliderGlow.Parent = SliderPart
-sliderGlow.BackgroundTransparency = 1
-sliderGlow.Size = UDim2.new(1, 10, 1, 10)
-sliderGlow.Position = UDim2.new(0, -5, 0, -5)
-sliderGlow.Image = "rbxassetid://4896581736"
-sliderGlow.ImageColor3 = Color3.fromRGB(0, 200, 255)
-sliderGlow.ImageTransparency = 0.7
-sliderGlow.ZIndex = -1
-
-spawn(function()
-    while SliderPart and SliderPart.Parent do
-        for i = 0, 1, 0.01 do
-            sliderGlow.ImageTransparency = 0.6 + math.sin(i*math.pi)*0.2
-            wait(0.03)
-        end
-    end
-end)
-    
-    
+                    SliderPart.Name = "SliderPart"
+    SliderPart.Parent = SliderBar
+    SliderPart.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+    SliderPart.BorderSizePixel = 0
+    SliderPart.Size = UDim2.new(0, 54, 0, 13)
                     SliderPartC.CornerRadius = UDim.new(0, 4)
                     SliderPartC.Name = "SliderPartC"
                     SliderPartC.Parent = SliderPart
@@ -1518,31 +1414,12 @@ end)
                     DropdownModule.ClipsDescendants = true
                     DropdownModule.Position = UDim2.new(0, 0, 0, 0)
                     DropdownModule.Size = UDim2.new(0, 428, 0, 38)
-                    DropdownTop.Name = "CyberDropdown"
+                    DropdownTop.Name = "DropdownTop"
 DropdownTop.Parent = DropdownModule
-DropdownTop.BackgroundColor3 = Color3.fromRGB(15, 25, 35)
-DropdownTop.BorderColor3 = Color3.fromRGB(0, 150, 255)
+DropdownTop.BackgroundColor3 = zyColor
+DropdownTop.BorderColor3 = Color3.fromRGB(180, 150, 50)
 DropdownTop.BorderSizePixel = 1
 DropdownTop.Size = UDim2.new(0, 428, 0, 42)
-
-local scanLine = Instance.new("Frame")
-scanLine.Name = "ScanLine"
-scanLine.Parent = DropdownTop
-scanLine.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-scanLine.BackgroundTransparency = 0.8
-scanLine.Size = UDim2.new(1, 0, 0, 1)
-scanLine.Position = UDim2.new(0, 0, 0, 0)
-scanLine.ZIndex = 2
-
-spawn(function()
-    while scanLine and scanLine.Parent do
-        for i = 0, 1, 0.05 do
-            scanLine.Position = UDim2.new(0, 0, i, 0)
-            scanLine.BackgroundTransparency = 0.7 + math.sin(i*math.pi)*0.2
-            wait(0.03)
-        end
-    end
-end)
 DropdownTop.AutoButtonColor = false
 DropdownTop.Font = Enum.Font.GothamSemibold
 DropdownTop.Text = ""
