@@ -722,7 +722,7 @@ function window.Tab(window, name, icon)
             TabIco.BackgroundTransparency = 1
             TabIco.BorderSizePixel = 0
             TabIco.Size = UDim2.new(0, 24, 0, 24)
-            TabIco.Image = ("rbxassetid://17120415981"):format(icon or 4370341699)
+            TabIco.Image = ("rbxassetid://103514147451766"):format(icon or 4370341699)
             TabIco.ImageTransparency = 0.2
             TabText.Name = "TabText"
             TabText.Parent = TabIco
