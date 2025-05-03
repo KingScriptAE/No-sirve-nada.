@@ -1,7 +1,6 @@
 --[[
 
-由霖溺设计师/完成ui设计
-
+bu Linni
 ]]
 
 if debugX then
@@ -13,7 +12,6 @@ local function getService(name)
     return if cloneref then cloneref(service) else service
 end
 
---加载并执行托管在远程URL上的函数。如果请求的URL响应时间过长，则取消请求。\n--捕获函数错误并将其记录到输出中
 local function loadWithTimeout(url: string, timeout: number?): ...any
 	assert(type(url) == "string", "Expected string, got " .. type(url))
 	timeout = timeout or 5
@@ -21,7 +19,8 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 	local success, result = false, nil
 
 	local requestThread = task.spawn(function()
-		local fetchSuccess, fetchResult = pcall(game.HttpGet, game, url) --游戏：HttpGet（URL）\n--如果请求失败，即使FetchSuccess为true，内容也可以为空
+		local fetchSuccess, fetchResult = pcall(game.HttpGet, game, url) -- game:HttpGet(url)
+		-- If the request fails the content can be empty, even if fetchSuccess is true
 		if not fetchSuccess or #fetchResult == 0 then
 			if #fetchResult == 0 then
 				fetchResult = "Empty response" -- Set the error message
@@ -69,9 +68,10 @@ local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".rfld"
 local settingsTable = {
 	General = {
-	--如果需要，只需设置getSetting（name）
+		-- if needs be in order just make getSetting(name)
 		rayfieldOpen = {Type = 'bind', Value = 'K', Name = 'Rayfield Keybind'},
-	--建筑矮化--RayField提示
+		-- buildwarnings
+		-- rayfieldprompts
 
 	},
 	System = {
@@ -87,7 +87,6 @@ local useStudio = RunService:IsStudio() or false
 
 local settingsCreated = false
 local cachedSettings
---local prompt = useStudio and require(script.Parent.prompt) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/Sirius/refs/heads/request/prompt.lua')
 local request = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
 
 
@@ -160,29 +159,7 @@ if debugX then
 	warn('Settings Loaded')
 end
 
---if not cachedSettings or not cachedSettings.System or not cachedSettings.System.usageAnalytics then
---	local fileFunctionsAvailable = isfile and writefile and readfile
 
---	if not fileFunctionsAvailable and not useStudio then
---		warn('Rayfield Interface Suite | Sirius Analytics:\n\n\nAs you don\'t have file functionality with your executor, we are unable to save whether you want to opt in or out to analytics.\nIf you do not want to take part in anonymised usage statistics, let us know in our Discord at sirius.menu/discord and we will manually opt you out.')
---		analytics = true	
---	else
---		prompt.create(
---			'Help us improve',
---	            [[Would you like to allow Sirius to collect usage statistics?
-
---<font transparency='0.4'>No data is linked to you or your personal activity.</font>]],
---			'Continue',
---			'Cancel',
---			function(result)
---				settingsTable.System.usageAnalytics.Value = result
---				analytics = result
---			end
---		)
---	end
-
---	repeat task.wait() until analytics ~= nil
---end
 
 if not requestsDisabled then
 	if debugX then
@@ -202,7 +179,7 @@ if not requestsDisabled then
 						reporter.report("Rayfield", Release, InterfaceBuild)
 					end)
 				else
-					warn("Failed to load or execute the reporter. \nPlease notify Rayfield developers at sirius.menu/discord.")
+					warn("Failed to load or execute the reporter. \nPlease notify Rayfield developers at Linni.menu/QQ.")
 				end
 			end)
 			if debugX then warn('Finished Report') end
@@ -909,9 +886,8 @@ local function LoadConfiguration(Configuration)
 				end
 			end)
 		else
-			warn("无法找到Rayfield "..FlagName.. "在保存文件中 .")
-			print("如果已添加新元素或未设置值，则上述错误可能不是问题.")
-			--RayfieldLibrary:Notify({Title = "Rayfield Flags", Content = "Rayfield was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
+			warn("Rayfield | Unable to find '"..FlagName.. "' in the save file.")
+			print("The error above may not be an issue if new elements have been added or not been set values.")
 		end
 	end
 
@@ -1143,9 +1119,9 @@ local function Hide(notify: boolean?)
 	Debounce = true
 	if notify then
 		if useMobilePrompt then 
-			RayfieldLibrary:Notify({Title = "接口已隐藏", Content = "界面已隐藏，您可以通过点击“显示Rayfield”来取消隐藏界面.", Duration = 7, Image = 4400697855})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.", Duration = 7, Image = 4400697855})
 		else
-			RayfieldLibrary:Notify({Title = "接口已隐藏", Content = `The interface has been hidden, you can unhide the interface by tapping {settingsTable.General.rayfieldOpen.Value or 'K'}.`, Duration = 7, Image = 4400697855})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {settingsTable.General.rayfieldOpen.Value or 'K'}.`, Duration = 7, Image = 4400697855})
 		end
 	end
 
@@ -1528,7 +1504,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	if not correctBuild and not Settings.DisableBuildWarnings then
 		task.delay(3, 
 			function() 
-				RayfieldLibrary:Notify({Title = ''构建不匹配, Content = '当您运行不兼容的接口版本时，Rayfield可能会遇到问题 ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\n此版本的Rayfield用于界面构建 '..InterfaceBuild..'.\n\n尝试重新加入，然后运行脚本两次.', Image = 4335487866, Duration = 15})		
+				RayfieldLibrary:Notify({Title = 'Build Mismatch', Content = 'Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
 			end)
 	end
 
@@ -1586,10 +1562,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 		if not success then
 			local success, result2 = pcall(ChangeTheme, 'Default')
 			if not success then
-				warn('严重错误-没有默认主题')
+				warn('CRITICAL ERROR - NO DEFAULT THEME')
 				print(result2)
 			end
-			warn('发布渲染主题。文件中没有主题')
+			warn('issue rendering theme. no theme on file')
 			print(result)
 		end
 	end
@@ -1603,8 +1579,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			while true do
 				task.wait(math.random(180, 600))
 				RayfieldLibrary:Notify({
-					Title = "Rayfield接口",
-					Content = "喜欢这个UI库吗？在霖溺QQ群找到它",
+					Title = "Rayfield Interface",
+					Content = "Enjoying this UI library? Find it at sirius.menu/discord",
 					Duration = 7,
 					Image = 4370033185,
 				})
@@ -1819,7 +1795,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if writefile then
 							writefile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, FoundKey)
 						end
-						RayfieldLibrary:Notify({Title = "Key 密钥", Content = ".此脚本的密钥已成功保存", Image = 3605522284})
+						RayfieldLibrary:Notify({Title = "Key System", Content = "The key for this script has been saved successfully.", Image = 3605522284})
 					end
 				else
 					if AttemptsRemaining == 0 then
@@ -3466,9 +3442,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 	function Window.ModifyTheme(NewTheme)
 		local success = pcall(ChangeTheme, NewTheme)
 		if not success then
-			RayfieldLibrary:Notify({Title = '无法更改主题', Content = '在文件中找不到主题.', Image = 4400704299})
+			RayfieldLibrary:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
 		else
-			RayfieldLibrary:Notify({Title = '主题已更改', Content = '已成功将主题更改为 '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
+			RayfieldLibrary:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
 		end
 	end
 
@@ -3660,15 +3636,15 @@ function RayfieldLibrary:LoadConfiguration()
 				end
 			else
 				notified = true
-				RayfieldLibrary:Notify({Title = "Rayfield 配置", Content = "我们无法启用配置保存，因为您使用的软件不支持文件系统.", Image = 4384402990})
+				RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
 			end
 		end)
 
 		if success and loaded and not notified then
-			RayfieldLibrary:Notify({Title = "Rayfield 配置", Content = "此脚本的配置文件已从上一个会话中加载.", Image = 4384403532})
+			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
 		elseif not success and not notified then
 			warn('Rayfield Configurations Error | '..tostring(result))
-			RayfieldLibrary:Notify({Title = "Rayfield 配置。", Content = "正确'加载您的配置时遇到问题.\n\n有关详细信息，请查看开发人员控制台.", Image = 4384402990})
+			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
 		end
 	end
 
@@ -3687,7 +3663,7 @@ if useStudio then
 		LoadingTitle = "Rayfield Interface Suite",
 		Theme = 'Default',
 		Icon = 0,
-		LoadingSubtitle = "by Sirius",
+		LoadingSubtitle = "by Linni",
 		ConfigurationSaving = {
 			Enabled = true,
 			FolderName = nil, -- Create a custom folder for your hub/game
