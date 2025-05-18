@@ -2222,12 +2222,12 @@ end
 function Luna:CreateWindow(WindowSettings)
 
 	WindowSettings = Kwargify({
-		Name = "Luna UI Example Window",
+		Name = "LinniNewUI Example Window",
 		Subtitle = "",
-		LogoID = "6031097225",
+		LogoID = "103514147451766",
 		LoadingEnabled = true,
-		LoadingTitle = "Luna Interface Suite",
-		LoadingSubtitle = "by Nebula Softworks",
+		LoadingTitle = "Luna 霖溺",
+		LoadingSubtitle = "by linni",
 
 		ConfigSettings = {},
 
@@ -2237,16 +2237,16 @@ function Luna:CreateWindow(WindowSettings)
 
 	WindowSettings.ConfigSettings = Kwargify({
 		RootFolder = nil,
-		ConfigFolder = "Big Hub"
+		ConfigFolder = "Linni Hub"
 	}, WindowSettings.ConfigSettings or {})
 
 	WindowSettings.KeySettings = Kwargify({
 		Title = WindowSettings.Name,
 		Subtitle = "Key System",
-		Note = "No Instructions",
+		Note = "霖溺卡密系统",
 		SaveInRoot = false, -- Enabling will save the key in your RootFolder (YOU MUST HAVE ONE BEFORE ENABLING THIS OPTION)
 		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-		Key = {""}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
+		Key = {"霖溺FREE"}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
 		SecondAction = {}	
 	}, WindowSettings.KeySettings or {})
 
