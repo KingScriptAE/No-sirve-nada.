@@ -1,6 +1,26 @@
 --[[
-ui作者是老外，不是霖溺!
-LinniNewUI
+
+Luna Interface Suite
+by Nebula Softworks
+
+Main Credits
+
+Hunter (Nebula Softworks) | Designing And Programming | Main Developer
+JustHey (Nebula Softworks) | Configurations, Bug Fixing And More! | Co Developer
+Throit | Color Picker
+Wally | Dragging And Certain Functions
+Sirius | PCall Parsing, Notifications, Slider And Home Tab
+Luna Executor | Original UI
+
+
+Extra Credits / Provided Certain Elements
+
+Pookie Pepelss | Bug Tester
+Inori | Configuration Concept
+Latte Softworks and qweery | Lucide Icons And Material Icons
+kirill9655 | Loading Circle
+Deity/dp4pv/x64x70 | Certain Scripting and Testing ig
+
 ]]
 
 local Release = "Prerelease Beta 6.1"
@@ -18,13 +38,13 @@ local Camera = workspace.CurrentCamera
 local CoreGui = game:GetService("CoreGui")
 
 local isStudio
-local website = "github.com/KingScriptAE"
+local website = "github.com/Nebula-Softworks"
 
 if RunService:IsStudio() then
 	isStudio = true
 end
 
--- Lucide和Material图标分别归功于Latte Softworks和Qweery。
+-- Credits To Latte Softworks And qweery for Lucide And Material Icons Respectively.
 local IconModule = {
 	Lucide = nil,
 	Material = {
@@ -1543,14 +1563,14 @@ local function GetIcon(icon, source)
 
 			local r = sizedicons[icon]
 			if not r then
-				error("Lucide图标：按名称查找图标失败 \"" .. icon .. "\.", 2)
+				error("Lucide Icons: Failed to find icon by the name of \"" .. icon .. "\.", 2)
 			end
 
 			local rirs = r[2]
 			local riro = r[3]
 
 			if type(r[1]) ~= "number" or type(rirs) ~= "table" or type(riro) ~= "table" then
-				error("Lucide图标：内部错误：自动生成的资产条目无效")
+				error("Lucide Icons: Internal error: Invalid auto-generated asset entry")
 			end
 
 			local irs = Vector2.new(rirs[1], rirs[2])
@@ -1564,7 +1584,7 @@ local function GetIcon(icon, source)
 
 			return asset
 		else
-			return "rbxassetid://103514147451766"
+			return "rbxassetid://10723434557"
 		end
 	else	
 		if icon ~= nil and IconModule[source] then
@@ -1632,7 +1652,7 @@ local function BlurModule(Frame)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundTransparency = 1
 
-	local GenUid; do -- 为RenderStepped绑定生成唯一名称
+	local GenUid; do -- Generate unique names for RenderStepped bindings
 		local id = 0
 		function GenUid()
 			id = id + 1
@@ -1655,7 +1675,7 @@ local function BlurModule(Frame)
 
 		local acos, max, pi, sqrt = math.acos, math.max, math.pi, math.sqrt
 		local sz = 0.22
-		local function DrawTriangle(v1, v2, v3, p0, p1) -- I 我想Stravant写了这个函数
+		local function DrawTriangle(v1, v2, v3, p0, p1) -- I think Stravant wrote this function
 
 			local s1 = (v1 - v2).magnitude
 			local s2 = (v2 - v3).magnitude
@@ -1815,7 +1835,7 @@ local function unpackt(array : table)
 	return val
 end
 
--- 接口管理
+-- Interface Management
 local LunaUI = isStudio and script.Parent:WaitForChild("Luna UI") or game:GetObjects("rbxassetid://86467455075715")[1]
 
 local SizeBleh = nil
@@ -2202,12 +2222,12 @@ end
 function Luna:CreateWindow(WindowSettings)
 
 	WindowSettings = Kwargify({
-		Name = "LinniNewUI Example Window",
+		Name = "Luna UI Example Window",
 		Subtitle = "",
 		LogoID = "6031097225",
 		LoadingEnabled = true,
 		LoadingTitle = "Luna Interface Suite",
-		LoadingSubtitle = "by 霖溺",
+		LoadingSubtitle = "by Nebula Softworks",
 
 		ConfigSettings = {},
 
@@ -2217,23 +2237,23 @@ function Luna:CreateWindow(WindowSettings)
 
 	WindowSettings.ConfigSettings = Kwargify({
 		RootFolder = nil,
-		ConfigFolder = "Linni Hub"
+		ConfigFolder = "Big Hub"
 	}, WindowSettings.ConfigSettings or {})
 
 	WindowSettings.KeySettings = Kwargify({
 		Title = WindowSettings.Name,
 		Subtitle = "Key System",
 		Note = "No Instructions",
-		SaveInRoot = false, -- 启用将在根文件夹中保存密钥（在启用此选项之前必须有一个）
-		SaveKey = true, -- 用户的密钥将被保存，但如果您更改密钥，他们将无法使用您的脚本
-		Key = {""}, -- 系统将接受的密钥列表，请使用像Pelican或Luarmor这样的系统，该系统根据您的HWID提供密钥字符串，因为放置一个简单的字符串很容易被绕过
+		SaveInRoot = false, -- Enabling will save the key in your RootFolder (YOU MUST HAVE ONE BEFORE ENABLING THIS OPTION)
+		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+		Key = {""}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
 		SecondAction = {}	
 	}, WindowSettings.KeySettings or {})
 
 	WindowSettings.KeySettings.SecondAction = Kwargify({
 		Enabled = false,
 		Type = "Discord", -- Link/Discord
-		Parameter = "" -- 对于不一致，请添加“邀请”链接，如“主页”选项卡。对于“链接”，键入UR密钥系统的链接
+		Parameter = "" -- for discord, add the invite link like home tab. for link, type the link of ur key sys
 	}, WindowSettings.KeySettings.SecondAction)
 
 	local Passthrough = false
@@ -2258,7 +2278,7 @@ function Luna:CreateWindow(WindowSettings)
 
 	LoadingFrame.Frame.Frame.Title.Text = WindowSettings.LoadingTitle
 	LoadingFrame.Frame.Frame.Subtitle.Text = WindowSettings.LoadingSubtitle
-	LoadingFrame.Version.Text = LoadingFrame.Frame.Frame.Title.Text == "霖溺" and Release or "LinniNewUI"
+	LoadingFrame.Version.Text = LoadingFrame.Frame.Frame.Title.Text == "Luna Interface Suite" and Release or "Luna UI"
 
 	Navigation.Player.icon.ImageLabel.Image = Players:GetUserThumbnailAsync(Players.LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
 	Navigation.Player.Namez.Text = Players.LocalPlayer.DisplayName
@@ -3575,7 +3595,7 @@ function Luna:CreateWindow(WindowSettings)
 					Name = "Dynamic Input",
 					Description = nil,
 					CurrentValue = "",
-					PlaceholderText = "欢迎使用霖溺脚本",
+					PlaceholderText = "Input Placeholder",
 					RemoveTextAfterFocusLost = false,
 					Numeric = false,
 					Enter = false,
@@ -6703,24 +6723,24 @@ end
 
 if isStudio then
 	local Window = Luna:CreateWindow({
-		Name = "Linni Hub,
-		Subtitle = "by Linni",
-		LogoID = "103514147451766",
+		Name = "Nebula Client - Luna Hub | Blade Ball",
+		Subtitle = "by Nebula Softworks",
+		LogoID = "123795201100198",
 		LoadingEnabled = true,
-		LoadingTitle = "霖溺 (Linni Hub)",
-		LoadingSubtitle = "Loading script",
+		LoadingTitle = "Nebula Client (Luna Hub)",
+		LoadingSubtitle = "Loading script for Blade Ball",
 		KeySystem = true,
 		KeySettings = {
-			Title = "霖溺 | Key System",
-			Subtitle = "script",
-			Note = "请输入您的密钥以使用Linni客户端",
-			FileName = "Key", -- 密钥文件的名称。这将被保存在你的根文件夹中。然而，如果你没有一个，它将保存在你的配置文件夹中。
-			SaveKey = true, -- 用户的密钥将被保存，但如果您更改密钥，他们将无法使用您的脚本
-			Key = {"霖溺FREE"}, -- 系统将接受的密钥列表，请使用像Pelican或Luarmor这样的系统，该系统根据您的HWID提供密钥字符串，因为放置一个简单的字符串很容易被绕过
+			Title = "Nebula Client | Key System",
+			Subtitle = "Blade Ball",
+			Note = "Please Enter Your Key To Use Nebula Client",
+			FileName = "Key", -- the name of the key file. this will be saved in ur RootFolder. However, if you don't have one, it'll save in ur config folder instead
+			SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+			Key = {"Example Key"}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
 			SecondAction = {
 				Enabled = true,
-				Type = "http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=viOjjgj19-TUiZlamhpxb6uvWwVNGoB7&authKey=ACDi9sCtIis%2F4P%2BtirP046uWaJ54%2F149eBnUvaAsMu%2BWZwSFoEQrzZC9UDGFwmp%2F&noverify=0&group_code=744830231", -- Link/Discord
-				Parameter = "https://qm.qq.com/q/SU0hmhIvwk" -- 对于不一致，请添加“邀请”链接，如“主页”选项卡。对于“链接”，键入UR密钥系统的链接
+				Type = "Link", -- Link/Discord
+				Parameter = "" -- for discord, add the invite link like home tab. for link, type the link of ur key sys
 			}
 		}
 	})
