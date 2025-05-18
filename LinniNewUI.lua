@@ -1555,7 +1555,7 @@ local function GetIcon(icon, source)
 		return "rbxassetid://" .. icon
 	elseif source == "Lucide" then
 		-- full credit to latte softworks :)
-		local iconData = not isStudio and game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/newui1.lua)
+		local iconData = not isStudio and game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/newui1.lua")
 		local icons = isStudio and IconModule.Lucide or loadstring(iconData)()
 		if not isStudio then
 			icon = string.match(string.lower(icon), "^%s*(.*)%s*$") :: string
