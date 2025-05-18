@@ -1,5 +1,5 @@
 --[[
-by Linni
+ui作者是老外，不是霖溺!
 LinniNewUI
 ]]
 
