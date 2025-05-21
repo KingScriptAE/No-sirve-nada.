@@ -38,7 +38,7 @@ local Camera = workspace.CurrentCamera
 local CoreGui = game:GetService("CoreGui")
 
 local isStudio
-local website = "github.com/Nebula-Softworks"
+local website = "github.com/KingScriptAE"
 
 if RunService:IsStudio() then
 	isStudio = true
@@ -2224,7 +2224,7 @@ function Luna:CreateWindow(WindowSettings)
 	WindowSettings = Kwargify({
 		Name = "LinniNewUI Example Window",
 		Subtitle = "",
-		LogoID = "103514147451766",
+		LogoID = "109324145118343",
 		LoadingEnabled = true,
 		LoadingTitle = "Luna 霖溺",
 		LoadingSubtitle = "by linni",
