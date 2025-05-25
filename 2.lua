@@ -10,7 +10,7 @@ return function(Config, Utilities, ESPObject, ESPConfig)
         VanillaUIVisible = true
     }
     
-    -- Function to hide vanilla name/health bars for players
+
     local function hideVanillaUI()
         if not ESPManager.VanillaUIVisible then return end
         
@@ -32,7 +32,6 @@ return function(Config, Utilities, ESPObject, ESPConfig)
         warn("[Skull Hub] Vanilla UI hidden - ESP Enabled")
     end
     
-    -- Function to restore vanilla name/health bars
     local function restoreVanillaUI()
         if ESPManager.VanillaUIVisible then return end
         
@@ -112,7 +111,6 @@ return function(Config, Utilities, ESPObject, ESPConfig)
         end)
         ESPManager.Update()
         
-        -- Hide vanilla UI initially if ESP is enabled
         if Config.Enabled then
             hideVanillaUI()
         end
@@ -133,22 +131,19 @@ return function(Config, Utilities, ESPObject, ESPConfig)
             ESPManager.Connection = nil
         end
         
-        -- Restore vanilla UI when cleaning up
         restoreVanillaUI()
         print("[Skull Hub] ESP Cleaned Up - Restored Vanilla UI")
     end
     
-    -- Handle ESP enable/disable with reset and debug
     function ESPManager.SetEnabled(enabled)
         print("[Skull Hub] Attempting to set ESP Enabled to:", enabled)
         
-        -- Ensure Config.Enabled reflects the desired state
         Config.Enabled = enabled
         
         if enabled then
             hideVanillaUI()
-            ESPManager.Initialize() -- Re-initialize to reset state fully
-            ESPManager.Update() -- Ensure all objects are recreated
+            ESPManager.Initialize() 
+            ESPManager.Update() 
             print("ESP Re-enabled successfully")
         else
             restoreVanillaUI()
@@ -156,13 +151,10 @@ return function(Config, Utilities, ESPObject, ESPConfig)
             print("ESP Disabled successfully")
         end
     end
-    
-    -- Expose current enabled state for external checks
     function ESPManager.IsEnabled()
         return Config.Enabled
     end
     
-    -- Handle CensuraDev toggle keybind integration
     function ESPManager.HandleToggleKey()
         local system = getgenv().CensuraSystem
         if not system then return end
