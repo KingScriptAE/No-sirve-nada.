@@ -2,23 +2,23 @@
 
 return function(Config, Utilities)
     local ESPConfig = {
-    FadeStartMultiplier = 0.7, -- Fade starts at 70% of MaxDistance
-    HealthBarDistance = 100,   -- Health bars visible under 100 studs
-    SpatialFilterThreshold = 0.9, -- Skip updates beyond 90% MaxDistance
-    SpatialMoveThreshold = 5,  -- Movement threshold for spatial filtering (studs)
-    UpdateInterval = 0.2,      -- Update every 0.2 seconds
-    RarityColors = {           -- Colors triggering rarity glow
+    FadeStartMultiplier = 0.7, 
+    HealthBarDistance = 100,   
+    SpatialFilterThreshold = 0.9, 
+    SpatialMoveThreshold = 5,
+    UpdateInterval = 0.2,      
+    RarityColors = {       
         "Gold", "Silver", "Rare"
     }
 }
 
-    local ESPObject = loadstring(game:HttpGet("https://raw.githubusercontent.com/RENBex6969/SkullHUB-deadrails/refs/heads/main/ESPObject.lua"))()(Config, Utilities, ESPConfig)--1
+    local ESPObject = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/1.lua"))()(Config, Utilities, ESPConfig)--1
     
-    local ESPManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/RENBex6969/SkullHUB-deadrails/refs/heads/main/ESPManager.lua"))()(Config, Utilities, ESPObject, ESPConfig)--2
+    local ESPManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/2.lua"))()(Config, Utilities, ESPObject, ESPConfig)--2
     
     local ESP = {}
     
-    -- Expose public interface from ESPManager
+
     ESP.Initialize = ESPManager.Initialize
     ESP.Cleanup = ESPManager.Cleanup
     ESP.Update = ESPManager.Update
