@@ -49,7 +49,7 @@ function Notif.New(text, timee)
     frame_2.Visible = true
     frame_2.Parent = frame
 	
-    -- Main Notification Frame
+
     local frame_3 = Instance.new("Frame")
     frame_3.AnchorPoint = Vector2.new(0.5, 1)
     frame_3.AutomaticSize = Enum.AutomaticSize.X
@@ -116,7 +116,7 @@ function Notif.New(text, timee)
     uicorner_2.Parent = text_button
 
     local image_button = Instance.new("ImageButton")
-    image_button.Image = "rbxassetid://3926305904"
+    image_button.Image = "rbxassetid://99599917888886"
     image_button.ImageColor3 = Color3.new(0.784314, 0.784314, 0.784314)
     image_button.ImageRectOffset = Vector2.new(924, 724)
     image_button.ImageRectSize = Vector2.new(36, 36)
