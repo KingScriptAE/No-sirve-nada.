@@ -1,256 +1,256 @@
 
-local Ancestral = {};
+local LinniScript = {};
 
--- AncesHub
-Ancestral["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
-Ancestral["1"]["IgnoreGuiInset"] = true;
-Ancestral["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
-Ancestral["1"]["Name"] = [[AncesHub]];
-Ancestral["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
-
-
--- AncesHub.BackgroundFrame
-Ancestral["2"] = Instance.new("Frame", Ancestral["1"]);
-Ancestral["2"]["BorderSizePixel"] = 0;
-Ancestral["2"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["2"]["Size"] = UDim2.new(0, 452, 0, 344);
-Ancestral["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-Ancestral["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2"]["Name"] = [[BackgroundFrame]];
+-- LinniHub
+LinniScript["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+LinniScript["1"]["IgnoreGuiInset"] = true;
+LinniScript["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
+LinniScript["1"]["Name"] = [[LinniHub]];
+LinniScript["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 
--- AncesHub.BackgroundFrame.UICorner
-Ancestral["3"] = Instance.new("UICorner", Ancestral["2"]);
-Ancestral["3"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame
+LinniScript["2"] = Instance.new("Frame", LinniScript["1"]);
+LinniScript["2"]["BorderSizePixel"] = 0;
+LinniScript["2"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["2"]["Size"] = UDim2.new(0, 452, 0, 344);
+LinniScript["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+LinniScript["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2"]["Name"] = [[BackgroundFrame]];
 
 
--- AncesHub.BackgroundFrame.UIGradient
-Ancestral["4"] = Instance.new("UIGradient", Ancestral["2"]);
-Ancestral["4"]["Rotation"] = -143;
-Ancestral["4"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.484, Color3.fromRGB(6, 244, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
+-- LinniHub.BackgroundFrame.UICorner
+LinniScript["3"] = Instance.new("UICorner", LinniScript["2"]);
+LinniScript["3"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.LightBlue
-Ancestral["5"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["5"]["BorderSizePixel"] = 0;
-Ancestral["5"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["5"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["5"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["5"]["Name"] = [[LightBlue]];
-Ancestral["5"]["BackgroundTransparency"] = 0.8;
+-- LinniHub.BackgroundFrame.UIGradient
+LinniScript["4"] = Instance.new("UIGradient", LinniScript["2"]);
+LinniScript["4"]["Rotation"] = -143;
+LinniScript["4"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.484, Color3.fromRGB(6, 244, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
 
 
--- AncesHub.BackgroundFrame.LightBlue.UIGradient
-Ancestral["6"] = Instance.new("UIGradient", Ancestral["5"]);
-Ancestral["6"]["Rotation"] = 50;
-Ancestral["6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+-- LinniHub.BackgroundFrame.LightBlue
+LinniScript["5"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["5"]["BorderSizePixel"] = 0;
+LinniScript["5"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["5"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["5"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["5"]["Name"] = [[LightBlue]];
+LinniScript["5"]["BackgroundTransparency"] = 0.8;
 
 
--- AncesHub.BackgroundFrame.LightBlue.UICorner
-Ancestral["7"] = Instance.new("UICorner", Ancestral["5"]);
-Ancestral["7"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.LightBlue.UIGradient
+LinniScript["6"] = Instance.new("UIGradient", LinniScript["5"]);
+LinniScript["6"]["Rotation"] = 50;
+LinniScript["6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
 
 
--- AncesHub.BackgroundFrame.Blue
-Ancestral["8"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["8"]["BorderSizePixel"] = 0;
-Ancestral["8"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["8"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["8"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["8"]["Name"] = [[Blue]];
-Ancestral["8"]["BackgroundTransparency"] = 0.6;
+-- LinniHub.BackgroundFrame.LightBlue.UICorner
+LinniScript["7"] = Instance.new("UICorner", LinniScript["5"]);
+LinniScript["7"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Blue.UIGradient
-Ancestral["9"] = Instance.new("UIGradient", Ancestral["8"]);
-Ancestral["9"]["Rotation"] = -70;
-Ancestral["9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+-- LinniHub.BackgroundFrame.Blue
+LinniScript["8"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["8"]["BorderSizePixel"] = 0;
+LinniScript["8"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["8"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["8"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["8"]["Name"] = [[Blue]];
+LinniScript["8"]["BackgroundTransparency"] = 0.6;
 
 
--- AncesHub.BackgroundFrame.Blue.UICorner
-Ancestral["a"] = Instance.new("UICorner", Ancestral["8"]);
-Ancestral["a"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.Blue.UIGradient
+LinniScript["9"] = Instance.new("UIGradient", LinniScript["8"]);
+LinniScript["9"]["Rotation"] = -70;
+LinniScript["9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
 
 
--- AncesHub.BackgroundFrame.Main
-Ancestral["b"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["b"]["ZIndex"] = 2;
-Ancestral["b"]["BorderSizePixel"] = 0;
-Ancestral["b"]["BackgroundColor3"] = Color3.fromRGB(67, 67, 67);
-Ancestral["b"]["Size"] = UDim2.new(0, 311, 0, 343);
-Ancestral["b"]["Position"] = UDim2.new(0, 140, 0, 0);
-Ancestral["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["b"]["Name"] = [[Main]];
-Ancestral["b"]["BackgroundTransparency"] = 1;
+-- LinniHub.BackgroundFrame.Blue.UICorner
+LinniScript["a"] = Instance.new("UICorner", LinniScript["8"]);
+LinniScript["a"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Main.Tabs
-Ancestral["c"] = Instance.new("Folder", Ancestral["b"]);
-Ancestral["c"]["Name"] = [[Tabs]];
+-- LinniHub.BackgroundFrame.Main
+LinniScript["b"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["b"]["ZIndex"] = 2;
+LinniScript["b"]["BorderSizePixel"] = 0;
+LinniScript["b"]["BackgroundColor3"] = Color3.fromRGB(67, 67, 67);
+LinniScript["b"]["Size"] = UDim2.new(0, 311, 0, 343);
+LinniScript["b"]["Position"] = UDim2.new(0, 140, 0, 0);
+LinniScript["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["b"]["Name"] = [[Main]];
+LinniScript["b"]["BackgroundTransparency"] = 1;
 
 
--- AncesHub.BackgroundFrame.Side
-Ancestral["d"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["d"]["ZIndex"] = 2;
-Ancestral["d"]["BorderSizePixel"] = 0;
-Ancestral["d"]["BackgroundColor3"] = Color3.fromRGB(44, 44, 44);
-Ancestral["d"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["d"]["Size"] = UDim2.new(0, 140, 0, 344);
-Ancestral["d"]["Position"] = UDim2.new(0.15487, 0, 0.5, 0);
-Ancestral["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["d"]["Name"] = [[Side]];
+-- LinniHub.BackgroundFrame.Main.Tabs
+LinniScript["c"] = Instance.new("Folder", LinniScript["b"]);
+LinniScript["c"]["Name"] = [[Tabs]];
 
 
--- AncesHub.BackgroundFrame.Side.UICorner
-Ancestral["e"] = Instance.new("UICorner", Ancestral["d"]);
-Ancestral["e"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.Side
+LinniScript["d"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["d"]["ZIndex"] = 2;
+LinniScript["d"]["BorderSizePixel"] = 0;
+LinniScript["d"]["BackgroundColor3"] = Color3.fromRGB(44, 44, 44);
+LinniScript["d"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["d"]["Size"] = UDim2.new(0, 140, 0, 344);
+LinniScript["d"]["Position"] = UDim2.new(0.15487, 0, 0.5, 0);
+LinniScript["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["d"]["Name"] = [[Side]];
 
 
--- AncesHub.BackgroundFrame.Side.UIGradient
-Ancestral["f"] = Instance.new("UIGradient", Ancestral["d"]);
-Ancestral["f"]["Rotation"] = -51;
-Ancestral["f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.484, Color3.fromRGB(6, 244, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
+-- LinniHub.BackgroundFrame.Side.UICorner
+LinniScript["e"] = Instance.new("UICorner", LinniScript["d"]);
+LinniScript["e"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Side.LightBlue
-Ancestral["10"] = Instance.new("Frame", Ancestral["d"]);
-Ancestral["10"]["BorderSizePixel"] = 0;
-Ancestral["10"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["10"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["10"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["10"]["Name"] = [[LightBlue]];
-Ancestral["10"]["BackgroundTransparency"] = 0.8;
+-- LinniHub.BackgroundFrame.Side.UIGradient
+LinniScript["f"] = Instance.new("UIGradient", LinniScript["d"]);
+LinniScript["f"]["Rotation"] = -51;
+LinniScript["f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.484, Color3.fromRGB(6, 244, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
 
 
--- AncesHub.BackgroundFrame.Side.LightBlue.UIGradient
-Ancestral["11"] = Instance.new("UIGradient", Ancestral["10"]);
-Ancestral["11"]["Rotation"] = 50;
-Ancestral["11"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+-- LinniHub.BackgroundFrame.Side.LightBlue
+LinniScript["10"] = Instance.new("Frame", LinniScript["d"]);
+LinniScript["10"]["BorderSizePixel"] = 0;
+LinniScript["10"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["10"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["10"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["10"]["Name"] = [[LightBlue]];
+LinniScript["10"]["BackgroundTransparency"] = 0.8;
 
 
--- AncesHub.BackgroundFrame.Side.LightBlue.UICorner
-Ancestral["12"] = Instance.new("UICorner", Ancestral["10"]);
-Ancestral["12"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.Side.LightBlue.UIGradient
+LinniScript["11"] = Instance.new("UIGradient", LinniScript["10"]);
+LinniScript["11"]["Rotation"] = 50;
+LinniScript["11"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
 
 
--- AncesHub.BackgroundFrame.Side.Blue
-Ancestral["13"] = Instance.new("Frame", Ancestral["d"]);
-Ancestral["13"]["BorderSizePixel"] = 0;
-Ancestral["13"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["13"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["13"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["13"]["Name"] = [[Blue]];
-Ancestral["13"]["BackgroundTransparency"] = 0.6;
+-- LinniHub.BackgroundFrame.Side.LightBlue.UICorner
+LinniScript["12"] = Instance.new("UICorner", LinniScript["10"]);
+LinniScript["12"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Side.Blue.UIGradient
-Ancestral["14"] = Instance.new("UIGradient", Ancestral["13"]);
-Ancestral["14"]["Rotation"] = -70;
-Ancestral["14"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+-- LinniHub.BackgroundFrame.Side.Blue
+LinniScript["13"] = Instance.new("Frame", LinniScript["d"]);
+LinniScript["13"]["BorderSizePixel"] = 0;
+LinniScript["13"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["13"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["13"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["13"]["Name"] = [[Blue]];
+LinniScript["13"]["BackgroundTransparency"] = 0.6;
 
 
--- AncesHub.BackgroundFrame.Side.Blue.UICorner
-Ancestral["15"] = Instance.new("UICorner", Ancestral["13"]);
-Ancestral["15"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.Side.Blue.UIGradient
+LinniScript["14"] = Instance.new("UIGradient", LinniScript["13"]);
+LinniScript["14"]["Rotation"] = -70;
+LinniScript["14"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
 
 
--- AncesHub.BackgroundFrame.Side.Cyan
-Ancestral["16"] = Instance.new("CanvasGroup", Ancestral["d"]);
-Ancestral["16"]["BorderSizePixel"] = 0;
-Ancestral["16"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["16"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["16"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["16"]["Name"] = [[Cyan]];
-Ancestral["16"]["BackgroundTransparency"] = 0.8;
+-- LinniHub.BackgroundFrame.Side.Blue.UICorner
+LinniScript["15"] = Instance.new("UICorner", LinniScript["13"]);
+LinniScript["15"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Side.Cyan.UIGradient
-Ancestral["17"] = Instance.new("UIGradient", Ancestral["16"]);
-Ancestral["17"]["Rotation"] = -26;
-Ancestral["17"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+-- LinniHub.BackgroundFrame.Side.Cyan
+LinniScript["16"] = Instance.new("CanvasGroup", LinniScript["d"]);
+LinniScript["16"]["BorderSizePixel"] = 0;
+LinniScript["16"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["16"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["16"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["16"]["Name"] = [[Cyan]];
+LinniScript["16"]["BackgroundTransparency"] = 0.8;
 
 
--- AncesHub.BackgroundFrame.Side.Cyan.UICorner
-Ancestral["18"] = Instance.new("UICorner", Ancestral["16"]);
-Ancestral["18"]["CornerRadius"] = UDim.new(0, 10);
+-- LinniHub.BackgroundFrame.Side.Cyan.UIGradient
+LinniScript["17"] = Instance.new("UIGradient", LinniScript["16"]);
+LinniScript["17"]["Rotation"] = -26;
+LinniScript["17"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
 
 
--- AncesHub.BackgroundFrame.Side.Cyan.AbstractBg
-Ancestral["19"] = Instance.new("ImageLabel", Ancestral["16"]);
-Ancestral["19"]["BorderSizePixel"] = 0;
-Ancestral["19"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["19"]["ImageColor3"] = Color3.fromRGB(0, 183, 22);
-Ancestral["19"]["Image"] = [[rbxassetid://88984077541230]];
-Ancestral["19"]["Size"] = UDim2.new(0, 549, 0, 364);
-Ancestral["19"]["Visible"] = false;
-Ancestral["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["19"]["BackgroundTransparency"] = 1;
-Ancestral["19"]["Rotation"] = 40;
-Ancestral["19"]["Name"] = [[AbstractBg]];
-Ancestral["19"]["Position"] = UDim2.new(0.41197, 0, 0.48528, 0);
+-- LinniHub.BackgroundFrame.Side.Cyan.UICorner
+LinniScript["18"] = Instance.new("UICorner", LinniScript["16"]);
+LinniScript["18"]["CornerRadius"] = UDim.new(0, 10);
 
 
--- AncesHub.BackgroundFrame.Side.TabButtons
-Ancestral["1a"] = Instance.new("ScrollingFrame", Ancestral["d"]);
-Ancestral["1a"]["ZIndex"] = 5;
-Ancestral["1a"]["BorderSizePixel"] = 0;
-Ancestral["1a"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
-Ancestral["1a"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
-Ancestral["1a"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["1a"]["Name"] = [[TabButtons]];
-Ancestral["1a"]["Selectable"] = false;
-Ancestral["1a"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["1a"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-Ancestral["1a"]["Size"] = UDim2.new(0, 140, 0, 285);
-Ancestral["1a"]["ScrollBarImageColor3"] = Color3.fromRGB(118, 118, 118);
-Ancestral["1a"]["Position"] = UDim2.new(0, 0, 0, 59);
-Ancestral["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["1a"]["ScrollBarThickness"] = 2;
-Ancestral["1a"]["BackgroundTransparency"] = 1;
+-- LinniHub.BackgroundFrame.Side.Cyan.AbstractBg
+LinniScript["19"] = Instance.new("ImageLabel", LinniScript["16"]);
+LinniScript["19"]["BorderSizePixel"] = 0;
+LinniScript["19"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["19"]["ImageColor3"] = Color3.fromRGB(0, 183, 22);
+LinniScript["19"]["Image"] = [[rbxassetid://88984077541230]];
+LinniScript["19"]["Size"] = UDim2.new(0, 549, 0, 364);
+LinniScript["19"]["Visible"] = false;
+LinniScript["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["19"]["BackgroundTransparency"] = 1;
+LinniScript["19"]["Rotation"] = 40;
+LinniScript["19"]["Name"] = [[AbstractBg]];
+LinniScript["19"]["Position"] = UDim2.new(0.41197, 0, 0.48528, 0);
 
 
--- AncesHub.BackgroundFrame.Side.TabButtons.UIListLayout
-Ancestral["1b"] = Instance.new("UIListLayout", Ancestral["1a"]);
-Ancestral["1b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+-- LinniHub.BackgroundFrame.Side.TabButtons
+LinniScript["1a"] = Instance.new("ScrollingFrame", LinniScript["d"]);
+LinniScript["1a"]["ZIndex"] = 5;
+LinniScript["1a"]["BorderSizePixel"] = 0;
+LinniScript["1a"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+LinniScript["1a"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
+LinniScript["1a"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["1a"]["Name"] = [[TabButtons]];
+LinniScript["1a"]["Selectable"] = false;
+LinniScript["1a"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["1a"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+LinniScript["1a"]["Size"] = UDim2.new(0, 140, 0, 285);
+LinniScript["1a"]["ScrollBarImageColor3"] = Color3.fromRGB(118, 118, 118);
+LinniScript["1a"]["Position"] = UDim2.new(0, 0, 0, 59);
+LinniScript["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["1a"]["ScrollBarThickness"] = 2;
+LinniScript["1a"]["BackgroundTransparency"] = 1;
 
 
--- AncesHub.BackgroundFrame.Side.DraggablePart
-Ancestral["1c"] = Instance.new("Frame", Ancestral["d"]);
-Ancestral["1c"]["ZIndex"] = 5;
-Ancestral["1c"]["BorderSizePixel"] = 0;
-Ancestral["1c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["1c"]["Size"] = UDim2.new(0, 140, 0, 55);
-Ancestral["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["1c"]["Name"] = [[DraggablePart]];
-Ancestral["1c"]["BackgroundTransparency"] = 1;
+-- LinniHub.BackgroundFrame.Side.TabButtons.UIListLayout
+LinniScript["1b"] = Instance.new("UIListLayout", LinniScript["1a"]);
+LinniScript["1b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 
 
--- AncesHub.BackgroundFrame.Side.DraggablePart.Logo
-Ancestral["1d"] = Instance.new("ImageLabel", Ancestral["1c"]);
-Ancestral["1d"]["BorderSizePixel"] = 0;
-Ancestral["1d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["1d"]["Image"] = [[rbxassetid://120727887371733]];
-Ancestral["1d"]["Size"] = UDim2.new(0, 33, 0, 35);
-Ancestral["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["1d"]["BackgroundTransparency"] = 1;
-Ancestral["1d"]["Name"] = [[Logo]];
-Ancestral["1d"]["Position"] = UDim2.new(0, 12, 0, 13);
+-- LinniHub.BackgroundFrame.Side.DraggablePart
+LinniScript["1c"] = Instance.new("Frame", LinniScript["d"]);
+LinniScript["1c"]["ZIndex"] = 5;
+LinniScript["1c"]["BorderSizePixel"] = 0;
+LinniScript["1c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["1c"]["Size"] = UDim2.new(0, 140, 0, 55);
+LinniScript["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["1c"]["Name"] = [[DraggablePart]];
+LinniScript["1c"]["BackgroundTransparency"] = 1;
 
 
--- AncesHub.BackgroundFrame.Side.DraggablePart.Logo.UIAspectRatioConstraint
-Ancestral["1e"] = Instance.new("UIAspectRatioConstraint", Ancestral["1d"]);
+-- LinniHub.BackgroundFrame.Side.DraggablePart.Logo
+LinniScript["1d"] = Instance.new("ImageLabel", LinniScript["1c"]);
+LinniScript["1d"]["BorderSizePixel"] = 0;
+LinniScript["1d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["1d"]["Image"] = [[rbxassetid://120727887371733]];
+LinniScript["1d"]["Size"] = UDim2.new(0, 33, 0, 35);
+LinniScript["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["1d"]["BackgroundTransparency"] = 1;
+LinniScript["1d"]["Name"] = [[Logo]];
+LinniScript["1d"]["Position"] = UDim2.new(0, 12, 0, 13);
+
+
+-- LinniHub.BackgroundFrame.Side.DraggablePart.Logo.UIAspectRatioConstraint
+LinniScript["1e"] = Instance.new("UIAspectRatioConstraint", LinniScript["1d"]);
 
 
 
--- AncesHub.BackgroundFrame.Side.DraggablePart.Logo.UICorner
-Ancestral["1f"] = Instance.new("UICorner", Ancestral["1d"]);
+-- LinniHub.BackgroundFrame.Side.DraggablePart.Logo.UICorner
+LinniScript["1f"] = Instance.new("UICorner", LinniScript["1d"]);
 
 
 
@@ -263,43 +263,43 @@ function Library:CreateWindow(config)
     local customTitle = config.Title or "Default Title"
 
     -- Contoh elemen GUI
-    local Ancestral = {}
+    local LinniScript = {}
 
     -- Create BackgroundFrame.Side.DraggablePart.Title
-    Ancestral["20"] = Instance.new("TextLabel")
-    Ancestral["20"].Name = "Title"
-    Ancestral["20"].TextWrapped = true
-    Ancestral["20"].BorderSizePixel = 0
-    Ancestral["20"].TextXAlignment = Enum.TextXAlignment.Left
-    Ancestral["20"].TextScaled = true
-    Ancestral["20"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["20"].TextSize = 14
-    Ancestral["20"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    Ancestral["20"].TextColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["20"].BackgroundTransparency = 1
-    Ancestral["20"].AnchorPoint = Vector2.new(0, 0.5)
-    Ancestral["20"].Size = UDim2.new(0, 80, 0, 17)
-    Ancestral["20"].Position = UDim2.new(0, 55, 0, 29)
-    Ancestral["20"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Ancestral["20"].Text = customTitle -- GANTI DARI CONFIG
+    LinniScript["20"] = Instance.new("TextLabel")
+    LinniScript["20"].Name = "Title"
+    LinniScript["20"].TextWrapped = true
+    LinniScript["20"].BorderSizePixel = 0
+    LinniScript["20"].TextXAlignment = Enum.TextXAlignment.Left
+    LinniScript["20"].TextScaled = true
+    LinniScript["20"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["20"].TextSize = 14
+    LinniScript["20"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    LinniScript["20"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["20"].BackgroundTransparency = 1
+    LinniScript["20"].AnchorPoint = Vector2.new(0, 0.5)
+    LinniScript["20"].Size = UDim2.new(0, 80, 0, 17)
+    LinniScript["20"].Position = UDim2.new(0, 55, 0, 29)
+    LinniScript["20"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+    LinniScript["20"].Text = customTitle -- GANTI DARI CONFIG
 
     -- Create Floating.Folder.Title
-    Ancestral["d5"] = Instance.new("TextLabel")
-    Ancestral["d5"].Name = "Title"
-    Ancestral["d5"].TextWrapped = true
-    Ancestral["d5"].BorderSizePixel = 0
-    Ancestral["d5"].TextXAlignment = Enum.TextXAlignment.Left
-    Ancestral["d5"].TextScaled = true
-    Ancestral["d5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["d5"].TextSize = 14
-    Ancestral["d5"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    Ancestral["d5"].TextColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["d5"].BackgroundTransparency = 1
-    Ancestral["d5"].AnchorPoint = Vector2.new(0, 0.5)
-    Ancestral["d5"].Size = UDim2.new(0, 70, 0, 15)
-    Ancestral["d5"].Position = UDim2.new(0, 53, 0, 21)
-    Ancestral["d5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Ancestral["d5"].Text = customTitle -- GANTI DARI CONFIG
+    LinniScript["d5"] = Instance.new("TextLabel")
+    LinniScript["d5"].Name = "Title"
+    LinniScript["d5"].TextWrapped = true
+    LinniScript["d5"].BorderSizePixel = 0
+    LinniScript["d5"].TextXAlignment = Enum.TextXAlignment.Left
+    LinniScript["d5"].TextScaled = true
+    LinniScript["d5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["d5"].TextSize = 14
+    LinniScript["d5"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    LinniScript["d5"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["d5"].BackgroundTransparency = 1
+    LinniScript["d5"].AnchorPoint = Vector2.new(0, 0.5)
+    LinniScript["d5"].Size = UDim2.new(0, 70, 0, 15)
+    LinniScript["d5"].Position = UDim2.new(0, 53, 0, 21)
+    LinniScript["d5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+    LinniScript["d5"].Text = customTitle -- GANTI DARI CONFIG
 
     -- Kembalikan objek window jika perlu
     return window
@@ -309,1644 +309,1644 @@ return Library
 
 
 
--- AncesHub.BackgroundFrame.Side.DraggablePart.Title.UIGradient
-Ancestral["21"] = Instance.new("UIGradient", Ancestral["20"]);
-Ancestral["21"]["Rotation"] = -90;
-Ancestral["21"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.BackgroundFrame.DropShadowHolder
-Ancestral["22"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["22"]["ZIndex"] = 0;
-Ancestral["22"]["BorderSizePixel"] = 0;
-Ancestral["22"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["22"]["Name"] = [[DropShadowHolder]];
-Ancestral["22"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.BackgroundFrame.DropShadowHolder.DropShadow
-Ancestral["23"] = Instance.new("ImageLabel", Ancestral["22"]);
-Ancestral["23"]["ZIndex"] = 0;
-Ancestral["23"]["BorderSizePixel"] = 0;
-Ancestral["23"]["SliceCenter"] = Rect.new(49, 49, 450, 450);
-Ancestral["23"]["ScaleType"] = Enum.ScaleType.Slice;
-Ancestral["23"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["23"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["23"]["Image"] = [[rbxassetid://6014261993]];
-Ancestral["23"]["Size"] = UDim2.new(1, 47, 1, 47);
-Ancestral["23"]["BackgroundTransparency"] = 1;
-Ancestral["23"]["Name"] = [[DropShadow]];
-Ancestral["23"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.BackgroundFrame.Cyan
-Ancestral["24"] = Instance.new("Frame", Ancestral["2"]);
-Ancestral["24"]["BorderSizePixel"] = 0;
-Ancestral["24"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["24"]["ClipsDescendants"] = true;
-Ancestral["24"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["24"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["24"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["24"]["Name"] = [[Cyan]];
-Ancestral["24"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.BackgroundFrame.Cyan.UIGradient
-Ancestral["25"] = Instance.new("UIGradient", Ancestral["24"]);
-Ancestral["25"]["Rotation"] = -26;
-Ancestral["25"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.BackgroundFrame.Cyan.UICorner
-Ancestral["26"] = Instance.new("UICorner", Ancestral["24"]);
-Ancestral["26"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Library
-Ancestral["27"] = Instance.new("ModuleScript", Ancestral["1"]);
-Ancestral["27"]["Name"] = [[Library]];
-
-
--- AncesHub.IconLib
-Ancestral["28"] = Instance.new("ModuleScript", Ancestral["1"]);
-Ancestral["28"]["Name"] = [[IconLib]];
-
-
--- AncesHub.Template
-Ancestral["29"] = Instance.new("Folder", Ancestral["1"]);
-Ancestral["29"]["Name"] = [[Template]];
-
-
--- AncesHub.Template.TabButton
-Ancestral["2a"] = Instance.new("TextButton", Ancestral["29"]);
-Ancestral["2a"]["BorderSizePixel"] = 0;
-Ancestral["2a"]["TextSize"] = 14;
-Ancestral["2a"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["2a"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["2a"]["Size"] = UDim2.new(0, 137, 0, 39);
-Ancestral["2a"]["BackgroundTransparency"] = 1;
-Ancestral["2a"]["Name"] = [[TabButton]];
-Ancestral["2a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2a"]["Text"] = [[]];
-Ancestral["2a"]["Visible"] = false;
-
-
--- AncesHub.Template.TabButton.Icon
-Ancestral["2b"] = Instance.new("ImageLabel", Ancestral["2a"]);
-Ancestral["2b"]["BorderSizePixel"] = 0;
-Ancestral["2b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["2b"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["2b"]["Image"] = [[rbxassetid://97623395395101]];
-Ancestral["2b"]["Size"] = UDim2.new(0, 25, 0, 25);
-Ancestral["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2b"]["BackgroundTransparency"] = 1;
-Ancestral["2b"]["Name"] = [[Icon]];
-Ancestral["2b"]["Position"] = UDim2.new(0.07, 0, 0.5, 0);
-
-
--- AncesHub.Template.TabButton.Icon.UIAspectRatioConstraint
-Ancestral["2c"] = Instance.new("UIAspectRatioConstraint", Ancestral["2b"]);
-
-
-
--- AncesHub.Template.TabButton.Title
-Ancestral["2d"] = Instance.new("TextLabel", Ancestral["2a"]);
-Ancestral["2d"]["TextWrapped"] = true;
-Ancestral["2d"]["BorderSizePixel"] = 0;
-Ancestral["2d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["2d"]["TextScaled"] = true;
-Ancestral["2d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["2d"]["TextSize"] = 14;
-Ancestral["2d"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["2d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["2d"]["BackgroundTransparency"] = 1;
-Ancestral["2d"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["2d"]["Size"] = UDim2.new(0, 90, 0, 17);
-Ancestral["2d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2d"]["Text"] = [[General]];
-Ancestral["2d"]["Name"] = [[Title]];
-Ancestral["2d"]["Position"] = UDim2.new(0.33, 0, 0.5, 0);
-
-
--- AncesHub.Template.TabButton.Title.UIGradient
-Ancestral["2e"] = Instance.new("UIGradient", Ancestral["2d"]);
-Ancestral["2e"]["Rotation"] = -90;
-Ancestral["2e"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.TabFrame
-Ancestral["2f"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["2f"]["Visible"] = false;
-Ancestral["2f"]["ZIndex"] = 0;
-Ancestral["2f"]["BorderSizePixel"] = 0;
-Ancestral["2f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["2f"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["2f"]["Name"] = [[TabFrame]];
-Ancestral["2f"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameRight
-Ancestral["30"] = Instance.new("ScrollingFrame", Ancestral["2f"]);
-Ancestral["30"]["Active"] = true;
-Ancestral["30"]["ZIndex"] = 2;
-Ancestral["30"]["BorderSizePixel"] = 0;
-Ancestral["30"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
-Ancestral["30"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
-Ancestral["30"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["30"]["Name"] = [[ScrollingFrameRight]];
-Ancestral["30"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-Ancestral["30"]["Size"] = UDim2.new(0.5, 0, 1, 0);
-Ancestral["30"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["30"]["Position"] = UDim2.new(0.5, 0, 0, 0);
-Ancestral["30"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["30"]["ScrollBarThickness"] = 0;
-Ancestral["30"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameRight.UIListLayout
-Ancestral["31"] = Instance.new("UIListLayout", Ancestral["30"]);
-Ancestral["31"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["31"]["Padding"] = UDim.new(0, 10);
-Ancestral["31"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameRight.UIPadding
-Ancestral["32"] = Instance.new("UIPadding", Ancestral["30"]);
-Ancestral["32"]["PaddingTop"] = UDim.new(0, 10);
-Ancestral["32"]["PaddingBottom"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameLeft
-Ancestral["33"] = Instance.new("ScrollingFrame", Ancestral["2f"]);
-Ancestral["33"]["Active"] = true;
-Ancestral["33"]["ZIndex"] = 0;
-Ancestral["33"]["BorderSizePixel"] = 0;
-Ancestral["33"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
-Ancestral["33"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
-Ancestral["33"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["33"]["Name"] = [[ScrollingFrameLeft]];
-Ancestral["33"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-Ancestral["33"]["Size"] = UDim2.new(0.5, 0, 1, 0);
-Ancestral["33"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["33"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["33"]["ScrollBarThickness"] = 0;
-Ancestral["33"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameLeft.UIListLayout
-Ancestral["34"] = Instance.new("UIListLayout", Ancestral["33"]);
-Ancestral["34"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["34"]["Padding"] = UDim.new(0, 10);
-Ancestral["34"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.TabFrame.ScrollingFrameLeft.UIPadding
-Ancestral["35"] = Instance.new("UIPadding", Ancestral["33"]);
-Ancestral["35"]["PaddingTop"] = UDim.new(0, 10);
-Ancestral["35"]["PaddingBottom"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Section
-Ancestral["36"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["36"]["Visible"] = false;
-Ancestral["36"]["ZIndex"] = 2;
-Ancestral["36"]["BorderSizePixel"] = 0;
-Ancestral["36"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["36"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["36"]["Size"] = UDim2.new(0, 145, 0, 2);
-Ancestral["36"]["Position"] = UDim2.new(0.04662, 0, 0.10811, 0);
-Ancestral["36"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["36"]["Name"] = [[Section]];
-Ancestral["36"]["BackgroundTransparency"] = 0.75;
-
-
--- AncesHub.Template.Section.UICorner
-Ancestral["37"] = Instance.new("UICorner", Ancestral["36"]);
-Ancestral["37"]["CornerRadius"] = UDim.new(0, 5);
-
-
--- AncesHub.Template.Section.Seperator
-Ancestral["38"] = Instance.new("Frame", Ancestral["36"]);
-Ancestral["38"]["BorderSizePixel"] = 0;
-Ancestral["38"]["BackgroundColor3"] = Color3.fromRGB(56, 56, 56);
-Ancestral["38"]["Size"] = UDim2.new(1, 0, 0, 2);
-Ancestral["38"]["Position"] = UDim2.new(0, 0, 0, 24);
-Ancestral["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["38"]["Name"] = [[Seperator]];
-
-
--- AncesHub.Template.Section.Seperator.UIGradient
-Ancestral["39"] = Instance.new("UIGradient", Ancestral["38"]);
-Ancestral["39"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(58, 144, 255))};
-
-
--- AncesHub.Template.Section.Title
-Ancestral["3a"] = Instance.new("TextLabel", Ancestral["36"]);
-Ancestral["3a"]["TextWrapped"] = true;
-Ancestral["3a"]["BorderSizePixel"] = 0;
-Ancestral["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["3a"]["TextScaled"] = true;
-Ancestral["3a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["3a"]["TextSize"] = 14;
-Ancestral["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["3a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["3a"]["BackgroundTransparency"] = 1;
-Ancestral["3a"]["Size"] = UDim2.new(0, 95, 0, 13);
-Ancestral["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["3a"]["Text"] = [[Section]];
-Ancestral["3a"]["Name"] = [[Title]];
-Ancestral["3a"]["Position"] = UDim2.new(0, 8, 0, 7);
-
-
--- AncesHub.Template.Section.Title.UIGradient
-Ancestral["3b"] = Instance.new("UIGradient", Ancestral["3a"]);
-Ancestral["3b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
-
-
--- AncesHub.Template.Section.SectionItems
-Ancestral["3c"] = Instance.new("Frame", Ancestral["36"]);
-Ancestral["3c"]["BorderSizePixel"] = 0;
-Ancestral["3c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["3c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["3c"]["Size"] = UDim2.new(0, 145, 0, 0);
-Ancestral["3c"]["Position"] = UDim2.new(0, 0, 0, 26);
-Ancestral["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["3c"]["Name"] = [[SectionItems]];
-Ancestral["3c"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Section.SectionItems.UIListLayout
-Ancestral["3d"] = Instance.new("UIListLayout", Ancestral["3c"]);
-Ancestral["3d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["3d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Section.SectionItems.UIPadding
-Ancestral["3e"] = Instance.new("UIPadding", Ancestral["3c"]);
-Ancestral["3e"]["PaddingTop"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.Section.Mark
-Ancestral["3f"] = Instance.new("Frame", Ancestral["36"]);
-Ancestral["3f"]["BorderSizePixel"] = 0;
-Ancestral["3f"]["BackgroundColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["3f"]["Size"] = UDim2.new(1, 0, 0, 2);
-Ancestral["3f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["3f"]["Name"] = [[Mark]];
-
-
--- AncesHub.Template.Section.Mark.UIGradient
-Ancestral["40"] = Instance.new("UIGradient", Ancestral["3f"]);
-Ancestral["40"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Section.UIPadding
-Ancestral["41"] = Instance.new("UIPadding", Ancestral["36"]);
-Ancestral["41"]["PaddingBottom"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.DropdownButton
-Ancestral["42"] = Instance.new("TextButton", Ancestral["29"]);
-Ancestral["42"]["TextWrapped"] = true;
-Ancestral["42"]["BorderSizePixel"] = 0;
-Ancestral["42"]["TextSize"] = 14;
-Ancestral["42"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["42"]["TextScaled"] = true;
-Ancestral["42"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["42"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["42"]["Selectable"] = false;
-Ancestral["42"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["42"]["Size"] = UDim2.new(1, 0, 0.11026, 0);
-Ancestral["42"]["BackgroundTransparency"] = 1;
-Ancestral["42"]["Name"] = [[DropdownButton]];
-Ancestral["42"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["42"]["Text"] = [[Test1]];
-Ancestral["42"]["Visible"] = false;
-Ancestral["42"]["Position"] = UDim2.new(0.5, 0, 0.05513, 0);
-
-
--- AncesHub.Template.DropdownButton.UIGradient
-Ancestral["43"] = Instance.new("UIGradient", Ancestral["42"]);
-Ancestral["43"]["Enabled"] = false;
-Ancestral["43"]["Rotation"] = -90;
-Ancestral["43"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Notification
-Ancestral["44"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["44"]["Visible"] = false;
-Ancestral["44"]["BorderSizePixel"] = 0;
-Ancestral["44"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["44"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["44"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["44"]["Size"] = UDim2.new(0, 265, 0, 65);
-Ancestral["44"]["Position"] = UDim2.new(0.8244, 0, 0.88221, 0);
-Ancestral["44"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["44"]["Name"] = [[Notification]];
-
-
--- AncesHub.Template.Notification.UICorner
-Ancestral["45"] = Instance.new("UICorner", Ancestral["44"]);
-Ancestral["45"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Notification.UIGradient
-Ancestral["46"] = Instance.new("UIGradient", Ancestral["44"]);
-Ancestral["46"]["Rotation"] = 180;
-Ancestral["46"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(5, 185, 191)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
-
-
--- AncesHub.Template.Notification.LightBlue
-Ancestral["47"] = Instance.new("Frame", Ancestral["44"]);
-Ancestral["47"]["BorderSizePixel"] = 0;
-Ancestral["47"]["AutoLocalize"] = false;
-Ancestral["47"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["47"]["BorderMode"] = Enum.BorderMode.Inset;
-Ancestral["47"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["47"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["47"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["47"]["Name"] = [[LightBlue]];
-Ancestral["47"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.Template.Notification.LightBlue.UIGradient
-Ancestral["48"] = Instance.new("UIGradient", Ancestral["47"]);
-Ancestral["48"]["Rotation"] = -77;
-Ancestral["48"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Template.Notification.LightBlue.UICorner
-Ancestral["49"] = Instance.new("UICorner", Ancestral["47"]);
-Ancestral["49"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Notification.LightBlue.UISizeConstraint
-Ancestral["4a"] = Instance.new("UISizeConstraint", Ancestral["47"]);
-Ancestral["4a"]["MaxSize"] = Vector2.new(265, math.huge);
-
-
--- AncesHub.Template.Notification.Blue
-Ancestral["4b"] = Instance.new("Frame", Ancestral["44"]);
-Ancestral["4b"]["BorderSizePixel"] = 0;
-Ancestral["4b"]["AutoLocalize"] = false;
-Ancestral["4b"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["4b"]["BorderMode"] = Enum.BorderMode.Inset;
-Ancestral["4b"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["4b"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["4b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["4b"]["Name"] = [[Blue]];
-Ancestral["4b"]["BackgroundTransparency"] = 0.6;
-
-
--- AncesHub.Template.Notification.Blue.UIGradient
-Ancestral["4c"] = Instance.new("UIGradient", Ancestral["4b"]);
-Ancestral["4c"]["Rotation"] = 93;
-Ancestral["4c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Template.Notification.Blue.UICorner
-Ancestral["4d"] = Instance.new("UICorner", Ancestral["4b"]);
-Ancestral["4d"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Notification.Blue.UISizeConstraint
-Ancestral["4e"] = Instance.new("UISizeConstraint", Ancestral["4b"]);
-Ancestral["4e"]["MaxSize"] = Vector2.new(265, math.huge);
-
-
--- AncesHub.Template.Notification.Cyan
-Ancestral["4f"] = Instance.new("Frame", Ancestral["44"]);
-Ancestral["4f"]["BorderSizePixel"] = 0;
-Ancestral["4f"]["AutoLocalize"] = false;
-Ancestral["4f"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["4f"]["BorderMode"] = Enum.BorderMode.Inset;
-Ancestral["4f"]["ClipsDescendants"] = true;
-Ancestral["4f"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["4f"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["4f"]["Name"] = [[Cyan]];
-Ancestral["4f"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.Template.Notification.Cyan.UIGradient
-Ancestral["50"] = Instance.new("UIGradient", Ancestral["4f"]);
-Ancestral["50"]["Rotation"] = -98;
-Ancestral["50"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Template.Notification.Cyan.UICorner
-Ancestral["51"] = Instance.new("UICorner", Ancestral["4f"]);
-Ancestral["51"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Notification.Cyan.UISizeConstraint
-Ancestral["52"] = Instance.new("UISizeConstraint", Ancestral["4f"]);
-Ancestral["52"]["MaxSize"] = Vector2.new(265, math.huge);
-
-
--- AncesHub.Template.Notification.Items
-Ancestral["53"] = Instance.new("ImageLabel", Ancestral["44"]);
-Ancestral["53"]["ZIndex"] = 2;
-Ancestral["53"]["BorderSizePixel"] = 0;
-Ancestral["53"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["53"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["53"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["53"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["53"]["BackgroundTransparency"] = 1;
-Ancestral["53"]["Name"] = [[Items]];
-
-
--- AncesHub.Template.Notification.Items.UIListLayout
-Ancestral["54"] = Instance.new("UIListLayout", Ancestral["53"]);
-Ancestral["54"]["Padding"] = UDim.new(0, 5);
-Ancestral["54"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["54"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Notification.Items.UIPadding
-Ancestral["55"] = Instance.new("UIPadding", Ancestral["53"]);
-Ancestral["55"]["PaddingTop"] = UDim.new(0, 15);
-Ancestral["55"]["PaddingLeft"] = UDim.new(0, 15);
-Ancestral["55"]["PaddingBottom"] = UDim.new(0, 15);
-
-
--- AncesHub.Template.Notification.Items.Title
-Ancestral["56"] = Instance.new("TextLabel", Ancestral["53"]);
-Ancestral["56"]["TextWrapped"] = true;
-Ancestral["56"]["BorderSizePixel"] = 0;
-Ancestral["56"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["56"]["TextScaled"] = true;
-Ancestral["56"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["56"]["TextSize"] = 14;
-Ancestral["56"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["56"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["56"]["BackgroundTransparency"] = 1;
-Ancestral["56"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["56"]["Size"] = UDim2.new(0, 235, 0, 15);
-Ancestral["56"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["56"]["Text"] = [[Notification]];
-Ancestral["56"]["Name"] = [[Title]];
-Ancestral["56"]["Position"] = UDim2.new(0, 0, 0, 9);
-
-
--- AncesHub.Template.Notification.Items.Title.UIGradient
-Ancestral["57"] = Instance.new("UIGradient", Ancestral["56"]);
-Ancestral["57"]["Rotation"] = -90;
-Ancestral["57"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Notification.Items.Title.Close
-Ancestral["58"] = Instance.new("ImageButton", Ancestral["56"]);
-Ancestral["58"]["BorderSizePixel"] = 0;
-Ancestral["58"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["58"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["58"]["Image"] = [[rbxassetid://10747384394]];
-Ancestral["58"]["Size"] = UDim2.new(0.09706, 0, 1.33333, 0);
-Ancestral["58"]["BackgroundTransparency"] = 1;
-Ancestral["58"]["Name"] = [[Close]];
-Ancestral["58"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["58"]["Position"] = UDim2.new(0.92, 0, 0.5, 0);
-
-
--- AncesHub.Template.Notification.Items.Title.Close.UIGradient
-Ancestral["59"] = Instance.new("UIGradient", Ancestral["58"]);
-Ancestral["59"]["Rotation"] = -90;
-Ancestral["59"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Notification.Items.Title.Close.UIAspectRatioConstraint
-Ancestral["5a"] = Instance.new("UIAspectRatioConstraint", Ancestral["58"]);
-Ancestral["5a"]["AspectRatio"] = 1.054;
-
-
--- AncesHub.Template.Notification.Items.Content
-Ancestral["5b"] = Instance.new("TextLabel", Ancestral["53"]);
-Ancestral["5b"]["TextWrapped"] = true;
-Ancestral["5b"]["BorderSizePixel"] = 0;
-Ancestral["5b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["5b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["5b"]["TextSize"] = 12;
-Ancestral["5b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["5b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["5b"]["BackgroundTransparency"] = 1;
-Ancestral["5b"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["5b"]["Size"] = UDim2.new(0, 218, 0, 10);
-Ancestral["5b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["5b"]["Text"] = [[This is a notification]];
-Ancestral["5b"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["5b"]["Name"] = [[Content]];
-Ancestral["5b"]["Position"] = UDim2.new(0, 0, 0, 19);
-
-
--- AncesHub.Template.Notification.Items.Content.UIGradient
-Ancestral["5c"] = Instance.new("UIGradient", Ancestral["5b"]);
-Ancestral["5c"]["Enabled"] = false;
-Ancestral["5c"]["Rotation"] = -90;
-Ancestral["5c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Notification.Items.SubContent
-Ancestral["5d"] = Instance.new("TextLabel", Ancestral["53"]);
-Ancestral["5d"]["TextWrapped"] = true;
-Ancestral["5d"]["BorderSizePixel"] = 0;
-Ancestral["5d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["5d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["5d"]["TextSize"] = 12;
-Ancestral["5d"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["5d"]["TextColor3"] = Color3.fromRGB(181, 181, 181);
-Ancestral["5d"]["BackgroundTransparency"] = 1;
-Ancestral["5d"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["5d"]["Size"] = UDim2.new(0, 218, 0, 10);
-Ancestral["5d"]["Visible"] = false;
-Ancestral["5d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["5d"]["Text"] = [[This is a notification]];
-Ancestral["5d"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["5d"]["Name"] = [[SubContent]];
-Ancestral["5d"]["Position"] = UDim2.new(0, 0, 0, 19);
-
-
--- AncesHub.Template.Notification.Items.SubContent.UIGradient
-Ancestral["5e"] = Instance.new("UIGradient", Ancestral["5d"]);
-Ancestral["5e"]["Enabled"] = false;
-Ancestral["5e"]["Rotation"] = -90;
-Ancestral["5e"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.NotificationList
-Ancestral["5f"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["5f"]["Visible"] = false;
-Ancestral["5f"]["BorderSizePixel"] = 0;
-Ancestral["5f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["5f"]["Size"] = UDim2.new(0.3349, 0, 1, 0);
-Ancestral["5f"]["Position"] = UDim2.new(0.665, 0, 0, 0);
-Ancestral["5f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["5f"]["Name"] = [[NotificationList]];
-Ancestral["5f"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.NotificationList.UIListLayout
-Ancestral["60"] = Instance.new("UIListLayout", Ancestral["5f"]);
-Ancestral["60"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right;
-Ancestral["60"]["Padding"] = UDim.new(0, 10);
-Ancestral["60"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
-Ancestral["60"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.NotificationList.UIPadding
-Ancestral["61"] = Instance.new("UIPadding", Ancestral["5f"]);
-Ancestral["61"]["PaddingRight"] = UDim.new(0, 30);
-Ancestral["61"]["PaddingBottom"] = UDim.new(0, 30);
-
-
--- AncesHub.Template.Button
-Ancestral["62"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["62"]["Visible"] = false;
-Ancestral["62"]["BorderSizePixel"] = 0;
-Ancestral["62"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["62"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["62"]["Size"] = UDim2.new(0, 145, 0, 39);
-Ancestral["62"]["Position"] = UDim2.new(0, 0, 0.58209, 0);
-Ancestral["62"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["62"]["Name"] = [[Button]];
-Ancestral["62"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Button.Button
-Ancestral["63"] = Instance.new("TextButton", Ancestral["62"]);
-Ancestral["63"]["BorderSizePixel"] = 0;
-Ancestral["63"]["AutoButtonColor"] = false;
-Ancestral["63"]["TextSize"] = 14;
-Ancestral["63"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["63"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["63"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["63"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["63"]["Size"] = UDim2.new(0, 131, 0, 24);
-Ancestral["63"]["Name"] = [[Button]];
-Ancestral["63"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["63"]["Text"] = [[]];
-Ancestral["63"]["Position"] = UDim2.new(0.00752, 0, 0.16667, 0);
-
-
--- AncesHub.Template.Button.Button.UICorner
-Ancestral["64"] = Instance.new("UICorner", Ancestral["63"]);
-Ancestral["64"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Button.Button.UIStroke
-Ancestral["65"] = Instance.new("UIStroke", Ancestral["63"]);
-Ancestral["65"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["65"]["Thickness"] = 1.5;
-Ancestral["65"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Button.Button.UIStroke.UIGradient
-Ancestral["66"] = Instance.new("UIGradient", Ancestral["65"]);
-Ancestral["66"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Button.Button.UIGradientOff
-Ancestral["67"] = Instance.new("UIGradient", Ancestral["63"]);
-Ancestral["67"]["Rotation"] = -90;
-Ancestral["67"]["Name"] = [[UIGradientOff]];
-Ancestral["67"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Button.Button.TextLabel
-Ancestral["68"] = Instance.new("TextLabel", Ancestral["63"]);
-Ancestral["68"]["TextWrapped"] = true;
-Ancestral["68"]["LineHeight"] = 1.1;
-Ancestral["68"]["BorderSizePixel"] = 0;
-Ancestral["68"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["68"]["TextSize"] = 14;
-Ancestral["68"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["68"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["68"]["BackgroundTransparency"] = 1;
-Ancestral["68"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["68"]["Size"] = UDim2.new(0, 131, 0, 13);
-Ancestral["68"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["68"]["Text"] = [[Button]];
-Ancestral["68"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["68"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.Template.Button.Button.TextLabel.UIGradient
-Ancestral["69"] = Instance.new("UIGradient", Ancestral["68"]);
-Ancestral["69"]["Rotation"] = -90;
-Ancestral["69"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Button.Button.UIGradientOn
-Ancestral["6a"] = Instance.new("UIGradient", Ancestral["63"]);
-Ancestral["6a"]["Enabled"] = false;
-Ancestral["6a"]["Name"] = [[UIGradientOn]];
-Ancestral["6a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Button.Button.UIListLayout
-Ancestral["6b"] = Instance.new("UIListLayout", Ancestral["63"]);
-Ancestral["6b"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["6b"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["6b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Button.Button.UIPadding
-Ancestral["6c"] = Instance.new("UIPadding", Ancestral["63"]);
-Ancestral["6c"]["PaddingTop"] = UDim.new(0, 6);
-Ancestral["6c"]["PaddingBottom"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.Button.UIListLayout
-Ancestral["6d"] = Instance.new("UIListLayout", Ancestral["62"]);
-Ancestral["6d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["6d"]["Padding"] = UDim.new(0, 10);
-Ancestral["6d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["6d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-Ancestral["6d"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
--- AncesHub.Template.Button.UIPadding
-Ancestral["6e"] = Instance.new("UIPadding", Ancestral["62"]);
-Ancestral["6e"]["PaddingRight"] = UDim.new(0, 6);
-Ancestral["6e"]["PaddingLeft"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.Dropdown
-Ancestral["6f"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["6f"]["Visible"] = false;
-Ancestral["6f"]["BorderSizePixel"] = 0;
-Ancestral["6f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["6f"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["6f"]["Size"] = UDim2.new(0, 145, 0, 54);
-Ancestral["6f"]["Position"] = UDim2.new(0, 0, 0.78629, 0);
-Ancestral["6f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["6f"]["Name"] = [[Dropdown]];
-Ancestral["6f"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Dropdown.UIListLayout
-Ancestral["70"] = Instance.new("UIListLayout", Ancestral["6f"]);
-Ancestral["70"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["70"]["Padding"] = UDim.new(0, 5);
-Ancestral["70"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["70"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Dropdown.UIPadding
-Ancestral["71"] = Instance.new("UIPadding", Ancestral["6f"]);
-Ancestral["71"]["PaddingRight"] = UDim.new(0, 6);
-Ancestral["71"]["PaddingLeft"] = UDim.new(0, 8);
-
-
--- AncesHub.Template.Dropdown.UIGradient
-Ancestral["72"] = Instance.new("UIGradient", Ancestral["6f"]);
-Ancestral["72"]["Rotation"] = -90;
-Ancestral["72"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Dropdown.OnChanged
-Ancestral["73"] = Instance.new("BindableEvent", Ancestral["6f"]);
-Ancestral["73"]["Name"] = [[OnChanged]];
-
-
--- AncesHub.Template.Dropdown.DropdownButton
-Ancestral["74"] = Instance.new("Frame", Ancestral["6f"]);
-Ancestral["74"]["BorderSizePixel"] = 0;
-Ancestral["74"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["74"]["Selectable"] = true;
-Ancestral["74"]["ClipsDescendants"] = true;
-Ancestral["74"]["Size"] = UDim2.new(0, 130, 0, 18);
-Ancestral["74"]["Position"] = UDim2.new(-0.00763, 0, 0.14595, 0);
-Ancestral["74"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["74"]["Name"] = [[DropdownButton]];
-Ancestral["74"]["SelectionGroup"] = true;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button
-Ancestral["75"] = Instance.new("TextButton", Ancestral["74"]);
-Ancestral["75"]["BorderSizePixel"] = 0;
-Ancestral["75"]["AutoButtonColor"] = false;
-Ancestral["75"]["TextSize"] = 14;
-Ancestral["75"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["75"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["75"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["75"]["Size"] = UDim2.new(0, 130, 0, 18);
-Ancestral["75"]["Name"] = [[Button]];
-Ancestral["75"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["75"]["Text"] = [[]];
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.UICorner
-Ancestral["76"] = Instance.new("UICorner", Ancestral["75"]);
-Ancestral["76"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.UIStroke
-Ancestral["77"] = Instance.new("UIStroke", Ancestral["75"]);
-Ancestral["77"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["77"]["Thickness"] = 1.5;
-Ancestral["77"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.UIStroke.UIGradient
-Ancestral["78"] = Instance.new("UIGradient", Ancestral["77"]);
-Ancestral["78"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.TextLabel
-Ancestral["79"] = Instance.new("TextLabel", Ancestral["75"]);
-Ancestral["79"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
-Ancestral["79"]["BorderSizePixel"] = 0;
-Ancestral["79"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["79"]["TextSize"] = 14;
-Ancestral["79"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["79"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["79"]["BackgroundTransparency"] = 1;
-Ancestral["79"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["79"]["Size"] = UDim2.new(1, 0, 0.7, 0);
-Ancestral["79"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["79"]["Text"] = [[Test]];
-Ancestral["79"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.TextLabel.UIGradient
-Ancestral["7a"] = Instance.new("UIGradient", Ancestral["79"]);
-Ancestral["7a"]["Rotation"] = -90;
-Ancestral["7a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.UIGradientOff
-Ancestral["7b"] = Instance.new("UIGradient", Ancestral["75"]);
-Ancestral["7b"]["Rotation"] = -90;
-Ancestral["7b"]["Name"] = [[UIGradientOff]];
-Ancestral["7b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.Button.UIGradientOn
-Ancestral["7c"] = Instance.new("UIGradient", Ancestral["75"]);
-Ancestral["7c"]["Enabled"] = false;
-Ancestral["7c"]["Name"] = [[UIGradientOn]];
-Ancestral["7c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.UICorner
-Ancestral["7d"] = Instance.new("UICorner", Ancestral["74"]);
-Ancestral["7d"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.UIStroke
-Ancestral["7e"] = Instance.new("UIStroke", Ancestral["74"]);
-Ancestral["7e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["7e"]["Color"] = Color3.fromRGB(45, 45, 45);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.UIStroke.UIGradient
-Ancestral["7f"] = Instance.new("UIGradient", Ancestral["7e"]);
-Ancestral["7f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.ScrollingFrame
-Ancestral["80"] = Instance.new("ScrollingFrame", Ancestral["74"]);
-Ancestral["80"]["Active"] = true;
-Ancestral["80"]["BorderSizePixel"] = 0;
-Ancestral["80"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
-Ancestral["80"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
-Ancestral["80"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["80"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["80"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["80"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-Ancestral["80"]["Size"] = UDim2.new(1, 0, 0.11377, 100);
-Ancestral["80"]["Position"] = UDim2.new(0, 0, 0, 48);
-Ancestral["80"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["80"]["ScrollBarThickness"] = 2;
-Ancestral["80"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.ScrollingFrame.UIListLayout
-Ancestral["81"] = Instance.new("UIListLayout", Ancestral["80"]);
-Ancestral["81"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["81"]["Padding"] = UDim.new(0, 5);
-Ancestral["81"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox
-Ancestral["82"] = Instance.new("Frame", Ancestral["74"]);
-Ancestral["82"]["Active"] = true;
-Ancestral["82"]["BorderSizePixel"] = 0;
-Ancestral["82"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["82"]["Selectable"] = true;
-Ancestral["82"]["AnchorPoint"] = Vector2.new(0.5, 0);
-Ancestral["82"]["Size"] = UDim2.new(0, 117, 0, 17);
-Ancestral["82"]["Position"] = UDim2.new(0.5, 0, 0, 25);
-Ancestral["82"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["82"]["Name"] = [[SeacrhBox]];
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox.UIStroke
-Ancestral["83"] = Instance.new("UIStroke", Ancestral["82"]);
-Ancestral["83"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["83"]["Thickness"] = 1.5;
-Ancestral["83"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox.UIStroke.UIGradient
-Ancestral["84"] = Instance.new("UIGradient", Ancestral["83"]);
-Ancestral["84"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox.UIGradient
-Ancestral["85"] = Instance.new("UIGradient", Ancestral["82"]);
-Ancestral["85"]["Rotation"] = -90;
-Ancestral["85"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox.TextBox
-Ancestral["86"] = Instance.new("TextBox", Ancestral["82"]);
-Ancestral["86"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["86"]["PlaceholderColor3"] = Color3.fromRGB(179, 179, 179);
-Ancestral["86"]["BorderSizePixel"] = 0;
-Ancestral["86"]["TextWrapped"] = true;
-Ancestral["86"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
-Ancestral["86"]["TextSize"] = 11;
-Ancestral["86"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["86"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["86"]["PlaceholderText"] = [[Search Here]];
-Ancestral["86"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["86"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["86"]["Text"] = [[]];
-Ancestral["86"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.SeacrhBox.UICorner
-Ancestral["87"] = Instance.new("UICorner", Ancestral["82"]);
-Ancestral["87"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Dropdown.DropdownButton.ScrollingFrameSearch
-Ancestral["88"] = Instance.new("ScrollingFrame", Ancestral["74"]);
-Ancestral["88"]["Visible"] = false;
-Ancestral["88"]["Active"] = true;
-Ancestral["88"]["BorderSizePixel"] = 0;
-Ancestral["88"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
-Ancestral["88"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
-Ancestral["88"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["88"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["88"]["Name"] = [[ScrollingFrameSearch]];
-Ancestral["88"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
-Ancestral["88"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-Ancestral["88"]["Size"] = UDim2.new(1, 0, 0.11377, 100);
-Ancestral["88"]["Position"] = UDim2.new(0, 0, 0, 48);
-Ancestral["88"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["88"]["ScrollBarThickness"] = 2;
-Ancestral["88"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.ScrollingFrameSearch.UIListLayout
-Ancestral["89"] = Instance.new("UIListLayout", Ancestral["88"]);
-Ancestral["89"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["89"]["Padding"] = UDim.new(0, 5);
-Ancestral["89"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Dropdown.DropdownButton.UIGradient
-Ancestral["8a"] = Instance.new("UIGradient", Ancestral["74"]);
-Ancestral["8a"]["Rotation"] = -90;
-Ancestral["8a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Dropdown.Title
-Ancestral["8b"] = Instance.new("TextLabel", Ancestral["6f"]);
-Ancestral["8b"]["TextWrapped"] = true;
-Ancestral["8b"]["LineHeight"] = 1.1;
-Ancestral["8b"]["BorderSizePixel"] = 0;
-Ancestral["8b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["8b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["8b"]["TextSize"] = 14;
-Ancestral["8b"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["8b"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["8b"]["BackgroundTransparency"] = 1;
-Ancestral["8b"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["8b"]["Size"] = UDim2.new(0, 131, 0, 13);
-Ancestral["8b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["8b"]["Text"] = [[Dropdown]];
-Ancestral["8b"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["8b"]["Name"] = [[Title]];
-Ancestral["8b"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.Template.Paragraph
-Ancestral["8c"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["8c"]["Visible"] = false;
-Ancestral["8c"]["BorderSizePixel"] = 0;
-Ancestral["8c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["8c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["8c"]["Size"] = UDim2.new(0, 145, 0, 42);
-Ancestral["8c"]["Position"] = UDim2.new(0, 0, 0.91602, 0);
-Ancestral["8c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["8c"]["Name"] = [[Paragraph]];
-Ancestral["8c"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Paragraph.UIListLayout
-Ancestral["8d"] = Instance.new("UIListLayout", Ancestral["8c"]);
-Ancestral["8d"]["Padding"] = UDim.new(0, 5);
-Ancestral["8d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["8d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-Ancestral["8d"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
--- AncesHub.Template.Paragraph.Paragraph
-Ancestral["8e"] = Instance.new("Frame", Ancestral["8c"]);
-Ancestral["8e"]["BorderSizePixel"] = 0;
-Ancestral["8e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["8e"]["Selectable"] = true;
-Ancestral["8e"]["ClipsDescendants"] = true;
-Ancestral["8e"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["8e"]["Size"] = UDim2.new(0, 130, 0, 28);
-Ancestral["8e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["8e"]["Name"] = [[Paragraph]];
-Ancestral["8e"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.Template.Paragraph.Paragraph.UICorner
-Ancestral["8f"] = Instance.new("UICorner", Ancestral["8e"]);
-Ancestral["8f"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Paragraph.Paragraph.UIStroke
-Ancestral["90"] = Instance.new("UIStroke", Ancestral["8e"]);
-Ancestral["90"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["90"]["Thickness"] = 1.5;
-Ancestral["90"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Paragraph.Paragraph.UIStroke.UIGradient
-Ancestral["91"] = Instance.new("UIGradient", Ancestral["90"]);
-Ancestral["91"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Paragraph.Paragraph.Title
-Ancestral["92"] = Instance.new("TextLabel", Ancestral["8e"]);
-Ancestral["92"]["TextWrapped"] = true;
-Ancestral["92"]["BorderSizePixel"] = 0;
-Ancestral["92"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["92"]["TextYAlignment"] = Enum.TextYAlignment.Top;
-Ancestral["92"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["92"]["TextSize"] = 17;
-Ancestral["92"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["92"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["92"]["BackgroundTransparency"] = 1;
-Ancestral["92"]["RichText"] = true;
-Ancestral["92"]["Size"] = UDim2.new(0, 130, 0, 15);
-Ancestral["92"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["92"]["Text"] = [[Paragraph]];
-Ancestral["92"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["92"]["Name"] = [[Title]];
-Ancestral["92"]["Position"] = UDim2.new(0, 0, 0, 27);
-
-
--- AncesHub.Template.Paragraph.Paragraph.Title.UIPadding
-Ancestral["93"] = Instance.new("UIPadding", Ancestral["92"]);
-Ancestral["93"]["PaddingRight"] = UDim.new(0, 6);
-Ancestral["93"]["PaddingLeft"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.Paragraph.Paragraph.UIPadding
-Ancestral["94"] = Instance.new("UIPadding", Ancestral["8e"]);
-Ancestral["94"]["PaddingTop"] = UDim.new(0, 8);
-Ancestral["94"]["PaddingRight"] = UDim.new(0, 5);
-Ancestral["94"]["PaddingLeft"] = UDim.new(0, 5);
-Ancestral["94"]["PaddingBottom"] = UDim.new(0, 8);
-
-
--- AncesHub.Template.Paragraph.Paragraph.UIListLayout
-Ancestral["95"] = Instance.new("UIListLayout", Ancestral["8e"]);
-Ancestral["95"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["95"]["Padding"] = UDim.new(0, 5);
-Ancestral["95"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Paragraph.Paragraph.Content
-Ancestral["96"] = Instance.new("TextLabel", Ancestral["8e"]);
-Ancestral["96"]["TextWrapped"] = true;
-Ancestral["96"]["BorderSizePixel"] = 0;
-Ancestral["96"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["96"]["TextYAlignment"] = Enum.TextYAlignment.Top;
-Ancestral["96"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["96"]["TextSize"] = 13;
-Ancestral["96"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["96"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["96"]["BackgroundTransparency"] = 1;
-Ancestral["96"]["RichText"] = true;
-Ancestral["96"]["Size"] = UDim2.new(0, 130, 0, 15);
-Ancestral["96"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["96"]["Text"] = [[Content]];
-Ancestral["96"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["96"]["Name"] = [[Content]];
-Ancestral["96"]["Position"] = UDim2.new(0, 0, 0, 27);
-
-
--- AncesHub.Template.Paragraph.Paragraph.Content.UIPadding
-Ancestral["97"] = Instance.new("UIPadding", Ancestral["96"]);
-Ancestral["97"]["PaddingRight"] = UDim.new(0, 6);
-Ancestral["97"]["PaddingLeft"] = UDim.new(0, 6);
-
-
--- AncesHub.Template.Paragraph.UIPadding
-Ancestral["98"] = Instance.new("UIPadding", Ancestral["8c"]);
-Ancestral["98"]["PaddingRight"] = UDim.new(0, 8);
-Ancestral["98"]["PaddingLeft"] = UDim.new(0, 8);
-
-
--- AncesHub.Template.Slider
-Ancestral["99"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["99"]["Visible"] = false;
-Ancestral["99"]["BorderSizePixel"] = 0;
-Ancestral["99"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["99"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["99"]["Size"] = UDim2.new(0, 145, 0, 47);
-Ancestral["99"]["Position"] = UDim2.new(0, 0, 0.63063, 0);
-Ancestral["99"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["99"]["Name"] = [[Slider]];
-Ancestral["99"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Slider.UIListLayout
-Ancestral["9a"] = Instance.new("UIListLayout", Ancestral["99"]);
-Ancestral["9a"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["9a"]["Padding"] = UDim.new(0, 6);
-Ancestral["9a"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["9a"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
--- AncesHub.Template.Slider.UIPadding
-Ancestral["9b"] = Instance.new("UIPadding", Ancestral["99"]);
-Ancestral["9b"]["PaddingTop"] = UDim.new(0, 10);
-Ancestral["9b"]["PaddingRight"] = UDim.new(0, 6);
-Ancestral["9b"]["PaddingLeft"] = UDim.new(0, 8);
-Ancestral["9b"]["PaddingBottom"] = UDim.new(0, 10);
-
-
--- AncesHub.Template.Slider.Frame
-Ancestral["9c"] = Instance.new("Frame", Ancestral["99"]);
-Ancestral["9c"]["BorderSizePixel"] = 0;
-Ancestral["9c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["9c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["9c"]["Size"] = UDim2.new(0, 125, 0, 13);
-Ancestral["9c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["9c"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Slider.Frame.UIListLayout
-Ancestral["9d"] = Instance.new("UIListLayout", Ancestral["9c"]);
-Ancestral["9d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-Ancestral["9d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["9d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-Ancestral["9d"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
--- AncesHub.Template.Slider.Frame.Title
-Ancestral["9e"] = Instance.new("TextLabel", Ancestral["9c"]);
-Ancestral["9e"]["TextWrapped"] = true;
-Ancestral["9e"]["BorderSizePixel"] = 0;
-Ancestral["9e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["9e"]["TextYAlignment"] = Enum.TextYAlignment.Top;
-Ancestral["9e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["9e"]["TextSize"] = 13;
-Ancestral["9e"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["9e"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["9e"]["BackgroundTransparency"] = 1;
-Ancestral["9e"]["RichText"] = true;
-Ancestral["9e"]["Size"] = UDim2.new(0.75, 0, 0, 13);
-Ancestral["9e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["9e"]["Text"] = [[Slider]];
-Ancestral["9e"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["9e"]["Name"] = [[Title]];
-Ancestral["9e"]["Position"] = UDim2.new(0, 0, 0, 27);
-
-
--- AncesHub.Template.Slider.Frame.ValueText
-Ancestral["9f"] = Instance.new("TextBox", Ancestral["9c"]);
-Ancestral["9f"]["Active"] = false;
-Ancestral["9f"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["9f"]["BorderSizePixel"] = 0;
-Ancestral["9f"]["TextXAlignment"] = Enum.TextXAlignment.Right;
-Ancestral["9f"]["TextWrapped"] = true;
-Ancestral["9f"]["TextSize"] = 14;
-Ancestral["9f"]["Name"] = [[ValueText]];
-Ancestral["9f"]["TextScaled"] = true;
-Ancestral["9f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["9f"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["9f"]["Selectable"] = false;
-Ancestral["9f"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["9f"]["Size"] = UDim2.new(0.25, -1, 0, 13);
-Ancestral["9f"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-Ancestral["9f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["9f"]["Text"] = [[0]];
-Ancestral["9f"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Slider.Frame.ValueText.UIGradient
-Ancestral["a0"] = Instance.new("UIGradient", Ancestral["9f"]);
-Ancestral["a0"]["Enabled"] = false;
-Ancestral["a0"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
-
-
--- AncesHub.Template.Slider.Trigger
-Ancestral["a1"] = Instance.new("TextButton", Ancestral["99"]);
-Ancestral["a1"]["BorderSizePixel"] = 0;
-Ancestral["a1"]["AutoButtonColor"] = false;
-Ancestral["a1"]["TextSize"] = 14;
-Ancestral["a1"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a1"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["a1"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["a1"]["Size"] = UDim2.new(0, 120, 0, 10);
-Ancestral["a1"]["BackgroundTransparency"] = 1;
-Ancestral["a1"]["Name"] = [[Trigger]];
-Ancestral["a1"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a1"]["Text"] = [[]];
-Ancestral["a1"]["Position"] = UDim2.new(0.00763, 0, 0.59239, 0);
-
-
--- AncesHub.Template.Slider.Trigger.Fill
-Ancestral["a2"] = Instance.new("TextButton", Ancestral["a1"]);
-Ancestral["a2"]["Active"] = false;
-Ancestral["a2"]["Interactable"] = false;
-Ancestral["a2"]["BorderSizePixel"] = 0;
-Ancestral["a2"]["AutoButtonColor"] = false;
-Ancestral["a2"]["TextSize"] = 14;
-Ancestral["a2"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["a2"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["a2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["a2"]["Size"] = UDim2.new(0, 120, 0, 4);
-Ancestral["a2"]["Name"] = [[Fill]];
-Ancestral["a2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a2"]["Text"] = [[]];
-Ancestral["a2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.Template.Slider.Trigger.Fill.UIGradient
-Ancestral["a3"] = Instance.new("UIGradient", Ancestral["a2"]);
-Ancestral["a3"]["Rotation"] = 180;
-Ancestral["a3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Slider.Trigger.Fill.UICorner
-Ancestral["a4"] = Instance.new("UICorner", Ancestral["a2"]);
-Ancestral["a4"]["CornerRadius"] = UDim.new(10, 10);
-
-
--- AncesHub.Template.Slider.Trigger.Fill.Circle
-Ancestral["a5"] = Instance.new("Frame", Ancestral["a2"]);
-Ancestral["a5"]["BorderSizePixel"] = 0;
-Ancestral["a5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["a5"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["a5"]["Size"] = UDim2.new(0, 10, 0, 10);
-Ancestral["a5"]["Position"] = UDim2.new(0, 0, 0.5, 0);
-Ancestral["a5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a5"]["Name"] = [[Circle]];
-
-
--- AncesHub.Template.Slider.Trigger.Fill.Circle.UICorner
-Ancestral["a6"] = Instance.new("UICorner", Ancestral["a5"]);
-Ancestral["a6"]["CornerRadius"] = UDim.new(10, 10);
-
-
--- AncesHub.Template.Slider.OnChanged
-Ancestral["a7"] = Instance.new("BindableEvent", Ancestral["99"]);
-Ancestral["a7"]["Name"] = [[OnChanged]];
-
-
--- AncesHub.Template.Textbox
-Ancestral["a8"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["a8"]["Visible"] = false;
-Ancestral["a8"]["BorderSizePixel"] = 0;
-Ancestral["a8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["a8"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["a8"]["Size"] = UDim2.new(0, 145, 0, 35);
-Ancestral["a8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["a8"]["Name"] = [[Textbox]];
-Ancestral["a8"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Textbox.UIListLayout
-Ancestral["a9"] = Instance.new("UIListLayout", Ancestral["a8"]);
-Ancestral["a9"]["Padding"] = UDim.new(0, 5);
-Ancestral["a9"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["a9"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-Ancestral["a9"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
--- AncesHub.Template.Textbox.UIPadding
-Ancestral["aa"] = Instance.new("UIPadding", Ancestral["a8"]);
-Ancestral["aa"]["PaddingTop"] = UDim.new(0, 8);
-Ancestral["aa"]["PaddingRight"] = UDim.new(0, 8);
-Ancestral["aa"]["PaddingLeft"] = UDim.new(0, 8);
-Ancestral["aa"]["PaddingBottom"] = UDim.new(0, 8);
-
-
--- AncesHub.Template.Textbox.OnChanged
-Ancestral["ab"] = Instance.new("BindableEvent", Ancestral["a8"]);
-Ancestral["ab"]["Name"] = [[OnChanged]];
-
-
--- AncesHub.Template.Textbox.Title
-Ancestral["ac"] = Instance.new("TextLabel", Ancestral["a8"]);
-Ancestral["ac"]["TextWrapped"] = true;
-Ancestral["ac"]["BorderSizePixel"] = 0;
-Ancestral["ac"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["ac"]["TextTransparency"] = 0.7;
-Ancestral["ac"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["ac"]["TextSize"] = 13;
-Ancestral["ac"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["ac"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["ac"]["BackgroundTransparency"] = 1;
-Ancestral["ac"]["Size"] = UDim2.new(0, 72, 0, 23);
-Ancestral["ac"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["ac"]["Text"] = [[Textbox]];
-Ancestral["ac"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["ac"]["Name"] = [[Title]];
-
-
--- AncesHub.Template.Textbox.Box
-Ancestral["ad"] = Instance.new("TextButton", Ancestral["a8"]);
-Ancestral["ad"]["TextWrapped"] = true;
-Ancestral["ad"]["BorderSizePixel"] = 0;
-Ancestral["ad"]["AutoButtonColor"] = false;
-Ancestral["ad"]["TextSize"] = 14;
-Ancestral["ad"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["ad"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["ad"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["ad"]["Size"] = UDim2.new(0, 49, 0, 22);
-Ancestral["ad"]["Name"] = [[Box]];
-Ancestral["ad"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["ad"]["Text"] = [[]];
-Ancestral["ad"]["Position"] = UDim2.new(0.5969, 0, 0.02174, 0);
-
-
--- AncesHub.Template.Textbox.Box.UICorner
-Ancestral["ae"] = Instance.new("UICorner", Ancestral["ad"]);
-Ancestral["ae"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Textbox.Box.UIStroke
-Ancestral["af"] = Instance.new("UIStroke", Ancestral["ad"]);
-Ancestral["af"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["af"]["Thickness"] = 1.5;
-Ancestral["af"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Textbox.Box.UIStroke.UIGradient
-Ancestral["b0"] = Instance.new("UIGradient", Ancestral["af"]);
-Ancestral["b0"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Textbox.Box.UIGradient
-Ancestral["b1"] = Instance.new("UIGradient", Ancestral["ad"]);
-Ancestral["b1"]["Rotation"] = -90;
-Ancestral["b1"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Template.Textbox.Box.Textbox
-Ancestral["b2"] = Instance.new("TextBox", Ancestral["ad"]);
-Ancestral["b2"]["TextColor3"] = Color3.fromRGB(151, 151, 151);
-Ancestral["b2"]["PlaceholderColor3"] = Color3.fromRGB(96, 96, 96);
-Ancestral["b2"]["BorderSizePixel"] = 0;
-Ancestral["b2"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["b2"]["TextWrapped"] = true;
-Ancestral["b2"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
-Ancestral["b2"]["TextSize"] = 12;
-Ancestral["b2"]["Name"] = [[Textbox]];
-Ancestral["b2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["b2"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["b2"]["Selectable"] = false;
-Ancestral["b2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["b2"]["ClearTextOnFocus"] = false;
-Ancestral["b2"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["b2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-Ancestral["b2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["b2"]["Text"] = [[]];
-Ancestral["b2"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Textbox.Box.Textbox.UIGradient
-Ancestral["b3"] = Instance.new("UIGradient", Ancestral["b2"]);
-Ancestral["b3"]["Enabled"] = false;
-Ancestral["b3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
-
-
--- AncesHub.Template.Textbox.Box.Textbox.UIPadding
-Ancestral["b4"] = Instance.new("UIPadding", Ancestral["b2"]);
-Ancestral["b4"]["PaddingTop"] = UDim.new(0, 5);
-Ancestral["b4"]["PaddingLeft"] = UDim.new(0, 5);
-Ancestral["b4"]["PaddingBottom"] = UDim.new(0, 5);
-
-
--- AncesHub.Template.Toggle
-Ancestral["b5"] = Instance.new("Frame", Ancestral["29"]);
-Ancestral["b5"]["Visible"] = false;
-Ancestral["b5"]["BorderSizePixel"] = 0;
-Ancestral["b5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["b5"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["b5"]["Size"] = UDim2.new(0, 145, 0, 35);
-Ancestral["b5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["b5"]["Name"] = [[Toggle]];
-Ancestral["b5"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Template.Toggle.UIListLayout
-Ancestral["b6"] = Instance.new("UIListLayout", Ancestral["b5"]);
-Ancestral["b6"]["Padding"] = UDim.new(0, 5);
-Ancestral["b6"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-Ancestral["b6"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-Ancestral["b6"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
--- AncesHub.Template.Toggle.UIPadding
-Ancestral["b7"] = Instance.new("UIPadding", Ancestral["b5"]);
-Ancestral["b7"]["PaddingTop"] = UDim.new(0, 5);
-Ancestral["b7"]["PaddingRight"] = UDim.new(0, 9);
-Ancestral["b7"]["PaddingLeft"] = UDim.new(0, 9);
-Ancestral["b7"]["PaddingBottom"] = UDim.new(0, 5);
-
-
--- AncesHub.Template.Toggle.State
-Ancestral["b8"] = Instance.new("BoolValue", Ancestral["b5"]);
-Ancestral["b8"]["Name"] = [[State]];
-Ancestral["b8"]["Value"] = true;
-
-
--- AncesHub.Template.Toggle.OnChanged
-Ancestral["b9"] = Instance.new("BindableEvent", Ancestral["b5"]);
-Ancestral["b9"]["Name"] = [[OnChanged]];
-
-
--- AncesHub.Template.Toggle.Title
-Ancestral["ba"] = Instance.new("TextLabel", Ancestral["b5"]);
-Ancestral["ba"]["TextWrapped"] = true;
-Ancestral["ba"]["BorderSizePixel"] = 0;
-Ancestral["ba"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-Ancestral["ba"]["TextTransparency"] = 0.7;
-Ancestral["ba"]["TextYAlignment"] = Enum.TextYAlignment.Top;
-Ancestral["ba"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["ba"]["TextSize"] = 13;
-Ancestral["ba"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-Ancestral["ba"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
-Ancestral["ba"]["BackgroundTransparency"] = 1;
-Ancestral["ba"]["Size"] = UDim2.new(0, 98, 0, 13);
-Ancestral["ba"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["ba"]["Text"] = [[Toggle]];
-Ancestral["ba"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-Ancestral["ba"]["Name"] = [[Title]];
-Ancestral["ba"]["Position"] = UDim2.new(0, 0, 0, 27);
-
-
--- AncesHub.Template.Toggle.Toggle
-Ancestral["bb"] = Instance.new("TextButton", Ancestral["b5"]);
-Ancestral["bb"]["BorderSizePixel"] = 0;
-Ancestral["bb"]["AutoButtonColor"] = false;
-Ancestral["bb"]["TextSize"] = 14;
-Ancestral["bb"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["bb"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
-Ancestral["bb"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Ancestral["bb"]["Size"] = UDim2.new(0, 22, 0, 22);
-Ancestral["bb"]["Name"] = [[Toggle]];
-Ancestral["bb"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["bb"]["Text"] = [[]];
-Ancestral["bb"]["Position"] = UDim2.new(0.05517, 0, 0.13333, 0);
-
-
--- AncesHub.Template.Toggle.Toggle.UICorner
-Ancestral["bc"] = Instance.new("UICorner", Ancestral["bb"]);
-Ancestral["bc"]["CornerRadius"] = UDim.new(0, 4);
-
-
--- AncesHub.Template.Toggle.Toggle.UIStroke
-Ancestral["bd"] = Instance.new("UIStroke", Ancestral["bb"]);
-Ancestral["bd"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-Ancestral["bd"]["Thickness"] = 1.5;
-Ancestral["bd"]["Color"] = Color3.fromRGB(56, 56, 56);
-
-
--- AncesHub.Template.Toggle.Toggle.UIStroke.UIGradient
-Ancestral["be"] = Instance.new("UIGradient", Ancestral["bd"]);
-Ancestral["be"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
-
-
--- AncesHub.Template.Toggle.Toggle.UIGradient
-Ancestral["bf"] = Instance.new("UIGradient", Ancestral["bb"]);
-Ancestral["bf"]["Rotation"] = -90;
-Ancestral["bf"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
-
-
--- AncesHub.Floating
-Ancestral["c0"] = Instance.new("Frame", Ancestral["1"]);
-Ancestral["c0"]["BorderSizePixel"] = 0;
-Ancestral["c0"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["c0"]["Size"] = UDim2.new(0, 158, 0, 42);
-Ancestral["c0"]["Position"] = UDim2.new(0.02, 0, 0.1, 0);
-Ancestral["c0"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["c0"]["Name"] = [[Floating]];
-
-
--- AncesHub.Floating.UICorner
-Ancestral["c1"] = Instance.new("UICorner", Ancestral["c0"]);
-Ancestral["c1"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Floating.LightBlue
-Ancestral["c2"] = Instance.new("Frame", Ancestral["c0"]);
-Ancestral["c2"]["BorderSizePixel"] = 0;
-Ancestral["c2"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["c2"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["c2"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["c2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["c2"]["Name"] = [[LightBlue]];
-Ancestral["c2"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.Floating.LightBlue.UIGradient
-Ancestral["c3"] = Instance.new("UIGradient", Ancestral["c2"]);
-Ancestral["c3"]["Rotation"] = 50;
-Ancestral["c3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Floating.LightBlue.UICorner
-Ancestral["c4"] = Instance.new("UICorner", Ancestral["c2"]);
-Ancestral["c4"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Floating.Blue
-Ancestral["c5"] = Instance.new("Frame", Ancestral["c0"]);
-Ancestral["c5"]["BorderSizePixel"] = 0;
-Ancestral["c5"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["c5"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["c5"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["c5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["c5"]["Name"] = [[Blue]];
-Ancestral["c5"]["BackgroundTransparency"] = 0.6;
-
-
--- AncesHub.Floating.Blue.UIGradient
-Ancestral["c6"] = Instance.new("UIGradient", Ancestral["c5"]);
-Ancestral["c6"]["Rotation"] = -72;
-Ancestral["c6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Floating.Blue.UICorner
-Ancestral["c7"] = Instance.new("UICorner", Ancestral["c5"]);
-Ancestral["c7"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Floating.Cyan
-Ancestral["c8"] = Instance.new("CanvasGroup", Ancestral["c0"]);
-Ancestral["c8"]["BorderSizePixel"] = 0;
-Ancestral["c8"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
-Ancestral["c8"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["c8"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
-Ancestral["c8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["c8"]["Name"] = [[Cyan]];
-Ancestral["c8"]["BackgroundTransparency"] = 0.8;
-
-
--- AncesHub.Floating.Cyan.UIGradient
-Ancestral["c9"] = Instance.new("UIGradient", Ancestral["c8"]);
-Ancestral["c9"]["Rotation"] = -26;
-Ancestral["c9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
-
-
--- AncesHub.Floating.Cyan.UICorner
-Ancestral["ca"] = Instance.new("UICorner", Ancestral["c8"]);
-Ancestral["ca"]["CornerRadius"] = UDim.new(0, 10);
-
-
--- AncesHub.Floating.Cyan.AbstractBg
-Ancestral["cb"] = Instance.new("ImageLabel", Ancestral["c8"]);
-Ancestral["cb"]["BorderSizePixel"] = 0;
-Ancestral["cb"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["cb"]["ImageColor3"] = Color3.fromRGB(0, 183, 22);
-Ancestral["cb"]["Image"] = [[rbxassetid://88984077541230]];
-Ancestral["cb"]["Size"] = UDim2.new(0, 549, 0, 364);
-Ancestral["cb"]["Visible"] = false;
-Ancestral["cb"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["cb"]["BackgroundTransparency"] = 1;
-Ancestral["cb"]["Rotation"] = 40;
-Ancestral["cb"]["Name"] = [[AbstractBg]];
-Ancestral["cb"]["Position"] = UDim2.new(0.41197, 0, 0.48528, 0);
-
-
--- AncesHub.Floating.DropShadowHolder
-Ancestral["cc"] = Instance.new("Frame", Ancestral["c0"]);
-Ancestral["cc"]["ZIndex"] = 0;
-Ancestral["cc"]["BorderSizePixel"] = 0;
-Ancestral["cc"]["Size"] = UDim2.new(1, 0, 1, 0);
-Ancestral["cc"]["Name"] = [[DropShadowHolder]];
-Ancestral["cc"]["BackgroundTransparency"] = 1;
-
-
--- AncesHub.Floating.DropShadowHolder.DropShadow
-Ancestral["cd"] = Instance.new("ImageLabel", Ancestral["cc"]);
-Ancestral["cd"]["ZIndex"] = 0;
-Ancestral["cd"]["BorderSizePixel"] = 0;
-Ancestral["cd"]["SliceCenter"] = Rect.new(49, 49, 450, 450);
-Ancestral["cd"]["ScaleType"] = Enum.ScaleType.Slice;
-Ancestral["cd"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["cd"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-Ancestral["cd"]["Image"] = [[rbxassetid://6014261993]]; -- Lunor Diganti disini
-Ancestral["cd"]["Size"] = UDim2.new(1, 35, 1, 35);
-Ancestral["cd"]["BackgroundTransparency"] = 1;
-Ancestral["cd"]["Name"] = [[DropShadow]];
-Ancestral["cd"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- AncesHub.Floating.Folder
-Ancestral["ce"] = Instance.new("Folder", Ancestral["c0"]);
-
-
-
--- AncesHub.Floating.Folder.Logo
-Ancestral["cf"] = Instance.new("ImageLabel", Ancestral["ce"]);
-Ancestral["cf"]["BorderSizePixel"] = 0;
-Ancestral["cf"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["cf"]["Image"] = [[rbxassetid://120727887371733]];
-Ancestral["cf"]["Size"] = UDim2.new(0, 24, 0, 25);
-Ancestral["cf"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["cf"]["BackgroundTransparency"] = 1;
-Ancestral["cf"]["Name"] = [[Logo]];
-Ancestral["cf"]["Position"] = UDim2.new(0, 8, 0, 8);
-
-
--- AncesHub.Floating.Folder.Logo.UIAspectRatioConstraint
-Ancestral["d0"] = Instance.new("UIAspectRatioConstraint", Ancestral["cf"]);
-
-
-
--- AncesHub.Floating.Folder.Logo.UICorner
-Ancestral["d1"] = Instance.new("UICorner", Ancestral["cf"]);
-
-
-
--- AncesHub.Floating.Folder.Frame
-Ancestral["d2"] = Instance.new("Frame", Ancestral["ce"]);
-Ancestral["d2"]["BorderSizePixel"] = 0;
-Ancestral["d2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["d2"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["d2"]["Size"] = UDim2.new(0, 2, 0, 27);
-Ancestral["d2"]["Position"] = UDim2.new(0, 40, 0.5, 0);
-Ancestral["d2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-
-
--- AncesHub.Floating.Folder.Frame.UIGradient
-Ancestral["d3"] = Instance.new("UIGradient", Ancestral["d2"]);
-Ancestral["d3"]["Rotation"] = -90;
-Ancestral["d3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
-
-
--- AncesHub.Floating.Folder.Frame.UICorner
-Ancestral["d4"] = Instance.new("UICorner", Ancestral["d2"]);
-Ancestral["d4"]["CornerRadius"] = UDim.new(100, 100);
+-- LinniHub.BackgroundFrame.Side.DraggablePart.Title.UIGradient
+LinniScript["21"] = Instance.new("UIGradient", LinniScript["20"]);
+LinniScript["21"]["Rotation"] = -90;
+LinniScript["21"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.BackgroundFrame.DropShadowHolder
+LinniScript["22"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["22"]["ZIndex"] = 0;
+LinniScript["22"]["BorderSizePixel"] = 0;
+LinniScript["22"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["22"]["Name"] = [[DropShadowHolder]];
+LinniScript["22"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.BackgroundFrame.DropShadowHolder.DropShadow
+LinniScript["23"] = Instance.new("ImageLabel", LinniScript["22"]);
+LinniScript["23"]["ZIndex"] = 0;
+LinniScript["23"]["BorderSizePixel"] = 0;
+LinniScript["23"]["SliceCenter"] = Rect.new(49, 49, 450, 450);
+LinniScript["23"]["ScaleType"] = Enum.ScaleType.Slice;
+LinniScript["23"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["23"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["23"]["Image"] = [[rbxassetid://6014261993]];
+LinniScript["23"]["Size"] = UDim2.new(1, 47, 1, 47);
+LinniScript["23"]["BackgroundTransparency"] = 1;
+LinniScript["23"]["Name"] = [[DropShadow]];
+LinniScript["23"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.BackgroundFrame.Cyan
+LinniScript["24"] = Instance.new("Frame", LinniScript["2"]);
+LinniScript["24"]["BorderSizePixel"] = 0;
+LinniScript["24"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["24"]["ClipsDescendants"] = true;
+LinniScript["24"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["24"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["24"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["24"]["Name"] = [[Cyan]];
+LinniScript["24"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.BackgroundFrame.Cyan.UIGradient
+LinniScript["25"] = Instance.new("UIGradient", LinniScript["24"]);
+LinniScript["25"]["Rotation"] = -26;
+LinniScript["25"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.BackgroundFrame.Cyan.UICorner
+LinniScript["26"] = Instance.new("UICorner", LinniScript["24"]);
+LinniScript["26"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Library
+LinniScript["27"] = Instance.new("ModuleScript", LinniScript["1"]);
+LinniScript["27"]["Name"] = [[Library]];
+
+
+-- LinniHub.IconLib
+LinniScript["28"] = Instance.new("ModuleScript", LinniScript["1"]);
+LinniScript["28"]["Name"] = [[IconLib]];
+
+
+-- LinniHub.Template
+LinniScript["29"] = Instance.new("Folder", LinniScript["1"]);
+LinniScript["29"]["Name"] = [[Template]];
+
+
+-- LinniHub.Template.TabButton
+LinniScript["2a"] = Instance.new("TextButton", LinniScript["29"]);
+LinniScript["2a"]["BorderSizePixel"] = 0;
+LinniScript["2a"]["TextSize"] = 14;
+LinniScript["2a"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["2a"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["2a"]["Size"] = UDim2.new(0, 137, 0, 39);
+LinniScript["2a"]["BackgroundTransparency"] = 1;
+LinniScript["2a"]["Name"] = [[TabButton]];
+LinniScript["2a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2a"]["Text"] = [[]];
+LinniScript["2a"]["Visible"] = false;
+
+
+-- LinniHub.Template.TabButton.Icon
+LinniScript["2b"] = Instance.new("ImageLabel", LinniScript["2a"]);
+LinniScript["2b"]["BorderSizePixel"] = 0;
+LinniScript["2b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["2b"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["2b"]["Image"] = [[rbxassetid://97623395395101]];
+LinniScript["2b"]["Size"] = UDim2.new(0, 25, 0, 25);
+LinniScript["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2b"]["BackgroundTransparency"] = 1;
+LinniScript["2b"]["Name"] = [[Icon]];
+LinniScript["2b"]["Position"] = UDim2.new(0.07, 0, 0.5, 0);
+
+
+-- LinniHub.Template.TabButton.Icon.UIAspectRatioConstraint
+LinniScript["2c"] = Instance.new("UIAspectRatioConstraint", LinniScript["2b"]);
+
+
+
+-- LinniHub.Template.TabButton.Title
+LinniScript["2d"] = Instance.new("TextLabel", LinniScript["2a"]);
+LinniScript["2d"]["TextWrapped"] = true;
+LinniScript["2d"]["BorderSizePixel"] = 0;
+LinniScript["2d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["2d"]["TextScaled"] = true;
+LinniScript["2d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["2d"]["TextSize"] = 14;
+LinniScript["2d"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["2d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["2d"]["BackgroundTransparency"] = 1;
+LinniScript["2d"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["2d"]["Size"] = UDim2.new(0, 90, 0, 17);
+LinniScript["2d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2d"]["Text"] = [[General]];
+LinniScript["2d"]["Name"] = [[Title]];
+LinniScript["2d"]["Position"] = UDim2.new(0.33, 0, 0.5, 0);
+
+
+-- LinniHub.Template.TabButton.Title.UIGradient
+LinniScript["2e"] = Instance.new("UIGradient", LinniScript["2d"]);
+LinniScript["2e"]["Rotation"] = -90;
+LinniScript["2e"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.TabFrame
+LinniScript["2f"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["2f"]["Visible"] = false;
+LinniScript["2f"]["ZIndex"] = 0;
+LinniScript["2f"]["BorderSizePixel"] = 0;
+LinniScript["2f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["2f"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["2f"]["Name"] = [[TabFrame]];
+LinniScript["2f"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameRight
+LinniScript["30"] = Instance.new("ScrollingFrame", LinniScript["2f"]);
+LinniScript["30"]["Active"] = true;
+LinniScript["30"]["ZIndex"] = 2;
+LinniScript["30"]["BorderSizePixel"] = 0;
+LinniScript["30"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+LinniScript["30"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
+LinniScript["30"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["30"]["Name"] = [[ScrollingFrameRight]];
+LinniScript["30"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+LinniScript["30"]["Size"] = UDim2.new(0.5, 0, 1, 0);
+LinniScript["30"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["30"]["Position"] = UDim2.new(0.5, 0, 0, 0);
+LinniScript["30"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["30"]["ScrollBarThickness"] = 0;
+LinniScript["30"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameRight.UIListLayout
+LinniScript["31"] = Instance.new("UIListLayout", LinniScript["30"]);
+LinniScript["31"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["31"]["Padding"] = UDim.new(0, 10);
+LinniScript["31"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameRight.UIPadding
+LinniScript["32"] = Instance.new("UIPadding", LinniScript["30"]);
+LinniScript["32"]["PaddingTop"] = UDim.new(0, 10);
+LinniScript["32"]["PaddingBottom"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameLeft
+LinniScript["33"] = Instance.new("ScrollingFrame", LinniScript["2f"]);
+LinniScript["33"]["Active"] = true;
+LinniScript["33"]["ZIndex"] = 0;
+LinniScript["33"]["BorderSizePixel"] = 0;
+LinniScript["33"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+LinniScript["33"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
+LinniScript["33"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["33"]["Name"] = [[ScrollingFrameLeft]];
+LinniScript["33"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+LinniScript["33"]["Size"] = UDim2.new(0.5, 0, 1, 0);
+LinniScript["33"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["33"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["33"]["ScrollBarThickness"] = 0;
+LinniScript["33"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameLeft.UIListLayout
+LinniScript["34"] = Instance.new("UIListLayout", LinniScript["33"]);
+LinniScript["34"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["34"]["Padding"] = UDim.new(0, 10);
+LinniScript["34"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.TabFrame.ScrollingFrameLeft.UIPadding
+LinniScript["35"] = Instance.new("UIPadding", LinniScript["33"]);
+LinniScript["35"]["PaddingTop"] = UDim.new(0, 10);
+LinniScript["35"]["PaddingBottom"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Section
+LinniScript["36"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["36"]["Visible"] = false;
+LinniScript["36"]["ZIndex"] = 2;
+LinniScript["36"]["BorderSizePixel"] = 0;
+LinniScript["36"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["36"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["36"]["Size"] = UDim2.new(0, 145, 0, 2);
+LinniScript["36"]["Position"] = UDim2.new(0.04662, 0, 0.10811, 0);
+LinniScript["36"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["36"]["Name"] = [[Section]];
+LinniScript["36"]["BackgroundTransparency"] = 0.75;
+
+
+-- LinniHub.Template.Section.UICorner
+LinniScript["37"] = Instance.new("UICorner", LinniScript["36"]);
+LinniScript["37"]["CornerRadius"] = UDim.new(0, 5);
+
+
+-- LinniHub.Template.Section.Seperator
+LinniScript["38"] = Instance.new("Frame", LinniScript["36"]);
+LinniScript["38"]["BorderSizePixel"] = 0;
+LinniScript["38"]["BackgroundColor3"] = Color3.fromRGB(56, 56, 56);
+LinniScript["38"]["Size"] = UDim2.new(1, 0, 0, 2);
+LinniScript["38"]["Position"] = UDim2.new(0, 0, 0, 24);
+LinniScript["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["38"]["Name"] = [[Seperator]];
+
+
+-- LinniHub.Template.Section.Seperator.UIGradient
+LinniScript["39"] = Instance.new("UIGradient", LinniScript["38"]);
+LinniScript["39"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(58, 144, 255))};
+
+
+-- LinniHub.Template.Section.Title
+LinniScript["3a"] = Instance.new("TextLabel", LinniScript["36"]);
+LinniScript["3a"]["TextWrapped"] = true;
+LinniScript["3a"]["BorderSizePixel"] = 0;
+LinniScript["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["3a"]["TextScaled"] = true;
+LinniScript["3a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["3a"]["TextSize"] = 14;
+LinniScript["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["3a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["3a"]["BackgroundTransparency"] = 1;
+LinniScript["3a"]["Size"] = UDim2.new(0, 95, 0, 13);
+LinniScript["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["3a"]["Text"] = [[Section]];
+LinniScript["3a"]["Name"] = [[Title]];
+LinniScript["3a"]["Position"] = UDim2.new(0, 8, 0, 7);
+
+
+-- LinniHub.Template.Section.Title.UIGradient
+LinniScript["3b"] = Instance.new("UIGradient", LinniScript["3a"]);
+LinniScript["3b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
+
+
+-- LinniHub.Template.Section.SectionItems
+LinniScript["3c"] = Instance.new("Frame", LinniScript["36"]);
+LinniScript["3c"]["BorderSizePixel"] = 0;
+LinniScript["3c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["3c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["3c"]["Size"] = UDim2.new(0, 145, 0, 0);
+LinniScript["3c"]["Position"] = UDim2.new(0, 0, 0, 26);
+LinniScript["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["3c"]["Name"] = [[SectionItems]];
+LinniScript["3c"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Section.SectionItems.UIListLayout
+LinniScript["3d"] = Instance.new("UIListLayout", LinniScript["3c"]);
+LinniScript["3d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["3d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Section.SectionItems.UIPadding
+LinniScript["3e"] = Instance.new("UIPadding", LinniScript["3c"]);
+LinniScript["3e"]["PaddingTop"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.Section.Mark
+LinniScript["3f"] = Instance.new("Frame", LinniScript["36"]);
+LinniScript["3f"]["BorderSizePixel"] = 0;
+LinniScript["3f"]["BackgroundColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["3f"]["Size"] = UDim2.new(1, 0, 0, 2);
+LinniScript["3f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["3f"]["Name"] = [[Mark]];
+
+
+-- LinniHub.Template.Section.Mark.UIGradient
+LinniScript["40"] = Instance.new("UIGradient", LinniScript["3f"]);
+LinniScript["40"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Section.UIPadding
+LinniScript["41"] = Instance.new("UIPadding", LinniScript["36"]);
+LinniScript["41"]["PaddingBottom"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.DropdownButton
+LinniScript["42"] = Instance.new("TextButton", LinniScript["29"]);
+LinniScript["42"]["TextWrapped"] = true;
+LinniScript["42"]["BorderSizePixel"] = 0;
+LinniScript["42"]["TextSize"] = 14;
+LinniScript["42"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["42"]["TextScaled"] = true;
+LinniScript["42"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["42"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["42"]["Selectable"] = false;
+LinniScript["42"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["42"]["Size"] = UDim2.new(1, 0, 0.11026, 0);
+LinniScript["42"]["BackgroundTransparency"] = 1;
+LinniScript["42"]["Name"] = [[DropdownButton]];
+LinniScript["42"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["42"]["Text"] = [[Test1]];
+LinniScript["42"]["Visible"] = false;
+LinniScript["42"]["Position"] = UDim2.new(0.5, 0, 0.05513, 0);
+
+
+-- LinniHub.Template.DropdownButton.UIGradient
+LinniScript["43"] = Instance.new("UIGradient", LinniScript["42"]);
+LinniScript["43"]["Enabled"] = false;
+LinniScript["43"]["Rotation"] = -90;
+LinniScript["43"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Notification
+LinniScript["44"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["44"]["Visible"] = false;
+LinniScript["44"]["BorderSizePixel"] = 0;
+LinniScript["44"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["44"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["44"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["44"]["Size"] = UDim2.new(0, 265, 0, 65);
+LinniScript["44"]["Position"] = UDim2.new(0.8244, 0, 0.88221, 0);
+LinniScript["44"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["44"]["Name"] = [[Notification]];
+
+
+-- LinniHub.Template.Notification.UICorner
+LinniScript["45"] = Instance.new("UICorner", LinniScript["44"]);
+LinniScript["45"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Notification.UIGradient
+LinniScript["46"] = Instance.new("UIGradient", LinniScript["44"]);
+LinniScript["46"]["Rotation"] = 180;
+LinniScript["46"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(11, 11, 11)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(5, 185, 191)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(26, 26, 26))};
+
+
+-- LinniHub.Template.Notification.LightBlue
+LinniScript["47"] = Instance.new("Frame", LinniScript["44"]);
+LinniScript["47"]["BorderSizePixel"] = 0;
+LinniScript["47"]["AutoLocalize"] = false;
+LinniScript["47"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["47"]["BorderMode"] = Enum.BorderMode.Inset;
+LinniScript["47"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["47"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["47"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["47"]["Name"] = [[LightBlue]];
+LinniScript["47"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.Template.Notification.LightBlue.UIGradient
+LinniScript["48"] = Instance.new("UIGradient", LinniScript["47"]);
+LinniScript["48"]["Rotation"] = -77;
+LinniScript["48"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Template.Notification.LightBlue.UICorner
+LinniScript["49"] = Instance.new("UICorner", LinniScript["47"]);
+LinniScript["49"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Notification.LightBlue.UISizeConstraint
+LinniScript["4a"] = Instance.new("UISizeConstraint", LinniScript["47"]);
+LinniScript["4a"]["MaxSize"] = Vector2.new(265, math.huge);
+
+
+-- LinniHub.Template.Notification.Blue
+LinniScript["4b"] = Instance.new("Frame", LinniScript["44"]);
+LinniScript["4b"]["BorderSizePixel"] = 0;
+LinniScript["4b"]["AutoLocalize"] = false;
+LinniScript["4b"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["4b"]["BorderMode"] = Enum.BorderMode.Inset;
+LinniScript["4b"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["4b"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["4b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["4b"]["Name"] = [[Blue]];
+LinniScript["4b"]["BackgroundTransparency"] = 0.6;
+
+
+-- LinniHub.Template.Notification.Blue.UIGradient
+LinniScript["4c"] = Instance.new("UIGradient", LinniScript["4b"]);
+LinniScript["4c"]["Rotation"] = 93;
+LinniScript["4c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Template.Notification.Blue.UICorner
+LinniScript["4d"] = Instance.new("UICorner", LinniScript["4b"]);
+LinniScript["4d"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Notification.Blue.UISizeConstraint
+LinniScript["4e"] = Instance.new("UISizeConstraint", LinniScript["4b"]);
+LinniScript["4e"]["MaxSize"] = Vector2.new(265, math.huge);
+
+
+-- LinniHub.Template.Notification.Cyan
+LinniScript["4f"] = Instance.new("Frame", LinniScript["44"]);
+LinniScript["4f"]["BorderSizePixel"] = 0;
+LinniScript["4f"]["AutoLocalize"] = false;
+LinniScript["4f"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["4f"]["BorderMode"] = Enum.BorderMode.Inset;
+LinniScript["4f"]["ClipsDescendants"] = true;
+LinniScript["4f"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["4f"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["4f"]["Name"] = [[Cyan]];
+LinniScript["4f"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.Template.Notification.Cyan.UIGradient
+LinniScript["50"] = Instance.new("UIGradient", LinniScript["4f"]);
+LinniScript["50"]["Rotation"] = -98;
+LinniScript["50"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Template.Notification.Cyan.UICorner
+LinniScript["51"] = Instance.new("UICorner", LinniScript["4f"]);
+LinniScript["51"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Notification.Cyan.UISizeConstraint
+LinniScript["52"] = Instance.new("UISizeConstraint", LinniScript["4f"]);
+LinniScript["52"]["MaxSize"] = Vector2.new(265, math.huge);
+
+
+-- LinniHub.Template.Notification.Items
+LinniScript["53"] = Instance.new("ImageLabel", LinniScript["44"]);
+LinniScript["53"]["ZIndex"] = 2;
+LinniScript["53"]["BorderSizePixel"] = 0;
+LinniScript["53"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["53"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["53"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["53"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["53"]["BackgroundTransparency"] = 1;
+LinniScript["53"]["Name"] = [[Items]];
+
+
+-- LinniHub.Template.Notification.Items.UIListLayout
+LinniScript["54"] = Instance.new("UIListLayout", LinniScript["53"]);
+LinniScript["54"]["Padding"] = UDim.new(0, 5);
+LinniScript["54"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["54"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Notification.Items.UIPadding
+LinniScript["55"] = Instance.new("UIPadding", LinniScript["53"]);
+LinniScript["55"]["PaddingTop"] = UDim.new(0, 15);
+LinniScript["55"]["PaddingLeft"] = UDim.new(0, 15);
+LinniScript["55"]["PaddingBottom"] = UDim.new(0, 15);
+
+
+-- LinniHub.Template.Notification.Items.Title
+LinniScript["56"] = Instance.new("TextLabel", LinniScript["53"]);
+LinniScript["56"]["TextWrapped"] = true;
+LinniScript["56"]["BorderSizePixel"] = 0;
+LinniScript["56"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["56"]["TextScaled"] = true;
+LinniScript["56"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["56"]["TextSize"] = 14;
+LinniScript["56"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["56"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["56"]["BackgroundTransparency"] = 1;
+LinniScript["56"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["56"]["Size"] = UDim2.new(0, 235, 0, 15);
+LinniScript["56"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["56"]["Text"] = [[Notification]];
+LinniScript["56"]["Name"] = [[Title]];
+LinniScript["56"]["Position"] = UDim2.new(0, 0, 0, 9);
+
+
+-- LinniHub.Template.Notification.Items.Title.UIGradient
+LinniScript["57"] = Instance.new("UIGradient", LinniScript["56"]);
+LinniScript["57"]["Rotation"] = -90;
+LinniScript["57"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Notification.Items.Title.Close
+LinniScript["58"] = Instance.new("ImageButton", LinniScript["56"]);
+LinniScript["58"]["BorderSizePixel"] = 0;
+LinniScript["58"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["58"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["58"]["Image"] = [[rbxassetid://10747384394]];
+LinniScript["58"]["Size"] = UDim2.new(0.09706, 0, 1.33333, 0);
+LinniScript["58"]["BackgroundTransparency"] = 1;
+LinniScript["58"]["Name"] = [[Close]];
+LinniScript["58"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["58"]["Position"] = UDim2.new(0.92, 0, 0.5, 0);
+
+
+-- LinniHub.Template.Notification.Items.Title.Close.UIGradient
+LinniScript["59"] = Instance.new("UIGradient", LinniScript["58"]);
+LinniScript["59"]["Rotation"] = -90;
+LinniScript["59"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Notification.Items.Title.Close.UIAspectRatioConstraint
+LinniScript["5a"] = Instance.new("UIAspectRatioConstraint", LinniScript["58"]);
+LinniScript["5a"]["AspectRatio"] = 1.054;
+
+
+-- LinniHub.Template.Notification.Items.Content
+LinniScript["5b"] = Instance.new("TextLabel", LinniScript["53"]);
+LinniScript["5b"]["TextWrapped"] = true;
+LinniScript["5b"]["BorderSizePixel"] = 0;
+LinniScript["5b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["5b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["5b"]["TextSize"] = 12;
+LinniScript["5b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["5b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["5b"]["BackgroundTransparency"] = 1;
+LinniScript["5b"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["5b"]["Size"] = UDim2.new(0, 218, 0, 10);
+LinniScript["5b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["5b"]["Text"] = [[This is a notification]];
+LinniScript["5b"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["5b"]["Name"] = [[Content]];
+LinniScript["5b"]["Position"] = UDim2.new(0, 0, 0, 19);
+
+
+-- LinniHub.Template.Notification.Items.Content.UIGradient
+LinniScript["5c"] = Instance.new("UIGradient", LinniScript["5b"]);
+LinniScript["5c"]["Enabled"] = false;
+LinniScript["5c"]["Rotation"] = -90;
+LinniScript["5c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Notification.Items.SubContent
+LinniScript["5d"] = Instance.new("TextLabel", LinniScript["53"]);
+LinniScript["5d"]["TextWrapped"] = true;
+LinniScript["5d"]["BorderSizePixel"] = 0;
+LinniScript["5d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["5d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["5d"]["TextSize"] = 12;
+LinniScript["5d"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["5d"]["TextColor3"] = Color3.fromRGB(181, 181, 181);
+LinniScript["5d"]["BackgroundTransparency"] = 1;
+LinniScript["5d"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["5d"]["Size"] = UDim2.new(0, 218, 0, 10);
+LinniScript["5d"]["Visible"] = false;
+LinniScript["5d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["5d"]["Text"] = [[This is a notification]];
+LinniScript["5d"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["5d"]["Name"] = [[SubContent]];
+LinniScript["5d"]["Position"] = UDim2.new(0, 0, 0, 19);
+
+
+-- LinniHub.Template.Notification.Items.SubContent.UIGradient
+LinniScript["5e"] = Instance.new("UIGradient", LinniScript["5d"]);
+LinniScript["5e"]["Enabled"] = false;
+LinniScript["5e"]["Rotation"] = -90;
+LinniScript["5e"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.NotificationList
+LinniScript["5f"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["5f"]["Visible"] = false;
+LinniScript["5f"]["BorderSizePixel"] = 0;
+LinniScript["5f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["5f"]["Size"] = UDim2.new(0.3349, 0, 1, 0);
+LinniScript["5f"]["Position"] = UDim2.new(0.665, 0, 0, 0);
+LinniScript["5f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["5f"]["Name"] = [[NotificationList]];
+LinniScript["5f"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.NotificationList.UIListLayout
+LinniScript["60"] = Instance.new("UIListLayout", LinniScript["5f"]);
+LinniScript["60"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right;
+LinniScript["60"]["Padding"] = UDim.new(0, 10);
+LinniScript["60"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
+LinniScript["60"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.NotificationList.UIPadding
+LinniScript["61"] = Instance.new("UIPadding", LinniScript["5f"]);
+LinniScript["61"]["PaddingRight"] = UDim.new(0, 30);
+LinniScript["61"]["PaddingBottom"] = UDim.new(0, 30);
+
+
+-- LinniHub.Template.Button
+LinniScript["62"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["62"]["Visible"] = false;
+LinniScript["62"]["BorderSizePixel"] = 0;
+LinniScript["62"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["62"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["62"]["Size"] = UDim2.new(0, 145, 0, 39);
+LinniScript["62"]["Position"] = UDim2.new(0, 0, 0.58209, 0);
+LinniScript["62"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["62"]["Name"] = [[Button]];
+LinniScript["62"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Button.Button
+LinniScript["63"] = Instance.new("TextButton", LinniScript["62"]);
+LinniScript["63"]["BorderSizePixel"] = 0;
+LinniScript["63"]["AutoButtonColor"] = false;
+LinniScript["63"]["TextSize"] = 14;
+LinniScript["63"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["63"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["63"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["63"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["63"]["Size"] = UDim2.new(0, 131, 0, 24);
+LinniScript["63"]["Name"] = [[Button]];
+LinniScript["63"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["63"]["Text"] = [[]];
+LinniScript["63"]["Position"] = UDim2.new(0.00752, 0, 0.16667, 0);
+
+
+-- LinniHub.Template.Button.Button.UICorner
+LinniScript["64"] = Instance.new("UICorner", LinniScript["63"]);
+LinniScript["64"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Button.Button.UIStroke
+LinniScript["65"] = Instance.new("UIStroke", LinniScript["63"]);
+LinniScript["65"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["65"]["Thickness"] = 1.5;
+LinniScript["65"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Button.Button.UIStroke.UIGradient
+LinniScript["66"] = Instance.new("UIGradient", LinniScript["65"]);
+LinniScript["66"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Button.Button.UIGradientOff
+LinniScript["67"] = Instance.new("UIGradient", LinniScript["63"]);
+LinniScript["67"]["Rotation"] = -90;
+LinniScript["67"]["Name"] = [[UIGradientOff]];
+LinniScript["67"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Button.Button.TextLabel
+LinniScript["68"] = Instance.new("TextLabel", LinniScript["63"]);
+LinniScript["68"]["TextWrapped"] = true;
+LinniScript["68"]["LineHeight"] = 1.1;
+LinniScript["68"]["BorderSizePixel"] = 0;
+LinniScript["68"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["68"]["TextSize"] = 14;
+LinniScript["68"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["68"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["68"]["BackgroundTransparency"] = 1;
+LinniScript["68"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["68"]["Size"] = UDim2.new(0, 131, 0, 13);
+LinniScript["68"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["68"]["Text"] = [[Button]];
+LinniScript["68"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["68"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.Template.Button.Button.TextLabel.UIGradient
+LinniScript["69"] = Instance.new("UIGradient", LinniScript["68"]);
+LinniScript["69"]["Rotation"] = -90;
+LinniScript["69"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Button.Button.UIGradientOn
+LinniScript["6a"] = Instance.new("UIGradient", LinniScript["63"]);
+LinniScript["6a"]["Enabled"] = false;
+LinniScript["6a"]["Name"] = [[UIGradientOn]];
+LinniScript["6a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Button.Button.UIListLayout
+LinniScript["6b"] = Instance.new("UIListLayout", LinniScript["63"]);
+LinniScript["6b"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["6b"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["6b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Button.Button.UIPadding
+LinniScript["6c"] = Instance.new("UIPadding", LinniScript["63"]);
+LinniScript["6c"]["PaddingTop"] = UDim.new(0, 6);
+LinniScript["6c"]["PaddingBottom"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.Button.UIListLayout
+LinniScript["6d"] = Instance.new("UIListLayout", LinniScript["62"]);
+LinniScript["6d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["6d"]["Padding"] = UDim.new(0, 10);
+LinniScript["6d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["6d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+LinniScript["6d"]["FillDirection"] = Enum.FillDirection.Horizontal;
+
+
+-- LinniHub.Template.Button.UIPadding
+LinniScript["6e"] = Instance.new("UIPadding", LinniScript["62"]);
+LinniScript["6e"]["PaddingRight"] = UDim.new(0, 6);
+LinniScript["6e"]["PaddingLeft"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.Dropdown
+LinniScript["6f"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["6f"]["Visible"] = false;
+LinniScript["6f"]["BorderSizePixel"] = 0;
+LinniScript["6f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["6f"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["6f"]["Size"] = UDim2.new(0, 145, 0, 54);
+LinniScript["6f"]["Position"] = UDim2.new(0, 0, 0.78629, 0);
+LinniScript["6f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["6f"]["Name"] = [[Dropdown]];
+LinniScript["6f"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Dropdown.UIListLayout
+LinniScript["70"] = Instance.new("UIListLayout", LinniScript["6f"]);
+LinniScript["70"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["70"]["Padding"] = UDim.new(0, 5);
+LinniScript["70"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["70"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Dropdown.UIPadding
+LinniScript["71"] = Instance.new("UIPadding", LinniScript["6f"]);
+LinniScript["71"]["PaddingRight"] = UDim.new(0, 6);
+LinniScript["71"]["PaddingLeft"] = UDim.new(0, 8);
+
+
+-- LinniHub.Template.Dropdown.UIGradient
+LinniScript["72"] = Instance.new("UIGradient", LinniScript["6f"]);
+LinniScript["72"]["Rotation"] = -90;
+LinniScript["72"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Dropdown.OnChanged
+LinniScript["73"] = Instance.new("BindableEvent", LinniScript["6f"]);
+LinniScript["73"]["Name"] = [[OnChanged]];
+
+
+-- LinniHub.Template.Dropdown.DropdownButton
+LinniScript["74"] = Instance.new("Frame", LinniScript["6f"]);
+LinniScript["74"]["BorderSizePixel"] = 0;
+LinniScript["74"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["74"]["Selectable"] = true;
+LinniScript["74"]["ClipsDescendants"] = true;
+LinniScript["74"]["Size"] = UDim2.new(0, 130, 0, 18);
+LinniScript["74"]["Position"] = UDim2.new(-0.00763, 0, 0.14595, 0);
+LinniScript["74"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["74"]["Name"] = [[DropdownButton]];
+LinniScript["74"]["SelectionGroup"] = true;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button
+LinniScript["75"] = Instance.new("TextButton", LinniScript["74"]);
+LinniScript["75"]["BorderSizePixel"] = 0;
+LinniScript["75"]["AutoButtonColor"] = false;
+LinniScript["75"]["TextSize"] = 14;
+LinniScript["75"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["75"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["75"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["75"]["Size"] = UDim2.new(0, 130, 0, 18);
+LinniScript["75"]["Name"] = [[Button]];
+LinniScript["75"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["75"]["Text"] = [[]];
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.UICorner
+LinniScript["76"] = Instance.new("UICorner", LinniScript["75"]);
+LinniScript["76"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.UIStroke
+LinniScript["77"] = Instance.new("UIStroke", LinniScript["75"]);
+LinniScript["77"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["77"]["Thickness"] = 1.5;
+LinniScript["77"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.UIStroke.UIGradient
+LinniScript["78"] = Instance.new("UIGradient", LinniScript["77"]);
+LinniScript["78"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.TextLabel
+LinniScript["79"] = Instance.new("TextLabel", LinniScript["75"]);
+LinniScript["79"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
+LinniScript["79"]["BorderSizePixel"] = 0;
+LinniScript["79"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["79"]["TextSize"] = 14;
+LinniScript["79"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["79"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["79"]["BackgroundTransparency"] = 1;
+LinniScript["79"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["79"]["Size"] = UDim2.new(1, 0, 0.7, 0);
+LinniScript["79"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["79"]["Text"] = [[Test]];
+LinniScript["79"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.TextLabel.UIGradient
+LinniScript["7a"] = Instance.new("UIGradient", LinniScript["79"]);
+LinniScript["7a"]["Rotation"] = -90;
+LinniScript["7a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.UIGradientOff
+LinniScript["7b"] = Instance.new("UIGradient", LinniScript["75"]);
+LinniScript["7b"]["Rotation"] = -90;
+LinniScript["7b"]["Name"] = [[UIGradientOff]];
+LinniScript["7b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.Button.UIGradientOn
+LinniScript["7c"] = Instance.new("UIGradient", LinniScript["75"]);
+LinniScript["7c"]["Enabled"] = false;
+LinniScript["7c"]["Name"] = [[UIGradientOn]];
+LinniScript["7c"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.UICorner
+LinniScript["7d"] = Instance.new("UICorner", LinniScript["74"]);
+LinniScript["7d"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.UIStroke
+LinniScript["7e"] = Instance.new("UIStroke", LinniScript["74"]);
+LinniScript["7e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["7e"]["Color"] = Color3.fromRGB(45, 45, 45);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.UIStroke.UIGradient
+LinniScript["7f"] = Instance.new("UIGradient", LinniScript["7e"]);
+LinniScript["7f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.ScrollingFrame
+LinniScript["80"] = Instance.new("ScrollingFrame", LinniScript["74"]);
+LinniScript["80"]["Active"] = true;
+LinniScript["80"]["BorderSizePixel"] = 0;
+LinniScript["80"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+LinniScript["80"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
+LinniScript["80"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["80"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["80"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["80"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+LinniScript["80"]["Size"] = UDim2.new(1, 0, 0.11377, 100);
+LinniScript["80"]["Position"] = UDim2.new(0, 0, 0, 48);
+LinniScript["80"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["80"]["ScrollBarThickness"] = 2;
+LinniScript["80"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.ScrollingFrame.UIListLayout
+LinniScript["81"] = Instance.new("UIListLayout", LinniScript["80"]);
+LinniScript["81"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["81"]["Padding"] = UDim.new(0, 5);
+LinniScript["81"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox
+LinniScript["82"] = Instance.new("Frame", LinniScript["74"]);
+LinniScript["82"]["Active"] = true;
+LinniScript["82"]["BorderSizePixel"] = 0;
+LinniScript["82"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["82"]["Selectable"] = true;
+LinniScript["82"]["AnchorPoint"] = Vector2.new(0.5, 0);
+LinniScript["82"]["Size"] = UDim2.new(0, 117, 0, 17);
+LinniScript["82"]["Position"] = UDim2.new(0.5, 0, 0, 25);
+LinniScript["82"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["82"]["Name"] = [[SeacrhBox]];
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox.UIStroke
+LinniScript["83"] = Instance.new("UIStroke", LinniScript["82"]);
+LinniScript["83"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["83"]["Thickness"] = 1.5;
+LinniScript["83"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox.UIStroke.UIGradient
+LinniScript["84"] = Instance.new("UIGradient", LinniScript["83"]);
+LinniScript["84"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox.UIGradient
+LinniScript["85"] = Instance.new("UIGradient", LinniScript["82"]);
+LinniScript["85"]["Rotation"] = -90;
+LinniScript["85"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox.TextBox
+LinniScript["86"] = Instance.new("TextBox", LinniScript["82"]);
+LinniScript["86"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["86"]["PlaceholderColor3"] = Color3.fromRGB(179, 179, 179);
+LinniScript["86"]["BorderSizePixel"] = 0;
+LinniScript["86"]["TextWrapped"] = true;
+LinniScript["86"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
+LinniScript["86"]["TextSize"] = 11;
+LinniScript["86"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["86"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["86"]["PlaceholderText"] = [[Search Here]];
+LinniScript["86"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["86"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["86"]["Text"] = [[]];
+LinniScript["86"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.SeacrhBox.UICorner
+LinniScript["87"] = Instance.new("UICorner", LinniScript["82"]);
+LinniScript["87"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.ScrollingFrameSearch
+LinniScript["88"] = Instance.new("ScrollingFrame", LinniScript["74"]);
+LinniScript["88"]["Visible"] = false;
+LinniScript["88"]["Active"] = true;
+LinniScript["88"]["BorderSizePixel"] = 0;
+LinniScript["88"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+LinniScript["88"]["ElasticBehavior"] = Enum.ElasticBehavior.Never;
+LinniScript["88"]["TopImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["88"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["88"]["Name"] = [[ScrollingFrameSearch]];
+LinniScript["88"]["BottomImage"] = [[rbxasset://textures/ui/Scroll/scroll-middle.png]];
+LinniScript["88"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+LinniScript["88"]["Size"] = UDim2.new(1, 0, 0.11377, 100);
+LinniScript["88"]["Position"] = UDim2.new(0, 0, 0, 48);
+LinniScript["88"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["88"]["ScrollBarThickness"] = 2;
+LinniScript["88"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.ScrollingFrameSearch.UIListLayout
+LinniScript["89"] = Instance.new("UIListLayout", LinniScript["88"]);
+LinniScript["89"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["89"]["Padding"] = UDim.new(0, 5);
+LinniScript["89"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Dropdown.DropdownButton.UIGradient
+LinniScript["8a"] = Instance.new("UIGradient", LinniScript["74"]);
+LinniScript["8a"]["Rotation"] = -90;
+LinniScript["8a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Dropdown.Title
+LinniScript["8b"] = Instance.new("TextLabel", LinniScript["6f"]);
+LinniScript["8b"]["TextWrapped"] = true;
+LinniScript["8b"]["LineHeight"] = 1.1;
+LinniScript["8b"]["BorderSizePixel"] = 0;
+LinniScript["8b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["8b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["8b"]["TextSize"] = 14;
+LinniScript["8b"]["FontFace"] = Font.new([[rbxassetid://11702779517]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["8b"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["8b"]["BackgroundTransparency"] = 1;
+LinniScript["8b"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["8b"]["Size"] = UDim2.new(0, 131, 0, 13);
+LinniScript["8b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["8b"]["Text"] = [[Dropdown]];
+LinniScript["8b"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["8b"]["Name"] = [[Title]];
+LinniScript["8b"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.Template.Paragraph
+LinniScript["8c"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["8c"]["Visible"] = false;
+LinniScript["8c"]["BorderSizePixel"] = 0;
+LinniScript["8c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["8c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["8c"]["Size"] = UDim2.new(0, 145, 0, 42);
+LinniScript["8c"]["Position"] = UDim2.new(0, 0, 0.91602, 0);
+LinniScript["8c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["8c"]["Name"] = [[Paragraph]];
+LinniScript["8c"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Paragraph.UIListLayout
+LinniScript["8d"] = Instance.new("UIListLayout", LinniScript["8c"]);
+LinniScript["8d"]["Padding"] = UDim.new(0, 5);
+LinniScript["8d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["8d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+LinniScript["8d"]["FillDirection"] = Enum.FillDirection.Horizontal;
+
+
+-- LinniHub.Template.Paragraph.Paragraph
+LinniScript["8e"] = Instance.new("Frame", LinniScript["8c"]);
+LinniScript["8e"]["BorderSizePixel"] = 0;
+LinniScript["8e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["8e"]["Selectable"] = true;
+LinniScript["8e"]["ClipsDescendants"] = true;
+LinniScript["8e"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["8e"]["Size"] = UDim2.new(0, 130, 0, 28);
+LinniScript["8e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["8e"]["Name"] = [[Paragraph]];
+LinniScript["8e"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.Template.Paragraph.Paragraph.UICorner
+LinniScript["8f"] = Instance.new("UICorner", LinniScript["8e"]);
+LinniScript["8f"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.UIStroke
+LinniScript["90"] = Instance.new("UIStroke", LinniScript["8e"]);
+LinniScript["90"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["90"]["Thickness"] = 1.5;
+LinniScript["90"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.UIStroke.UIGradient
+LinniScript["91"] = Instance.new("UIGradient", LinniScript["90"]);
+LinniScript["91"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Paragraph.Paragraph.Title
+LinniScript["92"] = Instance.new("TextLabel", LinniScript["8e"]);
+LinniScript["92"]["TextWrapped"] = true;
+LinniScript["92"]["BorderSizePixel"] = 0;
+LinniScript["92"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["92"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+LinniScript["92"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["92"]["TextSize"] = 17;
+LinniScript["92"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["92"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["92"]["BackgroundTransparency"] = 1;
+LinniScript["92"]["RichText"] = true;
+LinniScript["92"]["Size"] = UDim2.new(0, 130, 0, 15);
+LinniScript["92"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["92"]["Text"] = [[Paragraph]];
+LinniScript["92"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["92"]["Name"] = [[Title]];
+LinniScript["92"]["Position"] = UDim2.new(0, 0, 0, 27);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.Title.UIPadding
+LinniScript["93"] = Instance.new("UIPadding", LinniScript["92"]);
+LinniScript["93"]["PaddingRight"] = UDim.new(0, 6);
+LinniScript["93"]["PaddingLeft"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.UIPadding
+LinniScript["94"] = Instance.new("UIPadding", LinniScript["8e"]);
+LinniScript["94"]["PaddingTop"] = UDim.new(0, 8);
+LinniScript["94"]["PaddingRight"] = UDim.new(0, 5);
+LinniScript["94"]["PaddingLeft"] = UDim.new(0, 5);
+LinniScript["94"]["PaddingBottom"] = UDim.new(0, 8);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.UIListLayout
+LinniScript["95"] = Instance.new("UIListLayout", LinniScript["8e"]);
+LinniScript["95"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["95"]["Padding"] = UDim.new(0, 5);
+LinniScript["95"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Paragraph.Paragraph.Content
+LinniScript["96"] = Instance.new("TextLabel", LinniScript["8e"]);
+LinniScript["96"]["TextWrapped"] = true;
+LinniScript["96"]["BorderSizePixel"] = 0;
+LinniScript["96"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["96"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+LinniScript["96"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["96"]["TextSize"] = 13;
+LinniScript["96"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["96"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["96"]["BackgroundTransparency"] = 1;
+LinniScript["96"]["RichText"] = true;
+LinniScript["96"]["Size"] = UDim2.new(0, 130, 0, 15);
+LinniScript["96"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["96"]["Text"] = [[Content]];
+LinniScript["96"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["96"]["Name"] = [[Content]];
+LinniScript["96"]["Position"] = UDim2.new(0, 0, 0, 27);
+
+
+-- LinniHub.Template.Paragraph.Paragraph.Content.UIPadding
+LinniScript["97"] = Instance.new("UIPadding", LinniScript["96"]);
+LinniScript["97"]["PaddingRight"] = UDim.new(0, 6);
+LinniScript["97"]["PaddingLeft"] = UDim.new(0, 6);
+
+
+-- LinniHub.Template.Paragraph.UIPadding
+LinniScript["98"] = Instance.new("UIPadding", LinniScript["8c"]);
+LinniScript["98"]["PaddingRight"] = UDim.new(0, 8);
+LinniScript["98"]["PaddingLeft"] = UDim.new(0, 8);
+
+
+-- LinniHub.Template.Slider
+LinniScript["99"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["99"]["Visible"] = false;
+LinniScript["99"]["BorderSizePixel"] = 0;
+LinniScript["99"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["99"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["99"]["Size"] = UDim2.new(0, 145, 0, 47);
+LinniScript["99"]["Position"] = UDim2.new(0, 0, 0.63063, 0);
+LinniScript["99"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["99"]["Name"] = [[Slider]];
+LinniScript["99"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Slider.UIListLayout
+LinniScript["9a"] = Instance.new("UIListLayout", LinniScript["99"]);
+LinniScript["9a"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["9a"]["Padding"] = UDim.new(0, 6);
+LinniScript["9a"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["9a"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- LinniHub.Template.Slider.UIPadding
+LinniScript["9b"] = Instance.new("UIPadding", LinniScript["99"]);
+LinniScript["9b"]["PaddingTop"] = UDim.new(0, 10);
+LinniScript["9b"]["PaddingRight"] = UDim.new(0, 6);
+LinniScript["9b"]["PaddingLeft"] = UDim.new(0, 8);
+LinniScript["9b"]["PaddingBottom"] = UDim.new(0, 10);
+
+
+-- LinniHub.Template.Slider.Frame
+LinniScript["9c"] = Instance.new("Frame", LinniScript["99"]);
+LinniScript["9c"]["BorderSizePixel"] = 0;
+LinniScript["9c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["9c"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["9c"]["Size"] = UDim2.new(0, 125, 0, 13);
+LinniScript["9c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["9c"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Slider.Frame.UIListLayout
+LinniScript["9d"] = Instance.new("UIListLayout", LinniScript["9c"]);
+LinniScript["9d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+LinniScript["9d"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["9d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+LinniScript["9d"]["FillDirection"] = Enum.FillDirection.Horizontal;
+
+
+-- LinniHub.Template.Slider.Frame.Title
+LinniScript["9e"] = Instance.new("TextLabel", LinniScript["9c"]);
+LinniScript["9e"]["TextWrapped"] = true;
+LinniScript["9e"]["BorderSizePixel"] = 0;
+LinniScript["9e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["9e"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+LinniScript["9e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["9e"]["TextSize"] = 13;
+LinniScript["9e"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["9e"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["9e"]["BackgroundTransparency"] = 1;
+LinniScript["9e"]["RichText"] = true;
+LinniScript["9e"]["Size"] = UDim2.new(0.75, 0, 0, 13);
+LinniScript["9e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["9e"]["Text"] = [[Slider]];
+LinniScript["9e"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["9e"]["Name"] = [[Title]];
+LinniScript["9e"]["Position"] = UDim2.new(0, 0, 0, 27);
+
+
+-- LinniHub.Template.Slider.Frame.ValueText
+LinniScript["9f"] = Instance.new("TextBox", LinniScript["9c"]);
+LinniScript["9f"]["Active"] = false;
+LinniScript["9f"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["9f"]["BorderSizePixel"] = 0;
+LinniScript["9f"]["TextXAlignment"] = Enum.TextXAlignment.Right;
+LinniScript["9f"]["TextWrapped"] = true;
+LinniScript["9f"]["TextSize"] = 14;
+LinniScript["9f"]["Name"] = [[ValueText]];
+LinniScript["9f"]["TextScaled"] = true;
+LinniScript["9f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["9f"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["9f"]["Selectable"] = false;
+LinniScript["9f"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["9f"]["Size"] = UDim2.new(0.25, -1, 0, 13);
+LinniScript["9f"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+LinniScript["9f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["9f"]["Text"] = [[0]];
+LinniScript["9f"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Slider.Frame.ValueText.UIGradient
+LinniScript["a0"] = Instance.new("UIGradient", LinniScript["9f"]);
+LinniScript["a0"]["Enabled"] = false;
+LinniScript["a0"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
+
+
+-- LinniHub.Template.Slider.Trigger
+LinniScript["a1"] = Instance.new("TextButton", LinniScript["99"]);
+LinniScript["a1"]["BorderSizePixel"] = 0;
+LinniScript["a1"]["AutoButtonColor"] = false;
+LinniScript["a1"]["TextSize"] = 14;
+LinniScript["a1"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a1"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["a1"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["a1"]["Size"] = UDim2.new(0, 120, 0, 10);
+LinniScript["a1"]["BackgroundTransparency"] = 1;
+LinniScript["a1"]["Name"] = [[Trigger]];
+LinniScript["a1"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a1"]["Text"] = [[]];
+LinniScript["a1"]["Position"] = UDim2.new(0.00763, 0, 0.59239, 0);
+
+
+-- LinniHub.Template.Slider.Trigger.Fill
+LinniScript["a2"] = Instance.new("TextButton", LinniScript["a1"]);
+LinniScript["a2"]["Active"] = false;
+LinniScript["a2"]["Interactable"] = false;
+LinniScript["a2"]["BorderSizePixel"] = 0;
+LinniScript["a2"]["AutoButtonColor"] = false;
+LinniScript["a2"]["TextSize"] = 14;
+LinniScript["a2"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["a2"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["a2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["a2"]["Size"] = UDim2.new(0, 120, 0, 4);
+LinniScript["a2"]["Name"] = [[Fill]];
+LinniScript["a2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a2"]["Text"] = [[]];
+LinniScript["a2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.Template.Slider.Trigger.Fill.UIGradient
+LinniScript["a3"] = Instance.new("UIGradient", LinniScript["a2"]);
+LinniScript["a3"]["Rotation"] = 180;
+LinniScript["a3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Slider.Trigger.Fill.UICorner
+LinniScript["a4"] = Instance.new("UICorner", LinniScript["a2"]);
+LinniScript["a4"]["CornerRadius"] = UDim.new(10, 10);
+
+
+-- LinniHub.Template.Slider.Trigger.Fill.Circle
+LinniScript["a5"] = Instance.new("Frame", LinniScript["a2"]);
+LinniScript["a5"]["BorderSizePixel"] = 0;
+LinniScript["a5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["a5"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["a5"]["Size"] = UDim2.new(0, 10, 0, 10);
+LinniScript["a5"]["Position"] = UDim2.new(0, 0, 0.5, 0);
+LinniScript["a5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a5"]["Name"] = [[Circle]];
+
+
+-- LinniHub.Template.Slider.Trigger.Fill.Circle.UICorner
+LinniScript["a6"] = Instance.new("UICorner", LinniScript["a5"]);
+LinniScript["a6"]["CornerRadius"] = UDim.new(10, 10);
+
+
+-- LinniHub.Template.Slider.OnChanged
+LinniScript["a7"] = Instance.new("BindableEvent", LinniScript["99"]);
+LinniScript["a7"]["Name"] = [[OnChanged]];
+
+
+-- LinniHub.Template.Textbox
+LinniScript["a8"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["a8"]["Visible"] = false;
+LinniScript["a8"]["BorderSizePixel"] = 0;
+LinniScript["a8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["a8"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["a8"]["Size"] = UDim2.new(0, 145, 0, 35);
+LinniScript["a8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["a8"]["Name"] = [[Textbox]];
+LinniScript["a8"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Textbox.UIListLayout
+LinniScript["a9"] = Instance.new("UIListLayout", LinniScript["a8"]);
+LinniScript["a9"]["Padding"] = UDim.new(0, 5);
+LinniScript["a9"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["a9"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+LinniScript["a9"]["FillDirection"] = Enum.FillDirection.Horizontal;
+
+
+-- LinniHub.Template.Textbox.UIPadding
+LinniScript["aa"] = Instance.new("UIPadding", LinniScript["a8"]);
+LinniScript["aa"]["PaddingTop"] = UDim.new(0, 8);
+LinniScript["aa"]["PaddingRight"] = UDim.new(0, 8);
+LinniScript["aa"]["PaddingLeft"] = UDim.new(0, 8);
+LinniScript["aa"]["PaddingBottom"] = UDim.new(0, 8);
+
+
+-- LinniHub.Template.Textbox.OnChanged
+LinniScript["ab"] = Instance.new("BindableEvent", LinniScript["a8"]);
+LinniScript["ab"]["Name"] = [[OnChanged]];
+
+
+-- LinniHub.Template.Textbox.Title
+LinniScript["ac"] = Instance.new("TextLabel", LinniScript["a8"]);
+LinniScript["ac"]["TextWrapped"] = true;
+LinniScript["ac"]["BorderSizePixel"] = 0;
+LinniScript["ac"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["ac"]["TextTransparency"] = 0.7;
+LinniScript["ac"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["ac"]["TextSize"] = 13;
+LinniScript["ac"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["ac"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["ac"]["BackgroundTransparency"] = 1;
+LinniScript["ac"]["Size"] = UDim2.new(0, 72, 0, 23);
+LinniScript["ac"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["ac"]["Text"] = [[Textbox]];
+LinniScript["ac"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["ac"]["Name"] = [[Title]];
+
+
+-- LinniHub.Template.Textbox.Box
+LinniScript["ad"] = Instance.new("TextButton", LinniScript["a8"]);
+LinniScript["ad"]["TextWrapped"] = true;
+LinniScript["ad"]["BorderSizePixel"] = 0;
+LinniScript["ad"]["AutoButtonColor"] = false;
+LinniScript["ad"]["TextSize"] = 14;
+LinniScript["ad"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["ad"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["ad"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["ad"]["Size"] = UDim2.new(0, 49, 0, 22);
+LinniScript["ad"]["Name"] = [[Box]];
+LinniScript["ad"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["ad"]["Text"] = [[]];
+LinniScript["ad"]["Position"] = UDim2.new(0.5969, 0, 0.02174, 0);
+
+
+-- LinniHub.Template.Textbox.Box.UICorner
+LinniScript["ae"] = Instance.new("UICorner", LinniScript["ad"]);
+LinniScript["ae"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Textbox.Box.UIStroke
+LinniScript["af"] = Instance.new("UIStroke", LinniScript["ad"]);
+LinniScript["af"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["af"]["Thickness"] = 1.5;
+LinniScript["af"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Textbox.Box.UIStroke.UIGradient
+LinniScript["b0"] = Instance.new("UIGradient", LinniScript["af"]);
+LinniScript["b0"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Textbox.Box.UIGradient
+LinniScript["b1"] = Instance.new("UIGradient", LinniScript["ad"]);
+LinniScript["b1"]["Rotation"] = -90;
+LinniScript["b1"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Template.Textbox.Box.Textbox
+LinniScript["b2"] = Instance.new("TextBox", LinniScript["ad"]);
+LinniScript["b2"]["TextColor3"] = Color3.fromRGB(151, 151, 151);
+LinniScript["b2"]["PlaceholderColor3"] = Color3.fromRGB(96, 96, 96);
+LinniScript["b2"]["BorderSizePixel"] = 0;
+LinniScript["b2"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["b2"]["TextWrapped"] = true;
+LinniScript["b2"]["TextTruncate"] = Enum.TextTruncate.AtEnd;
+LinniScript["b2"]["TextSize"] = 12;
+LinniScript["b2"]["Name"] = [[Textbox]];
+LinniScript["b2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["b2"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["b2"]["Selectable"] = false;
+LinniScript["b2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["b2"]["ClearTextOnFocus"] = false;
+LinniScript["b2"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["b2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+LinniScript["b2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["b2"]["Text"] = [[]];
+LinniScript["b2"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Textbox.Box.Textbox.UIGradient
+LinniScript["b3"] = Instance.new("UIGradient", LinniScript["b2"]);
+LinniScript["b3"]["Enabled"] = false;
+LinniScript["b3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 90, 255)),ColorSequenceKeypoint.new(0.247, Color3.fromRGB(63, 156, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 248))};
+
+
+-- LinniHub.Template.Textbox.Box.Textbox.UIPadding
+LinniScript["b4"] = Instance.new("UIPadding", LinniScript["b2"]);
+LinniScript["b4"]["PaddingTop"] = UDim.new(0, 5);
+LinniScript["b4"]["PaddingLeft"] = UDim.new(0, 5);
+LinniScript["b4"]["PaddingBottom"] = UDim.new(0, 5);
+
+
+-- LinniHub.Template.Toggle
+LinniScript["b5"] = Instance.new("Frame", LinniScript["29"]);
+LinniScript["b5"]["Visible"] = false;
+LinniScript["b5"]["BorderSizePixel"] = 0;
+LinniScript["b5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["b5"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["b5"]["Size"] = UDim2.new(0, 145, 0, 35);
+LinniScript["b5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["b5"]["Name"] = [[Toggle]];
+LinniScript["b5"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Template.Toggle.UIListLayout
+LinniScript["b6"] = Instance.new("UIListLayout", LinniScript["b5"]);
+LinniScript["b6"]["Padding"] = UDim.new(0, 5);
+LinniScript["b6"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+LinniScript["b6"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+LinniScript["b6"]["FillDirection"] = Enum.FillDirection.Horizontal;
+
+
+-- LinniHub.Template.Toggle.UIPadding
+LinniScript["b7"] = Instance.new("UIPadding", LinniScript["b5"]);
+LinniScript["b7"]["PaddingTop"] = UDim.new(0, 5);
+LinniScript["b7"]["PaddingRight"] = UDim.new(0, 9);
+LinniScript["b7"]["PaddingLeft"] = UDim.new(0, 9);
+LinniScript["b7"]["PaddingBottom"] = UDim.new(0, 5);
+
+
+-- LinniHub.Template.Toggle.State
+LinniScript["b8"] = Instance.new("BoolValue", LinniScript["b5"]);
+LinniScript["b8"]["Name"] = [[State]];
+LinniScript["b8"]["Value"] = true;
+
+
+-- LinniHub.Template.Toggle.OnChanged
+LinniScript["b9"] = Instance.new("BindableEvent", LinniScript["b5"]);
+LinniScript["b9"]["Name"] = [[OnChanged]];
+
+
+-- LinniHub.Template.Toggle.Title
+LinniScript["ba"] = Instance.new("TextLabel", LinniScript["b5"]);
+LinniScript["ba"]["TextWrapped"] = true;
+LinniScript["ba"]["BorderSizePixel"] = 0;
+LinniScript["ba"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+LinniScript["ba"]["TextTransparency"] = 0.7;
+LinniScript["ba"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+LinniScript["ba"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["ba"]["TextSize"] = 13;
+LinniScript["ba"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+LinniScript["ba"]["TextColor3"] = Color3.fromRGB(246, 246, 246);
+LinniScript["ba"]["BackgroundTransparency"] = 1;
+LinniScript["ba"]["Size"] = UDim2.new(0, 98, 0, 13);
+LinniScript["ba"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["ba"]["Text"] = [[Toggle]];
+LinniScript["ba"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+LinniScript["ba"]["Name"] = [[Title]];
+LinniScript["ba"]["Position"] = UDim2.new(0, 0, 0, 27);
+
+
+-- LinniHub.Template.Toggle.Toggle
+LinniScript["bb"] = Instance.new("TextButton", LinniScript["b5"]);
+LinniScript["bb"]["BorderSizePixel"] = 0;
+LinniScript["bb"]["AutoButtonColor"] = false;
+LinniScript["bb"]["TextSize"] = 14;
+LinniScript["bb"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["bb"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+LinniScript["bb"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+LinniScript["bb"]["Size"] = UDim2.new(0, 22, 0, 22);
+LinniScript["bb"]["Name"] = [[Toggle]];
+LinniScript["bb"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["bb"]["Text"] = [[]];
+LinniScript["bb"]["Position"] = UDim2.new(0.05517, 0, 0.13333, 0);
+
+
+-- LinniHub.Template.Toggle.Toggle.UICorner
+LinniScript["bc"] = Instance.new("UICorner", LinniScript["bb"]);
+LinniScript["bc"]["CornerRadius"] = UDim.new(0, 4);
+
+
+-- LinniHub.Template.Toggle.Toggle.UIStroke
+LinniScript["bd"] = Instance.new("UIStroke", LinniScript["bb"]);
+LinniScript["bd"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+LinniScript["bd"]["Thickness"] = 1.5;
+LinniScript["bd"]["Color"] = Color3.fromRGB(56, 56, 56);
+
+
+-- LinniHub.Template.Toggle.Toggle.UIStroke.UIGradient
+LinniScript["be"] = Instance.new("UIGradient", LinniScript["bd"]);
+LinniScript["be"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 39, 255))};
+
+
+-- LinniHub.Template.Toggle.Toggle.UIGradient
+LinniScript["bf"] = Instance.new("UIGradient", LinniScript["bb"]);
+LinniScript["bf"]["Rotation"] = -90;
+LinniScript["bf"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(0, 180, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(14, 43, 140))};
+
+
+-- LinniHub.Floating
+LinniScript["c0"] = Instance.new("Frame", LinniScript["1"]);
+LinniScript["c0"]["BorderSizePixel"] = 0;
+LinniScript["c0"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["c0"]["Size"] = UDim2.new(0, 158, 0, 42);
+LinniScript["c0"]["Position"] = UDim2.new(0.02, 0, 0.1, 0);
+LinniScript["c0"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["c0"]["Name"] = [[Floating]];
+
+
+-- LinniHub.Floating.UICorner
+LinniScript["c1"] = Instance.new("UICorner", LinniScript["c0"]);
+LinniScript["c1"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Floating.LightBlue
+LinniScript["c2"] = Instance.new("Frame", LinniScript["c0"]);
+LinniScript["c2"]["BorderSizePixel"] = 0;
+LinniScript["c2"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["c2"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["c2"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["c2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["c2"]["Name"] = [[LightBlue]];
+LinniScript["c2"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.Floating.LightBlue.UIGradient
+LinniScript["c3"] = Instance.new("UIGradient", LinniScript["c2"]);
+LinniScript["c3"]["Rotation"] = 50;
+LinniScript["c3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.461, Color3.fromRGB(0, 255, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Floating.LightBlue.UICorner
+LinniScript["c4"] = Instance.new("UICorner", LinniScript["c2"]);
+LinniScript["c4"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Floating.Blue
+LinniScript["c5"] = Instance.new("Frame", LinniScript["c0"]);
+LinniScript["c5"]["BorderSizePixel"] = 0;
+LinniScript["c5"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["c5"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["c5"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["c5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["c5"]["Name"] = [[Blue]];
+LinniScript["c5"]["BackgroundTransparency"] = 0.6;
+
+
+-- LinniHub.Floating.Blue.UIGradient
+LinniScript["c6"] = Instance.new("UIGradient", LinniScript["c5"]);
+LinniScript["c6"]["Rotation"] = -72;
+LinniScript["c6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.491, Color3.fromRGB(0, 50, 123)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Floating.Blue.UICorner
+LinniScript["c7"] = Instance.new("UICorner", LinniScript["c5"]);
+LinniScript["c7"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Floating.Cyan
+LinniScript["c8"] = Instance.new("CanvasGroup", LinniScript["c0"]);
+LinniScript["c8"]["BorderSizePixel"] = 0;
+LinniScript["c8"]["BackgroundColor3"] = Color3.fromRGB(107, 107, 107);
+LinniScript["c8"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["c8"]["Position"] = UDim2.new(-0.00013, 0, -0.00077, 0);
+LinniScript["c8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["c8"]["Name"] = [[Cyan]];
+LinniScript["c8"]["BackgroundTransparency"] = 0.8;
+
+
+-- LinniHub.Floating.Cyan.UIGradient
+LinniScript["c9"] = Instance.new("UIGradient", LinniScript["c8"]);
+LinniScript["c9"]["Rotation"] = -26;
+LinniScript["c9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(16, 16, 16)),ColorSequenceKeypoint.new(0.500, Color3.fromRGB(0, 35, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(16, 16, 16))};
+
+
+-- LinniHub.Floating.Cyan.UICorner
+LinniScript["ca"] = Instance.new("UICorner", LinniScript["c8"]);
+LinniScript["ca"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- LinniHub.Floating.Cyan.AbstractBg
+LinniScript["cb"] = Instance.new("ImageLabel", LinniScript["c8"]);
+LinniScript["cb"]["BorderSizePixel"] = 0;
+LinniScript["cb"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["cb"]["ImageColor3"] = Color3.fromRGB(0, 183, 22);
+LinniScript["cb"]["Image"] = [[rbxassetid://88984077541230]];
+LinniScript["cb"]["Size"] = UDim2.new(0, 549, 0, 364);
+LinniScript["cb"]["Visible"] = false;
+LinniScript["cb"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["cb"]["BackgroundTransparency"] = 1;
+LinniScript["cb"]["Rotation"] = 40;
+LinniScript["cb"]["Name"] = [[AbstractBg]];
+LinniScript["cb"]["Position"] = UDim2.new(0.41197, 0, 0.48528, 0);
+
+
+-- LinniHub.Floating.DropShadowHolder
+LinniScript["cc"] = Instance.new("Frame", LinniScript["c0"]);
+LinniScript["cc"]["ZIndex"] = 0;
+LinniScript["cc"]["BorderSizePixel"] = 0;
+LinniScript["cc"]["Size"] = UDim2.new(1, 0, 1, 0);
+LinniScript["cc"]["Name"] = [[DropShadowHolder]];
+LinniScript["cc"]["BackgroundTransparency"] = 1;
+
+
+-- LinniHub.Floating.DropShadowHolder.DropShadow
+LinniScript["cd"] = Instance.new("ImageLabel", LinniScript["cc"]);
+LinniScript["cd"]["ZIndex"] = 0;
+LinniScript["cd"]["BorderSizePixel"] = 0;
+LinniScript["cd"]["SliceCenter"] = Rect.new(49, 49, 450, 450);
+LinniScript["cd"]["ScaleType"] = Enum.ScaleType.Slice;
+LinniScript["cd"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["cd"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LinniScript["cd"]["Image"] = [[rbxassetid://6014261993]]; -- Lunor Diganti disini
+LinniScript["cd"]["Size"] = UDim2.new(1, 35, 1, 35);
+LinniScript["cd"]["BackgroundTransparency"] = 1;
+LinniScript["cd"]["Name"] = [[DropShadow]];
+LinniScript["cd"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+
+-- LinniHub.Floating.Folder
+LinniScript["ce"] = Instance.new("Folder", LinniScript["c0"]);
+
+
+
+-- LinniHub.Floating.Folder.Logo
+LinniScript["cf"] = Instance.new("ImageLabel", LinniScript["ce"]);
+LinniScript["cf"]["BorderSizePixel"] = 0;
+LinniScript["cf"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["cf"]["Image"] = [[rbxassetid://120727887371733]];
+LinniScript["cf"]["Size"] = UDim2.new(0, 24, 0, 25);
+LinniScript["cf"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["cf"]["BackgroundTransparency"] = 1;
+LinniScript["cf"]["Name"] = [[Logo]];
+LinniScript["cf"]["Position"] = UDim2.new(0, 8, 0, 8);
+
+
+-- LinniHub.Floating.Folder.Logo.UIAspectRatioConstraint
+LinniScript["d0"] = Instance.new("UIAspectRatioConstraint", LinniScript["cf"]);
+
+
+
+-- LinniHub.Floating.Folder.Logo.UICorner
+LinniScript["d1"] = Instance.new("UICorner", LinniScript["cf"]);
+
+
+
+-- LinniHub.Floating.Folder.Frame
+LinniScript["d2"] = Instance.new("Frame", LinniScript["ce"]);
+LinniScript["d2"]["BorderSizePixel"] = 0;
+LinniScript["d2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["d2"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["d2"]["Size"] = UDim2.new(0, 2, 0, 27);
+LinniScript["d2"]["Position"] = UDim2.new(0, 40, 0.5, 0);
+LinniScript["d2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+
+
+-- LinniHub.Floating.Folder.Frame.UIGradient
+LinniScript["d3"] = Instance.new("UIGradient", LinniScript["d2"]);
+LinniScript["d3"]["Rotation"] = -90;
+LinniScript["d3"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+
+
+-- LinniHub.Floating.Folder.Frame.UICorner
+LinniScript["d4"] = Instance.new("UICorner", LinniScript["d2"]);
+LinniScript["d4"]["CornerRadius"] = UDim.new(100, 100);
 
 
 local Library = {}
@@ -1958,43 +1958,43 @@ function Library:CreateWindow(config)
     local customTitle = config.Title or "Default Title"
 
     -- Contoh elemen GUI
-    local Ancestral = {}
+    local LinniScript = {}
 
     -- Create BackgroundFrame.Side.DraggablePart.Title
-    Ancestral["20"] = Instance.new("TextLabel")
-    Ancestral["20"].Name = "Title"
-    Ancestral["20"].TextWrapped = true
-    Ancestral["20"].BorderSizePixel = 0
-    Ancestral["20"].TextXAlignment = Enum.TextXAlignment.Left
-    Ancestral["20"].TextScaled = true
-    Ancestral["20"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["20"].TextSize = 14
-    Ancestral["20"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    Ancestral["20"].TextColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["20"].BackgroundTransparency = 1
-    Ancestral["20"].AnchorPoint = Vector2.new(0, 0.5)
-    Ancestral["20"].Size = UDim2.new(0, 80, 0, 17)
-    Ancestral["20"].Position = UDim2.new(0, 55, 0, 29)
-    Ancestral["20"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Ancestral["20"].Text = customTitle -- GANTI DARI CONFIG
+    LinniScript["20"] = Instance.new("TextLabel")
+    LinniScript["20"].Name = "Title"
+    LinniScript["20"].TextWrapped = true
+    LinniScript["20"].BorderSizePixel = 0
+    LinniScript["20"].TextXAlignment = Enum.TextXAlignment.Left
+    LinniScript["20"].TextScaled = true
+    LinniScript["20"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["20"].TextSize = 14
+    LinniScript["20"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    LinniScript["20"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["20"].BackgroundTransparency = 1
+    LinniScript["20"].AnchorPoint = Vector2.new(0, 0.5)
+    LinniScript["20"].Size = UDim2.new(0, 80, 0, 17)
+    LinniScript["20"].Position = UDim2.new(0, 55, 0, 29)
+    LinniScript["20"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+    LinniScript["20"].Text = customTitle -- GANTI DARI CONFIG
 
     -- Create Floating.Folder.Title
-    Ancestral["d5"] = Instance.new("TextLabel")
-    Ancestral["d5"].Name = "Title"
-    Ancestral["d5"].TextWrapped = true
-    Ancestral["d5"].BorderSizePixel = 0
-    Ancestral["d5"].TextXAlignment = Enum.TextXAlignment.Left
-    Ancestral["d5"].TextScaled = true
-    Ancestral["d5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["d5"].TextSize = 14
-    Ancestral["d5"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    Ancestral["d5"].TextColor3 = Color3.fromRGB(255, 255, 255)
-    Ancestral["d5"].BackgroundTransparency = 1
-    Ancestral["d5"].AnchorPoint = Vector2.new(0, 0.5)
-    Ancestral["d5"].Size = UDim2.new(0, 70, 0, 15)
-    Ancestral["d5"].Position = UDim2.new(0, 53, 0, 21)
-    Ancestral["d5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Ancestral["d5"].Text = customTitle -- GANTI DARI CONFIG
+    LinniScript["d5"] = Instance.new("TextLabel")
+    LinniScript["d5"].Name = "Title"
+    LinniScript["d5"].TextWrapped = true
+    LinniScript["d5"].BorderSizePixel = 0
+    LinniScript["d5"].TextXAlignment = Enum.TextXAlignment.Left
+    LinniScript["d5"].TextScaled = true
+    LinniScript["d5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["d5"].TextSize = 14
+    LinniScript["d5"].FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    LinniScript["d5"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    LinniScript["d5"].BackgroundTransparency = 1
+    LinniScript["d5"].AnchorPoint = Vector2.new(0, 0.5)
+    LinniScript["d5"].Size = UDim2.new(0, 70, 0, 15)
+    LinniScript["d5"].Position = UDim2.new(0, 53, 0, 21)
+    LinniScript["d5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+    LinniScript["d5"].Text = customTitle -- GANTI DARI CONFIG
 
     -- Kembalikan objek window jika perlu
     return window
@@ -2004,58 +2004,58 @@ return Library
 
 
 
--- AncesHub.Floating.Folder.Title.UIGradient
-Ancestral["d6"] = Instance.new("UIGradient", Ancestral["d5"]);
-Ancestral["d6"]["Rotation"] = -90;
-Ancestral["d6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+-- LinniHub.Floating.Folder.Title.UIGradient
+LinniScript["d6"] = Instance.new("UIGradient", LinniScript["d5"]);
+LinniScript["d6"]["Rotation"] = -90;
+LinniScript["d6"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
 
 
--- AncesHub.Floating.Folder.Status
-Ancestral["d7"] = Instance.new("ImageButton", Ancestral["ce"]);
-Ancestral["d7"]["Active"] = false;
-Ancestral["d7"]["BorderSizePixel"] = 0;
-Ancestral["d7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["d7"]["Selectable"] = false;
-Ancestral["d7"]["AnchorPoint"] = Vector2.new(0, 0.5);
-Ancestral["d7"]["Image"] = [[rbxassetid://10734895698]];
-Ancestral["d7"]["Size"] = UDim2.new(0, 19, 0, 20);
-Ancestral["d7"]["BackgroundTransparency"] = 1;
-Ancestral["d7"]["Name"] = [[Status]];
-Ancestral["d7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["d7"]["Position"] = UDim2.new(0, 128, 0.5, 0);
+-- LinniHub.Floating.Folder.Status
+LinniScript["d7"] = Instance.new("ImageButton", LinniScript["ce"]);
+LinniScript["d7"]["Active"] = false;
+LinniScript["d7"]["BorderSizePixel"] = 0;
+LinniScript["d7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["d7"]["Selectable"] = false;
+LinniScript["d7"]["AnchorPoint"] = Vector2.new(0, 0.5);
+LinniScript["d7"]["Image"] = [[rbxassetid://10734895698]];
+LinniScript["d7"]["Size"] = UDim2.new(0, 19, 0, 20);
+LinniScript["d7"]["BackgroundTransparency"] = 1;
+LinniScript["d7"]["Name"] = [[Status]];
+LinniScript["d7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["d7"]["Position"] = UDim2.new(0, 128, 0.5, 0);
 
 
--- AncesHub.Floating.Folder.Status.UIAspectRatioConstraint
-Ancestral["d8"] = Instance.new("UIAspectRatioConstraint", Ancestral["d7"]);
-
-
-
--- AncesHub.Floating.Folder.Status.UICorner
-Ancestral["d9"] = Instance.new("UICorner", Ancestral["d7"]);
+-- LinniHub.Floating.Folder.Status.UIAspectRatioConstraint
+LinniScript["d8"] = Instance.new("UIAspectRatioConstraint", LinniScript["d7"]);
 
 
 
--- AncesHub.Floating.Folder.Status.UIGradient
-Ancestral["da"] = Instance.new("UIGradient", Ancestral["d7"]);
-Ancestral["da"]["Rotation"] = -90;
-Ancestral["da"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
+-- LinniHub.Floating.Folder.Status.UICorner
+LinniScript["d9"] = Instance.new("UICorner", LinniScript["d7"]);
 
 
--- AncesHub.Floating.Folder.DraggablePart
-Ancestral["db"] = Instance.new("Frame", Ancestral["ce"]);
-Ancestral["db"]["BorderSizePixel"] = 0;
-Ancestral["db"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-Ancestral["db"]["Size"] = UDim2.new(0, 40, 0, 42);
-Ancestral["db"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-Ancestral["db"]["Name"] = [[DraggablePart]];
-Ancestral["db"]["BackgroundTransparency"] = 1;
+
+-- LinniHub.Floating.Folder.Status.UIGradient
+LinniScript["da"] = Instance.new("UIGradient", LinniScript["d7"]);
+LinniScript["da"]["Rotation"] = -90;
+LinniScript["da"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(3, 100, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(0, 255, 226))};
 
 
--- Require Ancestral wrapper
-local Ancestral_REQUIRE = require;
-local Ancestral_MODULES = {};
+-- LinniHub.Floating.Folder.DraggablePart
+LinniScript["db"] = Instance.new("Frame", LinniScript["ce"]);
+LinniScript["db"]["BorderSizePixel"] = 0;
+LinniScript["db"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LinniScript["db"]["Size"] = UDim2.new(0, 40, 0, 42);
+LinniScript["db"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LinniScript["db"]["Name"] = [[DraggablePart]];
+LinniScript["db"]["BackgroundTransparency"] = 1;
+
+
+-- Require LinniScript wrapper
+local LinniScript_REQUIRE = require;
+local LinniScript_MODULES = {};
 local function require(Module:ModuleScript)
-	local ModuleState = Ancestral_MODULES[Module];
+	local ModuleState = LinniScript_MODULES[Module];
 	if ModuleState then
 		if not ModuleState.Required then
 			ModuleState.Required = true;
@@ -2063,12 +2063,12 @@ local function require(Module:ModuleScript)
 		end
 		return ModuleState.Value;
 	end;
-	return Ancestral_REQUIRE(Module);
+	return LinniScript_REQUIRE(Module);
 end
 
-Ancestral_MODULES[Ancestral["27"]] = {
+LinniScript_MODULES[LinniScript["27"]] = {
 	Closure = function()
-		local script = Ancestral["27"];local LIB = {}
+		local script = LinniScript["27"];local LIB = {}
 		local TABLIST = {}
 
 		LIB.Options = {}
@@ -3759,9 +3759,9 @@ Ancestral_MODULES[Ancestral["27"]] = {
 		return LIB
 	end;
 };
-Ancestral_MODULES[Ancestral["28"]] = {
+LinniScript_MODULES[LinniScript["28"]] = {
 	Closure = function()
-		local script = Ancestral["28"];return {
+		local script = LinniScript["28"];return {
 			assets = {
 				["accessibility"] = "rbxassetid://10709751939",
 				["activity"] = "rbxassetid://10709752035",
@@ -4586,4 +4586,4 @@ Ancestral_MODULES[Ancestral["28"]] = {
 	end;
 };
 
-return require(Ancestral["27"])
+return require(LinniScript["27"])
