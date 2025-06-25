@@ -977,7 +977,7 @@ BackgroundTransparency=1,
 v,u,
 })
 
-local x=h("Enter Key","key",nil,"Input",function(x)
+local x=h("输入密钥","key",nil,"Input",function(x)
 p=x
 end)
 
@@ -1080,7 +1080,7 @@ PaddingBottom=UDim.new(0,16),
 
 
 
-local B=g("Exit","log-out",function()
+local B=g("退出","log-out",function()
 o:Close()()
 end,"Tertiary",z.Frame)
 
@@ -1092,12 +1092,12 @@ B.AnchorPoint=Vector2.new(0,1)
 end
 
 if i.KeySystem.URL then
-g("Get key","key",function()
+g("获取密钥","key",function()
 setclipboard(i.KeySystem.URL)
 end,"Secondary",z.Frame)
 end
 
-local C=g("Submit","arrow-right",function()
+local C=g("确定","arrow-right",function()
 local C=p
 local D
 if type(i.KeySystem.Key)=="table"then
