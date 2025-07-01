@@ -1,4 +1,4 @@
---霖溺二改，可提供作弊使用者参考，请自行复制
+
 
 
 local a a={cache={}, load=function(b)if not a.cache[b]then a.cache[b]={c=a[b]()}end return a.cache[b].c end}do function a.a()
@@ -603,12 +603,10 @@ TextSize=18,
 })
 
 d.AddSignal(r.MouseEnter,function()
-    f(r.Frame, 0.1, {ImageTransparency = 0.9, Size = UDim2.new(1, 5, 1, 5)}, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
-    f(r.SquircleOutline, 0.15, {ImageTransparency = 0.8}):Play()
+f(r.Frame,.047,{ImageTransparency=.95}):Play()
 end)
 d.AddSignal(r.MouseLeave,function()
-    f(r.Frame, 0.2, {ImageTransparency = 1, Size = UDim2.new(1, 0, 1, 0)}, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
-    f(r.SquircleOutline, 0.2, {ImageTransparency = 0.95}):Play()
+f(r.Frame,.047,{ImageTransparency=1}):Play()
 end)
 d.AddSignal(r.MouseButton1Up,function()
 if n then
@@ -723,23 +721,10 @@ p,
 
 
 
-d.AddSignal(p.Focused, function()
-    af(q, 0.15, {
-        Size = UDim2.new(1, 5, 0, 46)
-    }, Enum.EasingStyle.Quint):Play()
-    af(p, 0.1, {
-        TextTransparency = 0,
-        PlaceholderTransparency = 0.8
-    }):Play()
-end)
-
-d.AddSignal(p.FocusLost, function()
-    af(q, 0.2, {
-        Size = UDim2.new(1, 0, 0, 42)
-    }, Enum.EasingStyle.Back):Play()
-    if k then
-        d.SafeCallback(k, p.Text)
-    end
+d.AddSignal(p.FocusLost,function()
+if k then
+d.SafeCallback(k,p.Text)
+end
 end)
 
 return q
@@ -5215,27 +5200,6 @@ end
 
 function i.SelectTab(j,k)
 if not i.Tabs[k].Locked then
-if i.SelectedTab then
-            local currentTab = i.Tabs[i.SelectedTab]
-            af(currentTab.UIElements.Main, 0.2, {
-                Size = UDim2.new(1, -7, 0, 0)
-            }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
-        end
-        
-        local newTab = i.Tabs[k]
-        af(newTab.UIElements.Main, 0.25, {
-            Size = UDim2.new(1, 10, 0, 5)
-        }, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out):Play()
-        
-        for p,q in next,i.Containers do
-            q.AnchorPoint = Vector2.new(0, 0.05)
-            q.Visible = false
-        end
-        
-        i.Containers[k].Visible = true
-        af(i.Containers[k], 0.35, {
-            AnchorPoint = Vector2.new(0, 0)
-        }, Enum.EasingStyle.Quart, Enum.EasingDirection.Out):Play()
 i.SelectedTab=k
 
 for n,o in next,i.Tabs do
@@ -6814,25 +6778,7 @@ end
 
 function p.Open(K)
 task.spawn(function()
-      p.UIElements.Main.Visible = true
-        p.UIElements.Main.Size = UDim2.new(0, 0, 0, 0)
-        p.UIElements.Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-        
-        af(p.UIElements.Main, 0.5, {
-            Size = p.Size,
-            Position = p.Position
-        }, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
-        
-        af(v, 0.6, {
-            ImageTransparency = 0.7
-        }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
-        
-        task.wait(0.3)
-        p.UIElements.Main.Main.Visible = true
-        p.UIElements.Main.Main.GroupTransparency = 1
-        af(p.UIElements.Main.Main, 0.3, {
-            GroupTransparency = 0
-        }):Play()
+task.wait(.06)
 p.Closed=false
 
 g(p.UIElements.Main.Background,0.2,{
