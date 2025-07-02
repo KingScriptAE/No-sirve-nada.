@@ -211,7 +211,7 @@ local combatSettings = {
 Tabs.CombatTab:Section({Title = "战斗功能"})
 Tabs.CombatTab:Paragraph({
     Title = "超强攻击",
-    Desc = "自动检测身边的npc"
+    Desc = "目前只对第一张地图生效"
 })
 Tabs.CombatTab:Toggle({
     Title = "自动范围攻击",
