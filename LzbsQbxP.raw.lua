@@ -1,4 +1,4 @@
-Country = loadstring(game:HttpGet("https://pastefy.app/LzbsQbxP/raw"))()
+Country = loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80.lua"))()
 if game.CoreGui:FindFirstChild("Country") == nil then
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "Country"
