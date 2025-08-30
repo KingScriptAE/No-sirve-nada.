@@ -1387,11 +1387,11 @@ New=a.load'g'.New
 
 
 return[[{
-    "name": "windui",
-    "version": "1.6.45",
+    "name": "欢迎霖溺用户",
+    "version": "版本:免费",
     "main": "./dist/main.lua",
     "repository": "https://github.com/Footagesus/WindUI",
-    "discord": "https://discord.gg/Q6HkNG4vwP",
+    "discord": "not",
     "author": "Footagesus",
     "description": "Roblox UI Library for scripts",
     "license": "MIT",
