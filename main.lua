@@ -9613,7 +9613,7 @@ local ao=gethui and gethui()or game.CoreGui
 
 
 aa.ScreenGui=aj("ScreenGui",{
-Name="WindUI",
+Name="欢迎霖溺用户",
 Parent=ao,
 IgnoreGuiInset=true,
 ScreenInsets="None",
