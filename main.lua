@@ -1387,8 +1387,8 @@ New=a.load'g'.New
 
 
 return[[{
-    "name": "欢迎霖溺用户",
-    "version": "版本:免费",
+    "name": "<制作者霖溺>",
+    "version": "霖溺脚本-版本:免费",
     "main": "./dist/main.lua",
     "repository": "https://github.com/Footagesus/WindUI",
     "discord": "not",
@@ -9613,7 +9613,7 @@ local ao=gethui and gethui()or game.CoreGui
 
 
 aa.ScreenGui=aj("ScreenGui",{
-Name="欢迎霖溺用户",
+Name="WindUI",
 Parent=ao,
 IgnoreGuiInset=true,
 ScreenInsets="None",
