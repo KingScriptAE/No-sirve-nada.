@@ -3,9 +3,9 @@
 -- Test. do not use this.
 
 local Icons = {
-    ["lucide"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))(),
-    ["craft"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))(),
-    ["geist"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))(),
+    ["lucide"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/lucide.lua"))(),
+    ["craft"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/craft.lua"))(),
+    ["geist"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/geist.lua"))(),
 }
 
 
