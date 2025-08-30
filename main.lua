@@ -20,7 +20,7 @@ local e=game:GetService"UserInputService"
 local f=game:GetService"TweenService"
 local g=game:GetService"LocalizationService"
 
-local h=loadstring(game:HttpGetAsync"https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua")()
+local h=loadstring(game:HttpGetAsync"https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/mian f Yuan.lua")()
 h.SetIconsType"lucide"
 
 
@@ -9422,17 +9422,17 @@ ao:CreateTopbarButton("Close","x",function()
 ah(ao.UIElements.Main,0.35,{Position=UDim2.new(0.5,0,0.5,0)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 ao:Dialog{
 
-Title="Close Window",
-Content="Do you want to close this window? You will not be able to open it again.",
+Title="关闭霖溺？",
+Content="你可以再想想.",
 Buttons={
 {
-Title="Cancel",
+Title="取消",
 
 Callback=function()end,
 Variant="Secondary",
 },
 {
-Title="Close Window",
+Title="关闭",
 
 Callback=function()ao:Close():Destroy()end,
 Variant="Primary",
