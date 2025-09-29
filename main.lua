@@ -1525,7 +1525,7 @@ HorizontalAlignment="Center",
 am,
 ac("TextLabel",{
 BackgroundTransparency=1,
-FontFace=Font.new(ab.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ab.Font,Enum.FontWeight.Heavy),
 Text=ae or"Button",
 ThemeTag={
 TextColor3=(ah~="Primary"and ah~="White")and"Text",
@@ -1886,7 +1886,7 @@ local aq=ac("TextLabel",{
 AutomaticSize="XY",
 BackgroundTransparency=1,
 Text=ag.Title,
-FontFace=Font.new(ab.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ab.Font,Enum.FontWeight.Heavy),
 ThemeTag={
 TextColor3="Text",
 },
@@ -2727,7 +2727,7 @@ AutomaticSize="Y",
 BackgroundTransparency=1,
 Text=af.Title,
 TextXAlignment="Left",
-FontFace=Font.new(ab.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ab.Font,Enum.FontWeight.Heavy),
 ThemeTag={
 TextColor3="Text",
 },
@@ -3220,7 +3220,7 @@ local ai=ac("TextLabel",{
 BackgroundTransparency=1,
 AutomaticSize="XY",
 TextSize=ah.TextSize,
-FontFace=Font.new(ab.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ab.Font,Enum.FontWeight.Heavy),
 Text=ah.Title,
 TextColor3=typeof(ah.Color)=="Color3"and GetTextColorForHSB(ah.Color)or nil,
 })
@@ -6005,7 +6005,7 @@ local aw,ax,ay=at.Hue,at.Sat,at.Vib
 at.UIElements.Title=ac("TextLabel",{
 Text=at.Title,
 TextSize=20,
-FontFace=Font.new(aa.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(aa.Font,Enum.FontWeight.Heavy),
 TextXAlignment="Left",
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
@@ -6728,7 +6728,7 @@ TextSize=ai.TextSize,
 ThemeTag={
 TextColor3="Text",
 },
-FontFace=Font.new(aa.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(aa.Font,Enum.FontWeight.Heavy),
 
 
 Text=ai.Title,
@@ -7166,7 +7166,7 @@ TextColor3="Text"
 TextSize=20,
 TextTransparency=.1,
 Size=UDim2.new(1,-an,1,0),
-FontFace=Font.new(ac.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ac.Font,Enum.FontWeight.Heavy),
 TextTruncate="AtEnd",
 RichText=true,
 LayoutOrder=2,
@@ -7451,7 +7451,7 @@ or(-al.IconSize-10),
 ThemeTag={
 TextColor3="Text",
 },
-FontFace=Font.new(ac.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(ac.Font,Enum.FontWeight.Heavy),
 TextSize=14,
 BackgroundTransparency=1,
 TextTransparency=.7,
@@ -8408,7 +8408,7 @@ TextSize=17,
 ThemeTag={
 TextColor3="Text",
 },
-FontFace=Font.new(af.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(af.Font,Enum.FontWeight.Heavy),
 AutomaticSize="Y",
 BackgroundTransparency=1,
 Size=UDim2.new(1,-27,0,0),
@@ -8568,7 +8568,7 @@ end
 
 local g=ag("TextLabel",{
 Text=ao.Title,
-FontFace=Font.new(af.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(af.Font,Enum.FontWeight.Heavy),
 BackgroundTransparency=1,
 AutomaticSize="XY",
 Name="Title",
@@ -9292,7 +9292,7 @@ Parent=C.UIElements.Main,
 C.UIElements.Title=ag("TextLabel",{
 Text=B.Title,
 TextSize=20,
-FontFace=Font.new(af.Font,Enum.Font.IndieFlower),
+FontFace=Font.new(af.Font,Enum.FontWeight.Heavy),
 TextXAlignment="Left",
 TextWrapped=true,
 RichText=true,
