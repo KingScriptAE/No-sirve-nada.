@@ -703,7 +703,7 @@ ThemeTag={
 TextColor3="Text"
 },
 Text=i.Title,
-FontFace=Font.new(b.Font,Enum.FontWeight.Medium)
+FontFace=Font.new(b.Font,Enum.FontWeight.SemiBold)
 }),
 e("UIListLayout",{
 Padding=UDim.new(0,g.UIPadding/3)
@@ -724,7 +724,7 @@ ThemeTag={
 TextColor3="Text"
 },
 Text=i.Content,
-FontFace=Font.new(b.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(b.Font,Enum.FontWeight.SemiBold),
 Parent=p
 })
 end
@@ -1899,7 +1899,7 @@ Text="Key System",
 AnchorPoint=Vector2.new(1,0.5),
 Position=UDim2.new(1,0,0.5,0),
 TextTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 ThemeTag={
 TextColor3="Text",
 },
@@ -1940,7 +1940,7 @@ if ag.KeySystem.Note and ag.KeySystem.Note~=""then
 av=ac("TextLabel",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 TextXAlignment="Left",
 Text=ag.KeySystem.Note,
 TextSize=18,
@@ -1981,7 +1981,7 @@ ThemeTag={
 TextColor3="Text",
 },
 TextSize=18,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 BackgroundTransparency=1,
 AutomaticSize="XY",
 AnchorPoint=Vector2.new(0.5,0.5),
@@ -2139,7 +2139,7 @@ aE
 ac("TextLabel",{
 Text="Select Service",
 BackgroundTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 ThemeTag={TextColor3="Text"},
 TextTransparency=0.2,
 TextSize=16,
@@ -2211,7 +2211,7 @@ HorizontalAlignment="Center",
 ac("TextLabel",{
 Text=g.Title or h.Name,
 BackgroundTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 ThemeTag={TextColor3="Text"},
 TextTransparency=0.05,
 TextSize=18,
@@ -2766,7 +2766,7 @@ if af.Content and af.Content~=""then
 ao=ac("TextLabel",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 TextXAlignment="Left",
 Text=af.Content,
 TextSize=18,
@@ -2801,7 +2801,7 @@ ThemeTag={
 TextColor3="Text",
 },
 TextSize=18,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 BackgroundTransparency=1,
 AutomaticSize="XY",
 AnchorPoint=Vector2.new(0.5,0.5),
@@ -3551,7 +3551,7 @@ local ah
 local ai=ac("TextLabel",{
 Text=af.Title,
 TextSize=17,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 BackgroundTransparency=1,
 AutomaticSize="XY",
 })
@@ -3785,7 +3785,7 @@ local ah=ac("TextLabel",{
 AutomaticSize="XY",
 TextWrapped=true,
 BackgroundTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ab.Font,Enum.FontWeight.SemiBold),
 Text=ae,
 TextSize=17,
 TextTransparency=1,
@@ -4042,7 +4042,7 @@ TextTransparency=an=="Desc"and.25 or 0,
 TextWrapped=true,
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
-FontFace=Font.new(aa.Font,Enum.FontWeight.Medium)
+FontFace=Font.new(aa.Font,Enum.FontWeight.SemiBold)
 })
 end
 
@@ -4715,7 +4715,7 @@ TextColor3="Text"
 TextTransparency=.4,
 AutomaticSize="Y",
 TextSize=15,
-FontFace=Font.new(aa.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(aa.Font,Enum.FontWeight.SemiBold),
 BackgroundTransparency=1,
 LayoutOrder=-1,
 })
@@ -5825,7 +5825,7 @@ TextColor3=Color3.fromHex"#ffffff",
 TextTransparency=.2,
 TextSize=16,
 AutomaticSize="Y",
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 TextXAlignment="Left",
 BackgroundTransparency=1,
 TextTruncate="AtEnd",
@@ -7056,7 +7056,7 @@ TextColor3="Text"
 TextTransparency=not al.Locked and 0.4 or.7,
 TextSize=15,
 Size=UDim2.new(1,0,0,0),
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 TextWrapped=true,
 RichText=true,
 AutomaticSize="Y",
@@ -7311,7 +7311,7 @@ TextColor3="Text"
 TextSize=18,
 TextTransparency=.5,
 BackgroundTransparency=1,
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 })
 })
 
@@ -7819,7 +7819,7 @@ TextColor3="Text",
 TextSize=17,
 BackgroundTransparency=1,
 TextXAlignment="Left",
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 AutomaticSize="Y",
@@ -7835,7 +7835,7 @@ TextSize=15,
 TextTransparency=.25,
 BackgroundTransparency=1,
 TextXAlignment="Left",
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 AutomaticSize="Y",
@@ -8009,7 +8009,7 @@ TextColor3="Text",
 },
 TextTransparency=.2,
 BackgroundTransparency=1,
-FontFace=Font.new(ac.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(ac.Font,Enum.FontWeight.SemiBold),
 Parent=am,
 Name="NotFound",
 })
@@ -8422,7 +8422,7 @@ TextTransparency=.6,
 ThemeTag={
 TextColor3="Text",
 },
-FontFace=Font.new(af.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(af.Font,Enum.FontWeight.SemiBold),
 AutomaticSize="Y",
 BackgroundTransparency=1,
 Size=UDim2.new(1,-27,0,0),
@@ -8543,7 +8543,7 @@ ZIndex=99,
 function createAuthor(b)
 return ag("TextLabel",{
 Text=b,
-FontFace=Font.new(af.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(af.Font,Enum.FontWeight.SemiBold),
 BackgroundTransparency=1,
 TextTransparency=0.35,
 AutomaticSize="XY",
@@ -9311,7 +9311,7 @@ TextSize=18,
 TextTransparency=.4,
 TextWrapped=true,
 RichText=true,
-FontFace=Font.new(af.Font,Enum.FontWeight.Medium),
+FontFace=Font.new(af.Font,Enum.FontWeight.SemiBold),
 TextXAlignment="Left",
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
