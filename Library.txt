@@ -170,15 +170,17 @@ local Library = {
 
 IsLightTheme = false,
 Scheme = {
-    BackgroundColor = Color3.fromRGB(20, 21, 23),
-    MainColor = Color3.fromRGB(34, 35, 38),
-    AccentColor = Color3.fromRGB(163, 230, 53),
-    OutlineColor = Color3.fromRGB(55, 56, 60),
-    FontColor = Color3.fromRGB(235, 236, 237),
+    BackgroundColor = Color3.fromRGB(24, 24, 27),      -- 非常深的炭灰色，接近黑色但更有层次
+    MainColor = Color3.fromRGB(39, 39, 42),          -- 比背景稍亮的灰色，用于按钮等
+    AccentColor = Color3.fromRGB(99, 102, 241),      -- 现代感十足的靛蓝色，作为点缀
+    OutlineColor = Color3.fromRGB(63, 63, 70),       -- 中度灰色，用于边框，提供柔和的分割
+    FontColor = Color3.fromRGB(244, 244, 245),       -- 干净的灰白色，保证可读性
     Font = Font.fromEnum(Enum.Font.Gotham),
-    Red = Color3.fromRGB(255, 87, 87),
-    Dark = Color3.new(0.01, 0.01, 0.01),
-    White = Color3.fromRGB(255, 255, 255),
+
+    -- 以下是辅助颜色
+    Red = Color3.fromRGB(239, 68, 68),               -- 一个更鲜明的红色用于警示
+    Dark = Color3.new(0.02, 0.02, 0.03),             -- 更深的黑色
+    White = Color3.fromRGB(250, 250, 250),           -- 纯白色
 },
 
     Registry = {},
