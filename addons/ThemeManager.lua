@@ -45,7 +45,7 @@ do
         ["Default"] = {
             1,
             httpService:JSONDecode(
-                [[{"FontColor":"ffe6ab","MainColor":"31173e","AccentColor":"f1782e","BackgroundColor":"160534","OutlineColor":"460062"}]]
+                [[{"FontColor":"ffffff","MainColor":"313131","AccentColor":"ff002d","BackgroundColor":"000000","OutlineColor":"8d8d6d"}]]
             ),
         },
         ["Mspaint"] = {
@@ -709,7 +709,7 @@ do
         groupbox:AddLabel("Font color"):AddColorPicker("FontColor", { Default = self.Library.Scheme.FontColor })
         groupbox:AddDropdown("FontFace", {
             Text = "Font Face",
-            Default = "Fantasy",
+            Default = "SourceSans",
             Values = { "BuilderSans", "Code", "Fantasy", "Gotham", "Jura", "Roboto", "RobotoMono", "SourceSans" },
         })
 
