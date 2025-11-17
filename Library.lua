@@ -3460,23 +3460,21 @@ do
         end
 
         local function InitEvents(Button)
-            Button.Base.MouseEnter:Connect(function()
-                if Button.Disabled then
-                    return
-                end
-
+Button.Base.MouseEnter:Connect(function()
+                if Button.Disabled then return end
+                StopTween(Button.Tween)
                 Button.Tween = TweenService:Create(Button.Base, Library.TweenInfo, {
                     TextTransparency = 0,
+                    BackgroundColor3 = Library:GetBetterColor(Library.Scheme.MainColor, 1)
                 })
                 Button.Tween:Play()
             end)
             Button.Base.MouseLeave:Connect(function()
-                if Button.Disabled then
-                    return
-                end
-
+                if Button.Disabled then return end
+                StopTween(Button.Tween)
                 Button.Tween = TweenService:Create(Button.Base, Library.TweenInfo, {
                     TextTransparency = 0.4,
+                    BackgroundColor3 = Library.Scheme.MainColor
                 })
                 Button.Tween:Play()
             end)
@@ -4325,10 +4323,20 @@ do
             BackgroundColor3 = "AccentColor",
             Size = UDim2.fromScale(0.5, 1),
             Parent = Bar,
-
+            ClipsDescendants = true,
             DPIExclude = {
                 Size = true,
             },
+        })
+        New("UICorner", { CornerRadius = UDim.new(1,0), Parent = Fill })
+
+        New("UIGradient", {
+            Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
+                ColorSequenceKeypoint.new(1, Library:GetLighterColor(Library.Scheme.AccentColor))
+            }),
+            Rotation = 90,
+            Parent = Fill
         })
 
         function Slider:UpdateColors()
@@ -6738,7 +6746,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(0, 80, 0, 12),
             Position = UDim2.fromOffset(50, 14),
-            Text = "NOL-User",
+            Text = "LinniUser",
             TextSize = 10,
             TextColor3 = Color3.fromRGB(200, 200, 200),
             TextXAlignment = Enum.TextXAlignment.Left,
@@ -6749,28 +6757,33 @@ function Library:CreateWindow(WindowInfo)
 
         local isInfoHidden = true
 
+local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local isInfoHidden = true
+        
         BlockerButton.MouseButton1Click:Connect(function()
             isInfoHidden = not isInfoHidden
+            
+            local targetWidth = isInfoHidden and 44 or 140
+            TweenService:Create(PlayerInfoFrame, tweenInfo, { Size = UDim2.new(0, targetWidth, 0, 40) }):Play()
+            
             if isInfoHidden then
-                AvatarImage.Image = ""
-                AvatarImage.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
-                AvatarImage.BackgroundTransparency = 0
-                AvatarImage.ImageTransparency = 1
-                DisplayNameLabel.Visible = false
-                UsernameLabel.Visible = false
-                AXUserLabel.Visible = true
+                TweenService:Create(AvatarImage, tweenInfo, { ImageTransparency = 1 }):Play()
+                TweenService:Create(DisplayNameLabel, tweenInfo, { TextTransparency = 1 }):Play()
+                TweenService:Create(UsernameLabel, tweenInfo, { TextTransparency = 1 }):Play()
+                task.delay(0.15, function() AXUserLabel.Visible = true end)
             else
-                AvatarImage.Image = avatarUrl
-                AvatarImage.BackgroundTransparency = 1
-                AvatarImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-                AvatarImage.ImageTransparency = 0
-                DisplayNameLabel.Visible = true
-                UsernameLabel.Visible = true
                 AXUserLabel.Visible = false
+                AvatarImage.Image = avatarUrl
+                TweenService:Create(AvatarImage, tweenInfo, { ImageTransparency = 0 }):Play()
+                TweenService:Create(DisplayNameLabel, tweenInfo, { TextTransparency = 0 }):Play()
+                TweenService:Create(UsernameLabel, tweenInfo, { TextTransparency = 0 }):Play()
             end
-            local marginBottom = 40
-            Tabs.CanvasSize = UDim2.new(0, 0, 0, Tabs.UIListLayout.AbsoluteContentSize.Y + marginBottom)
         end)
+
+
+
+
+
 
         Tabs.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
             local marginBottom = 40
