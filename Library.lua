@@ -6738,7 +6738,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(0, 80, 0, 12),
             Position = UDim2.fromOffset(50, 14),
-            Text = "NOL-User",
+            Text = "LinniUser",
             TextSize = 10,
             TextColor3 = Color3.fromRGB(200, 200, 200),
             TextXAlignment = Enum.TextXAlignment.Left,
