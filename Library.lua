@@ -90,6 +90,7 @@ local Library = {
         White = Color3.new(1, 1, 1),
     },
 
+
     Registry = {},
     DPIRegistry = {},
 }
@@ -5178,6 +5179,7 @@ function Library:Notify(...)
     return Data
 end
 
+
 function Library:CreateWindow(WindowInfo)
     WindowInfo = Library:Validate(WindowInfo, Templates.Window)
     local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
@@ -5604,7 +5606,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(0, 80, 0, 12),
             Position = UDim2.fromOffset(50, 14),
-            Text = "霖溺-用户",
+            Text = "NOL-User",
             TextSize = 10,
             TextColor3 = Color3.fromRGB(200, 200, 200),
             TextXAlignment = Enum.TextXAlignment.Left,
