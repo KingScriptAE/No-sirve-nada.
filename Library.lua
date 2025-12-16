@@ -186,7 +186,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 8,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
@@ -282,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 8,
+        CornerRadius = 12,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -7870,24 +7870,113 @@ function Library:CreateWindow(WindowInfo)
     end
 
     if Library.IsMobile then
-        local ToggleButton = Library:AddDraggableButton("显示/隐藏", function()
+        local ControlCapsule = New("Frame", {
+            Name = "MobileControl",
+            Position = UDim2.new(0.5, -60, 0.1, 0),
+            Size = UDim2.fromOffset(130, 40),
+            BackgroundColor3 = "MainColor",
+            Parent = ScreenGui,
+            ZIndex = 2000,
+        })
+
+        New("UICorner", {
+            CornerRadius = UDim.new(1, 0),
+            Parent = ControlCapsule
+        })
+        
+        local CapsuleStroke = New("UIStroke", {
+            Color = "AccentColor",
+            Thickness = 1.6,
+            Transparency = 0,
+            Parent = ControlCapsule
+        })
+
+        New("UIGradient", {
+            Rotation = 90,
+            Color = ColorSequence.new{
+                ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)), 
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 180, 180))
+            },
+            Parent = ControlCapsule
+        })
+
+        local MenuButton = New("TextButton", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(0.5, -1, 1, 0),
+            Position = UDim2.fromScale(0, 0),
+            Text = "",
+            Parent = ControlCapsule
+        })
+        
+        local MenuIcon = New("ImageLabel", {
+            Image = "rbxassetid://6031091004",
+            ImageColor3 = "FontColor",
+            BackgroundTransparency = 1,
+            Size = UDim2.fromOffset(24, 24),
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Position = UDim2.fromScale(0.5, 0.5),
+            Parent = MenuButton
+        })
+
+        New("Frame", {
+            BackgroundColor3 = "OutlineColor",
+            Size = UDim2.new(0, 1, 0.6, 0),
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Position = UDim2.fromScale(0.5, 0.5),
+            BorderSizePixel = 0,
+            Parent = ControlCapsule
+        })
+
+        local LockButton = New("TextButton", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(0.5, -1, 1, 0),
+            Position = UDim2.fromScale(0.5, 0),
+            Text = "",
+            Parent = ControlCapsule
+        })
+
+        local LockIcon = New("ImageLabel", {
+            Image = "rbxassetid://6031094678",
+            ImageColor3 = "FontColor",
+            BackgroundTransparency = 1,
+            Size = UDim2.fromOffset(24, 24),
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Position = UDim2.fromScale(0.5, 0.5),
+            Parent = LockButton
+        })
+
+        MenuButton.MouseButton1Click:Connect(function()
             Library:Toggle()
+            local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+            TweenService:Create(MenuIcon, tweenInfo, {Scale = 0.8}):Play()
+            task.delay(0.1, function()
+                TweenService:Create(MenuIcon, tweenInfo, {Scale = 1}):Play()
+            end)
         end)
 
-        local LockButton = Library:AddDraggableButton("锁定", function(self)
-            Library.CantDragForced = not Library.CantDragForced
-            self:SetText(Library.CantDragForced and "解锁" or "锁定")
+        local IsLocked = false
+        LockButton.MouseButton1Click:Connect(function()
+            IsLocked = not IsLocked
+            Library.CantDragForced = IsLocked
+            
+            if IsLocked then
+                LockIcon.Image = "rbxassetid://6031094670"
+                LockIcon.ImageColor3 = Library.Scheme.Red
+                CapsuleStroke.Color = Library.Scheme.Red
+            else
+                LockIcon.Image = "rbxassetid://6031094678"
+                LockIcon.ImageColor3 = Library.Scheme.FontColor
+                CapsuleStroke.Color = Library.Scheme.AccentColor
+            end
+            
+            local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+            TweenService:Create(LockIcon, tweenInfo, {Scale = 1.2}):Play()
+            task.delay(0.1, function()
+                TweenService:Create(LockIcon, tweenInfo, {Scale = 1}):Play()
+            end)
         end)
 
-        if WindowInfo.MobileButtonsSide == "Right" then
-            ToggleButton.Button.Position = UDim2.new(1, -6, 0, 6)
-            ToggleButton.Button.AnchorPoint = Vector2.new(1, 0)
-
-            LockButton.Button.Position = UDim2.new(1, -6, 0, 46)
-            LockButton.Button.AnchorPoint = Vector2.new(1, 0)
-        else
-            LockButton.Button.Position = UDim2.fromOffset(6, 46)
-        end
+        Library:MakeDraggable(ControlCapsule, ControlCapsule)
     end
 
     --// Execution \\--
