@@ -1,4 +1,4 @@
---已修改
+--效果暂时不知道，未知。修改中……
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -163,8 +163,9 @@ local Library = {
     Notifications = {},
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    -- [美化] 动画曲线改为 Quart/Back，更加丝滑
+    TweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -190,15 +191,16 @@ local Library = {
     CornerRadius = 4,
 
     IsLightTheme = false,
+    -- [美化] 深色主题配色方案
     Scheme = {
-              BackgroundColor = Color3.fromRGB(15, 15, 15),
-        MainColor = Color3.fromRGB(25, 25, 25),
-        AccentColor = Color3.fromRGB(125, 85, 255),
-        OutlineColor = Color3.fromRGB(40, 40, 40),
-        FontColor = Color3.new(1, 1, 1),
-        Font = Font.fromEnum(Enum.Font.Code),
+        BackgroundColor = Color3.fromRGB(12, 12, 16), -- 更深邃的背景
+        MainColor = Color3.fromRGB(22, 22, 28),       -- 容器颜色
+        AccentColor = Color3.fromRGB(88, 101, 242),   -- Blurple 风格强调色
+        OutlineColor = Color3.fromRGB(45, 45, 60),    -- 低对比度描边
+        FontColor = Color3.fromRGB(240, 240, 240),    -- 亮白色字体
+        Font = Font.fromEnum(Enum.Font.GothamMedium), -- 现代字体
 
-        Red = Color3.fromRGB(255, 50, 50),
+        Red = Color3.fromRGB(255, 65, 65),
         Dark = Color3.new(0, 0, 0),
         White = Color3.new(1, 1, 1),
     },
@@ -286,7 +288,7 @@ local Templates = {
         CornerRadius = 4,
         NotifySide = "Right",
         ShowCustomCursor = true,
-        Font = Enum.Font.Code,
+        Font = Enum.Font.GothamMedium, -- 默认字体更新
         ToggleKeybind = Enum.KeyCode.RightControl,
         MobileButtonsSide = "Left",
         UnlockMouseWhileOpen = true,
@@ -1680,6 +1682,8 @@ do
         CornerRadius = UDim.new(0, Library.CornerRadius - 1),
         Parent = Holder,
     })
+
+    -- [美化] 水印顶部线条
     local WatermarkLine = New("Frame", {
         BackgroundColor3 = "AccentColor",
         BorderSizePixel = 0,
@@ -1687,6 +1691,7 @@ do
         Size = UDim2.new(1, 0, 0, 2),
         Parent = Holder
     })
+
     local WatermarkLabel = New("TextLabel", {
         BackgroundTransparency = 1,
         Size = UDim2.new(1, 0, 0, 32),
@@ -4209,6 +4214,8 @@ do
                 Size = true,
             },
         })
+
+        -- [美化] Slider 渐变
         local SliderGradient = New("UIGradient", {
             Color = ColorSequence.new({
                 ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
@@ -4217,6 +4224,7 @@ do
             Rotation = 90,
             Parent = Fill
         })
+
         function Slider:UpdateColors()
             if Library.Unloaded then
                 return
@@ -5992,24 +6000,7 @@ function Library:CreateWindow(WindowInfo)
     local Container
     local Window
     local WindowTitle
-        local MainStroke = New("UIStroke", {
-            Color = Library.Scheme.AccentColor,
-            Thickness = 1.5,
-            Transparency = 0.8,
-            Parent = MainFrame,
-        })
-        
-        local MainGradient = New("UIGradient", {
-            Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.new(1,1,1)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200))
-            }),
-            Rotation = 45,
-            Parent = MainFrame,
-        })
-        Library:AddToRegistry(MainStroke, {
-            Color = "AccentColor"
-        })
+
     local SidebarHighlightCallback = WindowInfo.SidebarHighlightCallback
 
     local LayoutState = {
@@ -6236,6 +6227,26 @@ function Library:CreateWindow(WindowInfo)
             CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
             Parent = MainFrame,
         })
+
+        -- [美化] 窗口发光描边
+        local MainStroke = New("UIStroke", {
+            Color = Library.Scheme.AccentColor, 
+            Thickness = 1.5,
+            Transparency = 0.8,
+            Parent = MainFrame,
+        })
+        Library:AddToRegistry(MainStroke, { Color = "AccentColor" })
+        
+        -- [美化] 背景微渐变
+        local MainGradient = New("UIGradient", {
+            Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Color3.new(1,1,1)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200))
+            }),
+            Rotation = 45,
+            Parent = MainFrame,
+        })
+
         local InitialSidebarWidth = GetSidebarWidth()
         LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
             Position = UDim2.new(0, InitialSidebarWidth, 0, 0),
@@ -6547,10 +6558,7 @@ function Library:CreateWindow(WindowInfo)
         })
         LayoutRefs.TabsFrame = Tabs
         
-        
-        
-        
-              --// Player Info Frame \\--
+        --// Player Info Frame \\--
         local PlayerInfoFrame = New("Frame", {
             BackgroundTransparency = 0,
             BackgroundColor3 = "BackgroundColor",
@@ -6677,11 +6685,6 @@ function Library:CreateWindow(WindowInfo)
 
         local marginBottom = 40
         Tabs.CanvasSize = UDim2.new(0, 0, 0, Tabs.UIListLayout.AbsoluteContentSize.Y + marginBottom)
-
-        
-        
-        
-        
 
         --// Container \\--
         Container = New("Frame", {
@@ -7511,12 +7514,17 @@ function Library:CreateWindow(WindowInfo)
             TweenService:Create(TabButton, Library.TweenInfo, {
                 BackgroundTransparency = 0,
             }):Play()
+            
+            -- [美化] 选中Tab文字高亮
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0,
+                TextColor3 = Library.Scheme.AccentColor
             }):Play()
+            
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
                     ImageTransparency = 0,
+                    ImageColor3 = Library.Scheme.AccentColor
                 }):Play()
             end
 
@@ -7545,12 +7553,17 @@ function Library:CreateWindow(WindowInfo)
             TweenService:Create(TabButton, Library.TweenInfo, {
                 BackgroundTransparency = 1,
             }):Play()
+            
+            -- [美化] 取消选中，颜色复原
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0.5,
+                TextColor3 = Library.Scheme.FontColor
             }):Play()
+            
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
                     ImageTransparency = 0.5,
+                    ImageColor3 = Library.Scheme.FontColor
                 }):Play()
             end
             TabContainer.Visible = false
