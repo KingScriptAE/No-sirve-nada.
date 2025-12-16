@@ -1,4 +1,3 @@
---乱改了一下
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -163,8 +162,8 @@ local Library = {
     Notifications = {},
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -187,11 +186,11 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 4,
+    CornerRadius = 6,
 
     IsLightTheme = false,
     Scheme = {
-        BackgroundColor = Color3.fromRGB(15, 15, 15),
+              BackgroundColor = Color3.fromRGB(15, 15, 15),
         MainColor = Color3.fromRGB(25, 25, 25),
         AccentColor = Color3.fromRGB(125, 85, 255),
         OutlineColor = Color3.fromRGB(40, 40, 40),
@@ -283,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 4,
+        CornerRadius = 6,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -3821,7 +3820,13 @@ do
             CornerRadius = UDim.new(1, 0),
             Parent = Ball,
         })
-
+local BallGlow = New("UIStroke", {
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            Color = Library.Scheme.AccentColor,
+            Transparency = 0.6,
+            Thickness = 0,
+            Parent = Ball
+        })
         function Toggle:UpdateColors()
             Toggle:Display()
         end
@@ -6187,9 +6192,10 @@ function Library:CreateWindow(WindowInfo)
             Size = false,
         })
 
-MainFrame = New("TextButton", {
-            BackgroundColor3 = Library.Scheme.BackgroundColor,
-            BackgroundTransparency = 0.1, 
+        MainFrame = New("TextButton", {
+            BackgroundColor3 = function()
+                return Library:GetBetterColor(Library.Scheme.BackgroundColor, -1)
+            end,
             Name = "Main",
             Text = "",
             Position = WindowInfo.Position,
@@ -6201,44 +6207,17 @@ MainFrame = New("TextButton", {
                 Position = true,
             },
         })
-        
-        local MainShadow = New("ImageLabel", {
-            Name = "Shadow",
-            AnchorPoint = Vector2.new(0.5, 0.5),
-            BackgroundTransparency = 1,
-            Position = UDim2.fromScale(0.5, 0.5),
-            Size = UDim2.new(1, 110, 1, 110),
-            ZIndex = -1,
-            Image = "rbxassetid://6014261993",
-            ImageColor3 = Color3.fromRGB(0, 0, 0),
-            ImageTransparency = 0.4,
-            ScaleType = Enum.ScaleType.Slice,
-            SliceCenter = Rect.new(49, 49, 450, 450),
-            Parent = MainFrame,
-        })
-        
-        local MainTexture = New("ImageLabel", {
-            Name = "Texture",
-            BackgroundTransparency = 1,
-            Size = UDim2.fromScale(1, 1),
-            ZIndex = 0,
-            Image = "rbxassetid://8992230677",
-            ImageColor3 = Library.Scheme.BackgroundColor,
-            ImageTransparency = 0.85,
-            ScaleType = Enum.ScaleType.Tile,
-            TileSize = UDim2.fromOffset(256, 256),
-            Parent = MainFrame,
-        })
-        New("UICorner", {
-            CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-            Parent = MainTexture,
-        })
-
         New("UICorner", {
             CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
             Parent = MainFrame,
         })
-        
+        local MainGradient = Instance.new("UIGradient")
+        MainGradient.Rotation = 90
+        MainGradient.Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 180, 180))
+        })
+        MainGradient.Parent = MainFrame
         
         local InitialSidebarWidth = GetSidebarWidth()
         LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
@@ -6410,7 +6389,7 @@ MainFrame = New("TextButton", {
             Parent = CurrentTabInfo,
         })
 
-SearchBox = New("TextBox", {
+        SearchBox = New("TextBox", {
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Size = WindowInfo.SearchbarSize,
@@ -6433,24 +6412,10 @@ SearchBox = New("TextBox", {
             PaddingTop = UDim.new(0, 8),
             Parent = SearchBox,
         })
-        
-        local SearchStroke = New("UIStroke", {
+        New("UIStroke", {
             Color = "OutlineColor",
             Parent = SearchBox,
         })
-        
-        SearchBox.Focused:Connect(function()
-            TweenService:Create(SearchStroke, Library.TweenInfo, {
-                Color = Library.Scheme.AccentColor
-            }):Play()
-        end)
-        
-        SearchBox.FocusLost:Connect(function()
-            TweenService:Create(SearchStroke, Library.TweenInfo, {
-                Color = Library.Scheme.OutlineColor
-            }):Play()
-        end)
-
 
         local SearchIcon = Library:GetIcon("search")
         if SearchIcon then
@@ -6570,7 +6535,7 @@ SearchBox = New("TextBox", {
         
               --// Player Info Frame \\--
         local PlayerInfoFrame = New("Frame", {
-            BackgroundTransparency = 0.4,
+            BackgroundTransparency = 0,
             BackgroundColor3 = "BackgroundColor",
             Size = UDim2.new(0.3, 0, 0, 40),
             AnchorPoint = Vector2.new(0, 1),
