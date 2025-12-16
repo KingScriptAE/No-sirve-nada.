@@ -186,7 +186,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 12,
+    CornerRadius = 15,
 
     IsLightTheme = false,
     Scheme = {
@@ -282,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 12,
+        CornerRadius = 15,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -7869,79 +7869,25 @@ function Library:CreateWindow(WindowInfo)
         task.spawn(Library.Toggle)
     end
 
-if Library.IsMobile then
-        local MobileControl = New("TextButton", {
-            Name = "MobileControl",
-            BackgroundColor3 = "BackgroundColor",
-            Size = UDim2.fromOffset(200, 36),
-            Position = UDim2.new(1, -6, 0, 6),
-            Text = "",
-            AutoButtonColor = false,
-            Parent = ScreenGui,
-            ZIndex = 2000,
-        })
-        
-        New("UICorner", { CornerRadius = UDim.new(0, Library.CornerRadius), Parent = MobileControl })
-        Library:MakeOutline(MobileControl, Library.CornerRadius)
-
-        local ButtonHolder = New("Frame", {
-            BackgroundTransparency = 1,
-            Size = UDim2.fromScale(1, 1),
-            Parent = MobileControl
-        })
-        New("UIListLayout", {
-            FillDirection = Enum.FillDirection.Horizontal,
-            SortOrder = Enum.SortOrder.LayoutOrder,
-            Padding = UDim.new(0, 0),
-            Parent = ButtonHolder
-        })
-
-        local ToggleBtn = New("TextButton", {
-            Name = "ToggleBtn",
-            BackgroundTransparency = 1,
-            Size = UDim2.new(0.5, 0, 1, 0),
-            Text = "显示/隐藏",
-            TextSize = 14,
-            TextColor3 = "FontColor",
-            Font = Library.Scheme.Font,
-            Parent = ButtonHolder
-        })
-
-        local LockBtn = New("TextButton", {
-            Name = "LockBtn",
-            BackgroundTransparency = 1,
-            Size = UDim2.new(0.5, 0, 1, 0),
-            Text = "锁定拖拽",
-            TextSize = 14,
-            TextColor3 = "FontColor",
-            Font = Library.Scheme.Font,
-            Parent = ButtonHolder
-        })
-
-        local Divider = New("Frame", {
-            BackgroundColor3 = "OutlineColor",
-            Size = UDim2.new(0, 1, 0.6, 0),
-            Position = UDim2.fromScale(0.5, 0.2),
-            BorderSizePixel = 0,
-            Parent = MobileControl,
-            ZIndex = 2005
-        })
-
-        --// 7. 功能逻辑
-        ToggleBtn.MouseButton1Click:Connect(function()
+    if Library.IsMobile then
+        local ToggleButton = Library:AddDraggableButton("显示/隐藏", function()
             Library:Toggle()
         end)
 
-        LockBtn.MouseButton1Click:Connect(function()
+        local LockButton = Library:AddDraggableButton("锁定", function(self)
             Library.CantDragForced = not Library.CantDragForced
-            LockBtn.Text = Library.CantDragForced and "解" or "锁"
-            LockBtn.TextColor3 = Library.CantDragForced and Library.Scheme.Red or Library.Scheme.FontColor
-            Library.Registry[LockBtn].TextColor3 = Library.CantDragForced and "Red" or "FontColor"
+            self:SetText(Library.CantDragForced and "解锁" or "锁定")
         end)
 
-        Library:MakeDraggable(MobileControl, MobileControl)
-        Library:MakeDraggable(MobileControl, ToggleBtn)
-        Library:MakeDraggable(MobileControl, LockBtn)
+        if WindowInfo.MobileButtonsSide == "Right" then
+            ToggleButton.Button.Position = UDim2.new(1, -6, 0, 6)
+            ToggleButton.Button.AnchorPoint = Vector2.new(1, 0)
+
+            LockButton.Button.Position = UDim2.new(1, -6, 0, 46)
+            LockButton.Button.AnchorPoint = Vector2.new(1, 0)
+        else
+            LockButton.Button.Position = UDim2.fromOffset(6, 46)
+        end
     end
 
     --// Execution \\--
