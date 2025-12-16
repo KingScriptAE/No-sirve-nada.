@@ -1679,7 +1679,13 @@ do
         CornerRadius = UDim.new(0, Library.CornerRadius - 1),
         Parent = Holder,
     })
-
+    local WatermarkLine = New("Frame", {
+        BackgroundColor3 = "AccentColor",
+        BorderSizePixel = 0,
+        Position = UDim2.fromScale(0, 0),
+        Size = UDim2.new(1, 0, 0, 2),
+        Parent = Holder
+    })
     local WatermarkLabel = New("TextLabel", {
         BackgroundTransparency = 1,
         Size = UDim2.new(1, 0, 0, 32),
@@ -4202,7 +4208,14 @@ do
                 Size = true,
             },
         })
-
+        local SliderGradient = New("UIGradient", {
+            Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))
+            }),
+            Rotation = 90,
+            Parent = Fill
+        })
         function Slider:UpdateColors()
             if Library.Unloaded then
                 return
@@ -5978,7 +5991,24 @@ function Library:CreateWindow(WindowInfo)
     local Container
     local Window
     local WindowTitle
-
+        local MainStroke = New("UIStroke", {
+            Color = Library.Scheme.AccentColor,
+            Thickness = 1.5,
+            Transparency = 0.8,
+            Parent = MainFrame,
+        })
+        
+        local MainGradient = New("UIGradient", {
+            Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Color3.new(1,1,1)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200))
+            }),
+            Rotation = 45,
+            Parent = MainFrame,
+        })
+        Library:AddToRegistry(MainStroke, {
+            Color = "AccentColor"
+        })
     local SidebarHighlightCallback = WindowInfo.SidebarHighlightCallback
 
     local LayoutState = {
