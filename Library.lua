@@ -7891,81 +7891,69 @@ function Library:CreateWindow(WindowInfo)
     end
 ]]
 if Library.IsMobile then
-        local MobileControlFrame = New("Frame", {
+        local MobileFrame = New("TextButton", {
             Name = "MobileControl",
-            BackgroundColor3 = "MainColor",
-            Position = UDim2.fromOffset(20, 20),
-            Size = UDim2.fromOffset(140, 36),
+            BackgroundColor3 = "BackgroundColor",
+            Position = UDim2.fromOffset(20, 50),
+            Size = UDim2.fromOffset(130, 34),
+            Text = "",
+            AutoButtonColor = false,
             Parent = ScreenGui,
             ZIndex = 100,
         })
         
-        New("UICorner", { CornerRadius = UDim.new(0, Library.CornerRadius), Parent = MobileControlFrame })
+        New("UICorner", { CornerRadius = UDim.new(0, Library.CornerRadius - 1), Parent = MobileFrame })
         
-        local Outline = Library:MakeOutline(MobileControlFrame, Library.CornerRadius, 100)
+        local Outline = Library:MakeOutline(MobileFrame, Library.CornerRadius, 100)
         Library:UpdateDPI(Outline, { Position = false, Size = false })
-
-        local ListLayout = New("UIListLayout", {
-            FillDirection = Enum.FillDirection.Horizontal,
-            SortOrder = Enum.SortOrder.LayoutOrder,
-            Padding = UDim.new(0, 0),
-            Parent = MobileControlFrame
+        local Divider = New("Frame", {
+            BackgroundColor3 = "OutlineColor",
+            Size = UDim2.new(0, 1, 0.6, 0),
+            Position = UDim2.fromScale(0.5, 0.2),
+            Parent = MobileFrame,
+            ZIndex = 102
         })
 
         local ToggleBtn = New("TextButton", {
-            Name = "ToggleBtn",
+            Name = "Toggle",
             BackgroundTransparency = 1,
-            Size = UDim2.new(0.5, -1, 1, 0),
+            Size = UDim2.fromScale(0.5, 1),
+            Position = UDim2.fromScale(0, 0),
             Text = "隐藏",
             TextSize = 14,
             TextColor3 = "FontColor",
             Font = Library.Scheme.Font,
-            Parent = MobileControlFrame
+            ZIndex = 101,
+            Parent = MobileFrame
         })
-
-        local Divider = New("Frame", {
-            Name = "Divider",
-            BackgroundColor3 = "OutlineColor",
-            Size = UDim2.new(0, 1, 0.6, 0),
-            Position = UDim2.fromScale(0.5, 0.2),
-            Parent = MobileControlFrame
-        })
-        New("UIFlexItem", { FlexMode = Enum.UIFlexMode.None, Parent = Divider })
-        Divider.LayoutOrder = 1
 
         local LockBtn = New("TextButton", {
-            Name = "LockBtn",
+            Name = "Lock",
             BackgroundTransparency = 1,
-            Size = UDim2.new(0.5, -1, 1, 0),
-            Text = "锁定拖拽",
+            Size = UDim2.fromScale(0.5, 1),
+            Position = UDim2.fromScale(0.5, 0),
+            Text = "锁定",
             TextSize = 14,
             TextColor3 = "FontColor",
             Font = Library.Scheme.Font,
-            Parent = MobileControlFrame
+            ZIndex = 101,
+            Parent = MobileFrame
         })
-        LockBtn.LayoutOrder = 2
-
         ToggleBtn.MouseButton1Click:Connect(function()
             Library:Toggle()
             ToggleBtn.Text = Library.Toggled and "隐藏" or "显示"
             ToggleBtn.TextColor3 = Library.Toggled and Library.Scheme.FontColor or Library.Scheme.AccentColor
         end)
-
         local IsLocked = false
         LockBtn.MouseButton1Click:Connect(function()
             IsLocked = not IsLocked
             Library.CantDragForced = IsLocked
             
-            if IsLocked then
-                LockBtn.Text = "已锁定"
-                LockBtn.TextColor3 = Library.Scheme.Red
-            else
-                LockBtn.Text = "锁定拖拽"
-                LockBtn.TextColor3 = Library.Scheme.FontColor
-            end
+            LockBtn.Text = IsLocked and "已锁" or "锁定"
+            LockBtn.TextColor3 = IsLocked and Library.Scheme.Red or Library.Scheme.FontColor
         end)
-
-        Library:MakeDraggable(MobileControlFrame, MobileControlFrame, true)
+        Library:MakeDraggable(MobileFrame, ToggleBtn, true)
+        Library:MakeDraggable(MobileFrame, LockBtn, true)
     end
     
     --// Execution \\--
