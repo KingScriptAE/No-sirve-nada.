@@ -1,0 +1,224 @@
+local Library = {}
+getgenv().ESPLibrary = Library
+
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local Camera = Workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+
+local V2 = Vector2.new
+local V3 = Vector3.new
+local Color3_new = Color3.new
+local Drawing_new = Drawing and Drawing.new
+local WTVP = Camera.WorldToViewportPoint
+
+local Cache = {}
+local Connection = nil
+
+local Settings = {
+	Tracers = false,
+	Distance = false,
+	MaxDistance = 12000,
+	TextSize = 14
+}
+
+local function GetRoot(model)
+	if model:IsA("BasePart") then return model end
+	if model:IsA("Model") then return model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart") end
+	return nil
+end
+
+local function CreateVisuals(part, color, name)
+	local root = GetRoot(part)
+	if not root then return nil end
+
+	local highlight = Instance.new("Highlight")
+	highlight.FillColor = color
+	highlight.OutlineColor = Color3_new(1, 1, 1)
+	highlight.FillTransparency = 0.75
+	highlight.OutlineTransparency = 0.2
+	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	highlight.Adornee = part
+	highlight.Enabled = false
+	highlight.Parent = part
+
+	local bb = Instance.new("BillboardGui")
+	bb.Size = UDim2.new(0, 200, 0, 50)
+	bb.StudsOffset = V3(0, 3.5, 0)
+	bb.AlwaysOnTop = true
+	bb.Enabled = false
+	bb.Parent = part
+	bb.Adornee = root
+
+	local txt = Instance.new("TextLabel")
+	txt.BackgroundTransparency = 1
+	txt.Size = UDim2.new(1, 0, 1, 0)
+	txt.TextColor3 = color
+	txt.Font = Enum.Font.GothamMedium 
+	txt.TextSize = Settings.TextSize
+	txt.Text = name
+	txt.RichText = true
+	txt.TextStrokeTransparency = 1 
+	txt.Parent = bb
+	local stroke = Instance.new("UIStroke")
+	stroke.Thickness = 1.2
+	stroke.Color = Color3_new(0, 0, 0)
+	stroke.Transparency = 0.3
+	stroke.Parent = txt
+
+	local tracer = nil
+	if Drawing_new then
+		tracer = Drawing_new("Line")
+		tracer.Visible = false
+		tracer.Color = color
+		tracer.Thickness = 1
+		tracer.Transparency = 0.8
+	end
+
+	return {
+		Root = root,
+		Highlight = highlight,
+		Gui = bb,
+		Label = txt,
+		Tracer = tracer,
+		Name = name,
+		Color = color,
+		LastDist = -1
+	}
+end
+
+function Library:SetTracers(bool) Settings.Tracers = bool end
+function Library:ShowDistance(bool) Settings.Distance = bool end
+function Library:SetMaxDistance(num) Settings.MaxDistance = num end
+
+function Library:RemoveESP(part)
+	local data = Cache[part]
+	if data then
+		if data.Highlight then data.Highlight:Destroy() end
+		if data.Gui then data.Gui:Destroy() end
+		if data.Tracer then data.Tracer:Remove() end
+		Cache[part] = nil
+	end
+end
+
+function Library:IsAlreadyESPED(Part)
+	return Cache[Part] ~= nil
+end
+
+
+function Library:AddESP(part, name, color)
+	if not part or Cache[part] then return end
+	local data = CreateVisuals(part, color, name)
+	if not data then return end
+
+	local signal
+	signal = part.AncestryChanged:Connect(function(_, parent)
+		if not parent then
+			signal:Disconnect()
+			Library:RemoveESP(part)
+		end
+	end)
+
+	Cache[part] = data
+end
+
+function Library:Unload()
+	if Connection then Connection:Disconnect() end
+	for part in pairs(Cache) do Library:RemoveESP(part) end
+	table.clear(Cache)
+	getgenv().ESPLibrary = nil
+end
+
+Connection = RunService.RenderStepped:Connect(function()
+	local char = LocalPlayer.Character
+	local rootPart = char and char:FindFirstChild("HumanoidRootPart")
+	
+	if not rootPart then 
+		for _, data in pairs(Cache) do
+			if data.Gui.Enabled then data.Gui.Enabled = false end
+			if data.Highlight.Enabled then data.Highlight.Enabled = false end
+			if data.Tracer and data.Tracer.Visible then data.Tracer.Visible = false end
+		end
+		return 
+	end
+
+	local myPos = rootPart.Position
+	local viewport = Camera.ViewportSize
+	local center = V2(viewport.X / 2, viewport.Y)
+	local maxDist = Settings.MaxDistance
+	local showTrace = Settings.Tracers
+	local showDist = Settings.Distance
+
+	for _, data in pairs(Cache) do
+		local objRoot = data.Root
+		
+		if not objRoot or not objRoot.Parent then 
+			if data.Gui.Enabled then
+				data.Gui.Enabled = false
+				data.Highlight.Enabled = false
+			end
+			if data.Tracer then data.Tracer.Visible = false end 
+			continue
+		end
+
+		local objPos = objRoot.Position
+		local distVec = (objPos - myPos)
+		local dist = distVec.Magnitude
+
+		if dist > maxDist then
+			if data.Gui.Enabled then
+				data.Gui.Enabled = false
+				data.Highlight.Enabled = false
+				if data.Tracer then data.Tracer.Visible = false end
+			end
+			continue
+		end
+
+		local screenPos, onScreen = WTVP(Camera, objPos)
+
+		if onScreen then
+			if not data.Gui.Enabled then
+				data.Gui.Enabled = true
+				data.Highlight.Enabled = true
+			end
+
+			local roundDist = math.floor(dist)
+		
+			if showDist then
+				if data.LastDist ~= roundDist then
+					data.LastDist = roundDist
+					data.Label.Text = string.format(
+						"<b>%s</b>\n<font size='%d' color='rgb(200,200,200)'>%d m</font>", 
+						data.Name, 
+						Settings.TextSize - 3,
+						roundDist
+					)
+				end
+			else
+				if data.LastDist ~= -1 then
+					data.LastDist = -1
+					data.Label.Text = string.format("<b>%s</b>", data.Name)
+				end
+			end
+
+			if data.Tracer then
+				if showTrace then
+					data.Tracer.From = center
+					data.Tracer.To = V2(screenPos.X, screenPos.Y)
+					if not data.Tracer.Visible then data.Tracer.Visible = true end
+				else
+					if data.Tracer.Visible then data.Tracer.Visible = false end
+				end
+			end
+		else
+			if data.Gui.Enabled then
+				data.Gui.Enabled = false
+				data.Highlight.Enabled = false 
+				if data.Tracer then data.Tracer.Visible = false end
+			end
+		end
+	end
+end)
+
+return Library
