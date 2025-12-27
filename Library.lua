@@ -1,4 +1,3 @@
---原版
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -163,8 +162,8 @@ local Library = {
     Notifications = {},
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -187,7 +186,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 8,
+    CornerRadius = 4,
 
     IsLightTheme = false,
     Scheme = {
@@ -283,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 8,
+        CornerRadius = 4,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -3821,13 +3820,7 @@ do
             CornerRadius = UDim.new(1, 0),
             Parent = Ball,
         })
-local BallGlow = New("UIStroke", {
-            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-            Color = Library.Scheme.AccentColor,
-            Transparency = 0.6,
-            Thickness = 0,
-            Parent = Ball
-        })
+
         function Toggle:UpdateColors()
             Toggle:Display()
         end
@@ -6197,6 +6190,65 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = function()
                 return Library:GetBetterColor(Library.Scheme.BackgroundColor, -1)
             end,
+        local function AddSnowEffect()
+            local SnowContainer = Instance.new("Frame")
+            SnowContainer.Name = "SnowEffect"
+            SnowContainer.Size = UDim2.fromScale(1, 1)
+            SnowContainer.BackgroundTransparency = 1
+            SnowContainer.ZIndex = 1
+            SnowContainer.ClipsDescendants = true
+            SnowContainer.Parent = MainFrame
+
+            local Flakes = {}
+            local RandomGen = Random.new()
+            local RunService = game:GetService("RunService")
+       
+            for i = 1, 60 do 
+                local Flake = Instance.new("ImageLabel")
+                Flake.BackgroundTransparency = 1
+              
+                Flake.Image = "rbxassetid://606582198" 
+                Flake.Size = UDim2.fromOffset(RandomGen:NextInteger(10, 25), RandomGen:NextInteger(10, 25))
+                Flake.Position = UDim2.fromScale(RandomGen:NextNumber(), RandomGen:NextNumber(-1, 1))
+                Flake.ImageTransparency = RandomGen:NextNumber(0.6, 0.9)
+                Flake.Parent = SnowContainer
+                
+                table.insert(Flakes, {
+                    Obj = Flake,
+                    x = RandomGen:NextNumber(),
+                    y = Flake.Position.Y.Scale,
+                    speed = RandomGen:NextNumber(0.05, 0.15),
+                    sway = RandomGen:NextNumber() * math.pi * 2,
+                    swayDist = RandomGen:NextNumber(0.01, 0.03)
+                })
+            end
+            
+            local Connection
+            Connection = RunService.RenderStepped:Connect(function(dt)
+                if Library.Unloaded then 
+                    if Connection then Connection:Disconnect() end
+                    return 
+                end
+                
+                if not MainFrame.Visible then return end 
+                
+                for _, f in ipairs(Flakes) do
+                
+                    f.y = f.y + (f.speed * dt)
+                    
+                    f.sway = f.sway + (dt * 1.5)
+                    local newX = f.x + math.sin(f.sway) * f.swayDist
+                    
+                    if f.y > 1.1 then
+                        f.y = -0.15
+                        f.x = RandomGen:NextNumber()
+                    end
+                    
+                    f.Obj.Position = UDim2.fromScale(newX, f.y)
+                end
+            end)
+        end
+        AddSnowEffect()
             Name = "Main",
             Text = "",
             Position = WindowInfo.Position,
@@ -6212,14 +6264,6 @@ function Library:CreateWindow(WindowInfo)
             CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
             Parent = MainFrame,
         })
-        local MainGradient = Instance.new("UIGradient")
-        MainGradient.Rotation = 90
-        MainGradient.Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 180, 180))
-        })
-        MainGradient.Parent = MainFrame
-        
         local InitialSidebarWidth = GetSidebarWidth()
         LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
             Position = UDim2.new(0, InitialSidebarWidth, 0, 0),
