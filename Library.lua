@@ -1,3 +1,4 @@
+--霖溺
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -6190,65 +6191,6 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = function()
                 return Library:GetBetterColor(Library.Scheme.BackgroundColor, -1)
             end,
-        local function AddSnowEffect()
-            local SnowContainer = Instance.new("Frame")
-            SnowContainer.Name = "SnowEffect"
-            SnowContainer.Size = UDim2.fromScale(1, 1)
-            SnowContainer.BackgroundTransparency = 1
-            SnowContainer.ZIndex = 1
-            SnowContainer.ClipsDescendants = true
-            SnowContainer.Parent = MainFrame
-
-            local Flakes = {}
-            local RandomGen = Random.new()
-            local RunService = game:GetService("RunService")
-       
-            for i = 1, 60 do 
-                local Flake = Instance.new("ImageLabel")
-                Flake.BackgroundTransparency = 1
-              
-                Flake.Image = "rbxassetid://606582198" 
-                Flake.Size = UDim2.fromOffset(RandomGen:NextInteger(10, 25), RandomGen:NextInteger(10, 25))
-                Flake.Position = UDim2.fromScale(RandomGen:NextNumber(), RandomGen:NextNumber(-1, 1))
-                Flake.ImageTransparency = RandomGen:NextNumber(0.6, 0.9)
-                Flake.Parent = SnowContainer
-                
-                table.insert(Flakes, {
-                    Obj = Flake,
-                    x = RandomGen:NextNumber(),
-                    y = Flake.Position.Y.Scale,
-                    speed = RandomGen:NextNumber(0.05, 0.15),
-                    sway = RandomGen:NextNumber() * math.pi * 2,
-                    swayDist = RandomGen:NextNumber(0.01, 0.03)
-                })
-            end
-            
-            local Connection
-            Connection = RunService.RenderStepped:Connect(function(dt)
-                if Library.Unloaded then 
-                    if Connection then Connection:Disconnect() end
-                    return 
-                end
-                
-                if not MainFrame.Visible then return end 
-                
-                for _, f in ipairs(Flakes) do
-                
-                    f.y = f.y + (f.speed * dt)
-                    
-                    f.sway = f.sway + (dt * 1.5)
-                    local newX = f.x + math.sin(f.sway) * f.swayDist
-                    
-                    if f.y > 1.1 then
-                        f.y = -0.15
-                        f.x = RandomGen:NextNumber()
-                    end
-                    
-                    f.Obj.Position = UDim2.fromScale(newX, f.y)
-                end
-            end)
-        end
-        AddSnowEffect()
             Name = "Main",
             Text = "",
             Position = WindowInfo.Position,
