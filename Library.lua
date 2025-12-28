@@ -186,7 +186,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 4,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
@@ -282,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 4,
+        CornerRadius = 12,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -5939,32 +5939,38 @@ function Library:Notify(...)
 end
 
 function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?)
-    SnowCount = SnowCount or 40
-    SnowSize = SnowSize or 6
-    Speed = Speed or 0.8
+    SnowCount = SnowCount or 40 
+    SnowSize = SnowSize or 6 
+    Speed = Speed or 0.8 
 
     local Snowflakes = {}
-    local ViewportSize = workspace.CurrentCamera.ViewportSize
-
+    
     local SnowContainer = New("Frame", {
         BackgroundTransparency = 1,
         Size = UDim2.fromScale(1, 1),
+        ZIndex = 1,
         Parent = Parent,
     })
 
     for i = 1, SnowCount do
         local Snowflake = New("Frame", {
             BackgroundColor3 = Color3.new(1, 1, 1),
-            BackgroundTransparency = 0.7,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromOffset(SnowSize, SnowSize),
             Position = UDim2.new(math.random(), 0, -0.1, 0),
             AnchorPoint = Vector2.new(0.5, 0.5),
-            ZIndex = 0,
+            ZIndex = 2,
             Parent = SnowContainer,
         })
         
         New("UICorner", {
             CornerRadius = UDim.new(1, 0),
+            Parent = Snowflake,
+        })
+        
+        New("UIStroke", {
+            Color = Color3.new(1, 1, 1),
+            Transparency = 0.5,
             Parent = Snowflake,
         })
 
@@ -6011,7 +6017,11 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         Destroy = function()
             Connection:Disconnect()
             SnowContainer:Destroy()
-        end
+        end,
+        SetVisible = function(visible)
+            SnowContainer.Visible = visible
+        end,
+        Container = SnowContainer
     }
 end
 function Library:CreateWindow(WindowInfo)
@@ -7984,7 +7994,22 @@ function Library:CreateWindow(WindowInfo)
         Library.IsRobloxFocused = false
     end))
     
-    local SnowEffect = Library:AddSnowEffect(MainFrame, 50, 8, 0.6)
+    local BackgroundContainer = New("Frame", {
+        BackgroundTransparency = 0.3,
+        BackgroundColor3 = Library.Scheme.BackgroundColor,
+        Size = UDim2.fromScale(1, 1),
+        Position = UDim2.fromScale(0, 0),
+        Parent = MainFrame,
+        ZIndex = 0,
+    })
+    
+    local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 50, 8, 0.6)
+    
+    Window.SetSnowVisible = function(visible)
+        if SnowEffect then
+            SnowEffect.SetVisible(visible)
+        end
+    end
     
     Window.RemoveSnowEffect = function()
         if SnowEffect then
@@ -7992,7 +8017,7 @@ function Library:CreateWindow(WindowInfo)
             SnowEffect = nil
         end
     end
-    
+        
     return Window
 end
 
