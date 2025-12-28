@@ -5984,27 +5984,22 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         })
     end
     
-    local function CreateClipFrame()
-        local ClipFrame = Instance.new("Frame")
-        ClipFrame.BackgroundTransparency = 1
-        ClipFrame.Size = UDim2.fromScale(1, 1)
-        ClipFrame.ClipsDescendants = true
-        ClipFrame.Parent = SnowContainer
-        
-        return ClipFrame
-    end
-    
-    local ClipFrame = CreateClipFrame()
+    local ClipFrame = New("Frame", {
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        ClipsDescendants = true,
+        Parent = SnowContainer,
+    })
 
     local SnowflakeIcon = Library:GetSnowflakeIcon()
     local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
     
     local function updateContainerBounds()
         return {
-            X = Parent.AbsolutePosition.X,
-            Y = Parent.AbsolutePosition.Y,
-            Width = Parent.AbsoluteSize.X,
-            Height = Parent.AbsoluteSize.Y
+            X = SnowContainer.AbsolutePosition.X,
+            Y = SnowContainer.AbsolutePosition.Y,
+            Width = SnowContainer.AbsoluteSize.X,
+            Height = SnowContainer.AbsoluteSize.Y
         }
     end
     
@@ -6014,8 +6009,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         local Snowflake
         
         local startX = math.random()
-        local startY = -0.1 - math.random() * 0.2
-        
+        local startY = -0.05 * math.random()
         local pixelX = startX * containerBounds.Width
         local pixelY = startY * containerBounds.Height
         
@@ -6103,14 +6097,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
             local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
             Data.X = Data.X + wobbleX * delta
             
-            if Data.X < 0 then 
-                Data.X = 0 
-                Data.Drift = math.abs(Data.Drift) * 0.5
-            end
-            if Data.X > 1 then 
-                Data.X = 1 
-                Data.Drift = -math.abs(Data.Drift) * 0.5
-            end
+            Data.X = math.clamp(Data.X, 0, 1)
             
             Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
             
@@ -6127,8 +6114,9 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
                 Instance.BackgroundTransparency = targetTransparency
             end
 
-            if Data.Y > 1.2 then
-                Data.Y = -0.1 - math.random() * 0.2
+        
+            if Data.Y > 1 then  -- 到达105%的位置时重置
+                Data.Y = -0.05 * math.random()
                 Data.X = math.random()
                 Data.Transparency = 0.2 + math.random() * 0.4
                 Instance.Rotation = math.random(0, 360)
