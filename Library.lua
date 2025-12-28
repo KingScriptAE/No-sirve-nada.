@@ -5960,10 +5960,11 @@ function Library:Notify(...)
     return Data
 end
 
-function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?)
+function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
     SnowCount = SnowCount or 40 
     SnowSize = SnowSize or 16
-    Speed = Speed or 0.6 
+    Speed = Speed or 0.6
+    Color = Color or Color3.fromRGB(240, 248, 255)
 
     local Snowflakes = {}
     
@@ -5977,31 +5978,45 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
     local SnowflakeIcon = Library:GetSnowflakeIcon()
     local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
     
+    local function updateContainerBounds()
+        return {
+            X = Parent.AbsolutePosition.X,
+            Y = Parent.AbsolutePosition.Y,
+            Width = Parent.AbsoluteSize.X,
+            Height = Parent.AbsoluteSize.Y
+        }
+    end
+    
+    local containerBounds = updateContainerBounds()
+
     for i = 1, SnowCount do
         local Snowflake
+       
+        local startX = math.random()
+        local startY = -0.1 - math.random() * 0.2
         
         if HasSnowflakeIcon then
             Snowflake = New("ImageLabel", {
                 Image = SnowflakeIcon.Url,
-                ImageColor3 = Color3.fromRGB(240, 248, 255),
+                ImageColor3 = Color,
                 ImageRectOffset = SnowflakeIcon.ImageRectOffset,
                 ImageRectSize = SnowflakeIcon.ImageRectSize,
                 ImageTransparency = 0.2 + math.random() * 0.4,
                 BackgroundTransparency = 1,
                 Size = UDim2.fromOffset(SnowSize, SnowSize),
                 Rotation = math.random(0, 360),
-                Position = UDim2.new(math.random(), 0, -0.1, 0),
+                Position = UDim2.new(startX, 0, startY, 0),
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 ZIndex = 2,
                 Parent = SnowContainer,
             })
         else
             Snowflake = New("Frame", {
-                BackgroundColor3 = Color3.new(1, 1, 1),
+                BackgroundColor3 = Color,
                 BackgroundTransparency = 0.3,
                 Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
                 Rotation = 45,
-                Position = UDim2.new(math.random(), 0, -0.1, 0),
+                Position = UDim2.new(startX, 0, startY, 0),
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 ZIndex = 2,
                 Parent = SnowContainer,
@@ -6013,16 +6028,16 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         end
         
         local Data = {
-            X = math.random(),
-            Y = -0.1,
+            X = startX,
+            Y = startY,
             Speed = Speed * (0.4 + math.random() * 0.6),
-            Drift = (math.random() - 0.5) * 0.03,
+            Drift = (math.random() - 0.5) * 0.02,
             Size = SnowSize,
-            RotationSpeed = (math.random() - 0.5) * 80,
+            RotationSpeed = (math.random() - 0.5) * 60,
             Transparency = 0.2 + math.random() * 0.4,
-            FlakeType = math.random(1, 3),
             WobblePhase = math.random() * math.pi * 2,
-            WobbleAmount = math.random() * 0.02,
+            WobbleAmount = math.random() * 0.01,
+            Scale = 0.8 + math.random() * 0.4,
         }
 
         if HasSnowflakeIcon then
@@ -6045,11 +6060,12 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
     end
 
     local Connection = RunService.RenderStepped:Connect(function(delta)
-        if not SnowContainer.Parent then
+        if not SnowContainer.Parent or not Parent then
             Connection:Disconnect()
             return
         end
 
+        containerBounds = updateContainerBounds()
         local currentTime = tick()
 
         for _, Snow in ipairs(Snowflakes) do
@@ -6059,44 +6075,61 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
             Data.Y = Data.Y + Data.Speed * delta * 0.5
             Data.X = Data.X + Data.Drift * delta
             
-            local wobbleX = math.sin(currentTime * 2 + Data.WobblePhase) * Data.WobbleAmount
+            local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
             Data.X = Data.X + wobbleX * delta
+            
+            if Data.X < -0.1 then Data.X = -0.1 end
+            if Data.X > 1.1 then Data.X = 1.1 end
             
             Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
             
-            local pulse = 0.9 + 0.1 * math.sin(currentTime * 3 + Data.Y * 8)
-            Instance.Size = UDim2.fromOffset(Data.Size * pulse, Data.Size * pulse)
+            local pulse = 0.9 + 0.1 * math.sin(currentTime * 2 + Data.Y * 10)
+            local actualSize = Data.Size * Data.Scale * pulse
+            Instance.Size = UDim2.fromOffset(actualSize, actualSize)
             
-            local depthTransparency = Data.Y * 0.2
-            Instance.ImageTransparency = Data.Transparency + depthTransparency
+            local depthTransparency = math.min(Data.Y * 0.3, 0.4)
+            local targetTransparency = math.min(Data.Transparency + depthTransparency, 0.9)
+            
+            if Instance:IsA("ImageLabel") then
+                Instance.ImageTransparency = targetTransparency
+            else
+                Instance.BackgroundTransparency = targetTransparency
+            end
 
             if Data.Y > 1.1 then
-                Data.Y = -0.1 - math.random() * 0.1
+                Data.Y = -0.1 - math.random() * 0.2
                 Data.X = math.random()
                 Data.Transparency = 0.2 + math.random() * 0.4
                 Instance.Rotation = math.random(0, 360)
-                Instance.ImageTransparency = Data.Transparency
                 
                 Data.Speed = Speed * (0.4 + math.random() * 0.6)
-                Data.RotationSpeed = (math.random() - 0.5) * 80
+                Data.Drift = (math.random() - 0.5) * 0.02
+                Data.RotationSpeed = (math.random() - 0.5) * 60
                 Data.WobblePhase = math.random() * math.pi * 2
-                Data.WobbleAmount = math.random() * 0.02
-                
-            elseif Data.X > 1.1 then
-                Data.X = -0.1
-            elseif Data.X < -0.1 then
-                Data.X = 1.1
+                Data.Scale = 0.8 + math.random() * 0.4
             end
 
             Instance.Position = UDim2.new(Data.X, 0, Data.Y, 0)
         end
     end)
+    
+    local ResizeConnection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+        containerBounds = updateContainerBounds()
+    end)
+    
+    local PositionConnection = Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
+        containerBounds = updateContainerBounds()
+    end)
 
     table.insert(Library.Signals, Connection)
+    table.insert(Library.Signals, ResizeConnection)
+    table.insert(Library.Signals, PositionConnection)
 
     return {
         Destroy = function()
             Connection:Disconnect()
+            if ResizeConnection then ResizeConnection:Disconnect() end
+            if PositionConnection then PositionConnection:Disconnect() end
             SnowContainer:Destroy()
         end,
         SetVisible = function(visible)
@@ -6104,9 +6137,13 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         end,
         SetIntensity = function(intensity)
             for _, Snow in ipairs(Snowflakes) do
-                local transparency = 0.2 + (1 - intensity) * 0.6
-                Snow.Data.Transparency = transparency
-                Snow.Instance.ImageTransparency = transparency
+                Snow.Data.Transparency = 0.2 + (1 - intensity) * 0.6
+            end
+        end,
+        SetSpeed = function(newSpeed)
+            Speed = newSpeed
+            for _, Snow in ipairs(Snowflakes) do
+                Snow.Data.Speed = Speed * (0.4 + math.random() * 0.6)
             end
         end,
         Container = SnowContainer
@@ -8091,7 +8128,7 @@ function Library:CreateWindow(WindowInfo)
         ZIndex = 0,
     })
     
-    local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 50, 8, 0.6)
+    local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 40, 10, 0.7)
     
     Window.SetSnowVisible = function(visible)
         if SnowEffect then
