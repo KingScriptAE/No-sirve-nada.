@@ -1,4 +1,4 @@
---霖溺
+--By霖溺
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -187,7 +187,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 4,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
@@ -283,7 +283,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 4,
+        CornerRadius = 12,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
