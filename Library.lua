@@ -5972,13 +5972,17 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         BackgroundTransparency = 1,
         Size = UDim2.fromScale(1, 1),
         ZIndex = 1,
+        ClipsDescendants = true,
         Parent = Parent,
     })
     
-    New("UICorner", {
-        CornerRadius = UDim.new(0, Library.CornerRadius - 1),
-        Parent = SnowContainer,
-    })
+    if Parent:FindFirstChild("UICorner") then
+        local parentCorner = Parent.UICorner
+        New("UICorner", {
+            CornerRadius = parentCorner.CornerRadius,
+            Parent = SnowContainer,
+        })
+    end
     
     local function CreateClipFrame()
         local ClipFrame = Instance.new("Frame")
@@ -6144,6 +6148,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
     
     local ResizeConnection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
         containerBounds = updateContainerBounds()
+        SnowContainer.Size = UDim2.fromScale(1, 1)
         ClipFrame.Size = UDim2.fromScale(1, 1)
     end)
     
