@@ -1,4 +1,4 @@
---霖溺
+--By霖溺
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -5974,6 +5974,23 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
         ZIndex = 1,
         Parent = Parent,
     })
+    
+    New("UICorner", {
+        CornerRadius = UDim.new(0, Library.CornerRadius - 1),
+        Parent = SnowContainer,
+    })
+    
+    local function CreateClipFrame()
+        local ClipFrame = Instance.new("Frame")
+        ClipFrame.BackgroundTransparency = 1
+        ClipFrame.Size = UDim2.fromScale(1, 1)
+        ClipFrame.ClipsDescendants = true
+        ClipFrame.Parent = SnowContainer
+        
+        return ClipFrame
+    end
+    
+    local ClipFrame = CreateClipFrame()
 
     local SnowflakeIcon = Library:GetSnowflakeIcon()
     local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
@@ -5991,9 +6008,12 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
 
     for i = 1, SnowCount do
         local Snowflake
-       
+        
         local startX = math.random()
         local startY = -0.1 - math.random() * 0.2
+        
+        local pixelX = startX * containerBounds.Width
+        local pixelY = startY * containerBounds.Height
         
         if HasSnowflakeIcon then
             Snowflake = New("ImageLabel", {
@@ -6005,10 +6025,10 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
                 BackgroundTransparency = 1,
                 Size = UDim2.fromOffset(SnowSize, SnowSize),
                 Rotation = math.random(0, 360),
-                Position = UDim2.new(startX, 0, startY, 0),
+                Position = UDim2.new(0, pixelX, 0, pixelY),
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 ZIndex = 2,
-                Parent = SnowContainer,
+                Parent = ClipFrame,
             })
         else
             Snowflake = New("Frame", {
@@ -6016,10 +6036,10 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
                 BackgroundTransparency = 0.3,
                 Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
                 Rotation = 45,
-                Position = UDim2.new(startX, 0, startY, 0),
+                Position = UDim2.new(0, pixelX, 0, pixelY),
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 ZIndex = 2,
-                Parent = SnowContainer,
+                Parent = ClipFrame,
             })
             New("UICorner", {
                 CornerRadius = UDim.new(0, 2),
@@ -6038,6 +6058,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
             WobblePhase = math.random() * math.pi * 2,
             WobbleAmount = math.random() * 0.01,
             Scale = 0.8 + math.random() * 0.4,
+            HalfSize = SnowSize / 2,
         }
 
         if HasSnowflakeIcon then
@@ -6078,8 +6099,14 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
             local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
             Data.X = Data.X + wobbleX * delta
             
-            if Data.X < -0.1 then Data.X = -0.1 end
-            if Data.X > 1.1 then Data.X = 1.1 end
+            if Data.X < 0 then 
+                Data.X = 0 
+                Data.Drift = math.abs(Data.Drift) * 0.5
+            end
+            if Data.X > 1 then 
+                Data.X = 1 
+                Data.Drift = -math.abs(Data.Drift) * 0.5
+            end
             
             Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
             
@@ -6096,7 +6123,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
                 Instance.BackgroundTransparency = targetTransparency
             end
 
-            if Data.Y > 1.1 then
+            if Data.Y > 1.2 then
                 Data.Y = -0.1 - math.random() * 0.2
                 Data.X = math.random()
                 Data.Transparency = 0.2 + math.random() * 0.4
@@ -6109,27 +6136,45 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
                 Data.Scale = 0.8 + math.random() * 0.4
             end
 
-            Instance.Position = UDim2.new(Data.X, 0, Data.Y, 0)
+            local pixelX = Data.X * containerBounds.Width
+            local pixelY = Data.Y * containerBounds.Height
+            Instance.Position = UDim2.new(0, pixelX, 0, pixelY)
         end
     end)
     
     local ResizeConnection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
         containerBounds = updateContainerBounds()
+        ClipFrame.Size = UDim2.fromScale(1, 1)
     end)
     
     local PositionConnection = Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
         containerBounds = updateContainerBounds()
     end)
+    
+    local CornerConnection
+    if Parent:FindFirstChild("UICorner") then
+        local parentCorner = Parent.UICorner
+        local snowCorner = SnowContainer:FindFirstChild("UICorner")
+        if snowCorner then
+            CornerConnection = parentCorner:GetPropertyChangedSignal("CornerRadius"):Connect(function()
+                snowCorner.CornerRadius = parentCorner.CornerRadius
+            end)
+        end
+    end
 
     table.insert(Library.Signals, Connection)
     table.insert(Library.Signals, ResizeConnection)
     table.insert(Library.Signals, PositionConnection)
+    if CornerConnection then
+        table.insert(Library.Signals, CornerConnection)
+    end
 
     return {
         Destroy = function()
             Connection:Disconnect()
             if ResizeConnection then ResizeConnection:Disconnect() end
             if PositionConnection then PositionConnection:Disconnect() end
+            if CornerConnection then CornerConnection:Disconnect() end
             SnowContainer:Destroy()
         end,
         SetVisible = function(visible)
