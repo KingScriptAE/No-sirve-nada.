@@ -1,4 +1,3 @@
---By霖溺
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -187,7 +186,7 @@ local Library = {
 
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 12,
+    CornerRadius = 4,
 
     IsLightTheme = false,
     Scheme = {
@@ -283,7 +282,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 12,
+        CornerRadius = 4,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.Code,
@@ -5939,6 +5938,82 @@ function Library:Notify(...)
     return Data
 end
 
+function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?)
+    SnowCount = SnowCount or 40
+    SnowSize = SnowSize or 6
+    Speed = Speed or 0.8
+
+    local Snowflakes = {}
+    local ViewportSize = workspace.CurrentCamera.ViewportSize
+
+    local SnowContainer = New("Frame", {
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        Parent = Parent,
+    })
+
+    for i = 1, SnowCount do
+        local Snowflake = New("Frame", {
+            BackgroundColor3 = Color3.new(1, 1, 1),
+            BackgroundTransparency = 0.7,
+            Size = UDim2.fromOffset(SnowSize, SnowSize),
+            Position = UDim2.new(math.random(), 0, -0.1, 0),
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            ZIndex = 0,
+            Parent = SnowContainer,
+        })
+        
+        New("UICorner", {
+            CornerRadius = UDim.new(1, 0),
+            Parent = Snowflake,
+        })
+
+        local Data = {
+            X = math.random(),
+            Y = -0.1,
+            Speed = Speed * (0.5 + math.random() * 0.5),
+            Drift = (math.random() - 0.5) * 0.02,
+            Size = SnowSize,
+        }
+
+        table.insert(Snowflakes, { Instance = Snowflake, Data = Data })
+    end
+
+    local Connection = RunService.RenderStepped:Connect(function(delta)
+        if not SnowContainer.Parent then
+            Connection:Disconnect()
+            return
+        end
+
+        for _, Snow in ipairs(Snowflakes) do
+            local Data = Snow.Data
+            local Instance = Snow.Instance
+
+            Data.Y = Data.Y + Data.Speed * delta * 0.5
+            Data.X = Data.X + Data.Drift * delta
+
+            if Data.Y > 1.1 then
+                Data.Y = -0.1
+                Data.X = math.random()
+            elseif Data.X > 1.1 then
+                Data.X = -0.1
+            elseif Data.X < -0.1 then
+                Data.X = 1.1
+            end
+
+            Instance.Position = UDim2.new(Data.X, 0, Data.Y, 0)
+        end
+    end)
+
+    table.insert(Library.Signals, Connection)
+
+    return {
+        Destroy = function()
+            Connection:Disconnect()
+            SnowContainer:Destroy()
+        end
+    }
+end
 function Library:CreateWindow(WindowInfo)
     WindowInfo = Library:Validate(WindowInfo, Templates.Window)
     local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
@@ -7908,7 +7983,16 @@ function Library:CreateWindow(WindowInfo)
     Library:GiveSignal(UserInputService.WindowFocusReleased:Connect(function()
         Library.IsRobloxFocused = false
     end))
-
+    
+    local SnowEffect = Library:AddSnowEffect(MainFrame, 50, 8, 0.6)
+    
+    Window.RemoveSnowEffect = function()
+        if SnowEffect then
+            SnowEffect.Destroy()
+            SnowEffect = nil
+        end
+    end
+    
     return Window
 end
 
