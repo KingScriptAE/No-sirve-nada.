@@ -1,4 +1,4 @@
---new linni v1
+
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -134,11 +134,9 @@ do
         return success, errorMessage
     end
 
-    task.spawn(function()
-        for AssetName, _ in CustomImageManagerAssets do
-            CustomImageManager.DownloadAsset(AssetName)
-        end
-    end)
+    for AssetName, _ in CustomImageManagerAssets do
+        CustomImageManager.DownloadAsset(AssetName)
+    end
 end
 
 local Library = {
@@ -165,7 +163,7 @@ local Library = {
     Notifications = {},
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
     NotifyTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
 
     Toggled = false,
@@ -551,9 +549,9 @@ function Library:MakeShadow(Parent, ZIndex)
     Shadow.Position = UDim2.fromScale(0.5, 0.5)
     Shadow.Size = UDim2.new(1, 40, 1, 40)
     Shadow.BackgroundTransparency = 1
-    Shadow.Image = "rbxassetid://6015897843"
+    Shadow.Image = "rbxassetid://6015897843" 
     Shadow.ImageColor3 = Color3.new(0, 0, 0)
-    Shadow.ImageTransparency = 0.4
+    Shadow.ImageTransparency = 0.4 
     Shadow.ScaleType = Enum.ScaleType.Slice
     Shadow.SliceCenter = Rect.new(47, 47, 453, 453)
     Shadow.ZIndex = ZIndex or 0
@@ -1580,15 +1578,6 @@ function Library:MakeOutline(Frame: GuiObject, Corner: number?, ZIndex: number?)
         Size = UDim2.new(1, -2, 1, -2),
         ZIndex = ZIndex,
         Parent = Holder,
-    })
-    
-    local Gradient = New("UIGradient", {
-        Rotation = 90,
-        Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
-            ColorSequenceKeypoint.new(1, Color3.new(0.6, 0.6, 0.6))
-        }),
-        Parent = Outline
     })
 
     if Corner and Corner > 0 then
@@ -3907,7 +3896,6 @@ do
             TweenService:Create(Label, Library.TweenInfo, {
                 TextTransparency = Toggle.Value and 0 or 0.4,
             }):Play()
-            -- [美化] 弹性动画
             TweenService:Create(Ball, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
                 AnchorPoint = Vector2.new(Offset, 0),
                 Position = UDim2.fromScale(Offset, 0),
@@ -5990,228 +5978,176 @@ function Library:Notify(...)
 end
 
 function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
-    SnowCount = SnowCount or 20
-    SnowSize = SnowSize or 16
-    Speed = Speed or 0.6
-    Color = Color or Color3.fromRGB(240, 248, 255)
-
-    local Snowflakes = {}
-    
     local SnowContainer = New("Frame", {
         BackgroundTransparency = 1,
         Size = UDim2.fromScale(1, 1),
         ZIndex = 1,
         ClipsDescendants = true,
         Parent = Parent,
+        Visible = false,
     })
     
-    if Parent:FindFirstChild("UICorner") then
-        local parentCorner = Parent.UICorner
-        New("UICorner", {
-            CornerRadius = parentCorner.CornerRadius,
+    task.defer(function()
+        SnowCount = SnowCount or 40 
+        SnowSize = SnowSize or 16
+        Speed = Speed or 0.6
+        Color = Color or Color3.fromRGB(240, 248, 255)
+
+        local Snowflakes = {}
+        
+        if Parent:FindFirstChild("UICorner") then
+            local parentCorner = Parent.UICorner
+            New("UICorner", {
+                CornerRadius = parentCorner.CornerRadius,
+                Parent = SnowContainer,
+            })
+        end
+        
+        local ClipFrame = New("Frame", {
+            BackgroundTransparency = 1,
+            Size = UDim2.fromScale(1, 1),
+            ClipsDescendants = true,
             Parent = SnowContainer,
         })
-    end
-    
-    local ClipFrame = New("Frame", {
-        BackgroundTransparency = 1,
-        Size = UDim2.fromScale(1, 1),
-        ClipsDescendants = true,
-        Parent = SnowContainer,
-    })
 
-    local SnowflakeIcon = Library:GetSnowflakeIcon()
-    local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
-    
-    local function updateContainerBounds()
-        return {
-            X = SnowContainer.AbsolutePosition.X,
-            Y = SnowContainer.AbsolutePosition.Y,
-            Width = SnowContainer.AbsoluteSize.X,
-            Height = SnowContainer.AbsoluteSize.Y
-        }
-    end
-    
-    local containerBounds = updateContainerBounds()
-
-    for i = 1, SnowCount do
-        local Snowflake
+        local SnowflakeIcon = Library:GetSnowflakeIcon()
+        local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
         
-        local startX = math.random()
-        local startY = -0.05 * math.random()
-        local pixelX = startX * containerBounds.Width
-        local pixelY = startY * containerBounds.Height
-        
-        if HasSnowflakeIcon then
-            Snowflake = New("ImageLabel", {
-                Image = SnowflakeIcon.Url,
-                ImageColor3 = Color,
-                ImageRectOffset = SnowflakeIcon.ImageRectOffset,
-                ImageRectSize = SnowflakeIcon.ImageRectSize,
-                ImageTransparency = 0.2 + math.random() * 0.4,
-                BackgroundTransparency = 1,
-                Size = UDim2.fromOffset(SnowSize, SnowSize),
-                Rotation = math.random(0, 360),
-                Position = UDim2.new(0, pixelX, 0, pixelY),
-                AnchorPoint = Vector2.new(0.5, 0.5),
-                ZIndex = 2,
-                Parent = ClipFrame,
-            })
-        else
-            Snowflake = New("Frame", {
-                BackgroundColor3 = Color,
-                BackgroundTransparency = 0.3,
-                Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
-                Rotation = 45,
-                Position = UDim2.new(0, pixelX, 0, pixelY),
-                AnchorPoint = Vector2.new(0.5, 0.5),
-                ZIndex = 2,
-                Parent = ClipFrame,
-            })
-            New("UICorner", {
-                CornerRadius = UDim.new(0, 2),
-                Parent = Snowflake,
-            })
+        local function updateContainerBounds()
+            return {
+                X = SnowContainer.AbsolutePosition.X,
+                Y = SnowContainer.AbsolutePosition.Y,
+                Width = SnowContainer.AbsoluteSize.X,
+                Height = SnowContainer.AbsoluteSize.Y
+            }
         end
         
-        local Data = {
-            X = startX,
-            Y = startY,
-            Speed = Speed * (0.4 + math.random() * 0.6),
-            Drift = (math.random() - 0.5) * 0.02,
-            Size = SnowSize,
-            RotationSpeed = (math.random() - 0.5) * 60,
-            Transparency = 0.2 + math.random() * 0.4,
-            WobblePhase = math.random() * math.pi * 2,
-            WobbleAmount = math.random() * 0.01,
-            Scale = 0.8 + math.random() * 0.4,
-            HalfSize = SnowSize / 2,
-        }
+        local containerBounds = updateContainerBounds()
 
-        if HasSnowflakeIcon then
-            local Glow = New("ImageLabel", {
-                Image = SnowflakeIcon.Url,
-                ImageColor3 = Color3.fromRGB(200, 230, 255),
-                ImageRectOffset = SnowflakeIcon.ImageRectOffset,
-                ImageRectSize = SnowflakeIcon.ImageRectSize,
-                ImageTransparency = Data.Transparency + 0.3,
-                BackgroundTransparency = 1,
-                Size = UDim2.new(1.3, 0, 1.3, 0),
-                Position = UDim2.fromScale(0.5, 0.5),
-                AnchorPoint = Vector2.new(0.5, 0.5),
-                ZIndex = 1,
-                Parent = Snowflake,
-            })
-        end
-
-        table.insert(Snowflakes, { Instance = Snowflake, Data = Data })
-    end
-
-    local Connection = RunService.RenderStepped:Connect(function(delta)
-        if not SnowContainer.Parent or not Parent then
-            Connection:Disconnect()
-            return
-        end
-
-        containerBounds = updateContainerBounds()
-        local currentTime = tick()
-
-        for _, Snow in ipairs(Snowflakes) do
-            local Data = Snow.Data
-            local Instance = Snow.Instance
-
-            Data.Y = Data.Y + Data.Speed * delta * 0.5
-            Data.X = Data.X + Data.Drift * delta
+        for i = 1, SnowCount do
+            local Snowflake
             
-            local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
-            Data.X = Data.X + wobbleX * delta
+            local startX = math.random()
+            local startY = -0.05 * math.random()
+            local pixelX = startX * containerBounds.Width
+            local pixelY = startY * containerBounds.Height
             
-            Data.X = math.clamp(Data.X, 0, 1)
-            
-            Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
-            
-            local pulse = 0.9 + 0.1 * math.sin(currentTime * 2 + Data.Y * 10)
-            local actualSize = Data.Size * Data.Scale * pulse
-            Instance.Size = UDim2.fromOffset(actualSize, actualSize)
-            
-            local depthTransparency = math.min(Data.Y * 0.3, 0.4)
-            local targetTransparency = math.min(Data.Transparency + depthTransparency, 0.9)
-            
-            if Instance:IsA("ImageLabel") then
-                Instance.ImageTransparency = targetTransparency
+            if HasSnowflakeIcon then
+                Snowflake = New("ImageLabel", {
+                    Image = SnowflakeIcon.Url,
+                    ImageColor3 = Color,
+                    ImageRectOffset = SnowflakeIcon.ImageRectOffset,
+                    ImageRectSize = SnowflakeIcon.ImageRectSize,
+                    ImageTransparency = 0.2 + math.random() * 0.4,
+                    BackgroundTransparency = 1,
+                    Size = UDim2.fromOffset(SnowSize, SnowSize),
+                    Rotation = math.random(0, 360),
+                    Position = UDim2.new(0, pixelX, 0, pixelY),
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    ZIndex = 2,
+                    Parent = ClipFrame,
+                })
             else
-                Instance.BackgroundTransparency = targetTransparency
+                Snowflake = New("Frame", {
+                    BackgroundColor3 = Color,
+                    BackgroundTransparency = 0.3,
+                    Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
+                    Rotation = 45,
+                    Position = UDim2.new(0, pixelX, 0, pixelY),
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    ZIndex = 2,
+                    Parent = ClipFrame,
+                })
+                New("UICorner", {
+                    CornerRadius = UDim.new(0, 2),
+                    Parent = Snowflake,
+                })
+            end
+            
+            local Data = {
+                X = startX,
+                Y = startY,
+                Speed = Speed * (0.4 + math.random() * 0.6),
+                Drift = (math.random() - 0.5) * 0.02,
+                Size = SnowSize,
+                RotationSpeed = (math.random() - 0.5) * 60,
+                Transparency = 0.2 + math.random() * 0.4,
+                WobblePhase = math.random() * math.pi * 2,
+                WobbleAmount = math.random() * 0.01,
+                Scale = 0.8 + math.random() * 0.4,
+                HalfSize = SnowSize / 2,
+            }
+
+            table.insert(Snowflakes, { Instance = Snowflake, Data = Data })
+        end
+
+        local Connection = RunService.RenderStepped:Connect(function(delta)
+            if not SnowContainer.Parent or not Parent then
+                -- self destruct inside closure
+                return
             end
 
-        
-            if Data.Y > 1 then
-                Data.Y = -0.05 * math.random()
-                Data.X = math.random()
-                Data.Transparency = 0.2 + math.random() * 0.4
-                Instance.Rotation = math.random(0, 360)
+            containerBounds = updateContainerBounds()
+            local currentTime = tick()
+
+            for _, Snow in ipairs(Snowflakes) do
+                local Data = Snow.Data
+                local Instance = Snow.Instance
+
+                Data.Y = Data.Y + Data.Speed * delta * 0.5
+                Data.X = Data.X + Data.Drift * delta
                 
-                Data.Speed = Speed * (0.4 + math.random() * 0.6)
-                Data.Drift = (math.random() - 0.5) * 0.02
-                Data.RotationSpeed = (math.random() - 0.5) * 60
-                Data.WobblePhase = math.random() * math.pi * 2
-                Data.Scale = 0.8 + math.random() * 0.4
+                local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
+                Data.X = Data.X + wobbleX * delta
+                
+                Data.X = math.clamp(Data.X, 0, 1)
+                
+                Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
+                
+                local pulse = 0.9 + 0.1 * math.sin(currentTime * 2 + Data.Y * 10)
+                local actualSize = Data.Size * Data.Scale * pulse
+                Instance.Size = UDim2.fromOffset(actualSize, actualSize)
+                
+                local depthTransparency = math.min(Data.Y * 0.3, 0.4)
+                local targetTransparency = math.min(Data.Transparency + depthTransparency, 0.9)
+                
+                if Instance:IsA("ImageLabel") then
+                    Instance.ImageTransparency = targetTransparency
+                else
+                    Instance.BackgroundTransparency = targetTransparency
+                end
+
+            
+                if Data.Y > 1 then
+                    Data.Y = -0.05 * math.random()
+                    Data.X = math.random()
+                    Data.Transparency = 0.2 + math.random() * 0.4
+                    Instance.Rotation = math.random(0, 360)
+                    
+                    Data.Speed = Speed * (0.4 + math.random() * 0.6)
+                    Data.Drift = (math.random() - 0.5) * 0.02
+                    Data.RotationSpeed = (math.random() - 0.5) * 60
+                    Data.WobblePhase = math.random() * math.pi * 2
+                    Data.Scale = 0.8 + math.random() * 0.4
+                end
+
+                local pixelX = Data.X * containerBounds.Width
+                local pixelY = Data.Y * containerBounds.Height
+                Instance.Position = UDim2.new(0, pixelX, 0, pixelY)
             end
-
-            local pixelX = Data.X * containerBounds.Width
-            local pixelY = Data.Y * containerBounds.Height
-            Instance.Position = UDim2.new(0, pixelX, 0, pixelY)
-        end
-    end)
-    
-    local ResizeConnection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-        containerBounds = updateContainerBounds()
-        SnowContainer.Size = UDim2.fromScale(1, 1)
-        ClipFrame.Size = UDim2.fromScale(1, 1)
-    end)
-    
-    local PositionConnection = Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-        containerBounds = updateContainerBounds()
-    end)
-    
-    local CornerConnection
-    if Parent:FindFirstChild("UICorner") then
-        local parentCorner = Parent.UICorner
-        local snowCorner = SnowContainer:FindFirstChild("UICorner")
-        if snowCorner then
-            CornerConnection = parentCorner:GetPropertyChangedSignal("CornerRadius"):Connect(function()
-                snowCorner.CornerRadius = parentCorner.CornerRadius
-            end)
-        end
-    end
-
-    table.insert(Library.Signals, Connection)
-    table.insert(Library.Signals, ResizeConnection)
-    table.insert(Library.Signals, PositionConnection)
-    if CornerConnection then
-        table.insert(Library.Signals, CornerConnection)
-    end
+        end)
+        
+        table.insert(Library.Signals, Connection)
+        SnowContainer.Visible = true
+    end) -- End Defer
 
     return {
         Destroy = function()
-            Connection:Disconnect()
-            if ResizeConnection then ResizeConnection:Disconnect() end
-            if PositionConnection then PositionConnection:Disconnect() end
-            if CornerConnection then CornerConnection:Disconnect() end
-            SnowContainer:Destroy()
+            -- logic handled by container destruction
+            if SnowContainer then SnowContainer:Destroy() end
         end,
         SetVisible = function(visible)
             SnowContainer.Visible = visible
-        end,
-        SetIntensity = function(intensity)
-            for _, Snow in ipairs(Snowflakes) do
-                Snow.Data.Transparency = 0.2 + (1 - intensity) * 0.6
-            end
-        end,
-        SetSpeed = function(newSpeed)
-            Speed = newSpeed
-            for _, Snow in ipairs(Snowflakes) do
-                Snow.Data.Speed = Speed * (0.4 + math.random() * 0.6)
-            end
         end,
         Container = SnowContainer
     }
@@ -6485,6 +6421,7 @@ function Library:CreateWindow(WindowInfo)
         })
         
         Library:MakeShadow(MainFrame, -1)
+        
         local MainGradient = New("UIGradient", {
             Rotation = 90,
             Color = ColorSequence.new{
@@ -6588,9 +6525,10 @@ function Library:CreateWindow(WindowInfo)
         })
         if not LayoutState.IsCompact then
             local MaxTextWidth =
-                math.max(0, InitialSidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
-            local TextWidth = Library:GetTextBounds(WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
-            WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
+                math.max(0, SidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
+            local TextWidth =
+                Library:GetTextBounds(LayoutRefs.WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
+            LayoutRefs.WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
         else
             WindowTitle.Size = UDim2.new(0, 0, 1, 0)
         end
@@ -7767,7 +7705,7 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 0.85,
+                BackgroundTransparency = 0.85, 
                 BackgroundColor3 = Library.Scheme.AccentColor
             }):Play()
             TweenService:Create(TabLabel, Library.TweenInfo, {
@@ -8041,12 +7979,10 @@ function Library:CreateWindow(WindowInfo)
                 Library.ActiveTab:Hide()
             end
 
-            -- [美化] KeyTab 选中样式统一
             TweenService:Create(TabButton, Library.TweenInfo, {
                 BackgroundTransparency = 0.85,
                 BackgroundColor3 = Library.Scheme.AccentColor
             }):Play()
-            
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0,
             }):Play()
@@ -8255,6 +8191,7 @@ function Library:CreateWindow(WindowInfo)
         ZIndex = 0,
     })
     
+    -- [优化] 异步加载雪花，防止卡顿
     local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 40, 10, 0.7)
     
     Window.SetSnowVisible = function(visible)
