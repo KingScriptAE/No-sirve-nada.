@@ -1,4 +1,4 @@
-
+--new
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -134,9 +134,11 @@ do
         return success, errorMessage
     end
 
-    for AssetName, _ in CustomImageManagerAssets do
-        CustomImageManager.DownloadAsset(AssetName)
-    end
+    task.spawn(function()
+        for AssetName, _ in CustomImageManagerAssets do
+            CustomImageManager.DownloadAsset(AssetName)
+        end
+    end)
 end
 
 local Library = {
@@ -5988,7 +5990,7 @@ function Library:Notify(...)
 end
 
 function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
-    SnowCount = SnowCount or 40 
+    SnowCount = SnowCount or 20
     SnowSize = SnowSize or 16
     Speed = Speed or 0.6
     Color = Color or Color3.fromRGB(240, 248, 255)
