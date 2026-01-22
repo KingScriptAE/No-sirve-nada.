@@ -1,4 +1,4 @@
---new
+--new linni
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -1131,7 +1131,7 @@ type IconModule = {
 
 local FetchIcons, Icons = pcall(function()
     return (loadstring(
-        game:HttpGet("https://raw.githubusercontent.com/deividcomsono/lucide-roblox-direct/refs/heads/main/source.lua")
+        game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/Lucidesource.lua")
     ) :: () -> IconModule)()
 end)
 
@@ -5990,7 +5990,7 @@ function Library:Notify(...)
 end
 
 function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
-    SnowCount = SnowCount or 20
+    SnowCount = SnowCount or 10
     SnowSize = SnowSize or 16
     Speed = Speed or 0.6
     Color = Color or Color3.fromRGB(240, 248, 255)
