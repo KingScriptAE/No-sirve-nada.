@@ -1,4 +1,4 @@
---By霖溺
+
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -163,8 +163,8 @@ local Library = {
     Notifications = {},
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -540,6 +540,23 @@ end
 local function GetLighterColor(Color)
     local H, S, V = Color:ToHSV()
     return Color3.fromHSV(H, math.max(0, S - 0.1), math.min(1, V + 0.1))
+end
+
+function Library:MakeShadow(Parent, ZIndex)
+    local Shadow = Instance.new("ImageLabel")
+    Shadow.Name = "Shadow"
+    Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+    Shadow.Position = UDim2.fromScale(0.5, 0.5)
+    Shadow.Size = UDim2.new(1, 40, 1, 40)
+    Shadow.BackgroundTransparency = 1
+    Shadow.Image = "rbxassetid://6015897843"
+    Shadow.ImageColor3 = Color3.new(0, 0, 0)
+    Shadow.ImageTransparency = 0.4
+    Shadow.ScaleType = Enum.ScaleType.Slice
+    Shadow.SliceCenter = Rect.new(47, 47, 453, 453)
+    Shadow.ZIndex = ZIndex or 0
+    Shadow.Parent = Parent
+    return Shadow
 end
 
 function Library:UpdateKeybindFrame()
@@ -1562,6 +1579,15 @@ function Library:MakeOutline(Frame: GuiObject, Corner: number?, ZIndex: number?)
         ZIndex = ZIndex,
         Parent = Holder,
     })
+    
+    local Gradient = New("UIGradient", {
+        Rotation = 90,
+        Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
+            ColorSequenceKeypoint.new(1, Color3.new(0.6, 0.6, 0.6))
+        }),
+        Parent = Outline
+    })
 
     if Corner and Corner > 0 then
         New("UICorner", {
@@ -2052,7 +2078,7 @@ function Library:SetIconModule(module: IconModule)
     FetchIcons = true
     Icons = module
 
-    -- Top ten fixes 🚀
+    -- Top ten fixes 
     CheckIcon = Library:GetIcon("check")
     ArrowIcon = Library:GetIcon("chevron-up")
     ResizeIcon = Library:GetIcon("move-diagonal-2")
@@ -3879,7 +3905,8 @@ do
             TweenService:Create(Label, Library.TweenInfo, {
                 TextTransparency = Toggle.Value and 0 or 0.4,
             }):Play()
-            TweenService:Create(Ball, Library.TweenInfo, {
+            -- [美化] 弹性动画
+            TweenService:Create(Ball, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
                 AnchorPoint = Vector2.new(Offset, 0),
                 Position = UDim2.fromScale(Offset, 0),
             }):Play()
@@ -6115,7 +6142,7 @@ function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: 
             end
 
         
-            if Data.Y > 1 then  -- 到达105%的位置时重置
+            if Data.Y > 1 then
                 Data.Y = -0.05 * math.random()
                 Data.X = math.random()
                 Data.Transparency = 0.2 + math.random() * 0.4
@@ -6454,6 +6481,17 @@ function Library:CreateWindow(WindowInfo)
             CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
             Parent = MainFrame,
         })
+        
+        Library:MakeShadow(MainFrame, -1)
+        local MainGradient = New("UIGradient", {
+            Rotation = 90,
+            Color = ColorSequence.new{
+                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(200, 200, 200)),
+            },
+            Parent = MainFrame
+        })
+        
         local InitialSidebarWidth = GetSidebarWidth()
         LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
             Position = UDim2.new(0, InitialSidebarWidth, 0, 0),
@@ -7727,7 +7765,8 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 0,
+                BackgroundTransparency = 0.85,
+                BackgroundColor3 = Library.Scheme.AccentColor
             }):Play()
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0,
@@ -7737,6 +7776,21 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0,
                 }):Play()
             end
+
+            if not TabButton:FindFirstChild("ActiveIndicator") then
+                local Indicator = Instance.new("Frame")
+                Indicator.Name = "ActiveIndicator"
+                Indicator.BackgroundColor3 = Library.Scheme.AccentColor
+                Indicator.Size = UDim2.new(0, 3, 0.6, 0)
+                Indicator.Position = UDim2.new(0, 0, 0.2, 0)
+                Indicator.BorderSizePixel = 0
+                Indicator.Parent = TabButton
+                
+                local IC = Instance.new("UICorner")
+                IC.CornerRadius = UDim.new(1,0)
+                IC.Parent = Indicator
+            end
+            TabButton.ActiveIndicator.Visible = true
 
             if Description then
                 CurrentTabInfo.Visible = true
@@ -7750,6 +7804,10 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TabContainer.Visible = true
+            TabContainer.Position = UDim2.fromOffset(0, 10)
+            TabContainer.BackgroundTransparency = 1
+            TweenService:Create(TabContainer, Library.TweenInfo, { Position = UDim2.fromOffset(0, 0) }):Play()
+
             Tab:RefreshSides()
 
             Library.ActiveTab = Tab
@@ -7771,6 +7829,11 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0.5,
                 }):Play()
             end
+            
+            if TabButton:FindFirstChild("ActiveIndicator") then
+                TabButton.ActiveIndicator.Visible = false
+            end
+            
             TabContainer.Visible = false
 
             if IsDefaultSearchbarSize then
@@ -7976,9 +8039,12 @@ function Library:CreateWindow(WindowInfo)
                 Library.ActiveTab:Hide()
             end
 
+            -- [美化] KeyTab 选中样式统一
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 0,
+                BackgroundTransparency = 0.85,
+                BackgroundColor3 = Library.Scheme.AccentColor
             }):Play()
+            
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0,
             }):Play()
@@ -7987,6 +8053,22 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0,
                 }):Play()
             end
+            
+            if not TabButton:FindFirstChild("ActiveIndicator") then
+                local Indicator = Instance.new("Frame")
+                Indicator.Name = "ActiveIndicator"
+                Indicator.BackgroundColor3 = Library.Scheme.AccentColor
+                Indicator.Size = UDim2.new(0, 3, 0.6, 0)
+                Indicator.Position = UDim2.new(0, 0, 0.2, 0)
+                Indicator.BorderSizePixel = 0
+                Indicator.Parent = TabButton
+                
+                local IC = Instance.new("UICorner")
+                IC.CornerRadius = UDim.new(1,0)
+                IC.Parent = Indicator
+            end
+            TabButton.ActiveIndicator.Visible = true
+
             TabContainer.Visible = true
 
             if Description then
@@ -8021,6 +8103,11 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0.5,
                 }):Play()
             end
+            
+            if TabButton:FindFirstChild("ActiveIndicator") then
+                TabButton.ActiveIndicator.Visible = false
+            end
+
             TabContainer.Visible = false
 
             if IsDefaultSearchbarSize then
