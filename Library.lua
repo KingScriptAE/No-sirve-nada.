@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.1.30 
---UI具体修改时间8:16 PM
+--UI具体修改时间8:29 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -998,6 +998,15 @@ v = ApplyDPIScale(v, (Table.DPIOffset and Table.DPIOffset[k]))
 elseif k == "TextSize" then
 DPIProperties[k] = v
 v = ApplyTextScale(v)
+end
+end
+pcall(function() Instance[k] = v end)
+end
+if GetTableSize(ThemeProperties) > 0 then
+Library.Registry[Instance] = ThemeProperties
+end
+if GetTableSize(DPIProperties) > 0 then
+Library.DPIRegistry[Instance] = DPIProperties
 end
 end
 pcall(function() Instance[k] = v end)
@@ -3005,9 +3014,9 @@ Toggle:Display()
 end
 function Toggle:Display()
 if Library.Unloaded then return end
-local TargetColor = Toggle.Value and "AccentColor" or "MainColor"
-local StrokeColor = Toggle.Value and "AccentColor" or "OutlineColor"
-local TextTrans = Toggle.Value and 0 or 0.4
+local On = Toggle.Value
+local TargetColor = On and "AccentColor" or "MainColor"
+local StrokeColor = On and "AccentColor" or "OutlineColor"
 if Toggle.Disabled then
 CheckboxStroke.Transparency = 0.5
 Label.TextTransparency = 0.8
@@ -3016,13 +3025,13 @@ return
 end
 Library:AddToRegistry(Checkbox, { BackgroundColor3 = TargetColor })
 Library:AddToRegistry(CheckboxStroke, { Color = StrokeColor })
-TweenService:Create(Label, Library.TweenInfo, { TextTransparency = TextTrans }):Play()
+TweenService:Create(Label, Library.TweenInfo, { TextTransparency = On and 0 or 0.4 }):Play()
 TweenService:Create(Checkbox, Library.TweenInfo, { BackgroundColor3 = Library.Scheme[TargetColor] }):Play()
 TweenService:Create(CheckboxStroke, Library.TweenInfo, { Color = Library.Scheme[StrokeColor] }):Play()
-local CheckSize = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
+local CheckSize = On and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
 TweenService:Create(CheckImage, Library.TweenInfo, {
 Size = CheckSize,
-ImageTransparency = Toggle.Value and 0 or 1,
+ImageTransparency = On and 0 or 1,
 ImageColor3 = Library.Scheme.FontColor
 }):Play()
 end
@@ -6495,7 +6504,8 @@ ImageColor3 = Library.Scheme.FontColor
 }):Play()
 end
 TabContainer.Visible = false
-if TabButton:FindFirstChild("Indicator") then TabButton.Indicator.Visible = false end
+if TabButton:FindFirstChild("Indicator") then
+TabButton.Indicator.Visible = false
 end
 end
 if not Library.ActiveTab then
@@ -6709,7 +6719,8 @@ ImageColor3 = Library.Scheme.FontColor
 }):Play()
 end
 TabContainer.Visible = false
-if TabButton:FindFirstChild("Indicator") then TabButton.Indicator.Visible = false end
+if TabButton:FindFirstChild("Indicator") then
+TabButton.Indicator.Visible = false
 end
 end
 if not Library.ActiveTab then
