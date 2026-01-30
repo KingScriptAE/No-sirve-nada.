@@ -1,5 +1,5 @@
 --UI作者MS 二改作者霖溺
---UI修改日期2026.1.30 5.45pm
+--UI修改日期2026.1.30 6.46pm
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -5276,35 +5276,40 @@ New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
 Parent = MainFrame,
 })
-local TopAccentBar = New("Frame", {
-Name = "TopAccentBar",
+local TopEdgeLine = New("Frame", {
+Name = "TopEdgeLine",
 BackgroundColor3 = "AccentColor",
 BorderSizePixel = 0,
 Position = UDim2.new(0, 0, 0, 0),
-Size = UDim2.new(1, 0, 0, 2),
-ZIndex = 10,
+Size = UDim2.new(1, 0, 0, 1),
+ZIndex = 12,
+Parent = MainFrame,
+})
+local HeaderGlow = New("Frame", {
+Name = "HeaderGlow",
+BackgroundTransparency = 1,
+Position = UDim2.new(0, 0, 0, 0),
+Size = UDim2.new(1, 0, 0, 25),
+ZIndex = 11,
 Parent = MainFrame,
 })
 New("UIGradient", {
-Color = ColorSequence.new({
-ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
-ColorSequenceKeypoint.new(0.5, Color3.new(1, 1, 1)),
-ColorSequenceKeypoint.new(1, Library.Scheme.AccentColor),
+Rotation = 90,
+Color = ColorSequence.new(Library.Scheme.AccentColor),
+Transparency = NumberSequence.new({
+NumberSequenceKeypoint.new(0, 0.85),
+NumberSequenceKeypoint.new(1, 1),
 }),
-Parent = TopAccentBar,
+Parent = HeaderGlow,
 })
 if WindowInfo.CornerRadius > 0 then
 New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-Parent = TopAccentBar,
+Parent = TopEdgeLine,
 })
-local Mask = New("Frame", {
-BackgroundColor3 = "AccentColor",
-BorderSizePixel = 0,
-Position = UDim2.new(0, 0, 0, 1),
-Size = UDim2.new(1, 0, 0, 1),
-ZIndex = 10,
-Parent = TopAccentBar,
+New("UICorner", {
+CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
+Parent = HeaderGlow,
 })
 end
 local InitialSidebarWidth = GetSidebarWidth()
@@ -5576,7 +5581,7 @@ AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundColor3 = "BackgroundColor",
 CanvasSize = UDim2.fromScale(0, 0),
 Position = UDim2.fromOffset(0, 49),
-ScrollBarThickness = 2,
+ScrollBarThickness = 1,
 Size = UDim2.new(0, InitialSidebarWidth, 1, -70),
 Parent = MainFrame,
 })
