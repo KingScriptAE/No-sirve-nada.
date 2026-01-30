@@ -1,6 +1,5 @@
---UI作者MS
---二改作者霖溺
---修改日期2026.1.30
+--UI作者MS 二改作者霖溺
+--UI修改日期2026.1.30 5.45pm
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -983,12 +982,13 @@ local DPIOffset = DPIProperties["DPIOffset"] or Table["DPIOffset"] or {}
 for k, v in pairs(Table) do
 if k == "DPIExclude" or k == "DPIOffset" then
 continue
-elseif ThemeProperties[k] then
-ThemeProperties[k] = nil
-elseif k ~= "Text" and (Library.Scheme[v] or typeof(v) == "function") then
+end
+if k ~= "Text" and (Library.Scheme[v] or typeof(v) == "function") then
 ThemeProperties[k] = v
 Instance[k] = Library.Scheme[v] or v()
 continue
+elseif ThemeProperties[k] then
+ThemeProperties[k] = nil
 end
 if not DPIExclude[k] then
 if k == "Position" or k == "Size" or k:match("Padding") then
@@ -999,11 +999,14 @@ DPIProperties[k] = v
 v = ApplyTextScale(v)
 end
 end
-Instance[k] = v
+local success, err = pcall(function() Instance[k] = v end)
+if not success then
+if k:match("Color") and typeof(v) == "string" and Library.Scheme[v] then
+Instance[k] = Library.Scheme[v]
 end
-if GetTableSize(ThemeProperties) > 0 then
-Library.Registry[Instance] = ThemeProperties
 end
+end
+if GetTableSize(ThemeProperties) > 0 then Library.Registry[Instance] = ThemeProperties end
 if GetTableSize(DPIProperties) > 0 then
 DPIProperties["DPIExclude"] = DPIExclude
 DPIProperties["DPIOffset"] = DPIOffset
@@ -6189,9 +6192,9 @@ ImageRectOffset = BoxIcon.ImageRectOffset,
 ImageRectSize = BoxIcon.ImageRectSize,
 BackgroundColor3 = "BackgroundColor",
 BackgroundTransparency = 0,
-Position = UDim2.fromOffset(10, -8),
+Position = UDim2.fromOffset(10, -8), 
 Size = UDim2.fromOffset(14, 14),
-ZIndex = 10,
+ZIndex = 15,
 Parent = GroupboxHolder,
 })
 end
@@ -6205,7 +6208,7 @@ Text = " " .. Info.Name:upper() .. " ",
 TextSize = 12,
 TextColor3 = "AccentColor",
 TextXAlignment = Enum.TextXAlignment.Left,
-ZIndex = 10,
+ZIndex = 15,
 Parent = GroupboxHolder,
 })
 New("UIPadding", {
