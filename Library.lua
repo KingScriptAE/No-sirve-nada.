@@ -1,6 +1,7 @@
---UI作者MS 二改作者霖溺
+--UI作者@MS 
+--UI二改作者@霖溺
 --UI修改日期2026.1.30 
---UI具体修改时间7:32 PM
+--UI具体修改时间8:58 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -63,7 +64,8 @@ return TraversedPath
 end
 function CustomImageManager.AddAsset(AssetName: string, RobloxAssetId: number, URL: string, ForceRedownload: boolean?)
 if CustomImageManagerAssets[AssetName] ~= nil then
-error(string.format("Asset %q already exists", AssetName))
+warn(string.format("Asset %q already exists, skipping overwrite.", AssetName))
+return
 end
 assert(typeof(RobloxAssetId) == "number", "RobloxAssetId must be a number")
 CustomImageManagerAssets[AssetName] = {
@@ -384,7 +386,7 @@ Bindable:Fire(false)
 end
 end)
 task.delay(Timeout, function()
-Connection:Disconnect()
+if Connection then Connection:Disconnect() end
 Bindable:Fire(false)
 end)
 local Result = Bindable.Event:Wait()
@@ -918,6 +920,10 @@ return (loadstring(
 game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/Lucidesource.lua")
 ) :: () -> IconModule)()
 end)
+if not FetchIcons then
+warn("Failed to load icon module, custom icons will not work.")
+Icons = { GetAsset = function() return nil end }
+end
 function Library:GetSnowflakeIcon()
 local SnowflakeIcon = self:GetIcon("snowflake")
 if SnowflakeIcon then
@@ -938,12 +944,12 @@ Custom = true,
 }
 end
 function Library:GetIcon(IconName: string)
-if not FetchIcons then
-return
+if not FetchIcons or not Icons then
+return nil
 end
 local Success, Icon = pcall(Icons.GetAsset, IconName)
 if not Success then
-return
+return nil
 end
 return Icon
 end
@@ -2117,6 +2123,7 @@ end
 end
 repeat
 task.wait()
+if Library.Unloaded then Picking = false return end
 Picker.Text = "..."
 Picker.Size = UDim2.fromOffset(29 * Library.DPIScale, 18 * Library.DPIScale)
 if GetInput() then
@@ -2131,6 +2138,7 @@ if IsModifierInput(Input) then
 local StopLoop = false
 repeat
 task.wait()
+if Library.Unloaded then StopLoop = true break end
 if UserInputService:IsKeyDown(Input.KeyCode) then
 task.wait(0.075)
 if UserInputService:IsKeyDown(Input.KeyCode) then
@@ -4265,10 +4273,11 @@ ScaleType = Image.ScaleType,
 Parent = Box,
 }
 local Icon = Library:GetCustomIcon(ImageProperties.Image)
-assert(Icon, "Image must be a valid Roblox asset or a valid URL or a valid lucide icon.")
+if Icon then
 ImageProperties.Image = Icon.Url
 ImageProperties.ImageRectOffset = Icon.ImageRectOffset
 ImageProperties.ImageRectSize = Icon.ImageRectSize
+end
 local ImageLabel = New("ImageLabel", ImageProperties)
 function Image:SetHeight(Height: number)
 assert(Height > 0, "Height must be greater than 0.")
@@ -4279,10 +4288,11 @@ end
 function Image:SetImage(NewImage: string)
 assert(typeof(NewImage) == "string", "Image must be a string.")
 local Icon = Library:GetCustomIcon(NewImage)
-assert(Icon, "Image must be a valid Roblox asset or a valid URL or a valid lucide icon.")
+if Icon then
 NewImage = Icon.Url
 Image.RectOffset = Icon.ImageRectOffset
 Image.RectSize = Icon.ImageRectSize
+end
 ImageLabel.Image = NewImage
 Image.Image = NewImage
 end
@@ -4502,6 +4512,7 @@ function Depbox:Update(CancelSearch)
 for _, Dependency in pairs(Depbox.Dependencies) do
 local Element = Dependency[1]
 local Value = Dependency[2]
+if not Element then continue end
 if Element.Type == "Toggle" and Element.Value ~= Value then
 DepboxContainer.Visible = false
 Depbox.Visible = false
@@ -4608,6 +4619,7 @@ function DepGroupbox:Update(CancelSearch)
 for _, Dependency in pairs(DepGroupbox.Dependencies) do
 local Element = Dependency[1]
 local Value = Dependency[2]
+if not Element then continue end
 if Element.Type == "Toggle" and Element.Value ~= Value then
 Background.Visible = false
 DepGroupbox.Visible = false
@@ -4900,7 +4912,7 @@ local Snowflakes = {}
 local SnowContainer = New("Frame", {
 BackgroundTransparency = 1,
 Size = UDim2.fromScale(1, 1),
-ZIndex = 1,
+ZIndex = 0,
 ClipsDescendants = true,
 Parent = Parent,
 })
@@ -4946,7 +4958,7 @@ Size = UDim2.fromOffset(SnowSize, SnowSize),
 Rotation = math.random(0, 360),
 Position = UDim2.new(0, pixelX, 0, pixelY),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 2,
+ZIndex = 0,
 Parent = ClipFrame,
 })
 else
@@ -4957,7 +4969,7 @@ Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
 Rotation = 45,
 Position = UDim2.new(0, pixelX, 0, pixelY),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 2,
+ZIndex = 0,
 Parent = ClipFrame,
 })
 New("UICorner", {
@@ -4989,7 +5001,7 @@ BackgroundTransparency = 1,
 Size = UDim2.new(1.3, 0, 1.3, 0),
 Position = UDim2.fromScale(0.5, 0.5),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 1,
+ZIndex = 0,
 Parent = Snowflake,
 })
 end
@@ -4997,7 +5009,7 @@ table.insert(Snowflakes, { Instance = Snowflake, Data = Data })
 end
 local Connection = RunService.RenderStepped:Connect(function(delta)
 if not SnowContainer.Parent or not Parent then
-Connection:Disconnect()
+if Connection then Connection:Disconnect() end
 return
 end
 containerBounds = updateContainerBounds()
@@ -5063,14 +5075,14 @@ table.insert(Library.Signals, CornerConnection)
 end
 return {
 Destroy = function()
-Connection:Disconnect()
+if Connection then Connection:Disconnect() end
 if ResizeConnection then ResizeConnection:Disconnect() end
 if PositionConnection then PositionConnection:Disconnect() end
 if CornerConnection then CornerConnection:Disconnect() end
-SnowContainer:Destroy()
+if SnowContainer then SnowContainer:Destroy() end
 end,
 SetVisible = function(visible)
-SnowContainer.Visible = visible
+if SnowContainer then SnowContainer.Visible = visible end
 end,
 SetIntensity = function(intensity)
 for _, Snow in ipairs(Snowflakes) do
@@ -5089,11 +5101,12 @@ end
 function Library:CreateWindow(WindowInfo)
 WindowInfo = Library:Validate(WindowInfo, Templates.Window)
 local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
+local startTime = tick()
 if RunService:IsStudio() and ViewportSize.X <= 5 and ViewportSize.Y <= 5 then
 repeat
 ViewportSize = workspace.CurrentCamera.ViewportSize
 task.wait()
-until ViewportSize.X > 5 and ViewportSize.Y > 5
+until (ViewportSize.X > 5 and ViewportSize.Y > 5) or (tick() - startTime > 5)
 end
 local MaxX = ViewportSize.X - 64
 local MaxY = ViewportSize.Y - 64
@@ -5104,6 +5117,15 @@ math.clamp(WindowInfo.Size.Y.Offset, Library.MinSize.Y, MaxY)
 )
 if typeof(WindowInfo.Font) == "EnumItem" then
 WindowInfo.Font = Font.fromEnum(WindowInfo.Font)
+end
+if typeof(WindowInfo.ToggleKeybind) == "string" then
+local key = Enum.KeyCode[WindowInfo.ToggleKeybind]
+if key then
+WindowInfo.ToggleKeybind = key
+else
+warn("Invalid ToggleKeybind string: " .. tostring(WindowInfo.ToggleKeybind))
+WindowInfo.ToggleKeybind = Enum.KeyCode.RightControl
+end
 end
 Library.CornerRadius = WindowInfo.CornerRadius
 Library:SetNotifySide(WindowInfo.NotifySide)
