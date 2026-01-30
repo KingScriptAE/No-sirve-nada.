@@ -1,4 +1,4 @@
---啦啦啦
+--？
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -3612,13 +3612,6 @@ local Checkbox = New("Frame", {
             CornerRadius = UDim.new(0, Library.CornerRadius / 2),
             Parent = Checkbox,
         })
-function Toggle:Display()
-    local TargetColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor
-    TweenService:Create(Checkbox, Library.TweenInfo, {
-        BackgroundColor3 = TargetColor
-    }):Play()
-    Checkbox.Shadow.Visible = Toggle.Value
-end
         local CheckboxStroke = New("UIStroke", {
             Color = "OutlineColor",
             Parent = Checkbox,
