@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.1.30 
---UI具体修改时间9.20 PM
+--UI具体修改时间9.25 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4958,7 +4958,7 @@ Size = UDim2.fromOffset(SnowSize, SnowSize),
 Rotation = math.random(0, 360),
 Position = UDim2.new(0, pixelX, 0, pixelY),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 0,
+ZIndex = 11,
 Parent = ClipFrame,
 })
 else
@@ -4969,7 +4969,7 @@ Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
 Rotation = 45,
 Position = UDim2.new(0, pixelX, 0, pixelY),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 0,
+ZIndex = 11,
 Parent = ClipFrame,
 })
 New("UICorner", {
@@ -5001,7 +5001,7 @@ BackgroundTransparency = 1,
 Size = UDim2.new(1.3, 0, 1.3, 0),
 Position = UDim2.fromScale(0.5, 0.5),
 AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 0,
+ZIndex = 11,
 Parent = Snowflake,
 })
 end
