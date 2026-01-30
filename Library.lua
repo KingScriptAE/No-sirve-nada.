@@ -1,5 +1,6 @@
 --UI作者MS 二改作者霖溺
---UI修改日期2026.1.30 6.46pm
+--UI修改日期2026.1.30 
+--UI具体修改时间7:32 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -127,7 +128,7 @@ KeybindContainer = nil,
 KeybindToggles = {},
 Notifications = {},
 ToggleKeybind = Enum.KeyCode.RightControl,
-TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+TweenInfo = TweenInfo.new(0.07, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
 NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 Toggled = false,
 Unloaded = false,
@@ -2757,6 +2758,14 @@ TextTransparency = 0.4,
 Visible = Button.Visible,
 Parent = Holder,
 })
+New("UIGradient", {
+Rotation = 90,
+Color = ColorSequence.new({
+ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
+ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200)),
+}),
+Parent = Base,
+})
 local Stroke = New("UIStroke", {
 Color = "OutlineColor",
 Transparency = Button.Disabled and 0.5 or 0,
@@ -2992,19 +3001,27 @@ function Toggle:Display()
 if Library.Unloaded then
 return
 end
-CheckboxStroke.Transparency = Toggle.Disabled and 0.5 or 0
 if Toggle.Disabled then
+CheckboxStroke.Transparency = 0.5
 Label.TextTransparency = 0.8
 CheckImage.ImageTransparency = Toggle.Value and 0.8 or 1
 Checkbox.BackgroundColor3 = Library.Scheme.BackgroundColor
 Library.Registry[Checkbox].BackgroundColor3 = "BackgroundColor"
 return
 end
+CheckboxStroke.Transparency = 0
 TweenService:Create(Label, Library.TweenInfo, {
 TextTransparency = Toggle.Value and 0 or 0.4,
 }):Play()
+local CheckTargetSize = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
+local CheckTargetTransparency = Toggle.Value and 0 or 1
 TweenService:Create(CheckImage, Library.TweenInfo, {
-ImageTransparency = Toggle.Value and 0 or 1,
+Size = CheckTargetSize,
+ImageTransparency = CheckTargetTransparency,
+ImageColor3 = Library.Scheme.FontColor
+}):Play()
+TweenService:Create(CheckboxStroke, Library.TweenInfo, {
+Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
 }):Play()
 Checkbox.BackgroundColor3 = Library.Scheme.MainColor
 Library.Registry[Checkbox].BackgroundColor3 = "MainColor"
@@ -3159,31 +3176,35 @@ if Library.Unloaded then
 return
 end
 local Offset = Toggle.Value and 1 or 0
-Switch.BackgroundTransparency = Toggle.Disabled and 0.75 or 0
-SwitchStroke.Transparency = Toggle.Disabled and 0.75 or 0
-Switch.BackgroundColor3 = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor
-SwitchStroke.Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
-Library.Registry[Switch].BackgroundColor3 = Toggle.Value and "AccentColor" or "MainColor"
-Library.Registry[SwitchStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
 if Toggle.Disabled then
+Switch.BackgroundTransparency = 0.75
+SwitchStroke.Transparency = 0.75
 Label.TextTransparency = 0.8
 Ball.AnchorPoint = Vector2.new(Offset, 0)
 Ball.Position = UDim2.fromScale(Offset, 0)
 Ball.BackgroundColor3 = Library:GetDarkerColor(Library.Scheme.FontColor)
-Library.Registry[Ball].BackgroundColor3 = function()
-return Library:GetDarkerColor(Library.Scheme.FontColor)
-end
 return
 end
 TweenService:Create(Label, Library.TweenInfo, {
 TextTransparency = Toggle.Value and 0 or 0.4,
 }):Play()
+TweenService:Create(Switch, Library.TweenInfo, {
+BackgroundColor3 = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor,
+BackgroundTransparency = 0
+}):Play()
+TweenService:Create(SwitchStroke, Library.TweenInfo, {
+Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor,
+Transparency = Toggle.Value and 0 or 0.2
+}):Play()
+local BallScale = Toggle.Value and 1 or 0.7
 TweenService:Create(Ball, Library.TweenInfo, {
 AnchorPoint = Vector2.new(Offset, 0),
 Position = UDim2.fromScale(Offset, 0),
+Size = UDim2.fromScale(BallScale, BallScale)
 }):Play()
 Ball.BackgroundColor3 = Library.Scheme.FontColor
-Library.Registry[Ball].BackgroundColor3 = "FontColor"
+Library.Registry[Switch].BackgroundColor3 = Toggle.Value and "AccentColor" or "MainColor"
+Library.Registry[SwitchStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -3368,6 +3389,12 @@ Box:GetPropertyChangedSignal("Text"):Connect(function()
 Input:SetValue(Box.Text)
 end)
 end
+Box.Focused:Connect(function()
+TweenService:Create(Box, Library.TweenInfo, { BorderColor3 = Library.Scheme.AccentColor }):Play()
+end)
+Box.FocusLost:Connect(function()
+TweenService:Create(Box, Library.TweenInfo, { BorderColor3 = Library.Scheme.OutlineColor }):Play()
+end)
 if typeof(Input.Tooltip) == "string" or typeof(Input.DisabledTooltip) == "string" then
 Input.TooltipTable = Library:AddTooltip(Input.Tooltip, Input.DisabledTooltip, Box)
 Input.TooltipTable.Disabled = Input.Disabled
@@ -3672,6 +3699,12 @@ TextXAlignment = Enum.TextXAlignment.Left,
 Visible = false,
 Parent = Display,
 })
+SearchBox.Focused:Connect(function()
+TweenService:Create(SearchBox, Library.TweenInfo, { TextColor3 = Library.Scheme.AccentColor }):Play()
+end)
+SearchBox.FocusLost:Connect(function()
+TweenService:Create(SearchBox, Library.TweenInfo, { TextColor3 = Library.Scheme.FontColor }):Play()
+end)
 New("UIPadding", {
 PaddingLeft = UDim.new(0, 8),
 Parent = SearchBox,
@@ -5485,10 +5518,16 @@ PaddingRight = UDim.new(0, 8),
 PaddingTop = UDim.new(0, 8),
 Parent = SearchBox,
 })
-New("UIStroke", {
+local SearchStroke = New("UIStroke", {
 Color = "OutlineColor",
 Parent = SearchBox,
 })
+SearchBox.Focused:Connect(function()
+TweenService:Create(SearchStroke, Library.TweenInfo, { Color = Library.Scheme.AccentColor }):Play()
+end)
+SearchBox.FocusLost:Connect(function()
+TweenService:Create(SearchStroke, Library.TweenInfo, { Color = Library.Scheme.OutlineColor }):Play()
+end)
 local SearchIcon = Library:GetIcon("search")
 if SearchIcon then
 New("ImageLabel", {
@@ -5913,6 +5952,8 @@ AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundTransparency = 1,
 CanvasSize = UDim2.fromScale(0, 0),
 ScrollBarThickness = 2,
+ScrollBarImageColor3 = "AccentColor",
+ScrollBarImageTransparency = 0.2,
 Parent = TabContainer,
 })
 New("UIListLayout", {
@@ -5939,7 +5980,9 @@ AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundTransparency = 1,
 CanvasSize = UDim2.fromScale(0, 0),
 Position = UDim2.fromScale(1, 0),
-ScrollBarThickness = 0,
+ScrollBarThickness = 2,
+ScrollBarImageColor3 = "AccentColor",
+ScrollBarImageTransparency = 0.2,
 Parent = TabContainer,
 })
 New("UIListLayout", {
@@ -5996,6 +6039,7 @@ BorderSizePixel = 0,
 Size = UDim2.fromScale(1, 1),
 CanvasSize = UDim2.new(0, 0, 0, 0),
 ScrollBarThickness = 2,
+ScrollBarImageColor3 = "AccentColor",
 ScrollingDirection = Enum.ScrollingDirection.Y,
 Parent = WarningBox,
 })
@@ -6182,12 +6226,6 @@ New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
 Parent = GroupboxHolder,
 })
---[[
-Library:MakeLine(GroupboxHolder, {
-Position = UDim2.fromOffset(0, 34),
-Size = UDim2.new(1, 0, 0, 1),
-})
-]]
 local BoxIcon = Library:GetCustomIcon(Info.IconName)
 if BoxIcon then
 New("ImageLabel", {
@@ -6197,7 +6235,7 @@ ImageRectOffset = BoxIcon.ImageRectOffset,
 ImageRectSize = BoxIcon.ImageRectSize,
 BackgroundColor3 = "BackgroundColor",
 BackgroundTransparency = 0,
-Position = UDim2.fromOffset(10, -8), 
+Position = UDim2.fromOffset(10, -8),
 Size = UDim2.fromOffset(14, 14),
 ZIndex = 15,
 Parent = GroupboxHolder,
@@ -6399,11 +6437,14 @@ if Library.ActiveTab == Tab then
 return
 end
 TweenService:Create(TabLabel, Library.TweenInfo, {
-TextTransparency = Hovering and 0.25 or 0.5,
+TextTransparency = Hovering and 0 or 0.5,
+TextColor3 = Hovering and Library.Scheme.White or Library.Scheme.FontColor,
+Position = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
-ImageTransparency = Hovering and 0.25 or 0.5,
+ImageTransparency = Hovering and 0 or 0.5,
+ImageColor3 = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
 }):Play()
 end
 end
@@ -6450,7 +6491,6 @@ else
 TabButton.Indicator.Visible = true
 end
 end
---1
 function Tab:Hide()
 TweenService:Create(TabButton, Library.TweenInfo, {
 BackgroundTransparency = 1,
@@ -6473,7 +6513,6 @@ if TabButton:FindFirstChild("Indicator") then
 TabButton.Indicator.Visible = false
 end
 end
---1
 if not Library.ActiveTab then
 Tab:Show()
 end
@@ -6627,11 +6666,14 @@ if Library.ActiveTab == Tab then
 return
 end
 TweenService:Create(TabLabel, Library.TweenInfo, {
-TextTransparency = Hovering and 0.25 or 0.5,
+TextTransparency = Hovering and 0 or 0.5,
+TextColor3 = Hovering and Library.Scheme.White or Library.Scheme.FontColor,
+Position = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
-ImageTransparency = Hovering and 0.25 or 0.5,
+ImageTransparency = Hovering and 0 or 0.5,
+ImageColor3 = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
 }):Play()
 end
 end
@@ -6678,7 +6720,6 @@ else
 TabButton.Indicator.Visible = true
 end
 end
---2
 function Tab:Hide()
 TweenService:Create(TabButton, Library.TweenInfo, {
 BackgroundTransparency = 1,
@@ -6701,7 +6742,6 @@ if TabButton:FindFirstChild("Indicator") then
 TabButton.Indicator.Visible = false
 end
 end
---2
 if not Library.ActiveTab then
 Tab:Show()
 end
