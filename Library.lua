@@ -1,4 +1,4 @@
---Bylinni
+--啦啦啦
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -1548,10 +1548,10 @@ end
 
 function Library:MakeOutline(Frame: GuiObject, Corner: number?, ZIndex: number?)
     local Holder = New("Frame", {
-        BackgroundColor3 = "Dark",
-        Position = UDim2.fromOffset(-2, -2),
-        Size = UDim2.new(1, 4, 1, 4),
-        ZIndex = ZIndex,
+        BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+        Position = UDim2.fromOffset(-1, -1),
+        Size = UDim2.new(1, 2, 1, 2),
+        ZIndex = ZIndex or 0,
         Parent = Frame,
     })
 
@@ -1559,19 +1559,13 @@ function Library:MakeOutline(Frame: GuiObject, Corner: number?, ZIndex: number?)
         BackgroundColor3 = "OutlineColor",
         Position = UDim2.fromOffset(1, 1),
         Size = UDim2.new(1, -2, 1, -2),
-        ZIndex = ZIndex,
+        ZIndex = ZIndex or 0,
         Parent = Holder,
     })
 
     if Corner and Corner > 0 then
-        New("UICorner", {
-            CornerRadius = UDim.new(0, Corner + 1),
-            Parent = Holder,
-        })
-        New("UICorner", {
-            CornerRadius = UDim.new(0, Corner),
-            Parent = Outline,
-        })
+        New("UICorner", { CornerRadius = UDim.new(0, Corner), Parent = Holder })
+        New("UICorner", { CornerRadius = UDim.new(0, Corner), Parent = Outline })
     end
 
     return Holder, Outline
@@ -3606,18 +3600,25 @@ do
             Padding = UDim.new(0, 6),
             Parent = Label,
         })
-
-        local Checkbox = New("Frame", {
-            BackgroundColor3 = "MainColor",
-            Size = UDim2.fromScale(1, 1),
-            SizeConstraint = Enum.SizeConstraint.RelativeYY,
-            Parent = Button,
-        })
+local Checkbox = New("Frame", {
+    BackgroundColor3 = "MainColor",
+    BorderColor3 = "OutlineColor",
+    BorderSizePixel = 1,
+    Position = UDim2.new(1, -20, 0.5, -8),
+    Size = UDim2.fromOffset(16, 16),
+    Parent = Button,
+})
         New("UICorner", {
             CornerRadius = UDim.new(0, Library.CornerRadius / 2),
             Parent = Checkbox,
         })
-
+function Toggle:Display()
+    local TargetColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor
+    TweenService:Create(Checkbox, Library.TweenInfo, {
+        BackgroundColor3 = TargetColor
+    }):Play()
+    Checkbox.Shadow.Visible = Toggle.Value
+end
         local CheckboxStroke = New("UIStroke", {
             Color = "OutlineColor",
             Parent = Checkbox,
@@ -6454,6 +6455,36 @@ function Library:CreateWindow(WindowInfo)
             CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
             Parent = MainFrame,
         })
+
+local AccentLine = New("Frame", {
+    BackgroundColor3 = "AccentColor",
+    BorderSizePixel = 0,
+    Position = UDim2.new(0, 0, 0, 0),
+    Size = UDim2.new(1, 0, 0, 2),
+    ZIndex = 5,
+    Parent = MainFrame,
+})
+
+local AccentGradient = New("UIGradient", {
+    Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 150, 255)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200, 50, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(50, 255, 150))
+    }),
+    Rotation = 0,
+    Parent = AccentLine,
+})
+
+local GridOverlay = New("ImageLabel", {
+    Image = "rbxassetid://6073763717",
+    ImageTransparency = 0.92,
+    BackgroundTransparency = 1,
+    Size = UDim2.fromScale(1, 1),
+    ScaleType = Enum.ScaleType.Tile,
+    TileSize = UDim2.fromOffset(4, 4),
+    ZIndex = 1,
+    Parent = MainFrame,
+})
         local InitialSidebarWidth = GetSidebarWidth()
         LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
             Position = UDim2.new(0, InitialSidebarWidth, 0, 0),
