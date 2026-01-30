@@ -1,6 +1,7 @@
---UI作者MS 二改作者霖溺
+--UI作者@MS 
+--UI二改作者@霖溺
 --UI修改日期2026.1.30 
---UI具体修改时间7:32 PM
+--UI具体修改时间8:02 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -2998,33 +2999,27 @@ function Toggle:UpdateColors()
 Toggle:Display()
 end
 function Toggle:Display()
-if Library.Unloaded then
-return
-end
+if Library.Unloaded then return end
+local TargetColor = Toggle.Value and "AccentColor" or "MainColor"
+local StrokeColor = Toggle.Value and "AccentColor" or "OutlineColor"
+local TextTrans = Toggle.Value and 0 or 0.4
 if Toggle.Disabled then
 CheckboxStroke.Transparency = 0.5
 Label.TextTransparency = 0.8
-CheckImage.ImageTransparency = Toggle.Value and 0.8 or 1
-Checkbox.BackgroundColor3 = Library.Scheme.BackgroundColor
-Library.Registry[Checkbox].BackgroundColor3 = "BackgroundColor"
+CheckImage.ImageTransparency = 1
 return
 end
-CheckboxStroke.Transparency = 0
-TweenService:Create(Label, Library.TweenInfo, {
-TextTransparency = Toggle.Value and 0 or 0.4,
-}):Play()
-local CheckTargetSize = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
-local CheckTargetTransparency = Toggle.Value and 0 or 1
+Library:AddToRegistry(Checkbox, { BackgroundColor3 = TargetColor })
+Library:AddToRegistry(CheckboxStroke, { Color = StrokeColor })
+TweenService:Create(Label, Library.TweenInfo, { TextTransparency = TextTrans }):Play()
+TweenService:Create(Checkbox, Library.TweenInfo, { BackgroundColor3 = Library.Scheme[TargetColor] }):Play()
+TweenService:Create(CheckboxStroke, Library.TweenInfo, { Color = Library.Scheme[StrokeColor] }):Play()
+local CheckSize = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
 TweenService:Create(CheckImage, Library.TweenInfo, {
-Size = CheckTargetSize,
-ImageTransparency = CheckTargetTransparency,
+Size = CheckSize,
+ImageTransparency = Toggle.Value and 0 or 1,
 ImageColor3 = Library.Scheme.FontColor
 }):Play()
-TweenService:Create(CheckboxStroke, Library.TweenInfo, {
-Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
-}):Play()
-Checkbox.BackgroundColor3 = Library.Scheme.MainColor
-Library.Registry[Checkbox].BackgroundColor3 = "MainColor"
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -6251,7 +6246,7 @@ Text = " " .. Info.Name:upper() .. " ",
 TextSize = 12,
 TextColor3 = "AccentColor",
 TextXAlignment = Enum.TextXAlignment.Left,
-ZIndex = 15,
+ZIndex = 20,
 Parent = GroupboxHolder,
 })
 New("UIPadding", {
@@ -6436,71 +6431,64 @@ function Tab:Hover(Hovering)
 if Library.ActiveTab == Tab then
 return
 end
+local TargetPos = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
+local TargetColor = Hovering and Library.Scheme.White or Library.Scheme.FontColor
+local TargetTrans = Hovering and 0 or 0.5
 TweenService:Create(TabLabel, Library.TweenInfo, {
-TextTransparency = Hovering and 0 or 0.5,
-TextColor3 = Hovering and Library.Scheme.White or Library.Scheme.FontColor,
-Position = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
+TextTransparency = TargetTrans,
+TextColor3 = TargetColor,
+Position = TargetPos
 }):Play()
 if TabIcon then
+local IconColor = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
 TweenService:Create(TabIcon, Library.TweenInfo, {
-ImageTransparency = Hovering and 0 or 0.5,
-ImageColor3 = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
+ImageTransparency = TargetTrans,
+ImageColor3 = IconColor
 }):Play()
 end
 end
 function Tab:Show()
-if Library.ActiveTab then
-Library.ActiveTab:Hide()
-end
-TweenService:Create(TabButton, Library.TweenInfo, {
-BackgroundTransparency = 0,
-}):Play()
+if Library.ActiveTab then Library.ActiveTab:Hide() end
+TweenService:Create(TabButton, Library.TweenInfo, { BackgroundTransparency = 0 }):Play()
 TweenService:Create(TabLabel, Library.TweenInfo, {
 TextTransparency = 0,
+TextColor3 = Library.Scheme.White,
+Position = UDim2.fromOffset(34, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
 ImageTransparency = 0,
+ImageColor3 = Library.Scheme.AccentColor
 }):Play()
-end
-if Description then
-CurrentTabInfo.Visible = true
-if IsDefaultSearchbarSize then
-SearchBox.Size = UDim2.fromScale(0.5, 1)
-end
-CurrentTabLabel.Text = Name
-CurrentTabDescription.Text = Description
 end
 TabContainer.Visible = true
 Tab:RefreshSides()
 Library.ActiveTab = Tab
-if Library.Searching then
-Library:UpdateSearch(Library.SearchText)
-end
-if not TabButton:FindFirstChild("Indicator") then
-local Indicator = New("Frame", {
+local Ind = TabButton:FindFirstChild("Indicator")
+if not Ind then
+Ind = New("Frame", {
 Name = "Indicator",
 BackgroundColor3 = "AccentColor",
 Position = UDim2.new(0, -12, 0.2, 0),
 Size = UDim2.new(0, 2, 0.6, 0),
-BorderSizePixel = 0,
 ZIndex = 5,
 Parent = TabButton,
 })
-else
-TabButton.Indicator.Visible = true
+end
+Ind.Visible = true
 end
 end
 function Tab:Hide()
-TweenService:Create(TabButton, Library.TweenInfo, {
-BackgroundTransparency = 1,
-}):Play()
+TweenService:Create(TabButton, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
 TweenService:Create(TabLabel, Library.TweenInfo, {
 TextTransparency = 0.5,
+TextColor3 = Library.Scheme.FontColor,
+Position = UDim2.fromOffset(30, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
 ImageTransparency = 0.5,
+ImageColor3 = Library.Scheme.FontColor
 }):Play()
 end
 TabContainer.Visible = false
@@ -6665,15 +6653,19 @@ function Tab:Hover(Hovering)
 if Library.ActiveTab == Tab then
 return
 end
+local TargetPos = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
+local TargetColor = Hovering and Library.Scheme.White or Library.Scheme.FontColor
+local TargetTrans = Hovering and 0 or 0.5
 TweenService:Create(TabLabel, Library.TweenInfo, {
-TextTransparency = Hovering and 0 or 0.5,
-TextColor3 = Hovering and Library.Scheme.White or Library.Scheme.FontColor,
-Position = Hovering and UDim2.fromOffset(34, 0) or UDim2.fromOffset(30, 0)
+TextTransparency = TargetTrans,
+TextColor3 = TargetColor,
+Position = TargetPos
 }):Play()
 if TabIcon then
+local IconColor = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
 TweenService:Create(TabIcon, Library.TweenInfo, {
-ImageTransparency = Hovering and 0 or 0.5,
-ImageColor3 = Hovering and Library.Scheme.AccentColor or Library.Scheme.FontColor
+ImageTransparency = TargetTrans,
+ImageColor3 = IconColor
 }):Play()
 end
 end
@@ -6686,10 +6678,13 @@ BackgroundTransparency = 0,
 }):Play()
 TweenService:Create(TabLabel, Library.TweenInfo, {
 TextTransparency = 0,
+TextColor3 = Library.Scheme.White,
+Position = UDim2.fromOffset(34, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
 ImageTransparency = 0,
+ImageColor3 = Library.Scheme.AccentColor
 }):Play()
 end
 TabContainer.Visible = true
@@ -6706,8 +6701,9 @@ Library.ActiveTab = Tab
 if Library.Searching then
 Library:UpdateSearch(Library.SearchText)
 end
-if not TabButton:FindFirstChild("Indicator") then
-New("Frame", {
+local Indicator = TabButton:FindFirstChild("Indicator")
+if not Indicator then
+Indicator = New("Frame", {
 Name = "Indicator",
 BackgroundColor3 = "AccentColor",
 Position = UDim2.new(0, -12, 0.2, 0),
@@ -6716,24 +6712,25 @@ BorderSizePixel = 0,
 ZIndex = 5,
 Parent = TabButton,
 })
-else
-TabButton.Indicator.Visible = true
+end
+Indicator.Visible = true
 end
 end
 function Tab:Hide()
-TweenService:Create(TabButton, Library.TweenInfo, {
-BackgroundTransparency = 1,
-}):Play()
+TweenService:Create(TabButton, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
 TweenService:Create(TabLabel, Library.TweenInfo, {
 TextTransparency = 0.5,
+TextColor3 = Library.Scheme.FontColor,
+Position = UDim2.fromOffset(30, 0)
 }):Play()
 if TabIcon then
 TweenService:Create(TabIcon, Library.TweenInfo, {
 ImageTransparency = 0.5,
+ImageColor3 = Library.Scheme.FontColor
 }):Play()
 end
 TabContainer.Visible = false
-if IsDefaultSearchbarSize then
+if Description and IsDefaultSearchbarSize then
 SearchBox.Size = UDim2.fromScale(1, 1)
 end
 CurrentTabInfo.Visible = false
