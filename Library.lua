@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.1.30 
---UI具体修改时间8:58 PM
+--UI具体修改时间9.17 PM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4912,7 +4912,7 @@ local Snowflakes = {}
 local SnowContainer = New("Frame", {
 BackgroundTransparency = 1,
 Size = UDim2.fromScale(1, 1),
-ZIndex = 0,
+ZIndex = 2,
 ClipsDescendants = true,
 Parent = Parent,
 })
