@@ -1,5 +1,6 @@
 --UI作者MS
 --二改作者霖溺
+--修改日期2026.1.30
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -1283,8 +1284,8 @@ end
 function Library:MakeOutline(Frame: GuiObject, Corner: number?, ZIndex: number?)
 local Holder = New("Frame", {
 BackgroundColor3 = "Dark",
-Position = UDim2.fromOffset(-2, -2),
-Size = UDim2.new(1, 4, 1, 4),
+Position = UDim2.fromOffset(-1, -1),
+Size = UDim2.new(1, 2, 1, 2),
 ZIndex = ZIndex,
 Parent = Frame,
 })
@@ -1294,6 +1295,13 @@ Position = UDim2.fromOffset(1, 1),
 Size = UDim2.new(1, -2, 1, -2),
 ZIndex = ZIndex,
 Parent = Holder,
+})
+local InnerFill = New("Frame", {
+BackgroundColor3 = "BackgroundColor",
+Position = UDim2.fromOffset(1, 1),
+Size = UDim2.new(1, -2, 1, -2),
+ZIndex = ZIndex,
+Parent = Outline,
 })
 if Corner and Corner > 0 then
 New("UICorner", {
@@ -1468,8 +1476,10 @@ BorderColor3 = "OutlineColor",
 BorderSizePixel = 1,
 BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
 CanvasSize = UDim2.fromOffset(0, 0),
-ScrollBarImageColor3 = "OutlineColor",
+ScrollBarImageColor3 = "AccentColor",
+ScrollBarImageTransparency = 0.3,
 ScrollBarThickness = List == 2 and 2 or 0,
+VerticalScrollBarInset = Enum.ScrollBarInset.None,
 Size = typeof(Size) == "function" and Size() or Size,
 TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
 Visible = false,
@@ -3412,7 +3422,7 @@ BackgroundColor3 = "MainColor",
 BorderColor3 = "OutlineColor",
 BorderSizePixel = 1,
 Position = UDim2.fromScale(0, 1),
-Size = UDim2.new(1, 0, 0, 13),
+Size = UDim2.new(1, 0, 0, 8),
 Text = "",
 Parent = Holder,
 })
@@ -3433,6 +3443,7 @@ Parent = DisplayLabel,
 local Fill = New("Frame", {
 BackgroundColor3 = "AccentColor",
 Size = UDim2.fromScale(0.5, 1),
+BorderSizePixel = 0,
 Parent = Bar,
 DPIExclude = {
 Size = true,
@@ -5262,6 +5273,37 @@ New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
 Parent = MainFrame,
 })
+local TopAccentBar = New("Frame", {
+Name = "TopAccentBar",
+BackgroundColor3 = "AccentColor",
+BorderSizePixel = 0,
+Position = UDim2.new(0, 0, 0, 0),
+Size = UDim2.new(1, 0, 0, 2),
+ZIndex = 10,
+Parent = MainFrame,
+})
+New("UIGradient", {
+Color = ColorSequence.new({
+ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
+ColorSequenceKeypoint.new(0.5, Color3.new(1, 1, 1)),
+ColorSequenceKeypoint.new(1, Library.Scheme.AccentColor),
+}),
+Parent = TopAccentBar,
+})
+if WindowInfo.CornerRadius > 0 then
+New("UICorner", {
+CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
+Parent = TopAccentBar,
+})
+local Mask = New("Frame", {
+BackgroundColor3 = "AccentColor",
+BorderSizePixel = 0,
+Position = UDim2.new(0, 0, 0, 1),
+Size = UDim2.new(1, 0, 0, 1),
+ZIndex = 10,
+Parent = TopAccentBar,
+})
+end
 local InitialSidebarWidth = GetSidebarWidth()
 LayoutRefs.DividerLine = Library:MakeLine(MainFrame, {
 Position = UDim2.new(0, InitialSidebarWidth, 0, 0),
@@ -5531,7 +5573,7 @@ AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundColor3 = "BackgroundColor",
 CanvasSize = UDim2.fromScale(0, 0),
 Position = UDim2.fromOffset(0, 49),
-ScrollBarThickness = 0,
+ScrollBarThickness = 2,
 Size = UDim2.new(0, InitialSidebarWidth, 1, -70),
 Parent = MainFrame,
 })
@@ -5862,7 +5904,7 @@ TabLeft = New("ScrollingFrame", {
 AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundTransparency = 1,
 CanvasSize = UDim2.fromScale(0, 0),
-ScrollBarThickness = 0,
+ScrollBarThickness = 2,
 Parent = TabContainer,
 })
 New("UIListLayout", {
@@ -5945,7 +5987,7 @@ BackgroundTransparency = 1,
 BorderSizePixel = 0,
 Size = UDim2.fromScale(1, 1),
 CanvasSize = UDim2.new(0, 0, 0, 0),
-ScrollBarThickness = 3,
+ScrollBarThickness = 2,
 ScrollingDirection = Enum.ScrollingDirection.Y,
 Parent = WarningBox,
 })
@@ -6132,10 +6174,12 @@ New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
 Parent = GroupboxHolder,
 })
+--[[
 Library:MakeLine(GroupboxHolder, {
 Position = UDim2.fromOffset(0, 34),
 Size = UDim2.new(1, 0, 0, 1),
 })
+]]
 local BoxIcon = Library:GetCustomIcon(Info.IconName)
 if BoxIcon then
 New("ImageLabel", {
@@ -6143,29 +6187,36 @@ Image = BoxIcon.Url,
 ImageColor3 = BoxIcon.Custom and "White" or "AccentColor",
 ImageRectOffset = BoxIcon.ImageRectOffset,
 ImageRectSize = BoxIcon.ImageRectSize,
-Position = UDim2.fromOffset(6, 6),
-Size = UDim2.fromOffset(22, 22),
+BackgroundColor3 = "BackgroundColor",
+BackgroundTransparency = 0,
+Position = UDim2.fromOffset(10, -8),
+Size = UDim2.fromOffset(14, 14),
+ZIndex = 10,
 Parent = GroupboxHolder,
 })
 end
 GroupboxLabel = New("TextLabel", {
-BackgroundTransparency = 1,
-Position = UDim2.fromOffset(BoxIcon and 24 or 0, 0),
-Size = UDim2.new(1, 0, 0, 34),
-Text = Info.Name,
-TextSize = 15,
+BackgroundTransparency = 0,
+BackgroundColor3 = "BackgroundColor",
+Position = UDim2.fromOffset(BoxIcon and 28 or 10, -8),
+Size = UDim2.fromOffset(0, 14),
+AutomaticSize = Enum.AutomaticSize.X,
+Text = " " .. Info.Name:upper() .. " ",
+TextSize = 12,
+TextColor3 = "AccentColor",
 TextXAlignment = Enum.TextXAlignment.Left,
+ZIndex = 10,
 Parent = GroupboxHolder,
 })
 New("UIPadding", {
-PaddingLeft = UDim.new(0, 12),
-PaddingRight = UDim.new(0, 12),
+PaddingLeft = UDim.new(0, 4),
+PaddingRight = UDim.new(0, 4),
 Parent = GroupboxLabel,
 })
 GroupboxContainer = New("Frame", {
 BackgroundTransparency = 1,
-Position = UDim2.fromOffset(0, 35),
-Size = UDim2.new(1, 0, 1, -35),
+Position = UDim2.fromOffset(0, 15),
+Size = UDim2.new(1, 0, 1, -15),
 Parent = GroupboxHolder,
 })
 GroupboxList = New("UIListLayout", {
@@ -6377,7 +6428,21 @@ Library.ActiveTab = Tab
 if Library.Searching then
 Library:UpdateSearch(Library.SearchText)
 end
+if not TabButton:FindFirstChild("Indicator") then
+local Indicator = New("Frame", {
+Name = "Indicator",
+BackgroundColor3 = "AccentColor",
+Position = UDim2.new(0, -12, 0.2, 0),
+Size = UDim2.new(0, 2, 0.6, 0),
+BorderSizePixel = 0,
+ZIndex = 5,
+Parent = TabButton,
+})
+else
+TabButton.Indicator.Visible = true
 end
+end
+--1
 function Tab:Hide()
 TweenService:Create(TabButton, Library.TweenInfo, {
 BackgroundTransparency = 1,
@@ -6396,7 +6461,11 @@ SearchBox.Size = UDim2.fromScale(1, 1)
 end
 CurrentTabInfo.Visible = false
 Library.ActiveTab = nil
+if TabButton:FindFirstChild("Indicator") then
+TabButton.Indicator.Visible = false
 end
+end
+--1
 if not Library.ActiveTab then
 Tab:Show()
 end
@@ -6587,7 +6656,21 @@ Library.ActiveTab = Tab
 if Library.Searching then
 Library:UpdateSearch(Library.SearchText)
 end
+if not TabButton:FindFirstChild("Indicator") then
+New("Frame", {
+Name = "Indicator",
+BackgroundColor3 = "AccentColor",
+Position = UDim2.new(0, -12, 0.2, 0),
+Size = UDim2.new(0, 2, 0.6, 0),
+BorderSizePixel = 0,
+ZIndex = 5,
+Parent = TabButton,
+})
+else
+TabButton.Indicator.Visible = true
 end
+end
+--2
 function Tab:Hide()
 TweenService:Create(TabButton, Library.TweenInfo, {
 BackgroundTransparency = 1,
@@ -6606,7 +6689,11 @@ SearchBox.Size = UDim2.fromScale(1, 1)
 end
 CurrentTabInfo.Visible = false
 Library.ActiveTab = nil
+if TabButton:FindFirstChild("Indicator") then
+TabButton.Indicator.Visible = false
 end
+end
+--2
 if not Library.ActiveTab then
 Tab:Show()
 end
