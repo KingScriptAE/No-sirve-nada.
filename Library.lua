@@ -1,8 +1,8 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.1.31
---UI具体修改时间12:46 AM
---UI修复日志记录: 修复Checkbox颜色注册问题, 优化Notify大小
+--UI具体修改时间13:01
+--UI修复日志记录: 修复Checkbox颜色问题
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4747,14 +4747,14 @@ CornerRadius = UDim.new(0, Library.CornerRadius - 1),
 Parent = Holder,
 })
 New("UIListLayout", {
-Padding = UDim.new(0, 4),
+Padding = UDim.new(0, 3), -- Reduced padding from 4 to 3
 Parent = Holder,
 })
 New("UIPadding", {
-PaddingBottom = UDim.new(0, 4),
+PaddingBottom = UDim.new(0, 4), -- Reduced padding from 8 to 4
 PaddingLeft = UDim.new(0, 8),
 PaddingRight = UDim.new(0, 8),
-PaddingTop = UDim.new(0, 6),
+PaddingTop = UDim.new(0, 6), -- Reduced padding from 8 to 6
 Parent = Holder,
 })
 local Title
@@ -6498,7 +6498,7 @@ if Library.Searching then
 Library:UpdateSearch(Library.SearchText)
 end
 if not TabButton:FindFirstChild("Indicator") then
-local Indicator = New("Frame", {
+New("Frame", {
 Name = "Indicator",
 BackgroundColor3 = "AccentColor",
 Position = UDim2.new(0, -12, 0.2, 0),
@@ -6543,6 +6543,8 @@ TabButton.MouseLeave:Connect(function()
 Tab:Hover(false)
 end)
 TabButton.MouseButton1Click:Connect(Tab.Show)
+Tab.Container = TabContainer
+setmetatable(Tab, BaseGroupbox)
 Library.Tabs[Name] = Tab
 return Tab
 end
