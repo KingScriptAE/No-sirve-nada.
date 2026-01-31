@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
---UI修改日期2026.1.30 
---UI具体修改时间9.25 PM
+--UI修改日期2026.1.31
+--UI具体修改时间12:24 AM
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -1120,6 +1120,7 @@ AnchorPoint = Vector2.new(1, 0),
 BackgroundTransparency = 1,
 Position = UDim2.new(1, -6, 0, 6),
 Size = UDim2.new(0, 300, 1, -6),
+ZIndex = 1000,
 Parent = ScreenGui,
 })
 NotificationList = New("UIListLayout", {
@@ -1493,7 +1494,7 @@ VerticalScrollBarInset = Enum.ScrollBarInset.None,
 Size = typeof(Size) == "function" and Size() or Size,
 TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
 Visible = false,
-ZIndex = 10,
+ZIndex = 50,
 Parent = ScreenGui,
 DPIExclude = {
 Position = true,
@@ -1506,7 +1507,7 @@ BorderColor3 = "OutlineColor",
 BorderSizePixel = 1,
 Size = typeof(Size) == "function" and Size() or Size,
 Visible = false,
-ZIndex = 10,
+ZIndex = 50,
 Parent = ScreenGui,
 DPIExclude = {
 Position = true,
@@ -1620,7 +1621,7 @@ BorderSizePixel = 1,
 TextSize = 14,
 TextWrapped = true,
 Visible = false,
-ZIndex = 20,
+ZIndex = 100,
 Parent = ScreenGui,
 })
 TooltipLabel:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
@@ -3193,15 +3194,19 @@ Ball.Position = UDim2.fromScale(Offset, 0)
 Ball.BackgroundColor3 = Library:GetDarkerColor(Library.Scheme.FontColor)
 return
 end
+Library.Registry[Switch].BackgroundColor3 = Toggle.Value and "AccentColor" or "MainColor"
+Library.Registry[SwitchStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
+local TargetSwitchColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor
+local TargetStrokeColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
 TweenService:Create(Label, Library.TweenInfo, {
 TextTransparency = Toggle.Value and 0 or 0.4,
 }):Play()
 TweenService:Create(Switch, Library.TweenInfo, {
-BackgroundColor3 = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor,
+BackgroundColor3 = TargetSwitchColor,
 BackgroundTransparency = 0
 }):Play()
 TweenService:Create(SwitchStroke, Library.TweenInfo, {
-Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor,
+Color = TargetStrokeColor,
 Transparency = Toggle.Value and 0 or 0.2
 }):Play()
 local BallScale = Toggle.Value and 1 or 0.7
@@ -3211,8 +3216,6 @@ Position = UDim2.fromScale(Offset, 0),
 Size = UDim2.fromScale(BallScale, BallScale)
 }):Play()
 Ball.BackgroundColor3 = Library.Scheme.FontColor
-Library.Registry[Switch].BackgroundColor3 = Toggle.Value and "AccentColor" or "MainColor"
-Library.Registry[SwitchStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -4716,12 +4719,13 @@ AutomaticSize = Enum.AutomaticSize.Y,
 BackgroundTransparency = 1,
 Size = UDim2.fromScale(1, 0),
 Visible = false,
+ZIndex = 1000,
 Parent = NotificationArea,
 DPIExclude = {
 Size = true,
 },
 })
-local Background = Library:MakeOutline(FakeBackground, Library.CornerRadius, 5)
+local Background = Library:MakeOutline(FakeBackground, Library.CornerRadius, 1005)
 Background.AutomaticSize = Enum.AutomaticSize.Y
 Background.Position = Library.NotifySide:lower() == "left" and UDim2.new(-1, -6, 0, -2) or UDim2.new(1, 6, 0, -2)
 Background.Size = UDim2.fromScale(1, 0)
@@ -5322,6 +5326,7 @@ Text = "",
 Position = WindowInfo.Position,
 Size = WindowInfo.Size,
 Visible = false,
+ZIndex = 1,
 Parent = ScreenGui,
 DPIExclude = {
 Position = true,
@@ -5329,15 +5334,6 @@ Position = true,
 })
 New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-Parent = MainFrame,
-})
-local TopEdgeLine = New("Frame", {
-Name = "TopEdgeLine",
-BackgroundColor3 = "AccentColor",
-BorderSizePixel = 0,
-Position = UDim2.new(0, 0, 0, 0),
-Size = UDim2.new(1, 0, 0, 1),
-ZIndex = 12,
 Parent = MainFrame,
 })
 local HeaderGlow = New("Frame", {
@@ -5358,10 +5354,6 @@ NumberSequenceKeypoint.new(1, 1),
 Parent = HeaderGlow,
 })
 if WindowInfo.CornerRadius > 0 then
-New("UICorner", {
-CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-Parent = TopEdgeLine,
-})
 New("UICorner", {
 CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
 Parent = HeaderGlow,
@@ -6455,6 +6447,9 @@ function Tab:AddRightTabbox(Name)
 return Tab:AddTabbox({ Side = 2, Name = Name })
 end
 function Tab:Hover(Hovering)
+if Library.IsMobile then
+return
+end
 if Library.ActiveTab == Tab then
 return
 end
@@ -6684,6 +6679,7 @@ end
 function Tab:RefreshSides() end
 function Tab:Resize() end
 function Tab:Hover(Hovering)
+if Library.IsMobile then return end
 if Library.ActiveTab == Tab then
 return
 end
