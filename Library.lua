@@ -1,7 +1,8 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.1.31
---UI具体修改时间12:24 AM
+--UI具体修改时间12:46 AM
+--UI修复日志记录: 修复Checkbox颜色注册问题, 优化Notify大小
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -3032,8 +3033,10 @@ ImageColor3 = Library.Scheme.FontColor
 TweenService:Create(CheckboxStroke, Library.TweenInfo, {
 Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
 }):Play()
+Library.Registry[CheckboxStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
 Checkbox.BackgroundColor3 = Library.Scheme.MainColor
 Library.Registry[Checkbox].BackgroundColor3 = "MainColor"
+Library.Registry[CheckImage].ImageColor3 = "FontColor"
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -4748,10 +4751,10 @@ Padding = UDim.new(0, 4),
 Parent = Holder,
 })
 New("UIPadding", {
-PaddingBottom = UDim.new(0, 8),
+PaddingBottom = UDim.new(0, 4),
 PaddingLeft = UDim.new(0, 8),
 PaddingRight = UDim.new(0, 8),
-PaddingTop = UDim.new(0, 8),
+PaddingTop = UDim.new(0, 6),
 Parent = Holder,
 })
 local Title
