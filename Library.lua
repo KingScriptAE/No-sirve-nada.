@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.2.1
---UI具体修改时间12:56
+--UI具体修改时间13:00
 --UI修复日志记录: 修复了部分问题
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -4755,7 +4755,7 @@ local Title
 local Desc
 local TitleX = 0
 local DescX = 0
-local TimerFill
+local TimerFill, TimerHolder
 if Data.Title then
 Title = New("TextLabel", {
 BackgroundTransparency = 1,
@@ -4797,7 +4797,7 @@ Desc.Size = UDim2.fromOffset(math.ceil(X), Y)
 DescX = X
 TotalHeight = TotalHeight + Y + 3
 end
-if TimerHolder.Visible then
+if TimerHolder and TimerHolder.Visible then
 TotalHeight = TotalHeight + 10
 end
 local MaxWidth = math.max(TitleX or 0, DescX or 0) + 24
@@ -4843,7 +4843,7 @@ FakeBackground:Destroy()
 end)
 end
 Data:Resize()
-local TimerHolder = New("Frame", {
+TimerHolder = New("Frame", {
 BackgroundTransparency = 1,
 Size = UDim2.new(1, 0, 0, 7),
 Visible = (Data.Persist ~= true and typeof(Data.Time) ~= "Instance") or typeof(Data.Steps) == "number",
