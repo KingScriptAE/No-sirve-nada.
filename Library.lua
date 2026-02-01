@@ -1,7 +1,7 @@
 --UI作者@MS 
 --UI二改作者@霖溺
 --UI修改日期2026.2.1
---UI具体修改时间13:00
+--UI具体修改时间13:13
 --UI修复日志记录: 修复了部分问题
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -891,6 +891,7 @@ end
 end
 Library:UpdateKeybindFrame()
 for _, Notification in pairs(Library.Notifications) do
+if Notification and Notification.Resize then
 Notification:Resize()
 end
 end
@@ -4797,7 +4798,7 @@ Desc.Size = UDim2.fromOffset(math.ceil(X), Y)
 DescX = X
 TotalHeight = TotalHeight + Y + 3
 end
-if TimerHolder and TimerHolder.Visible then
+if TimerHolder and typeof(TimerHolder) == "Instance" and TimerHolder.Visible then
 TotalHeight = TotalHeight + 10
 end
 local MaxWidth = math.max(TitleX or 0, DescX or 0) + 24
@@ -4832,17 +4833,14 @@ end
 if DeleteConnection then
 DeleteConnection:Disconnect()
 end
-TweenService
-:Create(Background, Library.NotifyTweenInfo, {
+TweenService:Create(Background, Library.NotifyTweenInfo, {
 Position = Library.NotifySide:lower() == "left" and UDim2.new(-1, -6, 0, -2) or UDim2.new(1, 6, 0, -2),
-})
-:Play()
+}):Play()
 task.delay(Library.NotifyTweenInfo.Time, function()
 Library.Notifications[FakeBackground] = nil
 FakeBackground:Destroy()
 end)
 end
-Data:Resize()
 TimerHolder = New("Frame", {
 BackgroundTransparency = 1,
 Size = UDim2.new(1, 0, 0, 7),
@@ -4862,6 +4860,7 @@ BackgroundColor3 = "AccentColor",
 Size = UDim2.fromScale(1, 1),
 Parent = TimerBar,
 })
+Data:Resize()
 if typeof(Data.Time) == "Instance" then
 TimerFill.Size = UDim2.fromScale(0, 1)
 end
@@ -4870,12 +4869,14 @@ local SoundId = Data.SoundId
 if typeof(SoundId) == "number" then
 SoundId = string.format("rbxassetid://%d", SoundId)
 end
+pcall(function()
 New("Sound", {
 SoundId = SoundId,
 Volume = 3,
 PlayOnRemove = true,
 Parent = SoundService,
 }):Destroy()
+end)
 end
 Library.Notifications[FakeBackground] = Data
 FakeBackground.Visible = true
@@ -4890,11 +4891,9 @@ repeat
 task.wait()
 until DeletedInstance or Data.Destroyed
 else
-TweenService
-:Create(TimerFill, TweenInfo.new(Data.Time, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+TweenService:Create(TimerFill, TweenInfo.new(Data.Time, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
 Size = UDim2.fromScale(0, 1),
-})
-:Play()
+}):Play()
 task.wait(Data.Time)
 end
 if not Data.Destroyed then
