@@ -1,8 +1,8 @@
 --UI作者@MS 
 --UI二改作者@霖溺
---UI修改日期2026.1.31
---UI具体修改时间13:16
---UI修复日志记录: 优化了Checkbox颜色问题,通知这个明天再改
+--UI修改日期2026.2.1
+--UI具体修改时间12:56
+--UI修复日志记录: 修复了部分问题
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -1298,14 +1298,14 @@ local Holder = New("Frame", {
 BackgroundColor3 = "Dark",
 Position = UDim2.fromOffset(-1, -1),
 Size = UDim2.new(1, 2, 1, 2),
-ZIndex = ZIndex,
+ZIndex = ZIndex or 1,
 Parent = Frame,
 })
 local Outline = New("Frame", {
 BackgroundColor3 = "OutlineColor",
 Position = UDim2.fromOffset(1, 1),
 Size = UDim2.new(1, -2, 1, -2),
-ZIndex = ZIndex,
+ZIndex = ZIndex or 1,
 Parent = Holder,
 })
 local InnerFill = New("Frame", {
@@ -3008,9 +3008,9 @@ function Toggle:UpdateColors()
 Toggle:Display()
 end
 function Toggle:Display()
-if Library.Unloaded then
-return
-end
+if Library.Unloaded then return end
+if not Library.Registry[CheckboxStroke] then Library.Registry[CheckboxStroke] = {} end
+if not Library.Registry[Label] then Library.Registry[Label] = {} end
 if Toggle.Disabled then
 CheckboxStroke.Transparency = 0.5
 Label.TextTransparency = 0.8
@@ -3020,23 +3020,21 @@ Library.Registry[Checkbox].BackgroundColor3 = "BackgroundColor"
 return
 end
 CheckboxStroke.Transparency = 0
+Library.Registry[CheckboxStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
+Library.Registry[Label].TextTransparency = Toggle.Value and 0 or 0.4
 TweenService:Create(Label, Library.TweenInfo, {
 TextTransparency = Toggle.Value and 0 or 0.4,
 }):Play()
-local CheckTargetSize = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0)
-local CheckTargetTransparency = Toggle.Value and 0 or 1
 TweenService:Create(CheckImage, Library.TweenInfo, {
-Size = CheckTargetSize,
-ImageTransparency = CheckTargetTransparency,
+Size = Toggle.Value and UDim2.new(1, -4, 1, -4) or UDim2.fromScale(0, 0),
+ImageTransparency = Toggle.Value and 0 or 1,
 ImageColor3 = Library.Scheme.FontColor
 }):Play()
 TweenService:Create(CheckboxStroke, Library.TweenInfo, {
 Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
 }):Play()
-Library.Registry[CheckboxStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
 Checkbox.BackgroundColor3 = Library.Scheme.MainColor
 Library.Registry[Checkbox].BackgroundColor3 = "MainColor"
-Library.Registry[CheckImage].ImageColor3 = "FontColor"
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -3184,41 +3182,37 @@ function Toggle:UpdateColors()
 Toggle:Display()
 end
 function Toggle:Display()
-if Library.Unloaded then
-return
-end
+if Library.Unloaded then return end
 local Offset = Toggle.Value and 1 or 0
+local BallScale = Toggle.Value and 1 or 0.7
+if not Library.Registry[Switch] then Library.Registry[Switch] = {} end
+if not Library.Registry[SwitchStroke] then Library.Registry[SwitchStroke] = {} end
 if Toggle.Disabled then
 Switch.BackgroundTransparency = 0.75
 SwitchStroke.Transparency = 0.75
 Label.TextTransparency = 0.8
 Ball.AnchorPoint = Vector2.new(Offset, 0)
 Ball.Position = UDim2.fromScale(Offset, 0)
-Ball.BackgroundColor3 = Library:GetDarkerColor(Library.Scheme.FontColor)
 return
 end
 Library.Registry[Switch].BackgroundColor3 = Toggle.Value and "AccentColor" or "MainColor"
 Library.Registry[SwitchStroke].Color = Toggle.Value and "AccentColor" or "OutlineColor"
-local TargetSwitchColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor
-local TargetStrokeColor = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor
 TweenService:Create(Label, Library.TweenInfo, {
 TextTransparency = Toggle.Value and 0 or 0.4,
 }):Play()
 TweenService:Create(Switch, Library.TweenInfo, {
-BackgroundColor3 = TargetSwitchColor,
+BackgroundColor3 = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.MainColor,
 BackgroundTransparency = 0
 }):Play()
 TweenService:Create(SwitchStroke, Library.TweenInfo, {
-Color = TargetStrokeColor,
-Transparency = Toggle.Value and 0 or 0.2
+Color = Toggle.Value and Library.Scheme.AccentColor or Library.Scheme.OutlineColor,
+Transparency = 0
 }):Play()
-local BallScale = Toggle.Value and 1 or 0.7
 TweenService:Create(Ball, Library.TweenInfo, {
 AnchorPoint = Vector2.new(Offset, 0),
 Position = UDim2.fromScale(Offset, 0),
 Size = UDim2.fromScale(BallScale, BallScale)
 }):Play()
-Ball.BackgroundColor3 = Library.Scheme.FontColor
 end
 function Toggle:OnChanged(Func)
 Toggle.Changed = Func
@@ -4789,27 +4783,26 @@ Size = true,
 })
 end
 function Data:Resize()
+local Padding = 10
+local TotalHeight = 0
 if Title then
-local X, Y = Library:GetTextBounds(
-Title.Text,
-Title.FontFace,
-Title.TextSize,
-NotificationArea.AbsoluteSize.X - (24 * Library.DPIScale)
-)
+local X, Y = Library:GetTextBounds(Title.Text, Title.FontFace, Title.TextSize, NotificationArea.AbsoluteSize.X - 32)
 Title.Size = UDim2.fromOffset(math.ceil(X), Y)
 TitleX = X
+TotalHeight = TotalHeight + Y
 end
 if Desc then
-local X, Y = Library:GetTextBounds(
-Desc.Text,
-Desc.FontFace,
-Desc.TextSize,
-NotificationArea.AbsoluteSize.X - (24 * Library.DPIScale)
-)
+local X, Y = Library:GetTextBounds(Desc.Text, Desc.FontFace, Desc.TextSize, NotificationArea.AbsoluteSize.X - 32)
 Desc.Size = UDim2.fromOffset(math.ceil(X), Y)
 DescX = X
+TotalHeight = TotalHeight + Y + 3
 end
-FakeBackground.Size = UDim2.fromOffset((TitleX > DescX and TitleX or DescX) + (24 * Library.DPIScale), 0)
+if TimerHolder.Visible then
+TotalHeight = TotalHeight + 10
+end
+local MaxWidth = math.max(TitleX or 0, DescX or 0) + 24
+FakeBackground.Size = UDim2.fromOffset(MaxWidth * Library.DPIScale, (TotalHeight + 10) * Library.DPIScale)
+Background.Size = UDim2.fromScale(1, 1)
 end
 function Data:ChangeTitle(NewText)
 if Title then
