@@ -1,8 +1,122 @@
 local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
 local localPlayer = Players.LocalPlayer
-local GROUP_ID = 36012386
-local MIN_RANK = 1
-local FONT_SIZE = 9
+local CONFIG = {
+GROUP_ID = 36012386,
+MIN_RANK = 1,
+FONT_SIZE = 9,
+ISLAND_COLOR = Color3.fromRGB(0, 0, 0),
+ISLAND_TRANSPARENCY = 0.2,
+TEXT_COLOR = Color3.fromRGB(255, 255, 255),
+ACCENT_COLOR = Color3.fromRGB(85, 200, 255),
+ANIMATION_SPEED = 0.6,
+SHOW_DURATION = 10,
+}
+local IslandSystem = {}
+local screenGui
+local mainFrame, iconFrame, textLabel, uiCorner, uiStroke
+function IslandSystem.Init()
+local parent = game:GetService("CoreGui")
+local success, _ = pcall(function() local a = parent.Name end)
+if not success then parent = localPlayer:WaitForChild("PlayerGui") end
+if parent:FindFirstChild("LinNi_IslandUI") then
+parent["LinNi_IslandUI"]:Destroy()
+end
+screenGui = Instance.new("ScreenGui")
+screenGui.Name = "LinNi_IslandUI"
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = parent
+mainFrame = Instance.new("Frame")
+mainFrame.Name = "DynamicIsland"
+mainFrame.AnchorPoint = Vector2.new(0.5, 0)
+mainFrame.BackgroundColor3 = CONFIG.ISLAND_COLOR
+mainFrame.BackgroundTransparency = 1
+mainFrame.Position = UDim2.new(0.5, 0, 0, 5)
+mainFrame.Size = UDim2.new(0, 0, 0, 0)
+mainFrame.ClipsDescendants = true
+mainFrame.Visible = false
+mainFrame.Parent = screenGui
+uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(1, 0)
+uiCorner.Parent = mainFrame
+uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.fromRGB(60, 60, 60)
+uiStroke.Thickness = 1
+uiStroke.Transparency = 1
+uiStroke.Parent = mainFrame
+iconFrame = Instance.new("Frame")
+iconFrame.Name = "StatusIcon"
+iconFrame.AnchorPoint = Vector2.new(0, 0.5)
+iconFrame.BackgroundColor3 = CONFIG.ACCENT_COLOR
+iconFrame.BackgroundTransparency = 1
+iconFrame.Position = UDim2.new(0, 6, 0.5, 0)
+iconFrame.Size = UDim2.new(0, 24, 0, 24)
+iconFrame.Parent = mainFrame
+local iconCorner = Instance.new("UICorner")
+iconCorner.CornerRadius = UDim.new(1, 0)
+iconCorner.Parent = iconFrame
+textLabel = Instance.new("TextLabel")
+textLabel.Name = "ContentText"
+textLabel.BackgroundTransparency = 1
+textLabel.Position = UDim2.new(0, 38, 0, 0)
+textLabel.Size = UDim2.new(1, -48, 1, 0)
+textLabel.Font = Enum.Font.GothamBold
+textLabel.Text = ""
+textLabel.TextColor3 = CONFIG.TEXT_COLOR
+textLabel.TextSize = 14
+textLabel.TextXAlignment = Enum.TextXAlignment.Left
+textLabel.TextTransparency = 1
+textLabel.Parent = mainFrame
+end
+local tweenInfo = TweenInfo.new(CONFIG.ANIMATION_SPEED, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local currentTween = nil
+local hideTask = nil
+function IslandSystem.Notify(message)
+if not mainFrame then return end
+if hideTask then task.cancel(hideTask) end
+if currentTween then currentTween:Cancel() end
+mainFrame.Visible = true
+local tempLabel = textLabel:Clone()
+tempLabel.Text = message
+tempLabel.Size = UDim2.new(0, 1000, 0, 35)
+tempLabel.Parent = screenGui
+local textBounds = game:GetService("TextService"):GetTextSize(message, 14, Enum.Font.GothamBold, Vector2.new(1000, 35))
+tempLabel:Destroy()
+local targetWidth = textBounds.X + 60
+if targetWidth < 120 then targetWidth = 120 end
+textLabel.Text = message
+local appearTween = TweenService:Create(mainFrame, tweenInfo, {
+BackgroundTransparency = CONFIG.ISLAND_TRANSPARENCY,
+Size = UDim2.new(0, targetWidth, 0, 35),
+Position = UDim2.new(0.5, 0, 0, 12)
+})
+TweenService:Create(uiStroke, tweenInfo, {Transparency = 0.5}):Play()
+TweenService:Create(iconFrame, tweenInfo, {BackgroundTransparency = 0}):Play()
+TweenService:Create(textLabel, tweenInfo, {TextTransparency = 0}):Play()
+appearTween:Play()
+currentTween = appearTween
+task.spawn(function()
+local iconPulse = TweenService:Create(iconFrame, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(255, 255, 255)})
+iconPulse:Play()
+task.wait(0.3)
+TweenService:Create(iconFrame, TweenInfo.new(0.5), {BackgroundColor3 = CONFIG.ACCENT_COLOR}):Play()
+end)
+hideTask = task.delay(CONFIG.SHOW_DURATION, function()
+local hideTween = TweenService:Create(mainFrame, tweenInfo, {
+Size = UDim2.new(0, 20, 0, 5),
+BackgroundTransparency = 1,
+Position = UDim2.new(0.5, 0, 0, 5)
+})
+TweenService:Create(uiStroke, tweenInfo, {Transparency = 1}):Play()
+TweenService:Create(iconFrame, tweenInfo, {BackgroundTransparency = 1}):Play()
+TweenService:Create(textLabel, TweenInfo.new(0.2), {TextTransparency = 1}):Play()
+hideTween:Play()
+task.wait(CONFIG.ANIMATION_SPEED)
+if mainFrame then
+mainFrame.Visible = false
+end
+end)
+end
 local function createChineseTag(player, character, rank)
 local head = character:WaitForChild("Head", 15)
 if not head then return end
@@ -20,44 +134,70 @@ label.Parent = bgui
 label.Size = UDim2.new(1, 0, 1, 0)
 label.BackgroundTransparency = 1
 label.Font = Enum.Font.GothamBold
-label.TextSize = FONT_SIZE
+label.TextSize = CONFIG.FONT_SIZE
 label.TextStrokeTransparency = 0.5
 label.TextStrokeColor3 = Color3.new(0, 0, 0)
 local roleName = ""
 local roleColor = Color3.new(1, 1, 1)
 if rank == 255 then
-roleName = "[群主]"
+roleName = "[群主] "
 roleColor = Color3.fromRGB(255, 215, 0)
 elseif rank >= 250 then
-roleName = "[霖溺-副会长]"
+roleName = "[霖溺-副会长] "
 roleColor = Color3.fromRGB(180, 130, 255)
 elseif rank >= 200 then
-roleName = "[霖溺管理员]"
+roleName = "[霖溺管理员] "
 roleColor = Color3.fromRGB(85, 200, 255)
 else
-roleName = "[霖溺成员]"
+roleName = "[霖溺成员] "
 roleColor = Color3.fromRGB(255, 255, 255)
 end
 label.Text = roleName .. player.Name
 label.TextColor3 = roleColor
+label.TextSize = 0
+TweenService:Create(label, TweenInfo.new(0.5, Enum.EasingStyle.Back), {TextSize = CONFIG.FONT_SIZE}):Play()
 end
+local processedPlayers = {}
+local groupMemberCount = 0
+local initialScanDone = false
 local function handlePlayer(player)
 if player == localPlayer then return end
+if processedPlayers[player.UserId] then return end
+processedPlayers[player.UserId] = true
 task.spawn(function()
 local success, rank = pcall(function()
-return player:GetRankInGroup(GROUP_ID)
+return player:GetRankInGroup(CONFIG.GROUP_ID)
 end)
-if success and rank >= MIN_RANK then
+if success and rank >= CONFIG.MIN_RANK then
+groupMemberCount = groupMemberCount + 1
 if player.Character then
 createChineseTag(player, player.Character, rank)
 end
 player.CharacterAdded:Connect(function(char)
 createChineseTag(player, char, rank)
 end)
+if initialScanDone then
+IslandSystem.Notify("新霖溺成员加入: " .. player.Name)
+end
 end
 end)
 end
+IslandSystem.Init()
 for _, player in ipairs(Players:GetPlayers()) do
 handlePlayer(player)
 end
+task.spawn(function()
+task.wait(2.5)
+initialScanDone = true
+if groupMemberCount > 0 then
+IslandSystem.Notify("本局共检测到 " .. groupMemberCount .. " 名霖溺成员")
+else
+end
+end)
 Players.PlayerAdded:Connect(handlePlayer)
+Players.PlayerRemoving:Connect(function(player)
+if processedPlayers[player.UserId] then
+groupMemberCount = math.max(0, groupMemberCount - 1)
+processedPlayers[player.UserId] = nil
+end
+end)
