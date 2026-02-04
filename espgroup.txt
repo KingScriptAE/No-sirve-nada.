@@ -29,13 +29,13 @@ if rank == 255 then
 roleName = "[群主]"
 roleColor = Color3.fromRGB(255, 215, 0)
 elseif rank >= 250 then
-roleName = "[副会长]"
+roleName = "[霖溺-副会长]"
 roleColor = Color3.fromRGB(180, 130, 255)
 elseif rank >= 200 then
-roleName = "[管理员]"
+roleName = "[霖溺管理员]"
 roleColor = Color3.fromRGB(85, 200, 255)
 else
-roleName = "[成员]"
+roleName = "[霖溺成员]"
 roleColor = Color3.fromRGB(255, 255, 255)
 end
 label.Text = roleName .. player.Name
