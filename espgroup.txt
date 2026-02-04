@@ -1,57 +1,63 @@
 local Players = game:GetService("Players")
-
-local RANK_OWNER = 255
-local RANK_VICE_PRESIDENT = 250
-local RANK_ADMIN = 200
-local function createESP(player, color, labelText)
-	player.CharacterAdded:Connect(function(character)
-		task.wait(0.5)
-		
-		local highlight = Instance.new("Highlight")
-		highlight.Name = "GroupESP"
-		highlight.FillColor = color
-		highlight.OutlineColor = Color3.new(1, 1, 1)
-		highlight.FillTransparency = 0.5
-		highlight.Adornee = character
-		highlight.Parent = character
-		
-		local bgui = Instance.new("BillboardGui")
-		bgui.Name = "RoleTag"
-		bgui.Size = UDim2.new(0, 200, 0, 50)
-		bgui.StudsOffset = Vector3.new(0, 4, 0)
-		bgui.AlwaysOnTop = true
-		
-		local label = Instance.new("TextLabel")
-		label.BackgroundTransparency = 1
-		label.Size = UDim2.new(1, 0, 1, 0)
-		label.Text = "[" .. labelText .. "] " .. player.Name
-		label.TextColor3 = color
-		label.TextScaled = true
-		label.Font = Enum.Font.SourceSansBold
-		label.TextStrokeTransparency = 0
-		label.Parent = bgui
-		
-		bgui.Parent = character
-	end)
+local localPlayer = Players.LocalPlayer
+local GROUP_ID = 36012386
+local MIN_RANK = 1
+local FONT_SIZE = 9
+local function createChineseTag(player, character, rank)
+local head = character:WaitForChild("Head", 15)
+if not head then return end
+if head:FindFirstChild("MinimalESP") then head.MinimalESP:Destroy() end
+local bgui = Instance.new("BillboardGui")
+bgui.Name = "MinimalESP"
+bgui.Adornee = head
+bgui.Size = UDim2.new(0, 200, 0, 30)
+bgui.StudsOffset = Vector3.new(0, 2.8, 0)
+bgui.AlwaysOnTop = true
+bgui.MaxDistance = 500
+bgui.Parent = head
+local label = Instance.new("TextLabel")
+label.Parent = bgui
+label.Size = UDim2.new(1, 0, 1, 0)
+label.BackgroundTransparency = 1
+label.Font = Enum.Font.GothamBold
+label.TextSize = FONT_SIZE
+label.TextStrokeTransparency = 0.5
+label.TextStrokeColor3 = Color3.new(0, 0, 0)
+local roleName = ""
+local roleColor = Color3.new(1, 1, 1)
+if rank == 255 then
+roleName = "[群主]"
+roleColor = Color3.fromRGB(255, 215, 0)
+elseif rank >= 250 then
+roleName = "[副会长]"
+roleColor = Color3.fromRGB(180, 130, 255)
+elseif rank >= 200 then
+roleName = "[管理员]"
+roleColor = Color3.fromRGB(85, 200, 255)
+else
+roleName = "[成员]"
+roleColor = Color3.fromRGB(255, 255, 255)
 end
-
-local function checkPlayerRank(player)
-	 if player == Players.LocalPlayer then return end
-
-	local rank = player:GetRankInGroup(TARGET_GROUP_ID)
-	local roleName = player:GetRoleInGroup(TARGET_GROUP_ID)
-
-	if rank == RANK_OWNER then
-		createESP(player, Color3.fromRGB(255, 215, 0), "群主")
-	elseif rank >= RANK_VICE_PRESIDENT then
-		createESP(player, Color3.fromRGB(170, 0, 255), "副会长")
-	elseif rank >= RANK_ADMIN then
-		createESP(player, Color3.fromRGB(0, 170, 255), "管理员")
-	end
+label.Text = roleName .. player.Name
+label.TextColor3 = roleColor
 end
-
-Players.PlayerAdded:Connect(checkPlayerRank)
-
+local function handlePlayer(player)
+if player == localPlayer then return end
+task.spawn(function()
+local success, rank = pcall(function()
+return player:GetRankInGroup(GROUP_ID)
+end)
+if success and rank >= MIN_RANK then
+if player.Character then
+createChineseTag(player, player.Character, rank)
+end
+player.CharacterAdded:Connect(function(char)
+createChineseTag(player, char, rank)
+end)
+end
+end)
+end
 for _, player in ipairs(Players:GetPlayers()) do
-	checkPlayerRank(player)
+handlePlayer(player)
 end
+Players.PlayerAdded:Connect(handlePlayer)
