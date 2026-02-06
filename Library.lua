@@ -1,9 +1,8 @@
 --UI作者@MS 
 --UI二改作者@霖溺
---UI修改日期2026.2.3
---UI具体修改时间22:29
---UI修复日志记录: 优化了部分问题
-loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
+--UI修改日期2026.1.31
+--UI具体修改时间12:46 AM
+--UI修复日志记录: 修复Checkbox颜色注册问题, 优化Notify大小
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4739,9 +4738,8 @@ Size = false,
 })
 local Holder = New("Frame", {
 BackgroundColor3 = "MainColor",
-Position = UDim2.fromOffset(1, 1),
-Size = UDim2.new(1, -2, 0, 0),
-AutomaticSize = Enum.AutomaticSize.Y,
+Position = UDim2.fromOffset(2, 2),
+Size = UDim2.new(1, -4, 1, -4),
 Parent = Background,
 })
 New("UICorner", {
@@ -4749,7 +4747,7 @@ CornerRadius = UDim.new(0, Library.CornerRadius - 1),
 Parent = Holder,
 })
 New("UIListLayout", {
-Padding = UDim.new(0, 3),
+Padding = UDim.new(0, 4),
 Parent = Holder,
 })
 New("UIPadding", {
@@ -6500,7 +6498,7 @@ if Library.Searching then
 Library:UpdateSearch(Library.SearchText)
 end
 if not TabButton:FindFirstChild("Indicator") then
-New("Frame", {
+local Indicator = New("Frame", {
 Name = "Indicator",
 BackgroundColor3 = "AccentColor",
 Position = UDim2.new(0, -12, 0.2, 0),
@@ -6545,8 +6543,6 @@ TabButton.MouseLeave:Connect(function()
 Tab:Hover(false)
 end)
 TabButton.MouseButton1Click:Connect(Tab.Show)
-Tab.Container = TabContainer
-setmetatable(Tab, BaseGroupbox)
 Library.Tabs[Name] = Tab
 return Tab
 end
