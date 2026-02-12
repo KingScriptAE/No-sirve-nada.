@@ -1,5 +1,6 @@
---测试v4
+--测试v5
 --何意味
+--啦啦啦啦啦啦啦啦
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -918,6 +919,7 @@ return (loadstring(
 game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/Lucidesource.lua")
 ) :: () -> IconModule)()
 end)
+--[[
 function Library:GetSnowflakeIcon()
 local SnowflakeIcon = self:GetIcon("snowflake")
 if SnowflakeIcon then
@@ -937,6 +939,7 @@ ImageRectSize = Vector2.zero,
 Custom = true,
 }
 end
+]]
 function Library:GetIcon(IconName: string)
 if not FetchIcons then
 return
@@ -4845,6 +4848,7 @@ end
 end)
 return Data
 end
+--[[
 function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
 SnowCount = SnowCount or 20
 SnowSize = SnowSize or 16
@@ -5040,6 +5044,7 @@ end,
 Container = SnowContainer
 }
 end
+]]
 function Library:CreateWindow(WindowInfo)
 WindowInfo = Library:Validate(WindowInfo, Templates.Window)
 local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
@@ -5329,7 +5334,7 @@ Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 					Volume = 0,
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
-					ZIndex = 2, 
+					ZIndex = 1, 
 					BackgroundTransparency = 1,
 					Parent = MainFrame,
 				})
@@ -5340,7 +5345,7 @@ Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
 					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 2, 
+					ZIndex = 1, 
 					BackgroundTransparency = 1,
 					ImageTransparency = WindowInfo.BackgroundTransparency or 0, 
 					Parent = MainFrame,
@@ -6800,6 +6805,7 @@ end))
 Library:GiveSignal(UserInputService.WindowFocusReleased:Connect(function()
 Library.IsRobloxFocused = false
 end))
+--[[
 local BackgroundContainer = New("Frame", {
 BackgroundTransparency = 0.3,
 BackgroundColor3 = Library.Scheme.BackgroundColor,
@@ -6808,6 +6814,7 @@ Position = UDim2.fromScale(0, 0),
 Parent = MainFrame,
 ZIndex = 0,
 })
+
 local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 40, 10, 0.7)
 Window.SetSnowVisible = function(visible)
 if SnowEffect then
@@ -6820,6 +6827,7 @@ SnowEffect.Destroy()
 SnowEffect = nil
 end
 end
+]]
 return Window
 end
 local function OnPlayerChange()
