@@ -1,4 +1,4 @@
---测试v2
+--测试v3
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
@@ -5330,7 +5330,7 @@ Video = FinalAsset,
 			Volume = 0,
 					Position = UDim2.fromScale(0, 0),
 				Size = UDim2.fromScale(1, 1),
-					ZIndex = 999999,
+					ZIndex = 1,
 		BackgroundTransparency = 1,
 	Parent = MainFrame,
 			})
@@ -5340,7 +5340,7 @@ Video = FinalAsset,
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
 					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 999999,
+					ZIndex = 1,
 					BackgroundTransparency = 1,
 					ImageTransparency = WindowInfo.BackgroundTransparency or 0.5,
 			Parent = MainFrame,
