@@ -1,7 +1,7 @@
---测试v7😦
+--测试v8😦
 --"LinniScriptHub"
---何意味😐
---啦啦啦啦啦啦啦啦😑
+--不知道，何意味😐
+--我服了😑
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -5338,96 +5338,27 @@ local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
 					Parent = MainFrame,
 				})
 			end
-			task.delay(0.1, funct
-		local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
-		
-		if BackgroundData then
-			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
-			local FinalAsset = BackgroundData
-			local IsVideo = false
 
-			if IsVideoUrl then
-				IsVideo = true
-				if string.find(IsVideoUrl, "http") then
-					local function SanitizeFilename(str) return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "") end
-					if not isfolder("Obsidian") then makefolder("Obsidian") end
-					if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
-					local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
-					if not isfile(FileName) then
-						local Success, Response = pcall(function() return game:HttpGet(IsVideoUrl) end)
-						if Success then writefile(FileName, Response) end
-					end
-					if getcustomasset then FinalAsset = getcustomasset(FileName) else IsVideo = false end
-				else FinalAsset = IsVideoUrl end
-			end
-
-			if IsVideo then
-				New("VideoFrame", {
-					Name = "CustomBackground",
-					Video = FinalAsset,
-					Looped = true,
-					Playing = true,
-					Volume = 0,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ZIndex = 1, 
-					BackgroundTransparency = 1,
-					Parent = MainFrame,
-				})
-			else
-				New("ImageLabel", {
-					Name = "CustomBackground",
-					Image = FinalAsset,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 1, 
-					BackgroundTransparency = 1,
-					ImageTransparency = 0,
-					Parent = MainFrame,
-				})
-			end
-			task.delay(0.1, function()
-				MainFrame.BackgroundTransparency = 1
+			task.delay(0.5, function()
+				if MainFrame then
+					MainFrame.BackgroundTransparency = 1
+					for _, child in pairs(MainFrame:GetChildren()) do
+						if child.Name ~= "CustomBackground" then
+						
+							if child:IsA("Frame") then
+								child.BackgroundTransparency = 1
+			
+								pcall(function() child.BackgroundColor3 = Color3.new(1,1,1) end)
+							end
 				
-				if Container then
-					Container.BackgroundTransparency = 1
-					Container.BackgroundColor3 = Color3.new(1,1,1)
-				end
-				
-				if Tabs then
-					Tabs.BackgroundTransparency = 1
-					Tabs.BackgroundColor3 = Color3.new(1,1,1)
-				end
-				
-				for _, child in pairs(MainFrame:GetChildren()) do
-					if child:IsA("Frame") and child.Name ~= "CustomBackground" and child ~= Container and child ~= Tabs then
-						if child.BackgroundColor3 == Library.Scheme.Dark or child.Size == UDim2.new(1, 4, 1, 4) then
-							child.BackgroundTransparency = 1
+							if child:IsA("ScrollingFrame") then
+								child.BackgroundTransparency = 1
+								pcall(function() child.BackgroundColor3 = Color3.new(1,1,1) end)
+							end
 						end
 					end
 				end
-			end)
-		end
-				MainFrame.BackgroundTransparency = 1
-				if Container then
-					Container.BackgroundTransparency = 1
-					Container.BackgroundColor3 = Color3.new(1,1,1)
-				end
-
-				if Tabs then
-					Tabs.BackgroundTransparency = 1
-					Tabs.BackgroundColor3 = Color3.new(1,1,1)
-				end
-				
-				for _, child in pairs(MainFrame:GetChildren()) do
-					if child:IsA("Frame") and child.Name ~= "CustomBackground" and child ~= Container and child ~= Tabs then
-						if child.BackgroundColor3 == Library.Scheme.Dark or child.Size == UDim2.new(1, 4, 1, 4) then
-							child.BackgroundTransparency = 1
-						end
-					end
-				end
-		end)
+	end)
 end
 ------
 if WindowInfo.Center then
