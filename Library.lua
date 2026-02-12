@@ -1,4 +1,6 @@
 --小测试😐
+--V1
+--祝你们玩的开心
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4911,18 +4913,72 @@ for _, Info in pairs(Lines) do
 Library:MakeLine(MainFrame, Info)
 end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
-if WindowInfo.BackgroundImage then
-New("ImageLabel", {
-Image = WindowInfo.BackgroundImage,
-Position = UDim2.fromScale(0, 0),
-Size = UDim2.fromScale(1, 1),
-ScaleType = Enum.ScaleType.Stretch,
-ZIndex = 999,
-BackgroundTransparency = 1,
-ImageTransparency = 0.75,
-Parent = MainFrame,
-})
-end
+-----
+local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
+		
+		if BackgroundData then
+			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
+			local FinalAsset = BackgroundData
+			local IsVideo = false
+
+			if IsVideoUrl then
+				IsVideo = true
+				if string.find(IsVideoUrl, "http") then
+					local function SanitizeFilename(str)
+						return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "")
+					end
+					
+					if not isfolder("Obsidian") then makefolder("Obsidian") end
+					if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
+					
+					local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
+					
+					if not isfile(FileName) then
+						local Success, Response = pcall(function()
+							return game:HttpGet(IsVideoUrl)
+						end)
+						if Success then
+							writefile(FileName, Response)
+						end
+					end
+					
+					if getcustomasset then
+						FinalAsset = getcustomasset(FileName)
+					else
+						IsVideo = false
+						warn("执行器不支持GetCustomAsset")
+					end
+				else
+					FinalAsset = IsVideoUrl
+				end
+			end
+
+			if IsVideo then
+				New("VideoFrame", {
+					Video = FinalAsset,
+					Looped = true,
+					Playing = true,
+					Volume = 0,
+					Position = UDim2.fromScale(0, 0),
+					Size = UDim2.fromScale(1, 1),
+					ZIndex = 1,
+					BackgroundTransparency = 1,
+					Parent = MainFrame,
+				})
+			else
+				New("ImageLabel", {
+					Image = FinalAsset,
+					Position = UDim2.fromScale(0, 0),
+					Size = UDim2.fromScale(1, 1),
+					ScaleType = Enum.ScaleType.Stretch,
+					ZIndex = 1,
+					BackgroundTransparency = 1,
+					ImageTransparency = WindowInfo.BackgroundTransparency or 0.5,
+					Parent = MainFrame,
+				})
+			end
+	end
+------
 if WindowInfo.Center then
 MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
 end
