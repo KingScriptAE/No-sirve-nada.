@@ -1,6 +1,4 @@
---测试v10😦
---"LinniScriptHub"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
+--小测试😐
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -26,90 +24,6 @@ local Labels = {}
 local Buttons = {}
 local Toggles = {}
 local Options = {}
-local Tooltips = {}
-local BaseURL = "https://raw.githubusercontent.com/deividcomsono/Obsidian/refs/heads/main/"
-local CustomImageManager = {}
-local CustomImageManagerAssets = {
-TransparencyTexture = {
-RobloxId = 139785960036434,
-Path = "Obsidian/assets/TransparencyTexture.png",
-URL = BaseURL .. "assets/TransparencyTexture.png",
-Id = nil,
-},
-SaturationMap = {
-RobloxId = 4155801252,
-Path = "Obsidian/assets/SaturationMap.png",
-URL = BaseURL .. "assets/SaturationMap.png",
-Id = nil,
-}
-}
-do
-local function RecursiveCreatePath(Path: string, IsFile: boolean?)
-if not isfolder or not makefolder then
-return
-end
-local Segments = Path:split("/")
-local TraversedPath = ""
-if IsFile then
-table.remove(Segments, #Segments)
-end
-for _, Segment in ipairs(Segments) do
-if not isfolder(TraversedPath .. Segment) then
-makefolder(TraversedPath .. Segment)
-end
-TraversedPath = TraversedPath .. Segment .. "/"
-end
-return TraversedPath
-end
-function CustomImageManager.AddAsset(AssetName: string, RobloxAssetId: number, URL: string, ForceRedownload: boolean?)
-if CustomImageManagerAssets[AssetName] ~= nil then
-error(string.format("Asset %q already exists", AssetName))
-end
-assert(typeof(RobloxAssetId) == "number", "RobloxAssetId must be a number")
-CustomImageManagerAssets[AssetName] = {
-RobloxId = RobloxAssetId,
-Path = string.format("Obsidian/custom_assets/%s", AssetName),
-URL = URL,
-Id = nil,
-}
-CustomImageManager.DownloadAsset(AssetName, ForceRedownload)
-end
-function CustomImageManager.GetAsset(AssetName: string)
-if not CustomImageManagerAssets[AssetName] then
-return nil
-end
-local AssetData = CustomImageManagerAssets[AssetName]
-if AssetData.Id then
-return AssetData.Id
-end
-local AssetID = string.format("rbxassetid://%s", AssetData.RobloxId)
-if getcustomasset then
-local Success, NewID = pcall(getcustomasset, AssetData.Path)
-if Success and NewID then
-AssetID = NewID
-end
-end
-AssetData.Id = AssetID
-return AssetID
-end
-function CustomImageManager.DownloadAsset(AssetName: string, ForceRedownload: boolean?)
-if not getcustomasset or not writefile or not isfile then
-return false, "missing functions"
-end
-local AssetData = CustomImageManagerAssets[AssetName]
-RecursiveCreatePath(AssetData.Path, true)
-if ForceRedownload ~= true and isfile(AssetData.Path) then
-return true, nil
-end
-local success, errorMessage = pcall(function()
-writefile(AssetData.Path, game:HttpGet(AssetData.URL))
-end)
-return success, errorMessage
-end
-for AssetName, _ in CustomImageManagerAssets do
-CustomImageManager.DownloadAsset(AssetName)
-end
-end
 local Library = {
 LocalPlayer = LocalPlayer,
 DevicePlatform = nil,
@@ -118,7 +32,6 @@ IsRobloxFocused = true,
 ScreenGui = nil,
 SearchText = "",
 Searching = false,
-GlobalSearch = false,
 LastSearchTab = nil,
 ActiveTab = nil,
 Tabs = {},
@@ -146,12 +59,12 @@ Signals = {},
 UnloadSignals = {},
 MinSize = Vector2.new(480, 360),
 DPIScale = 1,
-CornerRadius = 8,
+CornerRadius = 4,
 IsLightTheme = false,
 Scheme = {
-BackgroundColor = Color3.fromRGB(15, 15, 15),
+BackgroundColor = Color3.fromRGB(0, 0, 0),
 MainColor = Color3.fromRGB(25, 25, 25),
-AccentColor = Color3.fromRGB(125, 85, 255),
+AccentColor = Color3.fromRGB(162, 162, 162),
 OutlineColor = Color3.fromRGB(40, 40, 40),
 FontColor = Color3.new(1, 1, 1),
 Font = Font.fromEnum(Enum.Font.Code),
@@ -161,8 +74,73 @@ White = Color3.new(1, 1, 1),
 },
 Registry = {},
 DPIRegistry = {},
-ImageManager = CustomImageManager,
 }
+local ObsidianImageManager = {
+Assets = {
+TransparencyTexture = {
+RobloxId = 139785960036434,
+Path = "Obsidian/assets/TransparencyTexture.png",
+Id = nil,
+},
+SaturationMap = {
+RobloxId = 4155801252,
+Path = "Obsidian/assets/SaturationMap.png",
+Id = nil,
+},
+},
+}
+do
+local BaseURL = "https://raw.githubusercontent.com/deividcomsono/Obsidian/refs/heads/main/"
+local function RecursiveCreatePath(Path: string, IsFile: boolean?)
+if not isfolder or not makefolder then
+return
+end
+local Segments = Path:split("/")
+local TraversedPath = ""
+if IsFile then
+table.remove(Segments, #Segments)
+end
+for _, Segment in ipairs(Segments) do
+if not isfolder(TraversedPath .. Segment) then
+makefolder(TraversedPath .. Segment)
+end
+TraversedPath = TraversedPath .. Segment .. "/"
+end
+return TraversedPath
+end
+function ObsidianImageManager.GetAsset(AssetName: string)
+if not ObsidianImageManager.Assets[AssetName] then
+return nil
+end
+local AssetData = ObsidianImageManager.Assets[AssetName]
+if AssetData.Id then
+return AssetData.Id
+end
+local AssetID = string.format("rbxassetid://%s", AssetData.RobloxId)
+if getcustomasset then
+local Success, NewID = pcall(getcustomasset, AssetData.Path)
+if Success and NewID then
+AssetID = NewID
+end
+end
+AssetData.Id = AssetID
+return AssetID
+end
+function ObsidianImageManager.DownloadAsset(AssetPath: string)
+if not getcustomasset or not writefile or not isfile then
+return
+end
+RecursiveCreatePath(AssetPath, true)
+if isfile(AssetPath) then
+return
+end
+local URLPath = AssetPath:gsub("Obsidian/", "")
+writefile(AssetPath, game:HttpGet(BaseURL .. URLPath))
+end
+for _, Data in ObsidianImageManager.Assets do
+ObsidianImageManager.DownloadAsset(Data.Path)
+end
+end
 if RunService:IsStudio() then
 if UserInputService.TouchEnabled and not UserInputService.MouseEnabled then
 Library.IsMobile = true
@@ -223,7 +201,7 @@ UIStroke = {
 ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 },
 Window = {
-Title = "No Title",
+Title = "XK Hub",
 Footer = "No Footer",
 Position = UDim2.fromOffset(6, 6),
 Size = UDim2.fromOffset(720, 600),
@@ -232,8 +210,7 @@ AutoShow = true,
 Center = true,
 Resizable = true,
 SearchbarSize = UDim2.fromScale(1, 1),
-GlobalSearch = false,
-CornerRadius = 8,
+CornerRadius = 12,
 NotifySide = "Right",
 ShowCustomCursor = true,
 Font = Enum.Font.Code,
@@ -305,7 +282,6 @@ Visible = true,
 Image = {
 Image = "",
 Transparency = 0,
-BackgroundTransparency = 0,
 Color = Color3.new(1, 1, 1),
 RectOffset = Vector2.zero,
 RectSize = Vector2.zero,
@@ -412,7 +388,7 @@ and Library.IsRobloxFocused
 end
 local function GetTableSize(Table: { [any]: any })
 local Size = 0
-for _, _ in Table do
+for _, _ in pairs(Table) do
 Size += 1
 end
 return Size
@@ -539,21 +515,8 @@ end
 end
 function Library:UpdateSearch(SearchText)
 Library.SearchText = SearchText
-local TabsToReset = {}
-if Library.GlobalSearch then
-for _, Tab in pairs(Library.Tabs) do
-if typeof(Tab) == "table" and not Tab.IsKeyTab then
-table.insert(TabsToReset, Tab)
-end
-end
-elseif Library.LastSearchTab and typeof(Library.LastSearchTab) == "table" then
-table.insert(TabsToReset, Library.LastSearchTab)
-end
-local function ResetTab(Tab)
-if not Tab then
-return
-end
-for _, Groupbox in pairs(Tab.Groupboxes) do
+if Library.LastSearchTab then
+for _, Groupbox in pairs(Library.LastSearchTab.Groupboxes) do
 for _, ElementInfo in pairs(Groupbox.Elements) do
 ElementInfo.Holder.Visible = typeof(ElementInfo.Visible) == "boolean" and ElementInfo.Visible or true
 if ElementInfo.SubButton then
@@ -570,36 +533,33 @@ end
 Groupbox:Resize()
 Groupbox.Holder.Visible = true
 end
-for _, Tabbox in pairs(Tab.Tabboxes) do
-for _, SubTab in pairs(Tabbox.Tabs) do
-for _, ElementInfo in pairs(SubTab.Elements) do
-ElementInfo.Holder.Visible =
-typeof(ElementInfo.Visible) == "boolean" and ElementInfo.Visible or true
+for _, Tabbox in pairs(Library.LastSearchTab.Tabboxes) do
+for _, Tab in pairs(Tabbox.Tabs) do
+for _, ElementInfo in pairs(Tab.Elements) do
+ElementInfo.Holder.Visible = typeof(ElementInfo.Visible) == "boolean" and ElementInfo.Visible
+or true
 if ElementInfo.SubButton then
 ElementInfo.Base.Visible = ElementInfo.Visible
 ElementInfo.SubButton.Base.Visible = ElementInfo.SubButton.Visible
 end
 end
-for _, Depbox in pairs(SubTab.DependencyBoxes) do
+for _, Depbox in pairs(Tab.DependencyBoxes) do
 if not Depbox.Visible then
 continue
 end
 RestoreDepbox(Depbox)
 end
-SubTab.ButtonHolder.Visible = true
+Tab.ButtonHolder.Visible = true
 end
-if Tabbox.ActiveTab then
 Tabbox.ActiveTab:Resize()
-end
 Tabbox.Holder.Visible = true
 end
-for _, DepGroupbox in pairs(Tab.DependencyGroupboxes) do
+for _, DepGroupbox in pairs(Library.LastSearchTab.DependencyGroupboxes) do
 if not DepGroupbox.Visible then
 continue
 end
 for _, ElementInfo in pairs(DepGroupbox.Elements) do
-ElementInfo.Holder.Visible =
-typeof(ElementInfo.Visible) == "boolean" and ElementInfo.Visible or true
+ElementInfo.Holder.Visible = typeof(ElementInfo.Visible) == "boolean" and ElementInfo.Visible or true
 if ElementInfo.SubButton then
 ElementInfo.Base.Visible = ElementInfo.Visible
 ElementInfo.SubButton.Base.Visible = ElementInfo.SubButton.Visible
@@ -615,40 +575,14 @@ DepGroupbox:Resize()
 DepGroupbox.Holder.Visible = true
 end
 end
-for _, Tab in ipairs(TabsToReset) do
-ResetTab(Tab)
-end
 local Search = SearchText:lower()
-if Trim(Search) == "" then
-Library.Searching = false
-Library.LastSearchTab = nil
-return
-end
-if not Library.GlobalSearch and Library.ActiveTab and Library.ActiveTab.IsKeyTab then
+if Trim(Search) == "" or Library.ActiveTab.IsKeyTab then
 Library.Searching = false
 Library.LastSearchTab = nil
 return
 end
 Library.Searching = true
-local TabsToSearch = {}
-if Library.GlobalSearch then
-TabsToSearch = TabsToReset
-if #TabsToSearch == 0 then
-for _, Tab in pairs(Library.Tabs) do
-if typeof(Tab) == "table" and not Tab.IsKeyTab then
-table.insert(TabsToSearch, Tab)
-end
-end
-end
-elseif Library.ActiveTab then
-table.insert(TabsToSearch, Library.ActiveTab)
-end
-local function ApplySearchToTab(Tab)
-if not Tab then
-return
-end
-local HasVisible = false
-for _, Groupbox in pairs(Tab.Groupboxes) do
+for _, Groupbox in pairs(Library.ActiveTab.Groupboxes) do
 local VisibleElements = 0
 for _, ElementInfo in pairs(Groupbox.Elements) do
 if ElementInfo.Type == "Divider" then
@@ -687,16 +621,15 @@ VisibleElements += CheckDepbox(Depbox, Search)
 end
 if VisibleElements > 0 then
 Groupbox:Resize()
-HasVisible = true
 end
 Groupbox.Holder.Visible = VisibleElements > 0
 end
-for _, Tabbox in pairs(Tab.Tabboxes) do
+for _, Tabbox in pairs(Library.ActiveTab.Tabboxes) do
 local VisibleTabs = 0
 local VisibleElements = {}
-for _, SubTab in pairs(Tabbox.Tabs) do
-VisibleElements[SubTab] = 0
-for _, ElementInfo in pairs(SubTab.Elements) do
+for _, Tab in pairs(Tabbox.Tabs) do
+VisibleElements[Tab] = 0
+for _, ElementInfo in pairs(Tab.Elements) do
 if ElementInfo.Type == "Divider" then
 ElementInfo.Holder.Visible = false
 continue
@@ -714,39 +647,38 @@ ElementInfo.SubButton.Base.Visible = false
 end
 ElementInfo.Holder.Visible = Visible
 if Visible then
-VisibleElements[SubTab] += 1
+VisibleElements[Tab] += 1
 end
 continue
 end
 if ElementInfo.Text and ElementInfo.Text:lower():match(Search) and ElementInfo.Visible then
 ElementInfo.Holder.Visible = true
-VisibleElements[SubTab] += 1
+VisibleElements[Tab] += 1
 else
 ElementInfo.Holder.Visible = false
 end
 end
-for _, Depbox in pairs(SubTab.DependencyBoxes) do
+for _, Depbox in pairs(Tab.DependencyBoxes) do
 if not Depbox.Visible then
 continue
 end
-VisibleElements[SubTab] += CheckDepbox(Depbox, Search)
+VisibleElements[Tab] += CheckDepbox(Depbox, Search)
 end
 end
-for SubTab, Visible in pairs(VisibleElements) do
-SubTab.ButtonHolder.Visible = Visible > 0
+for Tab, Visible in pairs(VisibleElements) do
+Tab.ButtonHolder.Visible = Visible > 0
 if Visible > 0 then
 VisibleTabs += 1
-HasVisible = true
-if Tabbox.ActiveTab == SubTab then
-SubTab:Resize()
-elseif Tabbox.ActiveTab and VisibleElements[Tabbox.ActiveTab] == 0 then
-SubTab:Show()
+if Tabbox.ActiveTab == Tab then
+Tab:Resize()
+elseif VisibleElements[Tabbox.ActiveTab] == 0 then
+Tab:Show()
 end
 end
 end
 Tabbox.Holder.Visible = VisibleTabs > 0
 end
-for _, DepGroupbox in pairs(Tab.DependencyGroupboxes) do
+for _, DepGroupbox in pairs(Library.ActiveTab.DependencyGroupboxes) do
 if not DepGroupbox.Visible then
 continue
 end
@@ -788,43 +720,10 @@ VisibleElements += CheckDepbox(Depbox, Search)
 end
 if VisibleElements > 0 then
 DepGroupbox:Resize()
-HasVisible = true
 end
 DepGroupbox.Holder.Visible = VisibleElements > 0
 end
-return HasVisible
-end
-local FirstVisibleTab = nil
-local ActiveHasVisible = false
-for _, Tab in ipairs(TabsToSearch) do
-local HasVisible = ApplySearchToTab(Tab)
-if HasVisible then
-if not FirstVisibleTab then
-FirstVisibleTab = Tab
-end
-if Tab == Library.ActiveTab then
-ActiveHasVisible = true
-end
-end
-end
-if Library.GlobalSearch then
-if ActiveHasVisible and Library.ActiveTab then
-Library.ActiveTab:RefreshSides()
-elseif FirstVisibleTab then
-local SearchMarker = SearchText
-task.defer(function()
-if Library.SearchText ~= SearchMarker then
-return
-end
-if Library.ActiveTab ~= FirstVisibleTab then
-FirstVisibleTab:Show()
-end
-end)
-end
-Library.LastSearchTab = nil
-else
 Library.LastSearchTab = Library.ActiveTab
-end
 end
 function Library:AddToRegistry(Instance, Properties)
 Library.Registry[Instance] = Properties
@@ -891,11 +790,8 @@ for _, Notification in pairs(Library.Notifications) do
 Notification:Resize()
 end
 end
-function Library:GiveSignal(Connection: RBXScriptConnection | RBXScriptSignal)
-local ConnectionType = typeof(Connection)
-if Connection and (ConnectionType == "RBXScriptConnection" or ConnectionType == "RBXScriptSignal") then
+function Library:GiveSignal(Connection: RBXScriptConnection)
 table.insert(Library.Signals, Connection)
-end
 return Connection
 end
 function IsValidCustomIcon(Icon: string)
@@ -915,30 +811,9 @@ GetAsset: (Name: string) -> Icon?,
 }
 local FetchIcons, Icons = pcall(function()
 return (loadstring(
-game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/Lucidesource.lua")
+game:HttpGet("https://raw.githubusercontent.com/deividcomsono/lucide-roblox-direct/refs/heads/main/source.lua")
 ) :: () -> IconModule)()
 end)
---[[
-function Library:GetSnowflakeIcon()
-local SnowflakeIcon = self:GetIcon("snowflake")
-if SnowflakeIcon then
-return SnowflakeIcon
-end
-local alternateNames = {"snowflake-2", "snowing", "ice", "winter"}
-for _, name in ipairs(alternateNames) do
-local icon = self:GetIcon(name)
-if icon then
-return icon
-end
-end
-return {
-Url = "",
-ImageRectOffset = Vector2.zero,
-ImageRectSize = Vector2.zero,
-Custom = true,
-}
-end
-]]
 function Library:GetIcon(IconName: string)
 if not FetchIcons then
 return
@@ -1308,7 +1183,7 @@ CornerRadius = UDim.new(0, Corner),
 Parent = Outline,
 })
 end
-return Holder, Outline
+return Holder
 end
 function Library:AddDraggableButton(Text: string, Func)
 local Table = {}
@@ -1436,11 +1311,10 @@ Parent = WatermarkLabel,
 Library:MakeDraggable(WatermarkBackground, WatermarkLabel, true)
 local function ResizeWatermark()
 local X, Y = Library:GetTextBounds(WatermarkLabel.Text, Library.Scheme.Font, 15)
-WatermarkBackground.Size = UDim2.fromOffset((12 + X + 12 + 4) * Library.DPIScale, Y + 12 + 4)
+WatermarkBackground.Size = UDim2.fromOffset((12 + X + 12 + 4) * Library.DPIScale, Y * Library.DPIScale * 2 + 4)
 Library:UpdateDPI(WatermarkBackground, {
-Size = UDim2.fromOffset(12 + X + 12 + 4, Y + 12 + 4),
+Size = UDim2.fromOffset(12 + X + 12 + 4, Y * 2 + 4),
 })
-WatermarkLabel.Size = UDim2.new(1, 0, 0, WatermarkBackground.Size.Y.Offset)
 end
 function Library:SetWatermarkVisibility(Visible: boolean)
 WatermarkBackground.Visible = Visible
@@ -1580,9 +1454,6 @@ end
 return Table
 end
 Library:GiveSignal(UserInputService.InputBegan:Connect(function(Input: InputObject)
-if Library.Unloaded then
-return
-end
 if IsClickInput(Input, true) then
 local Location = Input.Position
 if
@@ -1607,9 +1478,6 @@ ZIndex = 20,
 Parent = ScreenGui,
 })
 TooltipLabel:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-if Library.Unloaded then
-return
-end
 local X, Y = Library:GetTextBounds(
 TooltipLabel.Text,
 TooltipLabel.FontFace,
@@ -1657,37 +1525,28 @@ end
 TooltipLabel.Visible = false
 CurrentHoverInstance = nil
 end
-local function GiveSignal(Connection: RBXScriptConnection | RBXScriptSignal)
-local ConnectionType = typeof(Connection)
-if Connection and (ConnectionType == "RBXScriptConnection" or ConnectionType == "RBXScriptSignal") then
-table.insert(TooltipTable.Signals, Connection)
-end
-return Connection
-end
-GiveSignal(HoverInstance.MouseEnter:Connect(DoHover))
-GiveSignal(HoverInstance.MouseMoved:Connect(DoHover))
-GiveSignal(HoverInstance.MouseLeave:Connect(function()
+table.insert(TooltipTable.Signals, HoverInstance.MouseEnter:Connect(DoHover))
+table.insert(TooltipTable.Signals, HoverInstance.MouseMoved:Connect(DoHover))
+table.insert(
+TooltipTable.Signals,
+HoverInstance.MouseLeave:Connect(function()
 if CurrentHoverInstance ~= HoverInstance then
 return
 end
 TooltipLabel.Visible = false
 CurrentHoverInstance = nil
-end))
+end)
+)
 function TooltipTable:Destroy()
 for Index = #TooltipTable.Signals, 1, -1 do
 local Connection = table.remove(TooltipTable.Signals, Index)
-if Connection and Connection.Connected then
 Connection:Disconnect()
 end
-end
 if CurrentHoverInstance == HoverInstance then
-if TooltipLabel then
 TooltipLabel.Visible = false
-end
 CurrentHoverInstance = nil
 end
 end
-table.insert(Tooltips, TooltipLabel)
 return TooltipTable
 end
 function Library:OnUnload(Callback)
@@ -1696,15 +1555,10 @@ end
 function Library:Unload()
 for Index = #Library.Signals, 1, -1 do
 local Connection = table.remove(Library.Signals, Index)
-if Connection and Connection.Connected then
 Connection:Disconnect()
 end
-end
-for _, Callback in Library.UnloadSignals do
+for _, Callback in pairs(Library.UnloadSignals) do
 Library:SafeCallback(Callback)
-end
-for _, Tooltip in Tooltips do
-Library:SafeCallback(Tooltip.Destroy, Tooltip)
 end
 Library.Unloaded = true
 ScreenGui:Destroy()
@@ -1922,7 +1776,6 @@ Holder.Active = not Normal
 Label.Position = Normal and UDim2.fromOffset(0, 0) or UDim2.fromOffset(22 * Library.DPIScale, 0)
 Checkbox.Visible = not Normal
 end
-KeyPicker.DoClick = function(...) end
 Holder.MouseButton1Click:Connect(function()
 if KeybindsToggle.Normal then
 return
@@ -2168,9 +2021,6 @@ Picking = false
 end)
 Picker.MouseButton2Click:Connect(MenuTable.Toggle)
 Library:GiveSignal(UserInputService.InputBegan:Connect(function(Input: InputObject)
-if Library.Unloaded then
-return
-end
 if
 KeyPicker.Mode == "Always"
 or KeyPicker.Value == "Unknown"
@@ -2206,9 +2056,6 @@ end
 KeyPicker:Update()
 end))
 Library:GiveSignal(UserInputService.InputEnded:Connect(function()
-if Library.Unloaded then
-return
-end
 if
 KeyPicker.Value == "Unknown"
 or KeyPicker.Value == "None"
@@ -2254,7 +2101,7 @@ Text = "",
 Parent = ToggleLabel,
 })
 local HolderTransparency = New("ImageLabel", {
-Image = CustomImageManager.GetAsset("TransparencyTexture"),
+Image = ObsidianImageManager.GetAsset("TransparencyTexture"),
 ImageTransparency = (1 - ColorPicker.Transparency),
 ScaleType = Enum.ScaleType.Tile,
 Size = UDim2.fromScale(1, 1),
@@ -2300,7 +2147,7 @@ Parent = ColorHolder,
 })
 local SatVipMap = New("ImageButton", {
 BackgroundColor3 = ColorPicker.Value,
-Image = CustomImageManager.GetAsset("SaturationMap"),
+Image = ObsidianImageManager.GetAsset("SaturationMap"),
 Size = UDim2.fromOffset(200, 200),
 Parent = ColorHolder,
 })
@@ -2340,7 +2187,7 @@ Parent = HueSelector,
 local TransparencySelector, TransparencyColor, TransparencyCursor
 if Info.Transparency then
 TransparencySelector = New("ImageButton", {
-Image = CustomImageManager.GetAsset("TransparencyTexture"),
+Image = ObsidianImageManager.GetAsset("TransparencyTexture"),
 ScaleType = Enum.ScaleType.Tile,
 Size = UDim2.fromOffset(16, 200),
 TileSize = UDim2.fromOffset(8, 8),
@@ -2421,7 +2268,6 @@ end
 CreateButton("Copy color", function()
 Library.CopiedColor = { ColorPicker.Value, ColorPicker.Transparency }
 end)
-ColorPicker.SetValueRGB = function(...) end
 CreateButton("Paste color", function()
 ColorPicker:SetValueRGB(Library.CopiedColor[1], Library.CopiedColor[2])
 end)
@@ -2779,7 +2625,7 @@ return
 end
 if Button.DoubleClick then
 Button.Locked = true
-Button.Base.Text = "Are you sure?"
+Button.Base.Text = "你确定吗？"
 Button.Base.TextColor3 = Library.Scheme.AccentColor
 Library.Registry[Button.Base].TextColor3 = "AccentColor"
 local Clicked = WaitForEvent(Button.Base.MouseButton1Click, 0.5)
@@ -3653,7 +3499,7 @@ local SearchBox
 if Info.Searchable then
 SearchBox = New("TextBox", {
 BackgroundTransparency = 1,
-PlaceholderText = "Search...",
+PlaceholderText = "搜索...",
 Position = UDim2.fromOffset(-8, 0),
 Size = UDim2.new(1, -12, 1, 0),
 TextSize = 14,
@@ -4055,9 +3901,6 @@ LastMousePos = input.Position
 end
 end)
 Library:GiveSignal(UserInputService.InputEnded:Connect(function(input)
-if Library.Unloaded then
-return
-end
 if not Viewport.Interactive then
 return
 end
@@ -4068,9 +3911,6 @@ Dragging = false
 end
 end))
 Library:GiveSignal(UserInputService.InputChanged:Connect(function(input)
-if Library.Unloaded then
-return
-end
 if not Viewport.Interactive or not Dragging or Pinching then
 return
 end
@@ -4101,9 +3941,6 @@ Viewport.Camera.CFrame += Viewport.Camera.CFrame.LookVector * ZoomAmount
 end
 end)
 Library:GiveSignal(UserInputService.TouchPinch:Connect(function(touchPositions, scale, velocity, state)
-if Library.Unloaded then
-return
-end
 if not Viewport.Interactive or not Library:MouseIsOverFrame(ViewportFrame, touchPositions[1]) then
 return
 end
@@ -4182,7 +4019,6 @@ RectSize = Info.RectSize,
 Height = Info.Height,
 ScaleType = Info.ScaleType,
 Transparency = Info.Transparency,
-BackgroundTransparency = Info.BackgroundTransparency,
 Visible = Info.Visible,
 Type = "Image",
 }
@@ -4197,7 +4033,6 @@ AnchorPoint = Vector2.new(0, 1),
 BackgroundColor3 = "MainColor",
 BorderColor3 = "OutlineColor",
 BorderSizePixel = 1,
-BackgroundTransparency = Image.BackgroundTransparency,
 Position = UDim2.fromScale(0, 1),
 Size = UDim2.fromScale(1, 1),
 Parent = Holder,
@@ -4449,11 +4284,10 @@ Container = DepboxContainer,
 Elements = {},
 DependencyBoxes = {},
 }
-local function ResizeDepbox()
+function Depbox:Resize()
 DepboxContainer.Size = UDim2.new(1, 0, 0, DepboxList.AbsoluteContentSize.Y * Library.DPIScale)
 Groupbox:Resize()
 end
-function Depbox:Resize() task.defer(ResizeDepbox) end
 function Depbox:Update(CancelSearch)
 for _, Dependency in pairs(Depbox.Dependencies) do
 local Element = Dependency[1]
@@ -4481,19 +4315,11 @@ end
 Depbox.Visible = true
 DepboxContainer.Visible = true
 if not Library.Searching then
-task.defer(function()
 Depbox:Resize()
-end)
 elseif not CancelSearch then
 Library:UpdateSearch(Library.SearchText)
 end
 end
-DepboxList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-if not Depbox.Visible then
-return
-end
-Depbox:Resize()
-end)
 function Depbox:SetupDependencies(Dependencies)
 for _, Dependency in pairs(Dependencies) do
 assert(typeof(Dependency) == "table", "Dependency should be a table.")
@@ -4556,10 +4382,9 @@ Tab = Tab,
 Elements = {},
 DependencyBoxes = {},
 }
-local function ResizeDepGroupbox()
+function DepGroupbox:Resize()
 Background.Size = UDim2.new(1, 0, 0, DepGroupboxList.AbsoluteContentSize.Y + 18 * Library.DPIScale)
 end
-function DepGroupbox:Resize() task.defer(ResizeDepGroupbox) end
 function DepGroupbox:Update(CancelSearch)
 for _, Dependency in pairs(DepGroupbox.Dependencies) do
 local Element = Dependency[1]
@@ -4770,9 +4595,6 @@ end
 end
 function Data:Destroy()
 Data.Destroyed = true
-if typeof(Data.Time) == "Instance" then
-pcall(Data.Time.Destroy, Data.Time)
-end
 if DeleteConnection then
 DeleteConnection:Disconnect()
 end
@@ -4847,203 +4669,6 @@ end
 end)
 return Data
 end
---[[
-function Library:AddSnowEffect(Parent: GuiObject, SnowCount: number?, SnowSize: number?, Speed: number?, Color: Color3?)
-SnowCount = SnowCount or 20
-SnowSize = SnowSize or 16
-Speed = Speed or 0.6
-Color = Color or Color3.fromRGB(240, 248, 255)
-local Snowflakes = {}
-local SnowContainer = New("Frame", {
-BackgroundTransparency = 1,
-Size = UDim2.fromScale(1, 1),
-ZIndex = 1,
-ClipsDescendants = true,
-Parent = Parent,
-})
-if Parent:FindFirstChild("UICorner") then
-local parentCorner = Parent.UICorner
-New("UICorner", {
-CornerRadius = parentCorner.CornerRadius,
-Parent = SnowContainer,
-})
-end
-local ClipFrame = New("Frame", {
-BackgroundTransparency = 1,
-Size = UDim2.fromScale(1, 1),
-ClipsDescendants = true,
-Parent = SnowContainer,
-})
-local SnowflakeIcon = Library:GetSnowflakeIcon()
-local HasSnowflakeIcon = SnowflakeIcon and SnowflakeIcon.Url ~= ""
-local function updateContainerBounds()
-return {
-X = SnowContainer.AbsolutePosition.X,
-Y = SnowContainer.AbsolutePosition.Y,
-Width = SnowContainer.AbsoluteSize.X,
-Height = SnowContainer.AbsoluteSize.Y
-}
-end
-local containerBounds = updateContainerBounds()
-for i = 1, SnowCount do
-local Snowflake
-local startX = math.random()
-local startY = -0.05 * math.random()
-local pixelX = startX * containerBounds.Width
-local pixelY = startY * containerBounds.Height
-if HasSnowflakeIcon then
-Snowflake = New("ImageLabel", {
-Image = SnowflakeIcon.Url,
-ImageColor3 = Color,
-ImageRectOffset = SnowflakeIcon.ImageRectOffset,
-ImageRectSize = SnowflakeIcon.ImageRectSize,
-ImageTransparency = 0.2 + math.random() * 0.4,
-BackgroundTransparency = 1,
-Size = UDim2.fromOffset(SnowSize, SnowSize),
-Rotation = math.random(0, 360),
-Position = UDim2.new(0, pixelX, 0, pixelY),
-AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 2,
-Parent = ClipFrame,
-})
-else
-Snowflake = New("Frame", {
-BackgroundColor3 = Color,
-BackgroundTransparency = 0.3,
-Size = UDim2.fromOffset(SnowSize/2, SnowSize/2),
-Rotation = 45,
-Position = UDim2.new(0, pixelX, 0, pixelY),
-AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 2,
-Parent = ClipFrame,
-})
-New("UICorner", {
-CornerRadius = UDim.new(0, 2),
-Parent = Snowflake,
-})
-end
-local Data = {
-X = startX,
-Y = startY,
-Speed = Speed * (0.4 + math.random() * 0.6),
-Drift = (math.random() - 0.5) * 0.02,
-Size = SnowSize,
-RotationSpeed = (math.random() - 0.5) * 60,
-Transparency = 0.2 + math.random() * 0.4,
-WobblePhase = math.random() * math.pi * 2,
-WobbleAmount = math.random() * 0.01,
-Scale = 0.8 + math.random() * 0.4,
-HalfSize = SnowSize / 2,
-}
-if HasSnowflakeIcon then
-local Glow = New("ImageLabel", {
-Image = SnowflakeIcon.Url,
-ImageColor3 = Color3.fromRGB(200, 230, 255),
-ImageRectOffset = SnowflakeIcon.ImageRectOffset,
-ImageRectSize = SnowflakeIcon.ImageRectSize,
-ImageTransparency = Data.Transparency + 0.3,
-BackgroundTransparency = 1,
-Size = UDim2.new(1.3, 0, 1.3, 0),
-Position = UDim2.fromScale(0.5, 0.5),
-AnchorPoint = Vector2.new(0.5, 0.5),
-ZIndex = 1,
-Parent = Snowflake,
-})
-end
-table.insert(Snowflakes, { Instance = Snowflake, Data = Data })
-end
-local Connection = RunService.RenderStepped:Connect(function(delta)
-if not SnowContainer.Parent or not Parent then
-Connection:Disconnect()
-return
-end
-containerBounds = updateContainerBounds()
-local currentTime = tick()
-for _, Snow in ipairs(Snowflakes) do
-local Data = Snow.Data
-local Instance = Snow.Instance
-Data.Y = Data.Y + Data.Speed * delta * 0.5
-Data.X = Data.X + Data.Drift * delta
-local wobbleX = math.sin(currentTime * 1.5 + Data.WobblePhase) * Data.WobbleAmount
-Data.X = Data.X + wobbleX * delta
-Data.X = math.clamp(Data.X, 0, 1)
-Instance.Rotation = Instance.Rotation + Data.RotationSpeed * delta
-local pulse = 0.9 + 0.1 * math.sin(currentTime * 2 + Data.Y * 10)
-local actualSize = Data.Size * Data.Scale * pulse
-Instance.Size = UDim2.fromOffset(actualSize, actualSize)
-local depthTransparency = math.min(Data.Y * 0.3, 0.4)
-local targetTransparency = math.min(Data.Transparency + depthTransparency, 0.9)
-if Instance:IsA("ImageLabel") then
-Instance.ImageTransparency = targetTransparency
-else
-Instance.BackgroundTransparency = targetTransparency
-end
-if Data.Y > 1 then
-Data.Y = -0.05 * math.random()
-Data.X = math.random()
-Data.Transparency = 0.2 + math.random() * 0.4
-Instance.Rotation = math.random(0, 360)
-Data.Speed = Speed * (0.4 + math.random() * 0.6)
-Data.Drift = (math.random() - 0.5) * 0.02
-Data.RotationSpeed = (math.random() - 0.5) * 60
-Data.WobblePhase = math.random() * math.pi * 2
-Data.Scale = 0.8 + math.random() * 0.4
-end
-local pixelX = Data.X * containerBounds.Width
-local pixelY = Data.Y * containerBounds.Height
-Instance.Position = UDim2.new(0, pixelX, 0, pixelY)
-end
-end)
-local ResizeConnection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-containerBounds = updateContainerBounds()
-SnowContainer.Size = UDim2.fromScale(1, 1)
-ClipFrame.Size = UDim2.fromScale(1, 1)
-end)
-local PositionConnection = Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-containerBounds = updateContainerBounds()
-end)
-local CornerConnection
-if Parent:FindFirstChild("UICorner") then
-local parentCorner = Parent.UICorner
-local snowCorner = SnowContainer:FindFirstChild("UICorner")
-if snowCorner then
-CornerConnection = parentCorner:GetPropertyChangedSignal("CornerRadius"):Connect(function()
-snowCorner.CornerRadius = parentCorner.CornerRadius
-end)
-end
-end
-table.insert(Library.Signals, Connection)
-table.insert(Library.Signals, ResizeConnection)
-table.insert(Library.Signals, PositionConnection)
-if CornerConnection then
-table.insert(Library.Signals, CornerConnection)
-end
-return {
-Destroy = function()
-Connection:Disconnect()
-if ResizeConnection then ResizeConnection:Disconnect() end
-if PositionConnection then PositionConnection:Disconnect() end
-if CornerConnection then CornerConnection:Disconnect() end
-SnowContainer:Destroy()
-end,
-SetVisible = function(visible)
-SnowContainer.Visible = visible
-end,
-SetIntensity = function(intensity)
-for _, Snow in ipairs(Snowflakes) do
-Snow.Data.Transparency = 0.2 + (1 - intensity) * 0.6
-end
-end,
-SetSpeed = function(newSpeed)
-Speed = newSpeed
-for _, Snow in ipairs(Snowflakes) do
-Snow.Data.Speed = Speed * (0.4 + math.random() * 0.6)
-end
-end,
-Container = SnowContainer
-}
-end
-]]
 function Library:CreateWindow(WindowInfo)
 WindowInfo = Library:Validate(WindowInfo, Templates.Window)
 local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
@@ -5068,7 +4693,6 @@ Library:SetNotifySide(WindowInfo.NotifySide)
 Library.ShowCustomCursor = WindowInfo.ShowCustomCursor
 Library.Scheme.Font = WindowInfo.Font
 Library.ToggleKeybind = WindowInfo.ToggleKeybind
-Library.GlobalSearch = WindowInfo.GlobalSearch
 local IsDefaultSearchbarSize = WindowInfo.SearchbarSize == UDim2.fromScale(1, 1)
 local MainFrame
 local SearchBox
@@ -5079,7 +4703,6 @@ local ResizeButton
 local Tabs
 local Container
 local Window
-local WindowTitle
 local SidebarHighlightCallback = WindowInfo.SidebarHighlightCallback
 local LayoutState = {
 IsCompact = WindowInfo.Compact,
@@ -5241,7 +4864,7 @@ end
 ApplySidebarLayout()
 end
 do
-Library.KeybindFrame, Library.KeybindContainer = Library:AddDraggableMenu("Keybinds")
+Library.KeybindFrame, Library.KeybindContainer = Library:AddDraggableMenu("XK Hub丨快捷菜单")
 Library.KeybindFrame.AnchorPoint = Vector2.new(0, 0.5)
 Library.KeybindFrame.Position = UDim2.new(0, 6, 0.5, 0)
 Library.KeybindFrame.Visible = false
@@ -5288,89 +4911,18 @@ for _, Info in pairs(Lines) do
 Library:MakeLine(MainFrame, Info)
 end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
------
-local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
-
-if BackgroundData then
-    local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
-    local FinalAsset = BackgroundData
-    local IsVideo = false
-    
-    if IsVideoUrl then
-        IsVideo = true
-        if string.find(IsVideoUrl, "http") then
-            local function SanitizeFilename(str)
-                return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "")
-            end
-            if not isfolder("Obsidian") then makefolder("Obsidian") end
-            if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
-            local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
-            if not isfile(FileName) then
-                local Success, Response = pcall(function() return game:HttpGet(IsVideoUrl) end)
-                if Success then writefile(FileName, Response) end
-            end
-            if getcustomasset then
-                FinalAsset = getcustomasset(FileName)
-            else
-                IsVideo = false
-            end
-        else
-            FinalAsset = IsVideoUrl
-        end
-    end
-
-    local BgInstance
-    if IsVideo then
-        BgInstance = New("VideoFrame", {
-            Name = "VideoBackground",
-            Video = FinalAsset,
-            Looped = true,
-            Playing = true,
-            Volume = 0,
-            Position = UDim2.fromScale(0, 0),
-            Size = UDim2.fromScale(1, 1),
-            ZIndex = 1,
-            BackgroundTransparency = 1,
-            Parent = MainFrame,
-        })
-    else
-        BgInstance = New("ImageLabel", {
-            Name = "ImageBackground",
-            Image = FinalAsset,
-            Position = UDim2.fromScale(0, 0),
-            Size = UDim2.fromScale(1, 1),
-            ScaleType = Enum.ScaleType.Stretch,
-            ZIndex = 1,
-            BackgroundTransparency = 1,
-            Parent = MainFrame,
-        })
-    end
-
-    New("UICorner", {
-        CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-        Parent = BgInstance,
-    })
-
-    local function MakeTransparent(obj)
-        if obj:IsA("Frame") or obj:IsA("ScrollingFrame") or obj:IsA("TextButton") then
-            if obj ~= BgInstance then
-                obj.BackgroundTransparency = 1
-            end
-        end
-    end
-
-    MainFrame.BackgroundTransparency = 1
-    
-    MainFrame.ChildAdded:Connect(function(child)
-        task.wait()
-        if child ~= BgInstance and not child:IsA("UIStroke") and not child:IsA("UICorner") then
-            MakeTransparent(child)
-            child.ChildAdded:Connect(MakeTransparent)
-            for _, sub in pairs(child:GetChildren()) do MakeTransparent(sub) end
-        end
-    end)
+if WindowInfo.BackgroundImage then
+New("ImageLabel", {
+Image = WindowInfo.BackgroundImage,
+Position = UDim2.fromScale(0, 0),
+Size = UDim2.fromScale(1, 1),
+ScaleType = Enum.ScaleType.Stretch,
+ZIndex = 999,
+BackgroundTransparency = 1,
+ImageTransparency = 0.75,
+Parent = MainFrame,
+})
 end
-------
 if WindowInfo.Center then
 MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
 end
@@ -5414,63 +4966,52 @@ Parent = TitleHolder,
 end
 WindowIcon.Visible = WindowInfo.Icon ~= nil or LayoutState.IsCompact
 LayoutRefs.WindowIcon = WindowIcon
-
------
 local WindowTitle = New("TextLabel", {
-    BackgroundTransparency = 1,
-    Text = WindowInfo.Title,
-    TextSize = 20,
-    TextColor3 = Color3.fromRGB(255, 255, 255), 
-    Visible = not LayoutState.IsCompact,
-    Parent = TitleHolder,
+BackgroundTransparency = 1,
+Text = WindowInfo.Title,
+TextSize = 20,
+TextColor3 = Color3.fromRGB(255, 255, 255),
+Visible = not LayoutState.IsCompact,
+Parent = TitleHolder,
 })
-
 local UIGradient = Instance.new("UIGradient")
 UIGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
-    ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)),
-    ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)),
-    ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)),
-    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)),
-    ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)),
-    ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)),
-    ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)),
-    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))
+ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
+ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
+ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)),
+ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)),
+ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)),
+ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)),
+ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)),
+ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)),
+ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)),
+ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)),
+ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))
 }
 UIGradient.Rotation = 0
 UIGradient.Parent = WindowTitle
-
 if not LayoutState.IsCompact then
-    LayoutRefs.WindowTitleGradient = UIGradient
-    
-    local gradientAnimation = game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
-        if not WindowTitle:IsDescendantOf(game) or WindowTitle.Parent == nil then
-            gradientAnimation:Disconnect()
-            return
-        end
-        
-        UIGradient.Rotation = UIGradient.Rotation + (360 * deltaTime)
-        if UIGradient.Rotation >= 360 then
-            UIGradient.Rotation = UIGradient.Rotation - 360
-        end
-    end)
-    
-    LayoutRefs.GradientAnimationSpeed = 1
-    LayoutRefs.GradientAnimation = gradientAnimation
-    
-    local MaxTextWidth =
-        math.max(0, InitialSidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
-    local TextWidth = Library:GetTextBounds(WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
-    WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
-else
-    WindowTitle.Size = UDim2.new(0, 0, 1, 0)
+LayoutRefs.WindowTitleGradient = UIGradient
+local gradientAnimation = game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+if not WindowTitle:IsDescendantOf(game) or WindowTitle.Parent == nil then
+gradientAnimation:Disconnect()
+return
 end
-
+UIGradient.Rotation = UIGradient.Rotation + (360 * deltaTime)
+if UIGradient.Rotation >= 360 then
+UIGradient.Rotation = UIGradient.Rotation - 360
+end
+end)
+LayoutRefs.GradientAnimationSpeed = 1
+LayoutRefs.GradientAnimation = gradientAnimation
+local MaxTextWidth =
+math.max(0, InitialSidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
+local TextWidth = Library:GetTextBounds(WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
+WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
+else
+WindowTitle.Size = UDim2.new(0, 0, 1, 0)
+end
 LayoutRefs.WindowTitle = WindowTitle
------
-
 local RightWrapper = New("Frame", {
 BackgroundTransparency = 1,
 AnchorPoint = Vector2.new(0, 0.5),
@@ -5531,7 +5072,7 @@ Parent = CurrentTabInfo,
 })
 SearchBox = New("TextBox", {
 BackgroundColor3 = "MainColor",
-PlaceholderText = "Search",
+PlaceholderText = "搜索功能",
 Size = WindowInfo.SearchbarSize,
 TextScaled = true,
 Visible = not (WindowInfo.DisableSearch or false),
@@ -5639,10 +5180,10 @@ Position = UDim2.fromOffset(2, 2),
 Size = UDim2.new(1, -4, 1, -4),
 Parent = ResizeButton,
 })
-MainFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+Library:GiveSignal(MainFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 EnsureSidebarBounds()
 ApplySidebarLayout()
-end)
+end))
 Tabs = New("ScrollingFrame", {
 AutomaticCanvasSize = Enum.AutomaticSize.Y,
 BackgroundColor3 = "BackgroundColor",
@@ -5656,121 +5197,6 @@ New("UIListLayout", {
 Parent = Tabs,
 })
 LayoutRefs.TabsFrame = Tabs
-local PlayerInfoFrame = New("Frame", {
-BackgroundTransparency = 0,
-BackgroundColor3 = "BackgroundColor",
-Size = UDim2.new(0.3, 0, 0, 40),
-AnchorPoint = Vector2.new(0, 1),
-Position = UDim2.new(0, 0, 1, -21),
-ZIndex = 2,
-Parent = MainFrame,
-})
-New("UICorner", {
-CornerRadius = UDim.new(0, Library.CornerRadius - 1),
-Parent = PlayerInfoFrame,
-})
-local BlockerButton = New("TextButton", {
-BackgroundTransparency = 1,
-Size = UDim2.new(1, 0, 1, 0),
-Text = "",
-ZIndex = 2,
-Parent = PlayerInfoFrame,
-})
-local avatarUrl = "rbxassetid://0"
-pcall(function()
-avatarUrl = game.Players:GetUserThumbnailAsync(
-game.Players.LocalPlayer.UserId,
-Enum.ThumbnailType.AvatarBust,
-Enum.ThumbnailSize.Size48x48
-)
-end)
-local AvatarFrame = New("Frame", {
-BackgroundTransparency = 1,
-Size = UDim2.fromOffset(32, 32),
-Position = UDim2.fromOffset(12, 4),
-ZIndex = 3,
-Parent = PlayerInfoFrame,
-})
-local AvatarImage = New("ImageLabel", {
-BackgroundTransparency = 0,
-BackgroundColor3 = Color3.fromRGB(181, 181, 181),
-Size = UDim2.fromOffset(32, 32),
-Position = UDim2.fromOffset(0, 0),
-Image = "",
-ImageColor3 = Color3.fromRGB(255, 255, 255),
-ImageTransparency = 1,
-ZIndex = 3,
-Parent = AvatarFrame,
-})
-New("UICorner", {
-CornerRadius = UDim.new(1, 0),
-Parent = AvatarImage,
-})
-local DisplayNameLabel = New("TextLabel", {
-BackgroundTransparency = 1,
-Size = UDim2.new(0, 80, 0, 16),
-Position = UDim2.fromOffset(50, 4),
-Text = game.Players.LocalPlayer.DisplayName,
-TextSize = 12,
-TextColor3 = Library.Scheme.FontColor,
-TextXAlignment = Enum.TextXAlignment.Left,
-ZIndex = 3,
-Visible = false,
-Parent = PlayerInfoFrame,
-})
-local UsernameLabel = New("TextLabel", {
-BackgroundTransparency = 1,
-Size = UDim2.new(0, 80, 0, 12),
-Position = UDim2.fromOffset(50, 20),
-Text = "@" .. game.Players.LocalPlayer.Name,
-TextSize = 10,
-TextColor3 = Color3.fromRGB(200, 200, 200),
-TextXAlignment = Enum.TextXAlignment.Left,
-ZIndex = 3,
-Visible = false,
-Parent = PlayerInfoFrame,
-})
-local AXUserLabel = New("TextLabel", {
-BackgroundTransparency = 1,
-Size = UDim2.new(0, 80, 0, 12),
-Position = UDim2.fromOffset(50, 14),
-Text = "霖溺用户",
-TextSize = 10,
-TextColor3 = Color3.fromRGB(200, 200, 200),
-TextXAlignment = Enum.TextXAlignment.Left,
-ZIndex = 3,
-Visible = true,
-Parent = PlayerInfoFrame,
-})
-local isInfoHidden = true
-BlockerButton.MouseButton1Click:Connect(function()
-isInfoHidden = not isInfoHidden
-if isInfoHidden then
-AvatarImage.Image = ""
-AvatarImage.BackgroundColor3 = Color3.fromRGB(181, 181, 181)
-AvatarImage.BackgroundTransparency = 0
-AvatarImage.ImageTransparency = 1
-DisplayNameLabel.Visible = false
-UsernameLabel.Visible = false
-AXUserLabel.Visible = true
-else
-AvatarImage.Image = avatarUrl
-AvatarImage.BackgroundTransparency = 1
-AvatarImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-AvatarImage.ImageTransparency = 0
-DisplayNameLabel.Visible = true
-UsernameLabel.Visible = true
-AXUserLabel.Visible = false
-end
-local marginBottom = 40
-Tabs.CanvasSize = UDim2.new(0, 0, 0, Tabs.UIListLayout.AbsoluteContentSize.Y + marginBottom)
-end)
-Tabs.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-local marginBottom = 40
-Tabs.CanvasSize = UDim2.new(0, 0, 0, Tabs.UIListLayout.AbsoluteContentSize.Y + marginBottom)
-end)
-local marginBottom = 40
-Tabs.CanvasSize = UDim2.new(0, 0, 0, Tabs.UIListLayout.AbsoluteContentSize.Y + marginBottom)
 Container = New("Frame", {
 AnchorPoint = Vector2.new(0, 0),
 BackgroundColor3 = function()
@@ -5839,9 +5265,6 @@ end
 end))
 end))
 Library:GiveSignal(UserInputService.InputChanged:Connect(function(input)
-if Library.Unloaded then
-return
-end
 if not SidebarDrag.Active then
 return
 end
@@ -5857,9 +5280,6 @@ SetSidebarWidth(SidebarDrag.StartWidth + Delta)
 end
 end))
 Library:GiveSignal(UserInputService.InputEnded:Connect(function(input)
-if Library.Unloaded then
-return
-end
 if not SidebarDrag.Active then
 return
 end
@@ -5903,11 +5323,6 @@ end
 function Window:ApplyLayout()
 ApplySidebarLayout()
 end
-function Window:ChangeTitle(title)
-assert(typeof(title) == "string", "Expected string for title got: " .. typeof(title))
-WindowTitle.Text = title
-WindowInfo.Title = title
-end
 function Window:AddTab(...)
 local Name = nil
 local Icon = nil
@@ -5928,6 +5343,11 @@ local TabIcon
 local TabContainer
 local TabLeft
 local TabRight
+local WarningBox
+local WarningBoxScrollingFrame
+local WarningTitle
+local WarningText
+local WarningStroke
 Icon = Library:GetCustomIcon(Icon)
 do
 TabButton = New("TextButton", {
@@ -6027,43 +5447,25 @@ Parent = TabRight,
 TabRight.Size = UDim2.new(0, math.floor(TabContainer.AbsoluteSize.X / 2) - 3, 1, 0)
 Library:UpdateDPI(TabRight, { Size = TabRight.Size })
 end
-end
-local WarningBoxHolder = New("Frame", {
+WarningBox = New("Frame", {
 AutomaticSize = Enum.AutomaticSize.Y,
-BackgroundTransparency = 1,
-Position = UDim2.fromOffset(2, 6),
+BackgroundColor3 = Color3.fromRGB(127, 0, 0),
+BorderColor3 = Color3.fromRGB(255, 50, 50),
+BorderMode = Enum.BorderMode.Inset,
+BorderSizePixel = 1,
+Position = UDim2.fromOffset(0, 6),
 Size = UDim2.fromScale(1, 0),
 Visible = false,
-Parent = TabContainer
-})
-local WarningBoxBackground, WarningBoxOutline = Library:MakeOutline(WarningBoxHolder, WindowInfo.CornerRadius)
-WarningBoxBackground.Size = UDim2.fromScale(1, 0)
-Library:UpdateDPI(WarningBoxBackground, {
-Size = false,
-})
-local WarningBox
-local WarningBoxScrollingFrame
-local WarningTitle
-local WarningStroke
-local WarningText
-do
-WarningBox = New("Frame", {
-BackgroundColor3 = "BackgroundColor",
-Position = UDim2.fromOffset(2, 2),
-Size = UDim2.new(1, -4, 0, 100),
-Parent = WarningBoxBackground,
-})
-New("UICorner", {
-CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
-Parent = WarningBox,
+Parent = TabContainer,
 })
 WarningBoxScrollingFrame = New("ScrollingFrame", {
 BackgroundTransparency = 1,
 BorderSizePixel = 0,
-Size = UDim2.fromScale(1, 1),
+AnchorPoint = Vector2.new(0.5, 0.5),
+Position = UDim2.new(0.5, 0, 0.5, -3),
+Size = UDim2.new(1, 0, 1, -3),
 CanvasSize = UDim2.new(0, 0, 0, 0),
 ScrollBarThickness = 3,
-ScrollingDirection = Enum.ScrollingDirection.Y,
 Parent = WarningBox,
 })
 New("UIPadding", {
@@ -6138,15 +5540,13 @@ end
 if typeof(Info.Text) == "string" then
 Tab.WarningBox.Text = Info.Text
 end
-WarningBoxHolder.Visible = Tab.WarningBox.Visible
+WarningBox.Visible = Tab.WarningBox.Visible
 WarningTitle.Text = Tab.WarningBox.Title
 WarningText.Text = Tab.WarningBox.Text
 Tab:Resize(true)
 WarningBox.BackgroundColor3 = Tab.WarningBox.IsNormal == true and Library.Scheme.BackgroundColor
 or Color3.fromRGB(127, 0, 0)
-WarningBoxBackground.BackgroundColor3 = Tab.WarningBox.IsNormal == true and Library.Scheme.Dark
-or Color3.fromRGB(169, 0, 0)
-WarningBoxOutline.BackgroundColor3 = Tab.WarningBox.IsNormal == true and Library.Scheme.OutlineColor
+WarningBox.BorderColor3 = Tab.WarningBox.IsNormal == true and Library.Scheme.OutlineColor
 or Color3.fromRGB(255, 50, 50)
 WarningTitle.TextColor3 = Tab.WarningBox.IsNormal == true and Library.Scheme.FontColor
 or Color3.fromRGB(255, 50, 50)
@@ -6154,12 +5554,6 @@ WarningStroke.Color = Tab.WarningBox.IsNormal == true and Library.Scheme.Outline
 or Color3.fromRGB(169, 0, 0)
 if not Library.Registry[WarningBox] then
 Library:AddToRegistry(WarningBox, {})
-end
-if not Library.Registry[WarningBoxBackground] then
-Library:AddToRegistry(WarningBoxBackground, {})
-end
-if not Library.Registry[WarningBoxOutline] then
-Library:AddToRegistry(WarningBoxOutline, {})
 end
 if not Library.Registry[WarningTitle] then
 Library:AddToRegistry(WarningTitle, {})
@@ -6170,10 +5564,7 @@ end
 Library.Registry[WarningBox].BackgroundColor3 = function()
 return Tab.WarningBox.IsNormal == true and Library.Scheme.BackgroundColor or Color3.fromRGB(127, 0, 0)
 end
-Library.Registry[WarningBoxBackground].BackgroundColor3 = function()
-return Tab.WarningBox.IsNormal == true and Library.Scheme.Dark or Color3.fromRGB(169, 0, 0)
-end
-Library.Registry[WarningBoxOutline].BackgroundColor3 = function()
+Library.Registry[WarningBox].BorderColor3 = function()
 return Tab.WarningBox.IsNormal == true and Library.Scheme.OutlineColor or Color3.fromRGB(255, 50, 50)
 end
 Library.Registry[WarningTitle].TextColor3 = function()
@@ -6184,7 +5575,7 @@ return Tab.WarningBox.IsNormal == true and Library.Scheme.OutlineColor or Color3
 end
 end
 function Tab:RefreshSides()
-local Offset = WarningBoxHolder.Visible and WarningBoxBackground.AbsoluteSize.Y + 6 or 0
+local Offset = WarningBox.Visible and WarningBox.AbsoluteSize.Y + 6 or 0
 for _, Side in pairs(Tab.Sides) do
 Side.Position = UDim2.new(Side.Position.X.Scale, 0, 0, Offset)
 Side.Size = UDim2.new(0, math.floor(TabContainer.AbsoluteSize.X / 2) - 3, 1, -Offset)
@@ -6212,9 +5603,8 @@ WarningBoxScrollingFrame.CanvasSize = UDim2.fromOffset(0, 0)
 end
 WarningText.Size = UDim2.new(1, -4, 0, YText)
 Library:UpdateDPI(WarningText, { Size = WarningText.Size })
-WarningBox.Size = UDim2.new(1, -4, 0, YBox)
+WarningBox.Size = UDim2.new(1, 0, 0, YBox)
 Library:UpdateDPI(WarningBox, { Size = WarningBox.Size })
-WarningBoxBackground.Size = UDim2.new(1, 0, 0, YBox + 4 * Library.DPIScale)
 end
 Tab:RefreshSides()
 end
@@ -6305,10 +5695,9 @@ Tab = Tab,
 DependencyBoxes = {},
 Elements = {},
 }
-local function ResizeGroupbox()
+function Groupbox:Resize()
 Background.Size = UDim2.new(1, 0, 0, GroupboxList.AbsoluteContentSize.Y + 53 * Library.DPIScale)
 end
-function Groupbox:Resize() task.defer(ResizeGroupbox) end
 setmetatable(Groupbox, BaseGroupbox)
 Groupbox:Resize()
 Tab.Groupboxes[Info.Name] = Groupbox
@@ -6424,13 +5813,12 @@ Line.Visible = true
 Container.Visible = false
 Tabbox.ActiveTab = nil
 end
-local function ResizeTab()
+function Tab:Resize()
 if Tabbox.ActiveTab ~= Tab then
 return
 end
 Background.Size = UDim2.new(1, 0, 0, List.AbsoluteContentSize.Y + 53 * Library.DPIScale)
 end
-function Tab:Resize() task.defer(ResizeTab) end
 if not Tabbox.ActiveTab then
 Tab:Show()
 end
@@ -6527,26 +5915,11 @@ TabButton.MouseButton1Click:Connect(Tab.Show)
 Library.Tabs[Name] = Tab
 return Tab
 end
-function Window:AddKeyTab(...)
-local Name = nil
-local Icon = nil
-local Description = nil
-if select("#", ...) == 1 and typeof(...) == "table" then
-local Info = select(1, ...)
-Name = Info.Name or "Tab"
-Icon = Info.Icon
-Description = Info.Description
-else
-Name = select(1, ...) or "Tab"
-Icon = select(2, ...)
-Description = select(3, ...)
-end
-Icon = Icon or "key"
+function Window:AddKeyTab(Name)
 local TabButton: TextButton
 local TabLabel
 local TabIcon
 local TabContainer
-Icon = if Icon == "key" then KeyIcon else Library:GetCustomIcon(Icon)
 do
 TabButton = New("TextButton", {
 BackgroundColor3 = "MainColor",
@@ -6575,12 +5948,12 @@ Visible = not LayoutState.IsCompact,
 Parent = TabButton,
 })
 table.insert(LayoutRefs.TabLabels, TabLabel)
-if Icon then
+if KeyIcon then
 TabIcon = New("ImageLabel", {
-Image = Icon.Url,
-ImageColor3 = Icon.Custom and "White" or "AccentColor",
-ImageRectOffset = Icon.ImageRectOffset,
-ImageRectSize = Icon.ImageRectSize,
+Image = KeyIcon.Url,
+ImageColor3 = "AccentColor",
+ImageRectOffset = KeyIcon.ImageRectOffset,
+ImageRectSize = KeyIcon.ImageRectSize,
 ImageTransparency = 0.5,
 Size = UDim2.fromScale(1, 1),
 SizeConstraint = Enum.SizeConstraint.RelativeYY,
@@ -6691,19 +6064,7 @@ ImageTransparency = 0,
 }):Play()
 end
 TabContainer.Visible = true
-if Description then
-CurrentTabInfo.Visible = true
-if IsDefaultSearchbarSize then
-SearchBox.Size = UDim2.fromScale(0.5, 1)
-end
-CurrentTabLabel.Text = Name
-CurrentTabDescription.Text = Description
-end
-Tab:RefreshSides()
 Library.ActiveTab = Tab
-if Library.Searching then
-Library:UpdateSearch(Library.SearchText)
-end
 end
 function Tab:Hide()
 TweenService:Create(TabButton, Library.TweenInfo, {
@@ -6718,10 +6079,6 @@ ImageTransparency = 0.5,
 }):Play()
 end
 TabContainer.Visible = false
-if IsDefaultSearchbarSize then
-SearchBox.Size = UDim2.fromScale(1, 1)
-end
-CurrentTabInfo.Visible = false
 Library.ActiveTab = nil
 end
 if not Library.ActiveTab then
@@ -6781,7 +6138,7 @@ if WindowInfo.AutoShow then
 task.spawn(Library.Toggle)
 end
 if Library.IsMobile then
-local ToggleButton = Library:AddDraggableButton("显示/隐藏", function()
+local ToggleButton = Library:AddDraggableButton("开关界面", function()
 Library:Toggle()
 end)
 local LockButton = Library:AddDraggableButton("锁定", function(self)
@@ -6801,9 +6158,6 @@ SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
 Library:UpdateSearch(SearchBox.Text)
 end)
 Library:GiveSignal(UserInputService.InputBegan:Connect(function(Input: InputObject)
-if Library.Unloaded then
-return
-end
 if UserInputService:GetFocusedTextBox() then
 return
 end
@@ -6823,48 +6177,19 @@ end))
 Library:GiveSignal(UserInputService.WindowFocusReleased:Connect(function()
 Library.IsRobloxFocused = false
 end))
---[[
-local BackgroundContainer = New("Frame", {
-BackgroundTransparency = 0.3,
-BackgroundColor3 = Library.Scheme.BackgroundColor,
-Size = UDim2.fromScale(1, 1),
-Position = UDim2.fromScale(0, 0),
-Parent = MainFrame,
-ZIndex = 0,
-})
-
-local SnowEffect = Library:AddSnowEffect(BackgroundContainer, 40, 10, 0.7)
-Window.SetSnowVisible = function(visible)
-if SnowEffect then
-SnowEffect.SetVisible(visible)
-end
-end
-Window.RemoveSnowEffect = function()
-if SnowEffect then
-SnowEffect.Destroy()
-SnowEffect = nil
-end
-end
-]]
 return Window
 end
 local function OnPlayerChange()
-if Library.Unloaded then
-return
-end
 local PlayerList, ExcludedPlayerList = GetPlayers(), GetPlayers(true)
-for _, Dropdown in Options do
+for _, Dropdown in pairs(Options) do
 if Dropdown.Type == "Dropdown" and Dropdown.SpecialType == "Player" then
 Dropdown:SetValues(Dropdown.ExcludeLocalPlayer and ExcludedPlayerList or PlayerList)
 end
 end
 end
 local function OnTeamChange()
-if Library.Unloaded then
-return
-end
 local TeamList = GetTeams()
-for _, Dropdown in Options do
+for _, Dropdown in pairs(Options) do
 if Dropdown.Type == "Dropdown" and Dropdown.SpecialType == "Team" then
 Dropdown:SetValues(TeamList)
 end
