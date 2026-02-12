@@ -1,6 +1,7 @@
---小测试😐
---V1
---祝你们玩的开心
+--二改@霖溺
+--不知道何意味
+--误以为
+--v3
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
 end)
@@ -4913,72 +4914,62 @@ for _, Info in pairs(Lines) do
 Library:MakeLine(MainFrame, Info)
 end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
------
-local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
-		
-		if BackgroundData then
-			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
-			local FinalAsset = BackgroundData
-			local IsVideo = false
+--------
+local function GetMediaAsset(url)
+    if not (writefile and isfile and getcustomasset) then return url end
+    local name = "Obsidian_Media_" .. tick() .. (url:match("%.%w+$") or ".mp4")
+    if not isfolder("Obsidian/Media") then makefolder("Obsidian/Media") end
+    local path = "Obsidian/Media/" .. name
+    
+    if not isfile(path) then
+        local success, content = pcall(game.HttpGet, game, url)
+        if success then writefile(path, content) else return url end
+    end
+    return getcustomasset(path)
+end
 
-			if IsVideoUrl then
-				IsVideo = true
-				if string.find(IsVideoUrl, "http") then
-					local function SanitizeFilename(str)
-						return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "")
-					end
-					
-					if not isfolder("Obsidian") then makefolder("Obsidian") end
-					if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
-					
-					local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
-					
-					if not isfile(FileName) then
-						local Success, Response = pcall(function()
-							return game:HttpGet(IsVideoUrl)
-						end)
-						if Success then
-							writefile(FileName, Response)
-						end
-					end
-					
-					if getcustomasset then
-						FinalAsset = getcustomasset(FileName)
-					else
-						IsVideo = false
-						warn("执行器不支持GetCustomAsset")
-					end
-				else
-					FinalAsset = IsVideoUrl
-				end
-			end
+local BackgroundContainer = New("Frame", {
+    Size = UDim2.fromScale(1, 1),
+    BackgroundTransparency = 1,
+    ZIndex = 0,
+    Parent = MainFrame,
+    ClipsDescendants = true
+})
+New("UICorner", { CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1), Parent = BackgroundContainer })
 
-			if IsVideo then
-				New("VideoFrame", {
-					Video = FinalAsset,
-					Looped = true,
-					Playing = true,
-					Volume = 0,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ZIndex = 1,
-					BackgroundTransparency = 1,
-					Parent = MainFrame,
-				})
-			else
-				New("ImageLabel", {
-					Image = FinalAsset,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 1,
-					BackgroundTransparency = 1,
-					ImageTransparency = WindowInfo.BackgroundTransparency or 0.5,
-					Parent = MainFrame,
-				})
-			end
-	end
-------
+local BackgroundObject = WindowInfo.Background or WindowInfo.BackgroundImage
+if BackgroundObject then
+    local isVideo = typeof(BackgroundObject) == "string" and BackgroundObject:sub(1, 6) == "video:"
+    local rawUrl = isVideo and BackgroundObject:sub(7) or BackgroundObject
+
+    task.spawn(function()
+        local assetId = (typeof(rawUrl) == "string" and rawUrl:match("^http")) and GetMediaAsset(rawUrl) or rawUrl
+        
+        if isVideo then
+            local Video = New("VideoFrame", {
+                Video = assetId,
+                Size = UDim2.fromScale(1, 1),
+                BackgroundTransparency = 1,
+                Looped = true,
+                Volume = 0,
+                Parent = BackgroundContainer,
+                ZIndex = 0
+            })
+            Video:Play()
+        else
+            New("ImageLabel", {
+                Image = assetId,
+                Size = UDim2.fromScale(1, 1),
+                BackgroundTransparency = 1,
+                ScaleType = Enum.ScaleType.Stretch,
+                ImageTransparency = 0.5,
+                Parent = BackgroundContainer,
+                ZIndex = 0
+            })
+        end
+    end)
+end
+--------
 if WindowInfo.Center then
 MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
 end
