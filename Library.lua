@@ -1,7 +1,7 @@
---测试v8😦
+--测试v9😦
 --"LinniScriptHub"
---不知道，何意味😐
---我服了😑
+--不知道，何意味，神经哎😐
+--我服了，草你妈😑
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -5292,73 +5292,85 @@ end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 -----
 local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
-		if BackgroundData then
-			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
-			local FinalAsset = BackgroundData
-			local IsVideo = false
 
-			if IsVideoUrl then
-				IsVideo = true
-				if string.find(IsVideoUrl, "http") then
-					local function SanitizeFilename(str) return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "") end
-					if not isfolder("Obsidian") then makefolder("Obsidian") end
-					if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
-					local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
-					if not isfile(FileName) then
-						local Success, Response = pcall(function() return game:HttpGet(IsVideoUrl) end)
-						if Success then writefile(FileName, Response) end
-					end
-					if getcustomasset then FinalAsset = getcustomasset(FileName) else IsVideo = false end
-				else FinalAsset = IsVideoUrl end
-			end
+if BackgroundData then
+    local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
+    local FinalAsset = BackgroundData
+    local IsVideo = false
+    
+    if IsVideoUrl then
+        IsVideo = true
+        if string.find(IsVideoUrl, "http") then
+            local function SanitizeFilename(str)
+                return str:gsub("[%s/\\:*?\"<>|]+", "-"):gsub("[^%w%-_%.]", "")
+            end
+            if not isfolder("Obsidian") then makefolder("Obsidian") end
+            if not isfolder("Obsidian/Backgrounds") then makefolder("Obsidian/Backgrounds") end
+            local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
+            if not isfile(FileName) then
+                local Success, Response = pcall(function() return game:HttpGet(IsVideoUrl) end)
+                if Success then writefile(FileName, Response) end
+            end
+            if getcustomasset then
+                FinalAsset = getcustomasset(FileName)
+            else
+                IsVideo = false
+            end
+        else
+            FinalAsset = IsVideoUrl
+        end
+    end
 
-			if IsVideo then
-				New("VideoFrame", {
-					Name = "CustomBackground",
-					Video = FinalAsset,
-					Looped = true,
-					Playing = true,
-					Volume = 0,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ZIndex = 1, 
-					BackgroundTransparency = 1,
-					Parent = MainFrame,
-				})
-			else
-				New("ImageLabel", {
-					Name = "CustomBackground",
-					Image = FinalAsset,
-					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromScale(1, 1),
-					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 1, 
-					BackgroundTransparency = 1,
-					ImageTransparency = 0,
-					Parent = MainFrame,
-				})
-			end
+    local BgInstance
+    if IsVideo then
+        BgInstance = New("VideoFrame", {
+            Name = "VideoBackground",
+            Video = FinalAsset,
+            Looped = true,
+            Playing = true,
+            Volume = 0,
+            Position = UDim2.fromScale(0, 0),
+            Size = UDim2.fromScale(1, 1),
+            ZIndex = -100,
+            BackgroundTransparency = 1,
+            Parent = MainFrame,
+        })
+    else
+        BgInstance = New("ImageLabel", {
+            Name = "ImageBackground",
+            Image = FinalAsset,
+            Position = UDim2.fromScale(0, 0),
+            Size = UDim2.fromScale(1, 1),
+            ScaleType = Enum.ScaleType.Stretch,
+            ZIndex = -100,
+            BackgroundTransparency = 1,
+            Parent = MainFrame,
+        })
+    end
 
-			task.delay(0.5, function()
-				if MainFrame then
-					MainFrame.BackgroundTransparency = 1
-					for _, child in pairs(MainFrame:GetChildren()) do
-						if child.Name ~= "CustomBackground" then
-						
-							if child:IsA("Frame") then
-								child.BackgroundTransparency = 1
-			
-								pcall(function() child.BackgroundColor3 = Color3.new(1,1,1) end)
-							end
-				
-							if child:IsA("ScrollingFrame") then
-								child.BackgroundTransparency = 1
-								pcall(function() child.BackgroundColor3 = Color3.new(1,1,1) end)
-							end
-						end
-					end
-				end
-	end)
+    New("UICorner", {
+        CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
+        Parent = BgInstance,
+    })
+
+    local function MakeTransparent(obj)
+        if obj:IsA("Frame") or obj:IsA("ScrollingFrame") or obj:IsA("TextButton") then
+            if obj ~= BgInstance then
+                obj.BackgroundTransparency = 1
+            end
+        end
+    end
+
+    MainFrame.BackgroundTransparency = 1
+    
+    MainFrame.ChildAdded:Connect(function(child)
+        task.wait()
+        if child ~= BgInstance and not child:IsA("UIStroke") and not child:IsA("UICorner") then
+            MakeTransparent(child)
+            child.ChildAdded:Connect(MakeTransparent)
+            for _, sub in pairs(child:GetChildren()) do MakeTransparent(sub) end
+        end
+    end)
 end
 ------
 if WindowInfo.Center then
