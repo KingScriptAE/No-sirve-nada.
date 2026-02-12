@@ -1,6 +1,6 @@
---测试v5
---何意味
---啦啦啦啦啦啦啦啦
+--测试v6😦
+--何意味😐
+--啦啦啦啦啦啦啦啦😑
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -5290,13 +5290,12 @@ Library:MakeLine(MainFrame, Info)
 end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 -----
-		local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
+local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
 		
 		if BackgroundData then
 			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
 			local FinalAsset = BackgroundData
 			local IsVideo = false
-
 			if IsVideoUrl then
 				IsVideo = true
 				if string.find(IsVideoUrl, "http") then
@@ -5318,12 +5317,18 @@ Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 						FinalAsset = getcustomasset(FileName)
 					else
 						IsVideo = false
-						warn("[Obsidian] 你的注入器不支持 getcustomasset，无法播放视频背景")
+						warn("[Obsidian] 注入器不支持 getcustomasset，无法播放视频")
 					end
 				else
 					FinalAsset = IsVideoUrl
 				end
 			end
+			MainFrame.BackgroundTransparency = 1
+			MainFrame.ChildAdded:Connect(function(child)
+				if child.Name == "Container" then
+					child.BackgroundTransparency = WindowInfo.BackgroundTransparency or 1
+				end
+			end)
 
 			if IsVideo then
 				New("VideoFrame", {
@@ -5334,7 +5339,7 @@ Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 					Volume = 0,
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
-					ZIndex = 1, 
+					ZIndex = 1,
 					BackgroundTransparency = 1,
 					Parent = MainFrame,
 				})
@@ -5345,13 +5350,13 @@ Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
 					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 1, 
+					ZIndex = 1,
 					BackgroundTransparency = 1,
-					ImageTransparency = WindowInfo.BackgroundTransparency or 0, 
+					ImageTransparency = 0,
 					Parent = MainFrame,
-				})
-			end
-		end
+			})
+	end
+end
 ------
 if WindowInfo.Center then
 MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
