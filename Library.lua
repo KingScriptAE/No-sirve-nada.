@@ -1,5 +1,5 @@
---测试v3
-
+--测试v4
+--何意味
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KingScriptAE/No-sirve-nada./refs/heads/main/espgroup.txt"))()
 local cloneref = (cloneref or clonereference or function(instance: any)
 return instance
@@ -5284,8 +5284,9 @@ for _, Info in pairs(Lines) do
 Library:MakeLine(MainFrame, Info)
 end
 Library:MakeOutline(MainFrame, WindowInfo.CornerRadius, 0)
-
-local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
+-----
+		local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
+		
 		if BackgroundData then
 			local IsVideoUrl = typeof(BackgroundData) == "string" and string.match(BackgroundData, "^video:(.+)")
 			local FinalAsset = BackgroundData
@@ -5304,50 +5305,49 @@ local BackgroundData = WindowInfo.Background or WindowInfo.BackgroundImage
 					local FileName = "Obsidian/Backgrounds/" .. SanitizeFilename(IsVideoUrl) .. ".webm"
 					
 					if not isfile(FileName) then
-						local Success, Response = pcall(function()
-							return game:HttpGet(IsVideoUrl)
-						end)
-						if Success then
-							writefile(FileName, Response)
-						end
+						local Success, Response = pcall(function() return game:HttpGet(IsVideoUrl) end)
+						if Success then writefile(FileName, Response) end
 					end
 					
 					if getcustomasset then
 						FinalAsset = getcustomasset(FileName)
 					else
 						IsVideo = false
-						warn("Executor does not support getcustomasset")
+						warn("[Obsidian] 你的注入器不支持 getcustomasset，无法播放视频背景")
 					end
 				else
 					FinalAsset = IsVideoUrl
 				end
 			end
-if IsVideo then
-New("VideoFrame", {
-Video = FinalAsset,
-			Looped = true,
-		Playing = true,
-			Volume = 0,
+
+			if IsVideo then
+				New("VideoFrame", {
+					Name = "VideoBackground",
+					Video = FinalAsset,
+					Looped = true,
+					Playing = true,
+					Volume = 0,
 					Position = UDim2.fromScale(0, 0),
-				Size = UDim2.fromScale(1, 1),
-					ZIndex = 1,
-		BackgroundTransparency = 1,
-	Parent = MainFrame,
-			})
+					Size = UDim2.fromScale(1, 1),
+					ZIndex = 2, 
+					BackgroundTransparency = 1,
+					Parent = MainFrame,
+				})
 			else
-			New("ImageLabel", {
+				New("ImageLabel", {
+					Name = "ImageBackground",
 					Image = FinalAsset,
 					Position = UDim2.fromScale(0, 0),
 					Size = UDim2.fromScale(1, 1),
 					ScaleType = Enum.ScaleType.Stretch,
-					ZIndex = 1,
+					ZIndex = 2, 
 					BackgroundTransparency = 1,
-					ImageTransparency = WindowInfo.BackgroundTransparency or 0.5,
-			Parent = MainFrame,
-		})
-	end
-end
-
+					ImageTransparency = WindowInfo.BackgroundTransparency or 0, 
+					Parent = MainFrame,
+				})
+			end
+		end
+------
 if WindowInfo.Center then
 MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
 end
@@ -5391,22 +5391,63 @@ Parent = TitleHolder,
 end
 WindowIcon.Visible = WindowInfo.Icon ~= nil or LayoutState.IsCompact
 LayoutRefs.WindowIcon = WindowIcon
-WindowTitle = New("TextButton", {
-BackgroundTransparency = 1,
-Text = WindowInfo.Title,
-TextSize = 20,
-Visible = not LayoutState.IsCompact,
-Parent = TitleHolder,
+
+-----
+local WindowTitle = New("TextLabel", {
+    BackgroundTransparency = 1,
+    Text = WindowInfo.Title,
+    TextSize = 20,
+    TextColor3 = Color3.fromRGB(255, 255, 255), 
+    Visible = not LayoutState.IsCompact,
+    Parent = TitleHolder,
 })
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
+    ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)),
+    ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)),
+    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)),
+    ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)),
+    ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)),
+    ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))
+}
+UIGradient.Rotation = 0
+UIGradient.Parent = WindowTitle
+
 if not LayoutState.IsCompact then
-local MaxTextWidth =
-math.max(0, InitialSidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
-local TextWidth = Library:GetTextBounds(WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
-WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
+    LayoutRefs.WindowTitleGradient = UIGradient
+    
+    local gradientAnimation = game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+        if not WindowTitle:IsDescendantOf(game) or WindowTitle.Parent == nil then
+            gradientAnimation:Disconnect()
+            return
+        end
+        
+        UIGradient.Rotation = UIGradient.Rotation + (360 * deltaTime)
+        if UIGradient.Rotation >= 360 then
+            UIGradient.Rotation = UIGradient.Rotation - 360
+        end
+    end)
+    
+    LayoutRefs.GradientAnimationSpeed = 1
+    LayoutRefs.GradientAnimation = gradientAnimation
+    
+    local MaxTextWidth =
+        math.max(0, InitialSidebarWidth - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 12 or 12))
+    local TextWidth = Library:GetTextBounds(WindowTitle.Text, Library.Scheme.Font, 20, MaxTextWidth)
+    WindowTitle.Size = UDim2.new(0, TextWidth, 1, 0)
 else
-WindowTitle.Size = UDim2.new(0, 0, 1, 0)
+    WindowTitle.Size = UDim2.new(0, 0, 1, 0)
 end
+
 LayoutRefs.WindowTitle = WindowTitle
+-----
+
 local RightWrapper = New("Frame", {
 BackgroundTransparency = 1,
 AnchorPoint = Vector2.new(0, 0.5),
