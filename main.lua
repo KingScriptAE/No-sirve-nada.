@@ -12116,17 +12116,17 @@ if not au.IgnoreAlerts then
 au:SetToTheCenter()
 au:Dialog{
 
-Title="Close Window",
-Content="Do you want to close this window? You will not be able to open it again.",
+Title="关闭ui",
+Content="是否要关闭霖溺？您将无法再次打开它",
 Buttons={
 {
-Title="Cancel",
+Title="取消",
 
 Callback=function()end,
 Variant="Secondary",
 },
 {
-Title="Close Window",
+Title="关闭ui",
 
 Callback=function()au:Destroy()end,
 Variant="Primary",
